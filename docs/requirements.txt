@@ -1,4 +1,6 @@
+cement
 configparser
 robpol86-sphinxcontrib-googleanalytics
+numpy
 sphinx
 sphinx-rtd-theme
