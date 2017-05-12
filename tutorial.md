@@ -5,6 +5,7 @@ The goal of this tutorial is to teach you how to test and document Python code.
 * Linux packages
   ```
   apt-get install \
+      git \                                    # repository manager
       meld \                                   # graphical differencing tool
       libgnome-keyring-dev \                   # password manager
       python \                                 # programming language
@@ -13,7 +14,11 @@ The goal of this tutorial is to teach you how to test and document Python code.
 * Python packages
   ```
   pip install \
+      setuptools                               # utility for distributing python packages
+
+  pip install \
       capturer \                               # capture stdout
+      configparse \                            # configuration file parser
       cement \                                 # framework for building command line programs
       codeclimate-test-reporter \              # tool to upload coverage reports to Code Climate
       coverage \                               # coverage tool
@@ -22,7 +27,6 @@ The goal of this tutorial is to teach you how to test and document Python code.
       pytest \                                 # test runner
       pytest-cov \                             # pytest plugin for coverage
       robpol86-sphinxcontrib-googleanalytics \ # sphinx support for google analytics 
-      setuptools \                             # utility for distributing python packages
       six \                                    # utilities for python 2/3 compatibility
       sphinx \                                 # documentation generator
       sphinx-rtd-theme                         # sphinx HTML theme
@@ -84,6 +88,9 @@ mkdir tests/fixtures           # directory to hold any files needed for the test
   import unittest
 
   class TestSimulation(unittest.TestCase):
+      class NewClass():
+          pass
+
       @classmethod
       def setUpClass(cls):
           """ Code to execute before all of the tests. For example, this can be used to create temporary
@@ -107,12 +114,14 @@ mkdir tests/fixtures           # directory to hold any files needed for the test
           pass
 
       def test_run(self):
+          self.NewClass
+
           # run code
-          sim = core.Simulation(t_max=10)
-          time, rnas = sim.run()
+          sim = core.Simulation()
+          hist = sim.run(time_max=10)
 
           # check the result
-          self.assertEqual(time[0], 0.)
+          self.assertEqual(hist.times[0], 0.)
   ```
   
   The goal of testing is to make sure that your code works as intended. Thus, each test should should (1) run some code and 
@@ -157,12 +166,12 @@ Stochastic codes should be validated by testing the statistical distribution of 
 following process:
 
 1. Run the code many times and keep a list of the outputs
-2. Run a statistical test of the distribution of the outputs. At a minimum test the the average of the distribution is
+2. Run a statistical test of the distribution of the outputs. At a minimum test the average of the distribution is
    close to the expected value. If possible, also test the variance of the distribution and higher-order moments of the
    distribution.
 
 ## Testing for multiple version of python
-We are aiming to support both the latest versiosn of Python 2 and 3. Therefore, you should test your code on both versions.
+We are aiming to support both the latest versions of Python 2 and 3. Therefore, you should test your code on both versions.
 ```
 python2 -m pytest tests
 python3 -m pytest tests
@@ -294,7 +303,8 @@ Set the Google Analytics id
 googleanalytics_id = 'UA-86340737-1'
 ```
 
-Add the following to run sphinx-apidoc within ReadTheDocs on sphinx-build
+Add the following to run sphinx-apidoc within ReadTheDocs on sphinx-build. Place the
+following at the bottom of `docs/conf.py`.
 ```
 from configparser import ConfigParser
 from sphinx import apidoc
@@ -349,8 +359,8 @@ class Class():
     """ Description
 
     Attributes:
-        name (:obj:`type`): description
-    """"
+        name (:obj:`core.Simulation`): description
+    """
 
     ...
 ```
@@ -537,6 +547,7 @@ pip install -e .
 ## Push code to PyPI
 
 1. Convert readme to .rst format
+2. Todo
 
 # Integrate with cloud-based development tools (CircleCI, Code Climate, Read The Docs, tests.karrlab.org)
 
