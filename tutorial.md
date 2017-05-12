@@ -42,7 +42,7 @@ The goal of this tutorial is to teach you how to test and document Python code.
   git clone https://github.com/KarrLab/python_tutorial.git
   ```
 
-# 2. Setup the directory structure within the repository
+# Setup the directory structure within the repository
 ```
 cd ~/Documents/python_tutorial
 mkdir python_tutorial             # to hold source code
@@ -52,11 +52,19 @@ mkdir python_tutorial/data        # directory to hold any data files needed by t
 
 *Note: the name of the source code directory should be the same as that of the repository*
 
-# 3. Write some code
+# Write some code
 
 See [`python_tutorial/core.py`](python_tutorial/core.py) for an annotated example.
 
-# 4. Write tests to make sure the code works
+## Making command line utilities
+
+[`cement`](https://builtoncement.com) can be used to easily build command line utilities.
+
+See [`python_tutorial/__main__.py`](python_tutorial/__main__.py) for a simple example. See
+`https://github.com/KarrLab/kinetic_datanator/blob/master/kinetic_datanator/__main__.py`
+for a more extensive example with nested controllers.
+
+# Write tests to make sure the code works
 
 ## Create a directory structure for the tests
 ```
@@ -119,17 +127,17 @@ mkdir tests/fixtures           # directory to hold any files needed for the test
   There are a large number of use assertions such as those below. See the [`unittest` documentation](https://docs.python.org/2/library/unittest.html)
   and the [`numpy.testing` documentation](https://docs.scipy.org/doc/numpy/reference/routines.testing.html) for additional assertions.
 
-  * unittest.TestCase.assertEqual
-  * unittest.TestCase.assertNotEqual
-  * unittest.TestCase.assertTrue
-  * unittest.TestCase.assertFalse
-  * unittest.TestCase.assertIsInstance
-  * unittest.TestCase.assertGreater
-  * unittest.TestCase.assertLess
-  * unittest.TestCase.assertAlmostEqual
-  * unittest.TestCase.assertRaises
-  * numpy.testing.assert_array_equal
-  * numpy.testing.assert_array_almost_equal
+  * `unittest.TestCase.assertEqual`
+  * `unittest.TestCase.assertNotEqual`
+  * `unittest.TestCase.assertTrue`
+  * `unittest.TestCase.assertFalse`
+  * `unittest.TestCase.assertIsInstance`
+  * `unittest.TestCase.assertGreater`
+  * `unittest.TestCase.assertLess`
+  * `unittest.TestCase.assertAlmostEqual`
+  * `unittest.TestCase.assertRaises`
+  * `numpy.testing.assert_array_equal`
+  * `numpy.testing.assert_array_almost_equal`
  
   See [`tests/test_core.py`](tests/test_core.py) for an annotated example.
 
@@ -508,24 +516,105 @@ pip install -e .
   [difftool "meld"]
       cmd = meld "$LOCAL" "$REMOTE"
   ```
-2. Commit the changes to the code to your local Git repository
+2. Review your changes
+  ```
+  git diff /path/to/file
+  git difftool /path/to/file
+  ```
+3. Commit the changes to the code to your local Git repository
   ```
   git commit -a -m "<Description of the changes to the code>"  
   ```
-3. Pull recent changes from other developers
+4. Pull recent changes from other developers
   ```
   git pull
   ```
-4. Merge any conflicts by editing the conflicting files
-5. Push the changes to the central repository at GitHub
+5. Merge any conflicts by editing the conflicting files
+6. Push the changes to the central repository at GitHub
   ```
   git push
   ```
+## Push code to PyPI
 
-# Integrate with cloud-based development tools (CircleCI, Code Climate,)
+1. Convert readme to .rst format
 
+# Integrate with cloud-based development tools (CircleCI, Code Climate, Read The Docs, tests.karrlab.org)
 
-# Additional topics
+## CircleCI
+1. Log into [CircleCI](https://circleci.com)
+2. Click on the `Projects` tab
+3. Click the `Add a project` button
+4. Click the `Build` button for the selected repository
+5. Add environment variables for the Code Climate, Coveralls, and Karr Lab server password
+  * CODECLIMATE_REPO_TOKEN 
+  * COVERALLS_REPO_TOKEN
+  * TEST_SERVER_TOKEN: jxdLhmaPkakbrdTs5MRgKD7p
+6. Create a configation file to instruct CircleCI what to do
+  
+   See [`.circleci/config.yml`](.circleci/config.yml) for an example. See the [CircleCI documentation](https://circleci.com/docs/2.0/)
+   for more information.
 
-* Deeper tutorial of cement
-* Docker, Docker Hub
+If you push a commit which breaks the tests, you are responsible for fixing the problem or notifying
+whoever else you think is response. It is important to fix the problem quickly while its fresh in 
+memory and so you don't suffer from test failure fatigure.
+
+## Coveralls
+1. Log into [Coveralls](https://coveralls.io)
+2. Click the "Add repos" button
+3. Turn the selected the repository on
+4. To push coverage data to Coveralls,
+   1. Copy the `repo_token`
+   2. Create an environment variable in the corresponding CircleCI build with the key = `COVERALLS_REPO_TOKEN`
+      and the value = the value of the `repo_token`
+
+## Code Climate
+1. Log into [Code Climate](https://codeclimate.com/dashboard)
+2. Click one of the "Add a repository" links
+3. Select the desired repository
+4. To view the analysis, return to your dashboard and select the package from the dashboard
+5. To push coverage data to Code Climate
+   1. Open the settings for the package
+   2. Navigate to the 'Test Coverage' settings
+   3. Copy the `Test reporter ID`
+   4. Create an environment variable in the corresponding CircleCI build with the key = `CODECLIMATE_REPO_TOKEN`
+      and the value = the value of the `Test reporter ID`
+
+## Read The Docs
+1. Log into [Read The Docs](https://readthedocs.org)
+2. Click the `Import a repository` button
+3. Select the repository
+4. Create the project
+5. Edit the settings
+  * Advanced settings
+    * Requirements file: docs/requirements.txt
+  * Notifications
+    * Add email
+6. Check for errors
+  * Navigate to builds
+  * Click on the latest build
+  * Browse the tabs for errors
+
+## code.karrlab.org
+1. SSH into code.karrlab.org
+2. Add a repository configuration file to /home/karrlab_code/code.karrlab.org/repo/<repo-name>.json
+3. Copy the syntax from the other files in that directory
+
+## Add badgets to `README.md`
+Add the following to the top of `README.md`
+```
+<!-- [![PyPI package](https://img.shields.io/pypi/v/python_tutorial.svg)](https://pypi.python.org/pypi/python_tutorial) -->
+[![Documentation](https://readthedocs.org/projects/karrlab_python_tutorial/badge/?version=latest)](http://karrlab_python_tutorial.readthedocs.org)
+[![Test results](https://circleci.com/gh/KarrLab/python_tutorial.svg?style=shield)](https://circleci.com/gh/KarrLab/python_tutorial)
+[![Test coverage](https://coveralls.io/repos/github/KarrLab/python_tutorial/badge.svg)](https://coveralls.io/github/KarrLab/python_tutorial)
+[![Code analysis](https://codeclimate.com/github/KarrLab/python_tutorial/badges/gpa.svg)](https://codeclimate.com/github/KarrLab/python_tutorial)
+[![License](https://img.shields.io/github/license/KarrLab/python_tutorial.svg)](LICENSE)
+![Analytics](https://ga-beacon.appspot.com/UA-86759801-1/python_tutorial/README.md?pixel)
+```
+
+# Build a custom virtual machine for CircleCI
+
+See 
+* [Docker](https://www.docker.com)
+* [Docker Hub](https://hub.docker.com)
+* [http://private.karrlab.org/wiki/index.php?title=Docker_installation_and_setup_instructions](http://private.karrlab.org/wiki/index.php?title=Docker_installation_and_setup_instructions)
+* [https://github.com/KarrLab/karr_lab_docker_images](https://github.com/KarrLab/karr_lab_docker_images)
