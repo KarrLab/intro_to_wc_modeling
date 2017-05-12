@@ -1,0 +1,47 @@
+version: 2
+jobs:
+  build:
+    working_directory: /root/project
+    docker:
+      - image: karrlab/build:0.0.5
+    steps:
+      - checkout
+      
+      - restore_cache:
+          keys:
+            - projectname-{{ checksum "requirements.txt" }}
+            - projectname-
+      
+      - run: pip2 install -e .
+      - run: pip2 install -U -e git+https://github.com/KarrLab/Karr-Lab-build-utils.git#egg=Karr-Lab-build-utils
+      - run: karr-lab-build-utils-2 install-requirements
+
+      - run: pip3 install -e .
+      - run: pip3 install -U -e git+https://github.com/KarrLab/Karr-Lab-build-utils.git#egg=Karr-Lab-build-utils
+      - run: karr-lab-build-utils-3 install-requirements
+      
+      - save_cache:
+          key: projectname-{{ checksum "requirements.txt" }}
+          paths:
+            - /usr/local/lib/python2.7/site-packages
+            - /usr/local/lib/python3.6/site-packages
+
+      - run: pip2 install -e git+https://github.com/KarrLab/Karr-Lab-build-utils.git#egg=Karr-Lab-build-utils
+      - run: karr-lab-build-utils-2 run-tests tests --with-xunit --with-coverage
+
+      - run: pip3 install -e git+https://github.com/KarrLab/Karr-Lab-build-utils.git#egg=Karr-Lab-build-utils
+      - run: karr-lab-build-utils-3 run-tests tests --with-xunit --with-coverage
+
+      - store_test_results:
+          path: /root/project/tests/reports
+      - store_artifacts:
+          path: /root/project/.coverage.2.7.13
+          destination: .coverage.2.7.13
+      - store_artifacts:
+          path: /root/project/.coverage.3.6.1
+          destination: .coverage.3.6.1
+      
+      - run: karr-lab-build-utils make-and-archive-reports
+      - store_artifacts:
+          path: /root/project/docs/_build/html
+          destination: docs
