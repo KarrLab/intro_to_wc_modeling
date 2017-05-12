@@ -1,0 +1,8 @@
+# license
+include LICENSE
+
+# requirements
+include requirements.txt
+
+# documentation
+include README.rst

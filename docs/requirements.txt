@@ -1,0 +1,4 @@
+configparser
+robpol86-sphinxcontrib-googleanalytics
+sphinx
+sphinx-rtd-theme

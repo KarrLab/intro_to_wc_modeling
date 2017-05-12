@@ -1,0 +1,17 @@
+# compiled files
+*.pyc
+
+# package files
+*.egg-info/
+
+# cache
+.cache/
+__pycache__/
+
+# coverage
+.coverage
+htmlcov/
+
+# compiled documentation
+docs/_build
+docs/source/
