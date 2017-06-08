@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-import python_tutorial
+import karr_lab_tutorials
 
 # parse dependencies from requirements.txt files
 install_requires = []
@@ -17,13 +17,13 @@ for line in open('tests/requirements.txt'):
 
 # install package
 setup(
-    name='python_tutorial',
-    version=python_tutorial.__version__,
+    name='karr_lab_tutorials',
+    version=karr_lab_tutorials.__version__,
 
     description='Python tutorial',
 
     # The project's main homepage.
-    url='https://github.com/KarrLab/python_tutorial',
+    url='https://github.com/KarrLab/karr_lab_tutorials',
 
     author='Jonathan Karr',
     author_email='jonrkarr@gmail.com',
@@ -46,7 +46,7 @@ setup(
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'python_tutorial = python_tutorial.__main__:main',
+            'karr_lab_tutorials = karr_lab_tutorials.__main__:main',
         ],
     },
 

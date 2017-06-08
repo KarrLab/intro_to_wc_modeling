@@ -6,7 +6,7 @@
 :License: MIT
 """
 
-from python_tutorial import __main__
+from karr_lab_tutorials.unit_testing import __main__
 import capturer
 import unittest
 

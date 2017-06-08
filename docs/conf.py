@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# python_tutorial documentation build configuration file, created by
+# karr_lab_tutorials documentation build configuration file, created by
 # sphinx-quickstart on Fri May 12 03:28:12 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -20,7 +20,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
-import python_tutorial
+import karr_lab_tutorials
 
 # -- General configuration ------------------------------------------------
 
@@ -62,7 +62,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'python_tutorial'
+project = 'karr_lab_tutorials'
 copyright = '2017, Jonathan Karr'
 author = 'Jonathan Karr'
 
@@ -71,7 +71,7 @@ author = 'Jonathan Karr'
 # built documents.
 #
 # The short X.Y version.
-version = python_tutorial.__version__
+version = karr_lab_tutorials.__version__
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -163,7 +163,7 @@ html_static_path = ['_static']
 # html_last_updated_fmt = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'python_tutorialdoc'
+htmlhelp_basename = 'karr_lab_tutorialsdoc'
 
 # Custom sidebar templates, maps document names to template names.
 #
@@ -252,7 +252,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'python_tutorial.tex', 'python\\_package\\_tutorial Documentation',
+    (master_doc, 'karr_lab_tutorials.tex', 'python\\_package\\_tutorial Documentation',
      'Jonathan Karr', 'manual'),
 ]
 
@@ -262,7 +262,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'python_tutorial', 'python_tutorial Documentation',
+    (master_doc, 'karr_lab_tutorials', 'karr_lab_tutorials Documentation',
      [author], 1)
 ]
 
@@ -273,8 +273,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'python_tutorial', 'python_tutorial Documentation',
-     author, 'python_tutorial', 'One line description of project.',
+    (master_doc, 'karr_lab_tutorials', 'karr_lab_tutorials Documentation',
+     author, 'karr_lab_tutorials', 'One line description of project.',
      'Miscellaneous'),
 ]
 
