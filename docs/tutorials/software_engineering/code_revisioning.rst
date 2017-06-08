@@ -11,7 +11,7 @@ This tutorial will teach you how to use Git, GitHub, and Meld to manage code rev
 
 `Meld <http://meldmerge.org>`_ is a program for graphically displaying the differences between two text files. Meld is very helpful to understanding how files have been edited.
 
-Installing and configurating the required software
+Installing and configuring the required software
 --------------------------------------------------
 This tutorial requires git and meld. Execute this command to install these package::
 
@@ -41,7 +41,7 @@ Instructions
 
 Create a GitHub account
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Visit `https://github.com <https://github.com>`_, click "Sign up", and follow the onscreen instructions.
+Visit `https://github.com <https://github.com>`_, click "Sign up", and follow the on screen instructions.
 
 
 Join the Karr Lab GitHub organization (group)
@@ -90,7 +90,7 @@ Once you are ready to share one or more commits with the rest of our lab, you ca
 
 Pull changes from other developers from GitHub
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-To retrieve changes made by other developers, execute ``git pull``. Note, if you have made changes which conflict with those made by other developes, Git will prompt you to manually review the conflict lines of code.
+To retrieve changes made by other developers, execute ``git pull``. Note, if you have made changes which conflict with those made by other developers, Git will prompt you to manually review the conflict lines of code.
 
 
 Using graphical programs to manage repositories

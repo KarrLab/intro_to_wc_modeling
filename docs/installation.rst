@@ -4,6 +4,7 @@ Installation
 
 Each tutorial outlines how to install all of the necessary software. The following is a consolidated guide to installing all of the software needed for the tutorials.
 
+
 **************************************************************************
 Requirements
 **************************************************************************
@@ -16,6 +17,7 @@ Requirements
 * Pandoc
 * Pip
 * Python
+
 
 **************************************************************************
 How to install these tutorials
@@ -60,7 +62,8 @@ Detailed instructions to install the tutorials and all of the requirements
             python3 \
             python-pip \
             python3-pip \
-            software-properties-common    
+            software-properties-common \
+            texlive
 
     #. Install the Sublime text editor::
 
@@ -80,9 +83,8 @@ Detailed instructions to install the tutorials and all of the requirements
         sudo curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci
         sudo chmod +x /usr/local/bin/circleci
 
-    #. Configure docker::
+    #. Purchase and install Illustrator by send an email to Manbir Singh.
 
-        sudo usermod -aG docker $USER
 
 #. Configure the packages
     
@@ -124,6 +126,10 @@ Detailed instructions to install the tutorials and all of the requirements
         * File >> Settings >> Tools >> Python Integrated Tools >> Default test runner: set to py.test
         * Run >> Edit configurations >> Defaults >> Python tests >> py.test: add additional arguments "--capture=no"
         * Run >> Edit configurations >> Defaults >> Python tests >> Nosetests: add additional arguments "--nocapture"
+
+    #. Configure docker::
+
+        sudo usermod -aG docker $USER
 
 #. Install these tutorials::
 

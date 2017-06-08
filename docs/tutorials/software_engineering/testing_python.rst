@@ -44,7 +44,7 @@ Taken together, your test code should be organized as follows::
 
 Writing tests
 -----------------------
-In the remainder of the tutorial, we will write tests for the code located in ``/path/to/this/repo/karr_lab_tutorials/unit_testing/`` to run a simple stochatic simulation.
+In the remainder of the tutorial, we will write tests for the code located in ``/path/to/this/repo/karr_lab_tutorials/unit_testing/`` to run a simple stochastic simulation.
 
 #. Create a file for the tests, `tests/unit_testing/test_core.py`
 #. Write a test file. For example::

@@ -102,9 +102,9 @@ Comparison between Python and MATLAB
 ------------------------------------
 Several websites have nice summaries of the advantages of Python over MATLAB
 
-* `Python vs Matlab <http://www.pyzo.org/python_vs_matlab.html>`_
-* `A Python Primer for Matlab Users <http://bastibe.de/2013-01-20-a-python-primer-for-matlab-users.html>`_
-* `NumPy for Matlab users <https://docs.scipy.org/doc/numpy-dev/user/numpy-for-matlab-users.html>`_
+* `Python vs MATLAB <http://www.pyzo.org/python_vs_matlab.html>`_
+* `A Python Primer for MATLAB Users <http://bastibe.de/2013-01-20-a-python-primer-for-matlab-users.html>`_
+* `NumPy for MATLAB users <https://docs.scipy.org/doc/numpy-dev/user/numpy-for-matlab-users.html>`_
 
 
 How to structure Python code
@@ -149,7 +149,7 @@ Databases are useful tools for organizing and quickly searching large datasets. 
 
 Database engines are the software programs which implement SQL and No-SQL databases. Several popular SQL database engines include MySQL, Oracle, and SQLite. Several popular No-SQL database engines include CouchBase, CouchDB, and MongoDB.
 
-SQL (Structured Query Language) is the language used to describe relational database schemas and how to insert and retrieve data to/from them. Each relational database engine uses it own variant of SQL, but the SQL langauges used by MySQL, Oracle, SQLite and most other popular relational database engines are very similar.
+SQL (Structured Query Language) is the language used to describe relational database schemas and how to insert and retrieve data to/from them. Each relational database engine uses it own variant of SQL, but the SQL languages used by MySQL, Oracle, SQLite and most other popular relational database engines are very similar.
 
 Most of the popular database engines have their own Python interfaces. In addition, there are several Python packages such as SQLAlchemy which abstract away many of the details the individual database engines and enable Python developers to use database with little direct interaction with SQL.
 
@@ -185,7 +185,7 @@ Because Python 2.7 and 3 are similar, and because many people still use Python 2
 
 Using the PyCharm debugger to debug code
 ----------------------------------------
-Debuggers are useful tools for debugging code that can be are far more powerful than print statements or logging. Debbuggers allow users to interactively inspect Python programs during their execution. In particular, debuggers allow users to set breakpoints at which the Python interpret should halt its execution and enable the user to inspect the state of the program (value of each variable in the namespace and in all parent namespaces), run an arbitrary Python code (e.g. to print something out), step through the code (instruct the Python interpreter to execute one additional instructions of the program), and/or resume the program. Debuggers also allow users to set conditional breakpoints which can be used to halt the execution of a program when the value of a variable meets a specific condition. Together, debuggers make it easy to trace through programs and find errors.
+Debuggers are useful tools for debugging code that can be are far more powerful than print statements or logging. Debuggers allow users to interactively inspect Python programs during their execution. In particular, debuggers allow users to set breakpoints at which the Python interpret should halt its execution and enable the user to inspect the state of the program (value of each variable in the namespace and in all parent namespaces), run an arbitrary Python code (e.g. to print something out), step through the code (instruct the Python interpreter to execute one additional instructions of the program), and/or resume the program. Debuggers also allow users to set conditional breakpoints which can be used to halt the execution of a program when the value of a variable meets a specific condition. Together, debuggers make it easy to trace through programs and find errors.
 
 Most IDEs include debuggers and there are debugger plugins for text editors such as Sublime. We recommend the PyCharm debugger. There are several tutorials on how to use PyCharm to debug code.
 

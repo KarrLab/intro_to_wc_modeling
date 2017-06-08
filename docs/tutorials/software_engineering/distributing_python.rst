@@ -42,7 +42,7 @@ The following examples illustrate how to list packages, how to specify package s
   matplotlib==2.3
   git+https://github.com/KarrLab/obj_model.git#egg=obj_model
 
-Similarly, save lists of required packages for testing and documenation to ``docs/requirements.txt`` and ``tests/requirements.txt``.
+Similarly, save lists of required packages for testing and documentation to ``docs/requirements.txt`` and ``tests/requirements.txt``.
 
 
 Create a license file

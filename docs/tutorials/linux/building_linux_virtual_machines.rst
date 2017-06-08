@@ -16,7 +16,7 @@ Instructions
 #. Download and install Virtual Box from `https://www.virtualbox.org/wiki/Downloads <https://www.virtualbox.org/wiki/Downloads>`_
 #. Download Mint Linux, Cinammon, 64-bit from `https://linuxmint.com/download.php <https://linuxmint.com/download.php>`_
 #. Run Virtual Box
-#. From the Virtual Box main menu, select "Machine" >> "New" and then follow the onscreen instructions
+#. From the Virtual Box main menu, select "Machine" >> "New" and then follow the on screen instructions
     
     #. Enter a name, e.g. "Mint Linux", select Type: "Linux", and select Version: "Ubuntu (64-bit)"
     #. Set the memory size to 4096 MB
@@ -37,7 +37,7 @@ Instructions
 #. Highlight the new virtual machine in Virtual Box, right click on the machine, and select "Start" >> "Normal start".
 #. In the window that opens
 
-    #. Select the Minut Linux file that you download in step 2
+    #. Select the Mint Linux file that you download in step 2
     #. Click "Start"
 
 #. After the temporary installation OS boots up, double click on the "Install Linux Mint" icon on the desktop

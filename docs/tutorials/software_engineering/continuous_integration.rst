@@ -5,7 +5,7 @@ To use testing to identify errors as quickly as possible when they are comparati
 
 To use testing effectively on team projects, you should fix broken tests immediately. If you don't fix test failures quickly and instead allow tests to remain broken, you will forfeit your ability to use tests to quickly detect new errors.
 
-We are using the CircleCI cloud-based continous integration system that has integration with GitHub. Each time you push your code to GitHub, GitHub triggers a "hook" which instructs CircleCI to "build" your code, which includes running all of your tests and notifying you of any errors. While CircleCI is primarily designed to run tests, CircleCI builds are very flexible and can be used to run any arbitrary code upon each trigger. We have used this flexibility to instruct CircleCI to execute the following tasks within each build
+We are using the CircleCI cloud-based continuous integration system that has integration with GitHub. Each time you push your code to GitHub, GitHub triggers a "hook" which instructs CircleCI to "build" your code, which includes running all of your tests and notifying you of any errors. While CircleCI is primarily designed to run tests, CircleCI builds are very flexible and can be used to run any arbitrary code upon each trigger. We have used this flexibility to instruct CircleCI to execute the following tasks within each build
 
 * Boot our custom virtual machine
 * Install any additional software needed to test the package
@@ -34,7 +34,7 @@ Follow these instructions to CircleCI to continuous test a GitHub repository
 #. Click on the `Projects` tab
 #. Click the `Add a project` button
 #. Click the `Build` button for the selected repository
-#. Add a CircleCI configation file, ``/path/to/repo/.circleci/config.yml``, to the repository to instruct CircleCI what execute within each build. This includes the following instructions
+#. Add a CircleCI configuration file, ``/path/to/repo/.circleci/config.yml``, to the repository to instruct CircleCI what execute within each build. This includes the following instructions
 
   * Which container/virtual machine should be used to run the build. We are using a custom container so that little additional software needs to be installed to test our code. See the `Linux containers tutorial <building_linux_containers>` for more information about how to create and use custom Linux containers.
   * Which GitHub repository to checkout.
@@ -105,7 +105,7 @@ Follow these instructions to use Coveralls to review the test coverage of a repo
 
 Karr Lab test results dashboard (tests.karrlab.org)
 ---------------------------------------------------
-Follow these instructions to use the Karr Lab test results dashboard to review the test results from a CircleCI buid
+Follow these instructions to use the Karr Lab test results dashboard to review the test results from a CircleCI build
 
 #. Create an environment variable in the CircleCI build with the name ``TEST_SERVER_TOKEN`` and value ``jxdLhmaPkakbrdTs5MRgKD7p``
 #. Open `http://tests.karrlab.org  <http://tests.karrlab.org>`_ in you browser. Once tests results have been uploaded to our tests history server, our test results dashboard will allow you to graphically review test results, as well as the performance of each test over time.
@@ -118,4 +118,4 @@ Follow these instructions to use the Karr Lab software development dashboard to 
 #. SSH into code.karrlab.org
 #. Add a repository configuration file to ``/home/karrlab_code/code.karrlab.org/repo/<repo-name>.json``
 #. Copy the syntax from the other files in the same directory
-#. Open `http://code.karrlab.org <http://code.karrlab.org>`_ in your browser. You should now be able to see the status of the repository, its CircleCI builds, the results of its results, the coverage of its tests, and severals stiatics about how many times the repository has been cloned, forked, and downloaded from GitHub and PyPI.
+#. Open `http://code.karrlab.org <http://code.karrlab.org>`_ in your browser. You should now be able to see the status of the repository, its CircleCI builds, the results of its results, the coverage of its tests, and severals statistics about how many times the repository has been cloned, forked, and downloaded from GitHub and PyPI.

@@ -15,7 +15,7 @@ Execute the following commands to install the packages required for this tutoria
         python-pip
     pip install \
         configparse \                            # configuration file parser
-        robpol86-sphinxcontrib-googleanalytics \ # sphinx support for google analytics 
+        robpol86-sphinxcontrib-googleanalytics \ # sphinx support for Google analytics 
         sphinx \                                 # documentation generator
         sphinx-rtd-theme                         # sphinx HTML theme
 
@@ -36,7 +36,7 @@ Generating a Sphinx configuration file
 --------------------------------------
 Sphinx is highly configurable and be configured using the ``docs/conf.py`` file.
 
-You can generate a Sphinx configuration file by running the ``sphinx-quickstart`` utility and following the onscreen instructions.
+You can generate a Sphinx configuration file by running the ``sphinx-quickstart`` utility and following the on screen instructions.
 
 Note: we are using a heavily Sphinx configuration file. See ``karr_lab_build_utils.templates.docs.conf.py`` for our template. In particular, we are enabling the ``napoleon`` extension to support Google-style argument and attribute doc strings.
 
@@ -108,4 +108,4 @@ Run the following to compile the documentation::
 
 Sphinx will print out any errors in the your documentation. These must be fixed to properly generate the documentation.
 
-The documenation can be viewed by opening ``docs/_build/html/index.html`` in your browser.
+The documentation can be viewed by opening ``docs/_build/html/index.html`` in your browser.
