@@ -9,11 +9,27 @@ Raster graphics are matrices of colored pixels. Raster graphics are commonly use
 In this tutorial, we will teach you how to draw vector graphics with Illustrator.
 
 
+Illustrator vs Inkscape
+-----------------------
+Inkscape provides most of the same core functionality as Illustrator. However, Inkscape lacks many of the features of Illustrator. Below is a list of some of the limitations of Inkscape compared to Illustrator.
+
+* Significantly slower for complex graphics
+* Interface is less polished
+* Poor default options for subscripts, superscripts
+* No linked text boxes for continued text flow
+* No tool to edit spacing of dashes
+* No native support for a binary file format such as .ai
+* Less control over .png export
+* No .gif, .jpg export
+
+
 Required software
 -----------------
 Run the following commands to install the software required for this tutorial::
 
     sudo apt-get install inkscape
+
+Email Manbir Singh to purchase and install Illustrator.
 
 
 Instructions
@@ -87,6 +103,16 @@ In this tutorial we will learn how to use Inkscape to draw a digram of a cell
     #. Select both this new rectangle and the cell
     #. Right click on the objects and select "Set Mask"
 
+#. Save the diagram
+
+    #. Select "File" >> "Save"
+    #. For simple graphics, choose the "Inkscape SVG (.svg)" format. For complex graphics, choose the "Compressed Inkscape SVG (.svgz)" format.
+
+#. Export the diagram
+
+    #. Select "File" >> "Export PNG Image..."
+    #. Set the desired export size and resolution
+
 
 Other useful features
 ---------------------
@@ -104,6 +130,14 @@ Joining lines
 * Use the "Edit paths by node" to select a node in a curve
 * Hold to the shift key and select another node in another curve
 * Click the "Join selected nodes" button to join the curves
+
+
+Embedding graphics 
+^^^^^^^^^^^^^^^^^^
+
+* Select "File" >> "Import"
+* Select the file that you wish to import
+* Select whether to "Embed" or "Link" the imported file
 
 
 Additional tutorials
