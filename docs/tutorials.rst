@@ -2,6 +2,7 @@
 Tutorials
 #########
 
+
 *********************************************************
 Linux
 *********************************************************
@@ -9,6 +10,7 @@ Linux
 .. include:: tutorials/linux/building_linux_virtual_machines.rst
 .. include:: tutorials/linux/building_linux_containers.rst
 .. include:: tutorials/linux/intro_to_linux.rst
+
 
 *********************************************************
 Software engineering
@@ -20,13 +22,16 @@ Software engineering
 .. include:: tutorials/software_engineering/continuous_integration.rst
 .. include:: tutorials/software_engineering/distributing_python.rst
 
+
 *********************************************************
-Whole-cell modeling
+Cell modeling
 *********************************************************
-* Data aggregation
-* Model annotation
-* Model composition
-* Multi-algorithm simulation
+.. include:: tutorials/cell_modeling/data_aggregation.rst
+.. include:: tutorials/cell_modeling/model_representation.rst
+.. include:: tutorials/cell_modeling/model_annotation.rst
+.. include:: tutorials/cell_modeling/model_composition.rst
+.. include:: tutorials/cell_modeling/simulation.rst
+
 
 *********************************************************
 Scientific communication: papers, presentations, graphics
