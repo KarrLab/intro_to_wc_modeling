@@ -12,4 +12,4 @@ import unittest
 class TestDatabaseTutorial(unittest.TestCase):
 
     def test(self):
-        import karr_lab_tutorials.software_engineering.databases.core
+        from karr_lab_tutorials.software_engineering.databases import core

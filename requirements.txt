@@ -1,2 +1,3 @@
-cement  # framework for building command line programs
-numpy   # numerical computations
+cement     # framework for building command line programs
+numpy      # numerical computations
+sqlalchemy # relational databases
