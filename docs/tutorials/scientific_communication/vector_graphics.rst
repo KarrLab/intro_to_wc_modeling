@@ -32,11 +32,11 @@ Run the following commands to install the software required for this tutorial::
 Email Manbir Singh to purchase and install Illustrator.
 
 
-Instructions
-------------
+Inkscape instructions
+---------------------
 In this tutorial we will learn how to use Inkscape to draw a digram of a cell
 
-#. Open Illustrator
+#. Open Inkscape
 #. Set the size of the canvas
 
     #. Open "File" >> "Document Properties..."
@@ -115,17 +115,17 @@ In this tutorial we will learn how to use Inkscape to draw a digram of a cell
 
 
 Other useful features
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 Selecting other objects with the same fill and/or stroke
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 * Select an object
 * Right click on the object and select "Select Same" >> "Fill and Stroke"
 
 
 Joining lines
-^^^^^^^^^^^^^
+"""""""""""""
 
 * Use the "Edit paths by node" to select a node in a curve
 * Hold to the shift key and select another node in another curve
@@ -133,7 +133,7 @@ Joining lines
 
 
 Embedding graphics 
-^^^^^^^^^^^^^^^^^^
+""""""""""""""""""
 
 * Select "File" >> "Import"
 * Select the file that you wish to import

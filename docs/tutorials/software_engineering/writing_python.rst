@@ -142,44 +142,13 @@ We are using the following convention to structure our Python source code reposi
 
 *Note: the name of the source code directory should be the same as that of the repository*
 
-
-Using databases with SQLAlchemy and SQLite
------------------------------------------------
-Databases are useful tools for organizing and quickly searching large datasets. Relational databases are the most common type of databases. Relational databases are based around schemas or structured definitions of the types of your data and the relationships among your data. These structured definitions facilitate fast searching of large datasets. However, these schemas can also make it cumbersome to represent multiple types of data with different structures. To overcome this limitation, several Python package provide support for editing or migrating schemas. Recently, there has been significant progress in the development of No-SQL databases which do not have fixed schemas.
-
-Database engines are the software programs which implement SQL and No-SQL databases. Several popular SQL database engines include MySQL, Oracle, and SQLite. Several popular No-SQL database engines include CouchBase, CouchDB, and MongoDB.
-
-SQL (Structured Query Language) is the language used to describe relational database schemas and how to insert and retrieve data to/from them. Each relational database engine uses it own variant of SQL, but the SQL languages used by MySQL, Oracle, SQLite and most other popular relational database engines are very similar.
-
-Most of the popular database engines have their own Python interfaces. In addition, there are several Python packages such as SQLAlchemy which abstract away many of the details the individual database engines and enable Python developers to use database with little direct interaction with SQL.
-
-There are several good tutorial on how to use SQLAlchemy and SQLite
-
-* `Introductory Tutorial of Python's SQLAlchemy <http://pythoncentral.io/introductory-tutorial-python-sqlalchemy/>`_
-* `SQLAlchemy ORM for Beginners <https://www.youtube.com/watch?v=51RpDZKShiw>`_
-* `SQLAlchemy Object Relational Tutorial <http://docs.sqlalchemy.org/en/latest/orm/tutorial.html>`_
-
-
-Building command line programs with Cement
-------------------------------------------
-`Cement <http://builtoncement.com>`_ is a useful package for easily building command line programs.
-
-See the `Cement quickstart guide <http://builtoncement.com/2.10/dev/quickstart.html>`_ for an introduction to Cement.
-
-
-Building web-based programs with Flask
---------------------------------------
-`Flask <http://flask.pocoo.org>`_ is a useful package for building web-based programs.
-
-There are several good Flask tutorials
-
-* `Flask Tutorial <http://flask.pocoo.org/docs/0.12/tutorial/>`_
-* `The Flask Mega-Tutorial <https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world>`_
-* `Flask by Example <https://realpython.com/blog/python/flask-by-example-part-1-project-setup/>`_
+.. include:: /tutorials/software_engineering/databases.rst
+.. include:: /tutorials/software_engineering/command_line_programs.rst
+.. include:: /tutorials/software_engineering/web_based_programs.rst
 
 
 Building code for Python 2 and 3
---------------------------------
+--------------------------------    
 Because Python 2.7 and 3 are similar, and because many people still use Python 2, we aim to write code that works on both Python 2 and 3. The ``six`` package provides several helpful utilities for writing code that works on both Python 2 and 3 with little extra effort.
 
 

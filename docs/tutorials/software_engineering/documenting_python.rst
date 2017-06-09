@@ -43,9 +43,9 @@ Note: we are using a heavily Sphinx configuration file. See ``karr_lab_build_uti
 
 Writing documentation
 -----------------------
-In the remainder of the tutorial, we will write tests for the code located in ``/path/to/this/repo/karr_lab_tutorials/unit_testing/``.
+In the remainder of the tutorial, we will write tests for the code located in ``/path/to/this/repo/karr_lab_tutorials/software_engineering/unit_testing/``.
 
-Using the `napoleon` style, you can document each class, method, and attribute. See ``karr_lab_tutorials/unit_testing/core.py`` for a complete example.
+Using the `napoleon` style, you can document each class, method, and attribute. See ``karr_lab_tutorials/software_engineering/unit_testing/core.py`` for a complete example.
 
 Classes
 ^^^^^^^
