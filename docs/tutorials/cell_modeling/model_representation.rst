@@ -57,7 +57,7 @@ Encode the same stochastic model in BioNetGen.
 
 Rule-based modeling API
 -----------------------
-The `PySB <http://pysb.org/>` rule-based modeling API overcomes some of the limitations of BioNetGen and Kappa by allowing modelers to define their own higher level abstractions which could be used to represent other types of combinatorial complexity. However, this requires modelers to develop their own unique higher level abstractions which again requires modeler to read lots of code to undertand a model. Furthermore, models that are described in PySB have to be complied to BioNetGen models which diminishes the advantages of network-free simulation.
+The `PySB <http://pysb.org/>`_ rule-based modeling API overcomes some of the limitations of BioNetGen and Kappa by allowing modelers to define their own higher level abstractions which could be used to represent other types of combinatorial complexity. However, this requires modelers to develop their own unique higher level abstractions which again requires modeler to read lots of code to undertand a model. Furthermore, models that are described in PySB have to be complied to BioNetGen models which diminishes the advantages of network-free simulation.
 
 Exercise
 ^^^^^^^^^

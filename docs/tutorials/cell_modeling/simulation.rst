@@ -15,3 +15,6 @@ Stochastic simulation (Gillespie algorithm)
 
 Multi-algorithm simulation
 --------------------------
+
+Simulating individual submodels
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

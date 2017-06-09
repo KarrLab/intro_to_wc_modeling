@@ -7,11 +7,14 @@ Tutorials
 Cell modeling
 *********************************************************
 .. include:: /tutorials/cell_modeling/data_aggregation.rst
+.. include:: /tutorials/cell_modeling/data_organization.rst
 .. include:: /tutorials/cell_modeling/model_design.rst
 .. include:: /tutorials/cell_modeling/model_representation.rst
 .. include:: /tutorials/cell_modeling/model_annotation.rst
 .. include:: /tutorials/cell_modeling/model_composition.rst
 .. include:: /tutorials/cell_modeling/simulation.rst
+.. include:: /tutorials/cell_modeling/testing_models.rst
+.. include:: /tutorials/cell_modeling/analyzing_simulation_results.rst
 
 
 *********************************************************
