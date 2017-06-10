@@ -46,3 +46,8 @@ Scientific communication: papers, presentations, graphics
 .. include:: /tutorials/scientific_communication/latex.rst
 .. include:: /tutorials/scientific_communication/vector_graphics.rst
 .. include:: /tutorials/scientific_communication/raster_graphics.rst
+
+*********************************************************
+Grants and fellowships
+*********************************************************
+.. include:: /tutorials/grants_and_fellowships/fellowships.rst

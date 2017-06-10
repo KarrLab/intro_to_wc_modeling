@@ -1,5 +1,5 @@
-LaTeX
-=====
+Formatting textual documents with LaTeX
+=======================================
 
 LaTeX is a powerful tool for generating beautiful textual documents. LaTeX is particularly useful for generating textual documents that require large amounts of math, algorithms, and references. Parts of LaTeX's power comes from the large number of additional packages that are available from `CTAN <https://www.ctan.org>`_, the LaTeX package repository.
 
