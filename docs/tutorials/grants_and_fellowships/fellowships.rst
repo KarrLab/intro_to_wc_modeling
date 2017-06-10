@@ -30,7 +30,7 @@ Postdoc/faculty transition awards are designed to provide senior postdocs with 2
 * Burroughs Welcome Fund (BWF) `Career Award at the Scientific Interface <https://www.bwfund.org/grant-programs/interfaces-science/career-awards-scientific-interface>`_ (CASI)
 * NIH `Pathway to Independence Award <https://www.nhlbi.nih.gov/research/training/programs/postdoc/pathway-parent-k99-r00>`_ (K99/R00)
 
-    * `10 Things I Wish I Knew Before I Wrote My K99 https://www.bcm.edu/gs/LinkedPowerpoints/Career-Things%20I%20wish%20I%20had%20known%20for%20a%20K99-R00.doc>`_
+    * `10 Things I Wish I Knew Before I Wrote My K99 <https://www.bcm.edu/gs/LinkedPowerpoints/Career-Things%20I%20wish%20I%20had%20known%20for%20a%20K99-R00.doc>`_
     * `Guide to the NIH Pathway to Independence Program (K99/R00) <http://rosen.caltech.edu/resources/K99%20Guide.pdf>`_
     * `How to write a K99 <http://k99advice.blogspot.com/2011/03/general-advice.html>`_
     * `How to Write a Successful K99 <http://www.jordandward.com/k99-grant-writing.html>`_
