@@ -2,54 +2,12 @@
 Tutorials
 #########
 
+.. toctree::
+    :maxdepth: 2
+    :caption: Table of contents
 
-*********************************************************
-Cell modeling
-*********************************************************
-.. include:: /tutorials/cell_modeling/data_aggregation.rst
-.. include:: /tutorials/cell_modeling/data_organization.rst
-.. include:: /tutorials/cell_modeling/model_design.rst
-.. include:: /tutorials/cell_modeling/model_representation.rst
-.. include:: /tutorials/cell_modeling/model_annotation.rst
-.. include:: /tutorials/cell_modeling/model_composition.rst
-.. include:: /tutorials/cell_modeling/simulation.rst
-.. include:: /tutorials/cell_modeling/testing_models.rst
-.. include:: /tutorials/cell_modeling/analyzing_simulation_results.rst
-
-
-*********************************************************
-Linux
-*********************************************************
-.. include:: /tutorials/linux/building_linux_virtual_machines.rst
-.. include:: /tutorials/linux/building_linux_containers.rst
-.. include:: /tutorials/linux/intro_to_linux.rst
-
-
-*********************************************************
-Software engineering
-*********************************************************
-.. include:: /tutorials/software_engineering/code_revisioning.rst
-.. include:: /tutorials/software_engineering/writing_python.rst
-.. include:: /tutorials/software_engineering/testing_python.rst
-.. include:: /tutorials/software_engineering/documenting_python.rst
-.. include:: /tutorials/software_engineering/continuous_integration.rst
-.. include:: /tutorials/software_engineering/distributing_python.rst
-
-
-*********************************************************
-Scientific communication: papers, presentations, graphics
-*********************************************************
-.. include:: /tutorials/scientific_communication/writing_manuscripts.rst
-.. include:: /tutorials/scientific_communication/reviewing_manuscripts.rst
-.. include:: /tutorials/scientific_communication/posters.rst
-.. include:: /tutorials/scientific_communication/presentations.rst
-.. include:: /tutorials/scientific_communication/data_visualization.rst
-.. include:: /tutorials/scientific_communication/latex.rst
-.. include:: /tutorials/scientific_communication/vector_graphics.rst
-.. include:: /tutorials/scientific_communication/raster_graphics.rst
-
-*********************************************************
-Grants and fellowships
-*********************************************************
-.. include:: /tutorials/grants_and_fellowships/fellowships.rst
-.. include:: /tutorials/grants_and_fellowships/grants.rst
+    tutorials/cell_modeling/index.rst   
+    tutorials/linux/index.rst   
+    tutorials/software_engineering/index.rst
+    tutorials/scientific_communication/index.rst
+    tutorials/grants_and_fellowships/index.rst
