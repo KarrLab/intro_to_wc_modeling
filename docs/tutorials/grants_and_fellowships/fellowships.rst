@@ -22,6 +22,12 @@ Below is a list of the largest postdoctoral fellowships are their application de
 * `Jane Coffin Childs Memorial Fund for Medical Research <http://www.jccfund.org/fellowship-information/>`_: February 1
 * NIH `National Research Service Award <https://www.nigms.nih.gov/Training/IndivPostdoc/Pages/default.aspx>`_ (NRSA, F32): Early April, August, and December
 
+Below are several lists of additional smaller fellowships
+
+* `Berkeley <http://www.spo.berkeley.edu/fund/biopostdoc.html>`_
+* `Harvard <https://research.fas.harvard.edu/postdoc_opportunities>`_
+* `MIT <https://biology.mit.edu/postdoctoral/career_funding/fellowships>`_
+
 
 Postdoc/faculty transition awards
 =================================

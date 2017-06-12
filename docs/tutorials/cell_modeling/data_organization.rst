@@ -1,2 +1,2 @@
-Data organization
-=================
+Input data organization
+=======================

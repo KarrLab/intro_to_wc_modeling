@@ -33,6 +33,7 @@ import karr_lab_tutorials
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
     'sphinxcontrib.googleanalytics',
 ]

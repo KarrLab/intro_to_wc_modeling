@@ -27,7 +27,7 @@ Below are several guidelines for designing effective slides
 * Use simple diagrams    
 * Use high-contrast colors so your slides are viewable even with dim projectors
 * Use sufficiently large font size so that text is readable from a distance
-* Avoid large amount of text
+* Avoid large amounts of text
 * Avoid placing content at the margins in case the projector is misaligned
 * Avoid complex transitions and reveals
 
