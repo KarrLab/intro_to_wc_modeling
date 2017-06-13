@@ -9,9 +9,12 @@ Cell modeling
     data_aggregation.rst
     data_organization.rst
     model_design.rst
+    model_calibration.rst
     model_representation.rst
     model_annotation.rst
     model_composition.rst
     simulation.rst
     testing_models.rst
-    analyzing_simulation_results.rst
+    logging_results.rst
+    organizing_results.rst
+    analyzing_results.rst

@@ -64,4 +64,4 @@ Exercises
 #. Download a curated model from BioModels and obtained the paper in which is was reported
 #. Remove all of the annotation from the model
 #. Using the paper, databases such as ChEBI and UniProt and ontologies such as the PO, annotate the semantic meaning of each species and reaction.
-#. Using the paper, embed custom annotations which describe the provenance of the model including the assumptions that the modelers made and the data sources that the mdoelers used to build and calibrate the model
+#. Using the paper, embed custom annotations which describe the provenance of the model including the assumptions that the modelers made and the data sources that the modelers used to build and calibrate the model

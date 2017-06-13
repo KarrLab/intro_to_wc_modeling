@@ -2,5 +2,7 @@ cement
 configparser
 robpol86-sphinxcontrib-googleanalytics
 numpy
+pgmpy
+sckit-learn
 sphinx
 sphinx-rtd-theme
