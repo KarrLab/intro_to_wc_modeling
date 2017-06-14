@@ -36,6 +36,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
     'sphinxcontrib.googleanalytics',
+    #'sphinxcontrib.spelling',
 ]
 
 # napoleon options

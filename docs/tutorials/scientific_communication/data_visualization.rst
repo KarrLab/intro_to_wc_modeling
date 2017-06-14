@@ -12,10 +12,10 @@ Visualizing data
 
     * Use appropriate scales
     * Compare 
-    * Lay data out on faimilar maps such as geographical and pathway maps
+    * Lay data out on familiar maps such as geographical and pathway maps
 
 * Use small multiples to visualize additional dimensions
-* Avoid red/green color palettes to accomodate colorblindness
+* Avoid red/green color palettes to accommodate colorblindness
 * Avoid distracting viewers with unnecessary data and other unnecessary visual marks
 
 

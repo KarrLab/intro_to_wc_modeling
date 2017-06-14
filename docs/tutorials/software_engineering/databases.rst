@@ -175,7 +175,7 @@ Once we have defined the Python data model, we can use SQLAlchemy to generate th
     # create the database
     Base.metadata.create_all(engine)
 
-We can use the sqlite3 lite command lite utilty to inspect the schema of the database that SQLAchemy generated.::
+We can use the sqlite3 lite command lite utility to inspect the schema of the database that SQLAchemy generated.::
     
     sqlite3 test.sqlite .schema
 
@@ -186,7 +186,7 @@ We can insert records into the database by (1) creating a "session" on the datab
 
 Note, SQLAlchemy automatically creates constructors for each class which have keyword arguments for each instance attribute.
 
-Note, SQLAlchemy automatically adds add objects to sesions that are linked to other objects that have been explicitly added to the session.::
+Note, SQLAlchemy automatically adds add objects to sessions that are linked to other objects that have been explicitly added to the session.::
 
     session = sqlalchemy.orm.sessionmaker(bind=engine)()
     # :obj:`sqlalchemy.orm.session.Session`: sqlalchemy session

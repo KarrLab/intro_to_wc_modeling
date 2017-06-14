@@ -38,7 +38,7 @@ Funding streams for your lab
 
 Funding programs for early career investigators
 -----------------------------------------------
-Below is a list of some of the biggest funding opportunities specifically for early careeer investigators
+Below is a list of some of the biggest funding opportunities specifically for early career investigators
 
 * NIGMS Maximizing Investigators' Research Award (MIRA, R35)
 
@@ -99,7 +99,7 @@ Budgeting
 
 Submitting proposals
 --------------------
-Propoals must be submitted through your institutions Grants and Contracts Office using their online proposal submission system. These online systems are straightforward. They simply require you to upload each component of your proposal as a .docx or .pdf document and enter your budget using a set of webforms. Typically, proposals must be submitted internally 1-2 weeks in advance of the external deadline. 
+Proposals must be submitted through your institutions Grants and Contracts Office using their online proposal submission system. These online systems are straightforward. They simply require you to upload each component of your proposal as a .docx or .pdf document and enter your budget using a set of webforms. Typically, proposals must be submitted internally 1-2 weeks in advance of the external deadline. 
 
 
 Advice for winning grants

@@ -1,3 +1,5 @@
+.. _unit_testing:
+
 Testing Python code with unittest, pytest, and Coverage
 =======================================================
 

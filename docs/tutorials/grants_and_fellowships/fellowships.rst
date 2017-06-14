@@ -7,7 +7,7 @@ Below is a list of the largest graduate fellowships, their application deadlines
 * NIH `National Research Service Award <https://researchtraining.nih.gov/programs/fellowships/f31>`_ (NRSA, F31): Early April, August, and December
 * NSF `Graduate Research Fellowship Program <https://www.nsfgrfp.org/>`_ (GRFP): Early November
 
-See `http://www.karrlab.org/resources/grad-fellowships <http://www.karrlab.org/resources/grad-fellowships>`_ for advice on how to write sucessful applications and examples of successful applications.
+See `http://www.karrlab.org/resources/grad-fellowships <http://www.karrlab.org/resources/grad-fellowships>`_ for advice on how to write successful applications and examples of successful applications.
 
 
 Postdoctoral fellowships
@@ -31,7 +31,7 @@ Below are several lists of additional smaller fellowships
 
 Postdoc/faculty transition awards
 =================================
-Postdoc/faculty transition awards are designed to provide senior postdocs with 2 years of additional funding to complete their postdoctoral training and three years of funding to start their own independent laboratory at another institution. Below are the largest transition award programs, their application deadlines, and links to advice on how to write sucessful applications.
+Postdoc/faculty transition awards are designed to provide senior postdocs with 2 years of additional funding to complete their postdoctoral training and three years of funding to start their own independent laboratory at another institution. Below are the largest transition award programs, their application deadlines, and links to advice on how to write successful applications.
 
 * Burroughs Welcome Fund (BWF) `Career Award at the Scientific Interface <https://www.bwfund.org/grant-programs/interfaces-science/career-awards-scientific-interface>`_ (CASI)
 * NIH `Pathway to Independence Award <https://www.nhlbi.nih.gov/research/training/programs/postdoc/pathway-parent-k99-r00>`_ (K99/R00)

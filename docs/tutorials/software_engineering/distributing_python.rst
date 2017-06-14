@@ -213,7 +213,7 @@ Docker Hub can be used to distribute virtual machines simply by changing the pub
 
 Distributing documentation with Read The Docs
 ---------------------------------------------
-After you have configured Sphinx, commited your code to GitHub, and made your repository public, follow these instructions to configure Read The Docs to compile the documentation for your code upon each push to GitHub. Note, your configuration must follow the Sphinx configuration template in ``karr_lab_build_utils`` for Read The Docs to properly compile your documentation. Note also, Read The Docs can only be used to compile and distribute documentation for public GitHub repositories.
+After you have configured Sphinx, committed your code to GitHub, and made your repository public, follow these instructions to configure Read The Docs to compile the documentation for your code upon each push to GitHub. Note, your configuration must follow the Sphinx configuration template in ``karr_lab_build_utils`` for Read The Docs to properly compile your documentation. Note also, Read The Docs can only be used to compile and distribute documentation for public GitHub repositories.
 
 #. Create an account at `https://readthedocs.org <https://readthedocs.org>`_
 #. Log into Read The Docs
