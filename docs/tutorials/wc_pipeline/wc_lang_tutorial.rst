@@ -16,7 +16,7 @@ However, users of ``wc_lang`` do not need to use ``obj_model`` directly.
 Semantics of a ``wc_lang`` biochemical Model
 ----------------------------------------------
 A ``wc_lang`` biochemical model represents a biochemical system as ``Species`` (we indicate
-classes in ``wc_lang`` by capitalized names in ``fixed-width`` text) which get transformed by reactions. 
+classes in ``wc_lang`` by capitalized names in ``fixed-width`` text) which get transformed by reactions.
 
 A ``SpeciesType`` describes a biochemical molecule, including its ``name`` (following Python
 convention, attributes
@@ -31,8 +31,8 @@ are not represented.
 
 More generally,
 a ``wc_lang`` model is a highly-interconnected graph of related Python objects (``obj_model.Model`` instances).
-For example, a ``Species`` instance contains ``reaction_participants``, 
-which references each ``Reaction`` in which the ``Species`` participates. 
+For example, a ``Species`` instance contains ``reaction_participants``,
+which references each ``Reaction`` in which the ``Species`` participates.
 The graph contain many convenience relationships like this, which make it easy to retrieve useful
 related data from anywhere in the graph.
 
@@ -65,7 +65,7 @@ Python object.
 Static Enumerations
 ~~~~~~~~~~~~~~~~~~~
 
-Instances of these classes are used as attributes of ``wc_lang`` model components.
+Static attributes of these classes are used as attributes of ``wc_lang`` model components.
 
 ``TaxonRank``
     The names of biological taxonomic ranks: *domain*, *kingdom*, *phylum*, etc.
@@ -172,16 +172,20 @@ Using ``wc_lang``
 -----------------
 ``wc_lang`` can be used in several ways. To read and use a model defined in one or more files, follow these steps:
 
+This tutorial assumes that your computer runs Python.
+
 0. Setup the tutorial::
 
     # In a Unix shell:
     git clone https://github.com/KarrLab/karr_lab_tutorials.git
-    cd karr_lab_tutorials/software_engineering/wc_lang_tutorial
+    cd karr_lab_tutorials/karr_lab_tutorials/wc_pipeline/wc_lang_tutorial
+    # install the Python packages required to run this tutorial
+    pip install -r wc_pipeline/requirements.txt
 
-Execute ``python core.py`` to run this tutorial.
+You may run this tutorial in the Python interpreter, or execute ``python core.py`` to run all of its code.
 
 ..
-    # THIS CODE IS DUPLICATED IN karr_lab_tutorials/software_engineering/wc_lang_tutorial/core.py
+    # THIS CODE IS DUPLICATED IN karr_lab_tutorials/wc_pipeline/wc_lang_tutorial/core.py
     # KEEP THEM SYNCHRONIZED, OR, BETTER YET, REPLACE THEM WITH A SINGLE FILE AND CONVERSION PROGRAM(S).
 
 1. Import the ``wc_lang`` model reader::
@@ -199,7 +203,7 @@ for inline classes)::
 
 A set of delimiter-separated files can store a model. The supported delimiters are *comma* in csv
 files or *tab* in tsv files.
-Excel workbooks are much easier to edit interactively, 
+Excel workbooks are much easier to edit interactively,
 but changes in delimiter-separated files can be tracked by version control systems like Git.
 Define a pattern of tsv filenames for the model. Each file stores the instances of one class::
 

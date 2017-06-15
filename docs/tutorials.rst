@@ -7,7 +7,8 @@ Tutorials
     :caption: Table of contents
 
     tutorials/cell_modeling/index.rst   
-    tutorials/linux/index.rst   
+    tutorials/linux/index.rst
     tutorials/software_engineering/index.rst
+    tutorials/wc_pipeline/index.rst
     tutorials/scientific_communication/index.rst
     tutorials/grants_and_fellowships/index.rst
