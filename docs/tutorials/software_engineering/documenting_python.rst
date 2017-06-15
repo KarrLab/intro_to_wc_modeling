@@ -1,9 +1,12 @@
 Documenting Python code with Sphinx
 ===================================
 
-The goal of this tutorial is to teach you how to document Python code to help and other understand your code. This includes both documentation of each attribute, argument, method, class, and module and entire packages.
+The goal of this tutorial is to teach you how to document Python code to help
+other programmers -- and yourself in the future -- understand your code. 
+We recommend that you document each attribute, argument, method and class, and also document
+each module and package.
 
-reStructuredText is the most commonly used markup format to document Python code and Sphinx is the most commonly used tool for compiling Python documentation.
+reStructuredText is the most commonly used markup format for documenting Python code and Sphinx is the most commonly used tool for compiling Python documentation.
 
 
 Required packages
@@ -29,16 +32,17 @@ Our convention is to place all top-level documentation within a separate ``docs`
             index.rst          # main documentation file
             conf.py            # Sphinx configuration
             requirements.txt   # packages required to compile the documentation
-        setup.cfg              # contains a setting which represents the packages that API documentation should be generated for
+        setup.cfg              # contains a setting which specifies the packages for which
+                               # API documentation should be generated
 
 
 Generating a Sphinx configuration file
 --------------------------------------
-Sphinx is highly configurable and be configured using the ``docs/conf.py`` file.
+Sphinx is highly configurable and can be configured using the ``docs/conf.py`` file.
 
 You can generate a Sphinx configuration file by running the ``sphinx-quickstart`` utility and following the on screen instructions.
 
-Note: we are using a heavily Sphinx configuration file. See ``karr_lab_build_utils.templates.docs.conf.py`` for our template. In particular, we are enabling the ``napoleon`` extension to support Google-style argument and attribute doc strings.
+Note: we are using a heavily modified Sphinx configuration file. See ``karr_lab_build_utils.templates.docs.conf.py`` for our template. In particular, we are enabling the ``napoleon`` extension to support Google-style argument and attribute doc strings.
 
 
 Writing documentation
@@ -106,6 +110,6 @@ Run the following to compile the documentation::
 
     sphinx-build docs docs/_build/html 
 
-Sphinx will print out any errors in the your documentation. These must be fixed to properly generate the documentation.
+Sphinx will print out any errors in the documentation. These must be fixed to properly generate the documentation.
 
-The documentation can be viewed by opening ``docs/_build/html/index.html`` in your browser.
+It can be viewed by opening ``docs/_build/html/index.html`` in your browser.

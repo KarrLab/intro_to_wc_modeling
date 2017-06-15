@@ -6,39 +6,55 @@
 :License: MIT
 '''
 
-import os
+##########################################################################################################
+# THIS CODE IS DUPLICATED IN karr_lab_tutorials/docs/tutorials/software_engineering/wc_lang_tutorial.rst
+# KEEP THEM SYNCHRONIZED, OR, BETTER YET, REPLACE THEM WITH A SINGLE FILE AND CONVERSION PROGRAM(S).
+##########################################################################################################
 
+import os
 from wc_lang.io import Reader
 
-# 2. Read a model from a file::
+# 2. Read a model from a file.
 
-# read a model from a workbook; each worksheet stores the instances of one class (with occasional exceptions)
+# Read a model from an Excel workbook. Each worksheet stores the instances of one class (with occasional exceptions for inline classes)::
+
 MODEL_FILENAME = os.path.join(os.path.dirname(__file__), 'examples', 'test_wc_lang.xlsx')
 model = Reader().run(MODEL_FILENAME)
 
-# define a pattern of tsv filenames for the model; each file stores the instances of one class
+'''
+A set of delimiter-separated files can store a model. The supported delimiters are *comma* in csv
+files or *tab* in tsv files.
+Excel workbooks are much easier to edit interactively, 
+but changes in delimiter-separated files can be tracked by version control systems like Git.
+Define a pattern of tsv filenames for the model. Each file stores the instances of one class::
+'''
 MODEL_FILENAME_PATTERN = os.path.join(os.path.dirname(__file__), 'examples', 'test_wc_lang-*.tsv')
 
-# make a set of tsv files that contain the same model
+# Make a set of tsv files that contain the same model::
+
 from wc_lang.io import Writer
 Writer().run(MODEL_FILENAME_PATTERN, model)
 
-# Read from tsv files; they must match the glob pattern in MODEL_FILENAME_PATTERN.
-# The glob must match the names of wc_lang classes; e.g., test_wc_lang-Model.tsv, test_wc_lang-Submodels.tsv, etc.
+'''
+Read from tsv files; they must match the glob pattern in ``MODEL_FILENAME_PATTERN``.
+The glob matches the names of ``wc_lang`` classes; e.g., ``test_wc_lang-Model.tsv``,
+``test_wc_lang-Submodels.tsv``, etc.::
+'''
+
 model_tsv = Reader().run(MODEL_FILENAME_PATTERN)
 
-# csv files can be used similarly
-# (You may ignore SchemaWarning messages if you receive them.)
+# csv files can be used similarly.
 
 # 3. Use the model::
-# models differ because of problems with 'reaction_participants'
-print(model.difference(model_tsv))
+# differing models indicates a problem
+# print(model.difference(model_tsv))
 
-# For example, list each submodel's id and name
+# For example, list each submodel's id and name::
+
 for lang_submodel in model.get_submodels():
     print('submodel:', 'id:', lang_submodel.id, 'name:', lang_submodel.name)
 
-# Documentation for wc_lang is available at: 
+# We have published the `API documentation <http://www.karrlab.org/>`_ for ``wc_lang`` online.
 '''
 More usefully, let's access the model and evaluate an aspect of its integrity.
 
@@ -81,7 +97,7 @@ properties must be checked after a model is instantiated. Other such properties 
 
 * Reactions in dynamic submodels contain fully specified rate laws
 
-``verify_reactant_compartments`` uses ```` to iterate through all submodels. It accesses 
+``verify_reactant_compartments`` uses ``get_submodels()`` to iterate through all submodels. It accesses 
 each submodel's compartment attribute with ``lang_submodel.compartment``, and
 each submodel's reactions with ``lang_submodel.reactions``.
 '''
@@ -95,7 +111,8 @@ def verify_reactant_compartments(model):
     for lang_submodel in model.get_submodels():
         compartment = lang_submodel.compartment
         if compartment is None:
-            errors.append("submodel '{}' must contain a compartment attribute".format(lang_submodel.id))
+            errors.append("submodel '{}' must contain a compartment attribute".format(
+                lang_submodel.id))
             continue
         for reaction in lang_submodel.reactions:
             for participant in reaction.participants:
