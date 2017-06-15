@@ -27,7 +27,7 @@ How to write a manuscript
 -------------------------
 The keys to writing good manuscripts are to describe why your work is significant (i.e. how it solves and important problems), to describe how your work is novel (i.e. how it is different from previous work), and to clearly present your ideas so they can easily be understood with minimal effort.
 
-Often the is best accomplished by organizing your the body of your manuscript into the following sections
+Often these goals are best accomplished by organizing the body of your manuscript into the following sections
 
 * Introduction: describe the problem that you've tried to solve, why it is important, the prior work that has been done on the problem, how you've approached the problem in a novel way, and provide a brief overview of the methods and results of the project
 * Methods: describe how you've solved the problem

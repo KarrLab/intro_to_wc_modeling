@@ -13,7 +13,7 @@ import numpy
 
 
 class Simulation(object):  # all classes should inherit from `object`
-    """ Simulates the synesis and degradation of a species
+    """ Simulates the synthesis and degradation of a species
 
     Attributes:
         k_syn (:obj:`float`): zeroth-order synthesis rate

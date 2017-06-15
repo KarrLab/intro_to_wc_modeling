@@ -1,0 +1,8 @@
+Id	Name	Model	Structure	Empirical formula	Molecular weight	Charge	Type	Comments	References
+biomass	biomass	ASP_test_2016_2			10.0	0.0	metabolite		
+specie_1	specie_name_1	ASP_test_2016_2		CO	1.0	0.0	pseudo_species		
+specie_2	specie_name_2	ASP_test_2016_2		O2	2.0	0.0	pseudo_species		
+specie_3	specie_name_3	ASP_test_2016_2		N2O2Na3	3.0	0.0	pseudo_species		
+specie_4	specie_name_4	ASP_test_2016_2		H3SO4C9	4.0	0.0	pseudo_species		
+specie_5	specie_name_5	ASP_test_2016_2		H20	5.0	0.0	pseudo_species		
+specie_6	specie_name_6	ASP_test_2016_2		U238	6.0	0.0	pseudo_species		

@@ -90,7 +90,7 @@ In the remainder of the tutorial, we will write tests for the code located in ``
 
 Each test method should begin within the prefix ``test_``
 
-There are a large number of use assertions such as those below that can be used to verify that code produces the expected results. See the `unittest documentation <https://docs.python.org/2/library/unittest.html>`_ and the `numpy.testing documentation <https://docs.scipy.org/doc/numpy/reference/routines.testing.html>`_ for additional assertions.
+``unittest`` provides numerous assertions such as those below that can be used to verify that code produces the expected results. See the `unittest documentation <https://docs.python.org/2/library/unittest.html>`_ and the `numpy.testing documentation <https://docs.scipy.org/doc/numpy/reference/routines.testing.html>`_ for additional assertions.
 
 * ``unittest.TestCase.assertEqual``
 * ``unittest.TestCase.assertNotEqual``

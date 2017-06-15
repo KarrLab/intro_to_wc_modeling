@@ -1,0 +1,6 @@
+Id	Name	Submodel	Participants	Reversible	Comments	References
+biomass	Metabolism production	submodel_1	[c]: (2) specie_2 ==> biomass	False		
+reaction_1	reaction_name_1	submodel_1	specie_1[c] + specie_2[e] ==> specie_1[c] + specie_2[c]	False		
+reaction_2	reaction_name_2	submodel_1	[c]: (2) specie_2 ==> specie_3	False		
+reaction_3	reaction_name_3	submodel_2	[c]: specie_2 + (2) specie_3 ==> specie_4	True		
+reaction_4	reaction_name_4	submodel_2	[c]: specie_4 ==> (2) specie_5 + specie_6	False		

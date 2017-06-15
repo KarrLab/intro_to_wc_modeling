@@ -1,0 +1,6 @@
+Reaction	Direction	Equation	K cat	K m	Comments	References
+reaction_1	forward	max( specie_1[e], specie_2[e] )				
+reaction_2	forward	k_cat * specie_2[c]	2000.0			
+reaction_3	backward	specie_5[c] + specie_6[c]	0.0003	0.001		
+reaction_3	forward	specie_4[c] / k_m	0.0003	0.001		
+reaction_4	forward	specie_2[c]	0.0003	0.001		
