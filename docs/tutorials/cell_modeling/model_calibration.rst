@@ -28,7 +28,7 @@ Calibration data
 ----------------
 Before discussing how to calibrate single-cell models, it is important to note the nature of the data available to calibrate cell models. First, the majority of the data available to calibrate single-cell models directly relate to just one or a few model parameters. This means that most model parameters can be estimated from just a small number of values and, generally, only a few model parameters have to be estimated from physiological data.
 
-Second, although cell models are stochastic and dynamic, most of the data available to build cell models represents the time- and population-average of large groups of cells. Consequently, cell models can be calibrated by calibrating their mean behavior which is significantly less complex and computionally-cheaper problem.
+Second, although cell models are stochastic and dynamic, most of the data available to build cell models represents the time- and population-average of large groups of cells. Consequently, cell models can be calibrated by calibrating their mean behavior which is significantly less complex and computationally-cheaper problem.
 
 
 Approximate, multi-stage parameter estimation

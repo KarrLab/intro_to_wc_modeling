@@ -7,7 +7,7 @@ Custom numerical simulation code
 --------------------------------
 At the lowest level, a model can be represented as a numerical simulation algorithm. For example, a stochastic model could be represented as Python code which implements the Gillepsie algorithm. This approach provides the modeler the most control over the numerical simulation of the model which can be helpful for efficiently simulating large models, but this approach leads to models that are difficult for other scientists to understand because understanding the model could require reading a large amount of code. Furthermore, because this approach requires models to write and test a large amount of code which is time-consuming.
 
-Excercise
+Exercise
 ^^^^^^^^^
 Write a program which implements the Gillespie algorithm and uses this to simulate a stochastic model.
 
@@ -39,7 +39,7 @@ Alternatively, models can be described using domain-specific modeling languages 
 
 This approach creates models that are much more comprehensible than models that are described directly in terms of their numerical integration. However, for large models this approach can require large numbers of species and reactions to represent all possible states and reactions. Furthermore, this enumerated representation becomes highly inefficient when the state space gets very large.
 
-Excercise
+Exercise
 ^^^^^^^^^
 Encode the same stochastic model in SBML and simulate the model using `COPASI <http://copasi.org/>`_.
 
@@ -57,13 +57,13 @@ Encode the same stochastic model in BioNetGen.
 
 Rule-based modeling API
 -----------------------
-The `PySB <http://pysb.org/>`_ rule-based modeling API overcomes some of the limitations of BioNetGen and Kappa by allowing modelers to define their own higher level abstractions which could be used to represent other types of combinatorial complexity. However, this requires modelers to develop their own unique higher level abstractions which again requires modeler to read lots of code to undertand a model. Furthermore, models that are described in PySB have to be complied to BioNetGen models which diminishes the advantages of network-free simulation.
+The `PySB <http://pysb.org/>`_ rule-based modeling API overcomes some of the limitations of BioNetGen and Kappa by allowing modelers to define their own higher level abstractions which could be used to represent other types of combinatorial complexity. However, this requires modelers to develop their own unique higher level abstractions which again requires modeler to read lots of code to understand a model. Furthermore, models that are described in PySB have to be complied to BioNetGen models which diminishes the advantages of network-free simulation.
 
 Exercise
 ^^^^^^^^^
 Describe the same stochastic model with PySB.
 
 
-High-level rule-based modeling lanaguge
+High-level rule-based modeling langauge
 ---------------------------------------
 To overcome the above limitations, we are developing a new higher-level rule-based modeling language and a corresponding higher-level network-free simulator.

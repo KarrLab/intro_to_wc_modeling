@@ -20,7 +20,7 @@ Common data types and data sources
 * RNA
     
     * Sequences: Sequencing; GenBank
-    * Modifications: Sequencing, mass-spectometry: Modomics
+    * Modifications: Sequencing, mass-spectrometry: Modomics
     * Concentrations: Microarray, RNA-seq; Array Express, GEO
     * Localization: FISH, microscopy; individual papers
     * Half-lives: Microarray, RNA-seq; individual papers
@@ -30,9 +30,9 @@ Common data types and data sources
     * Sequences: UniProt
     * Modifications: Mass-spectrometry; UniMod
     * 3D structures: X-ray crystallography, NMR; PDB
-    * Complexes: chromatograpy, yeast 2 hybrid; EcoCyc, UniProt
+    * Complexes: chromatography, yeast 2 hybrid; EcoCyc, UniProt
     * Localization: microscopy; PSORT, WolfSort
-    * Concentrations: mass-spectometry; Pax-DB
+    * Concentrations: mass-spectrometry; Pax-DB
     * Half-lives: mass-spectrometry; individual papers
 
 * Interactions
@@ -50,7 +50,7 @@ Common data types and data sources
 
 Finding data sources
 ------------------------
-There are several meta-databases which contain lists of datasources that are helpful for finding appropriate data source
+There are several meta-databases which contain lists of data sources that are helpful for finding appropriate data source
 
 * `BioCatalogue <https://www.biocatalogue.org>`_
 * `BioMart <http://www.biomart.org>`_
@@ -75,8 +75,8 @@ Data aggregation tools
 `BIOSERVICES <https://pythonhosted.org/bioservices>`_ is a helpful tool for aggregating data from approximately 25 of the largest molecular biology databases. However, BIOSERVICES only supports a few databases and provides minimal support for identifying relevant data for a model. Unfortunately, there are few tools for aggregating relevant data for models. Consequently, we must develop better tools for aggregating the data needed to build models.
 
 
-Determing the consensus of multiple observations
-------------------------------------------------
+Determining the consensus of multiple observations
+--------------------------------------------------
 In some cases, you may be lucky enough to find multiple observations to estimate a parameter value. In this case, we recommend estimating the parameter value by calculating the mean of the individual observations weighted by their relevance (taxonomic distance, species/reaction similarity, environmental similarity, etc.) to the model.
 
 
