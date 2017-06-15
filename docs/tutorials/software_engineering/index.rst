@@ -11,5 +11,4 @@ Software engineering
     testing_python.rst
     documenting_python.rst
     continuous_integration.rst
-    distributing_python.rst
-    wc_lang_tutorial.rst
+    distributing_python.rst    
