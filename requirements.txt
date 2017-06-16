@@ -1,5 +1,6 @@
-cement     # framework for building command line programs
-numpy      # numerical computations
-pgmpy
-scikit-learn
-sqlalchemy # relational databases
+cement                                                  # framework for building command line programs
+numpy                                                   # numerical computations
+pgmpy                                                   # graphical models package
+scikit-learn                                            # data science package
+sqlalchemy                                              # relational databases
+git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang  # wc-modeling language
