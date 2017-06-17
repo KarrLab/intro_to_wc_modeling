@@ -11,7 +11,6 @@ Cell modeling
     model_design.rst
     model_calibration.rst
     model_representation.rst
-    wc_lang_tutorial.rst
     model_annotation.rst
     model_composition.rst
     simulation.rst

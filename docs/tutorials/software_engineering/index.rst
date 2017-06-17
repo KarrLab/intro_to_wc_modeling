@@ -12,4 +12,3 @@ Software engineering
     documenting_python.rst
     continuous_integration.rst
     distributing_python.rst
-    distributing_python.rst    
