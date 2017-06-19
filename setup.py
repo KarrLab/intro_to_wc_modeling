@@ -1,23 +1,24 @@
-from setuptools import setup, find_packages
+import pip
+pip.main(['install', 'git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils'])
+
 import karr_lab_tutorials
 import os
+import setuptools
+import wc_utils.util.install
 
-# parse dependencies from requirements.txt files
-install_requires = []
-tests_require = []
+# parse dependencies and links from requirements.txt files
+with open('requirements.txt', 'r') as file:
+    install_requires, dependency_links_install = wc_utils.util.install.parse_requirements(file.readlines())
+with open('tests/requirements.txt', 'r') as file:
+    tests_require, dependency_links_tests = wc_utils.util.install.parse_requirements(file.readlines())
+dependency_links = list(set(dependency_links_install + dependency_links_tests))
 
-for line in open('requirements.txt'):
-    line, _, _ = line.partition('#')
-    line = line.strip()
-    install_requires.append(line)
+# install non-PyPI dependencies
+wc_utils.util.install.install_dependencies(dependency_links)
 
-for line in open('tests/requirements.txt'):
-    line, _, _ = line.partition('#')
-    line = line.strip()
-    tests_require.append(line)
 
 # install package
-setup(
+setuptools.setup(
     name='karr_lab_tutorials',
     version=karr_lab_tutorials.__version__,
 
@@ -43,7 +44,7 @@ setup(
     keywords='python, tutorial',
 
     # packages not prepared yet
-    packages=find_packages(exclude=['tests', 'tests.*']),
+    packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
     include_package_data=True,
     package_data={
         'karr_lab_tutorials': [
@@ -58,5 +59,5 @@ setup(
 
     install_requires=install_requires,
     tests_require=tests_require,
-    dependency_links=[],
+    dependency_links=dependency_links,
 )
