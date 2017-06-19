@@ -206,7 +206,21 @@ Using ``wc_lang``
 
     ``wc_lang`` can read and write models from specially formatted Excel workbooks in which each worksheet represents a Python class, each row
     represents a class instance, each column represents an instance attribute, each cell represents the value of an attribute of an
-    instance, and string identifiers are used to indicate relationships among objects
+    instance, and string identifiers are used to indicate relationships among objects.
+
+    In addition to defining a model, these Excel files should contain all of the annotation needed to understand the biological semantic meaning of
+    the model. Ideally, this should include
+
+    * NCBI Taxonomy ID for the taxon
+    * Gene Ontology (GO) annotations for each submodel
+    * The structure of each species: InChI for small molecules; sequences for polymers
+    * Where possible, ChEBI ids for each small molecule
+    * Where possible, ids for each gene, transcript, and protein
+    * Where possible, EC numbers or KEGG ids for each reaction    
+    * `Cell Component Ontology <http://brg.ai.sri.com/CCO>`_ (CCO) annotations for each compartment
+    * `Systems Biology Ontology <http://www.ebi.ac.uk/sbo>`_ (SBO) annotations for each parameter
+    * The citations which support each model decision
+    * PubMed id, DOI, ISBN, or URL for each citation
 
     This example illustrates how to read a model from an Excel file::
 
