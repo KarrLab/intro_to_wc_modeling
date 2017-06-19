@@ -178,14 +178,14 @@ This tutorial assumes that your computer runs Python.
 
     # In a Unix shell:
     git clone https://github.com/KarrLab/karr_lab_tutorials.git
-    cd karr_lab_tutorials/karr_lab_tutorials/wc_pipeline/wc_lang_tutorial
+    cd karr_lab_tutorials/karr_lab_tutorials/wc_modeling/wc_lang_tutorial
     # install the Python packages required to run this tutorial
-    pip install -r wc_pipeline/requirements.txt
+    pip install -r wc_modeling/requirements.txt
 
 You may run this tutorial in the Python interpreter, or execute ``python core.py`` to run all of its code.
 
 ..
-    # THIS CODE IS DUPLICATED IN karr_lab_tutorials/wc_pipeline/wc_lang_tutorial/core.py
+    # THIS CODE IS DUPLICATED IN karr_lab_tutorials/wc_modeling/wc_lang_tutorial/core.py
     # KEEP THEM SYNCHRONIZED, OR, BETTER YET, REPLACE THEM WITH A SINGLE FILE AND CONVERSION PROGRAM(S).
 
 1. Import the ``wc_lang`` model reader::

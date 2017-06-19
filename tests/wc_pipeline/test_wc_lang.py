@@ -12,4 +12,4 @@ import unittest
 class TestWC_Lang(unittest.TestCase):
 
     def test(self):
-        from karr_lab_tutorials.wc_pipeline.wc_lang_tutorial import core
+        from karr_lab_tutorials.wc_modeling.wc_lang_tutorial import core

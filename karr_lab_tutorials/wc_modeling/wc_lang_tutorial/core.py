@@ -7,7 +7,7 @@
 '''
 
 ##########################################################################################################
-# THIS CODE IS DUPLICATED IN karr_lab_tutorials/docs/tutorials/wc_pipeline/wc_lang_tutorial.rst
+# THIS CODE IS DUPLICATED IN karr_lab_tutorials/docs/tutorials/wc_modeling/wc_lang_tutorial.rst
 # KEEP THEM SYNCHRONIZED, OR, BETTER YET, REPLACE THEM WITH A SINGLE FILE AND CONVERSION PROGRAM(S).
 ##########################################################################################################
 
