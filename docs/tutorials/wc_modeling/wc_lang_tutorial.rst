@@ -1,4 +1,4 @@
-Using the wc_lang Package to Define Whole-Cell Models
+Using the wc_lang package to define whole-cell models
 =======================================================
 
 This tutorial teaches you how to use the ``wc_lang`` package to define whole-call models.
@@ -147,7 +147,7 @@ stored in a separate table, either a workbook's worksheet or delimiter-separated
     The expression is constructed from species names, compartment names, stoichiometric
     reaction coefficients, k_cat and k_m, and Python functions and mathematical operators.
     ``SpeciesType`` and ``Compartment`` names must be valid Python identifiers, and the entire
-    expressin must be a valid Python expression.
+    expression must be a valid Python expression.
     A species composed of a ``SpeciesType`` named
     ``species_x`` located in a ``Compartment`` named ``c`` is written ``species_x[c]``. Evaluating
     the rate law converts species into their concentration
@@ -172,136 +172,149 @@ Using ``wc_lang``
 -----------------
 ``wc_lang`` can be used in several ways. To read and use a model defined in one or more files, follow these steps:
 
-This tutorial assumes that your computer runs Python.
-
-0. Setup the tutorial::
-
-    # In a Unix shell:
-    git clone https://github.com/KarrLab/karr_lab_tutorials.git
-    cd karr_lab_tutorials/karr_lab_tutorials/wc_modeling/wc_lang_tutorial
-    # install the Python packages required to run this tutorial
-    pip install -r wc_modeling/requirements.txt
-
-You may run this tutorial in the Python interpreter, or execute ``python core.py`` to run all of its code.
-
 ..
     # THIS CODE IS DUPLICATED IN karr_lab_tutorials/wc_modeling/wc_lang_tutorial/core.py
     # KEEP THEM SYNCHRONIZED, OR, BETTER YET, REPLACE THEM WITH A SINGLE FILE AND CONVERSION PROGRAM(S).
 
-1. Import the ``wc_lang`` model reader::
+#. Install the required software for the tutorial:
+
+    * Python
+    * Pip
+
+#. Install the tutorial::
+
+    git clone https://github.com/KarrLab/karr_lab_tutorials.git
+    pip install \
+        ipython \
+        git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang \
+        git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils
+
+#. Change to the directory for this tutorial::
+
+    cd karr_lab_tutorials/karr_lab_tutorials/wc_modeling/wc_lang_tutorial
+
+#. Open an interactive python interpreter::
+    
+    ipython
+
+#. Import the ``os`` and ``wc_lang.io`` modules::
 
     import os
-    from wc_lang.io import Reader
+    import wc_lang.io
 
-2. Read a model from a file.
+#. Read a model from an Excel file.
 
-Read a model from an Excel workbook. Each worksheet stores the instances of one class (with occasional exceptions
-for inline classes)::
+    ``wc_lang`` can read and write models from specially formatted Excel workbooks in which each worksheet represents a Python class, each row
+    represents a class instance, each column represents an instance attribute, each cell represents the value of an attribute of an
+    instance, and string identifiers are used to indicate relationships among objects
 
-    MODEL_FILENAME = os.path.join(os.path.dirname(__file__), 'examples', 'test_wc_lang.xlsx')
-    model = Reader().run(MODEL_FILENAME)
+    This example illustrates how to read a model from an Excel file::
 
-A set of delimiter-separated files can store a model. The supported delimiters are *comma* in csv
-files or *tab* in tsv files.
-Excel workbooks are much easier to edit interactively,
-but changes in delimiter-separated files can be tracked by version control systems like Git.
-Define a pattern of tsv filenames for the model. Each file stores the instances of one class::
+        MODEL_FILENAME = os.path.join('examples', 'example_model.xlsx')
+        model = wc_lang.io.Reader().run(MODEL_FILENAME)
 
-    MODEL_FILENAME_PATTERN = os.path.join(os.path.dirname(__file__), 'examples', 'test_wc_lang-*.tsv')
+    ``wc_lang`` can also read and write models from specially formatted set of delimiter-separated files. `wc_lang`` uses filename glob patterns
+    to indicate sets of delimited files. The supported delimiters are *commas* for .csv files and *tabs* for .tsv files. These files use the same
+    format as the Excel workbook format, except that each worksheet is saved as a separate file.Excel workbooks are easier to edit interactively,
+    but delimiter-separated files are more compatible  with code version control systems such as Git.
 
-Make a set of tsv files that contain the same model::
+    This example illustrates how to write a model to an set of .tsv files::
 
-    from wc_lang.io import Writer
-    Writer().run(MODEL_FILENAME_PATTERN, model)
+        MODEL_FILENAME_PATTERN = os.path.join('examples', 'example_model-*.tsv')
+        wc_lang.io.Writer().run(MODEL_FILENAME_PATTERN, model)
 
-Read from tsv files; they must match the glob pattern in ``MODEL_FILENAME_PATTERN``.
-The glob matches the names of ``wc_lang`` classes; e.g., ``test_wc_lang-Model.tsv``,
-``test_wc_lang-Submodels.tsv``, etc.::
+    This example illustrates how to read a model from a set of .tsv files::
 
-    model_tsv = Reader().run(MODEL_FILENAME_PATTERN)
+        model_from_tsv = wc_lang.io.Reader().run(MODEL_FILENAME_PATTERN)
 
-csv files can be used similarly.
+    csv files can be used similarly.
 
-3. Use the model.
+#. Access properties of the model
 
-For example, list each submodel's id and name::
+    ``wc_lang`` models (instances of ``wc_lang.core.Model``) have several attributes:
 
-    for lang_submodel in model.get_submodels():
-        print('submodel:', 'id:', lang_submodel.id, 'name:', lang_submodel.name)
+    * id
+    * name
+    * version
+    * taxon
+    * submodels
+    * compartments
+    * species_types
+    * parameters
+    * references
 
-We have published the `API documentation <http://www.karrlab.org/>`_ for ``wc_lang`` online.
+    ``wc_lang`` also provides several convenience methods to get all of the elements of a specific type
+    that are part of a model. Each of these methods returns a list of the instances of requested type.
 
-More usefully, let's access the model and evaluate an aspect of its integrity.
+    * get_compartments
+    * get_species_types
+    * get_submodels
+    * get_species
+    * get_concentrations
+    * get_reactions
+    * get_rate_laws
+    * get_parameters
+    * get_references
 
-The ``Model`` object in ``wc_lang`` provides a set of convenience methods for accessing a model's elements.
-These are:
+    For example, ``get_submodels`` returns a list of all of the submodels. As illustrated below, this can be 
+    used to print the ids and names of the submodels::
 
-* ``get_compartments()``
+        for submodel in model.get_submodels():
+            print('id: {}, name: {}'.format(submodel.id, submodel.name))
 
-* ``get_species_types()``
+#. Programmatically build a new model and edit its model properties
 
-* ``get_submodels()``
+    You can also use the classes and methods in ``wc_lang.core`` to programmatically build and edit models
 
-* ``get_species()``
+    The following illustrates how to build a simple model programmatically::
 
-* ``get_concentrations()``
+        prog_model = wc_lang.core.Model(id='programmatic_model', name='Programmatic model')
 
-* ``get_reactions()``
+        submodel = wc_lang.core.Submodel(id='submodel_1', model=prog_model)
 
-* ``get_rate_laws()``
+        cytosol = wc_lang.core.Compartment(id='c', name='Cytosol')
 
-* ``get_parameters()``
+        atp = wc_lang.core.SpeciesType(id='atp', name='ATP', model=prog_model)
+        adp = wc_lang.core.SpeciesType(id='adp', name='ADP', model=prog_model)
+        pi = wc_lang.core.SpeciesType(id='pi', name='Pi', model=prog_model)
+        h2o = wc_lang.core.SpeciesType(id='h2o', name='H2O', model=prog_model)
+        h = wc_lang.core.SpeciesType(id='h', name='H+', model=prog_model)
 
-* ``get_references()``
+        atp_hydrolysis = wc_lang.core.Reaction(id='atp_hydrolysis', name='ATP hydrolysis')
+        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=atp, compartment=cytosol), coefficient=-1)
+        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=h2o, compartment=cytosol), coefficient=-1)
+        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=adp, compartment=cytosol), coefficient=1)
+        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=pi, compartment=cytosol), coefficient=1)
+        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=h, compartment=cytosol), coefficient=1)
 
-Each of these methods returns a list
-containing all of the model's instances of the component type in the method's name.
-E.g., ``get_rate_laws()`` returns all of the model's ``RateLaw`` instances.
+    # The following illustrates how to edit a model programmatically::
 
-While the schema ensures that a model provided by ``wc_lang`` has local integrity it does not
-evaluate global integrity. For example, a ``wc_lang`` model may associate a compartment with each
-submodel and must associate a submodel with each reaction. But it does not ensure that the reactants in
-a submodel's reactions are located in the submodel's compartment.
-The function ``verify_reactant_compartments`` below evaluates this consistency.
-This and other global model
-properties must be checked after a model is instantiated. Other such properties include:
+        prog_model.id = 'programmatically_created_model'
+        prog_model.name = 'Programmatically created model'
 
-* The model does not contain dead-end species which are only consumed or produced
+#. Compare and difference ``model`` and ``model_from_tsv``
 
-* Reactions are balanced
+    ``wc_lang`` provides two methods to determine if two models are semantically equal and report any semantic
+    differences between two models. The ``is_equal`` method determines if two models are semantically equal 
+    (the two models recursively have the same attribute values, ignoring the order of the attributes which has 
+    no semantic meaning). The following code excerpt illustrates how to compare the semantic equality of
+    ``model`` and ``model_from_tsv``::
 
-* Reactions in dynamic submodels contain fully specified rate laws
+        assert(model.is_equal(model_from_tsv) == True)
 
-``verify_reactant_compartments`` uses ``get_submodels()`` to iterate through all submodels. It accesses
-each submodel's compartment attribute with ``lang_submodel.compartment``, and
-each submodel's reactions with ``lang_submodel.reactions``.::
+    The ``difference`` method produces a textual description of the differences between two models. The following
+    code excerpt illustrates how to print the differences between ``model`` and ``model_from_tsv``::
 
-    def verify_reactant_compartments(model):
-        '''Verify that all reactants in each submodel's reactions are in the submodel's compartment
+        assert(model.difference(model_from_tsv) == '')
 
-        Returns:
-            `list`: errors
-        '''
-        errors = []
-        for lang_submodel in model.get_submodels():
-            compartment = lang_submodel.compartment
-            if compartment is None:
-                errors.append("submodel '{}' must contain a compartment attribute".format(
-                    lang_submodel.id))
-                continue
-            for reaction in lang_submodel.reactions:
-                for participant in reaction.participants:
-                    if participant.coefficient < 0:     # select reactants
-                        if participant.species.compartment != compartment:
-                            error = "submodel '{}' models compartment {}, but its reaction {} uses "\
-                            "specie {} in another compartment: {}".format(lang_submodel.id,
-                                compartment.id, reaction.id, participant.species.species_type.id,
-                                participant.species.compartment.id)
-                            errors.append(error)
-        return errors
+#. Normalize ``model`` into a reproducible order to facilitate reproducible numerical simulations
+    
+    The attribute order has no semantic meaning in ``wc_lang``. However, numerical simulation results derived from
+    models described in ``wc_lang`` can be sensitive to the attribute order. To facilitate reproducible simulation results,
+    ``wc_lang`` provides a ``normalize`` to sort models into a reproducible order.
 
-    print('\n'.join(verify_reactant_compartments(model)))
+    The following code excerpt will normalize ``model`` into a reproducible order::
 
-Other uses of a ``wc_lang`` model work similarly.
+        model.normalize()
 
-\(c\) Arthur Goldberg, 2017
+#. Please see `http://code.karrlab.org <http://code.karrlab.org/>`_ for documentation of the entire ``wc_lang`` API.
