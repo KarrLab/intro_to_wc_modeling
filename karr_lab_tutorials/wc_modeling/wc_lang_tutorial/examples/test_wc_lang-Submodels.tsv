@@ -1,3 +1,0 @@
-Id	Name	Model	Algorithm	Comments	References	Compartment
-submodel_1	Metabolism	ASP_test_2016_2	dfba			c
-submodel_2	RNA degradation	ASP_test_2016_2	ssa			c

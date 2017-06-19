@@ -1,5 +1,6 @@
 from setuptools import setup, find_packages
 import karr_lab_tutorials
+import os
 
 # parse dependencies from requirements.txt files
 install_requires = []
@@ -44,6 +45,11 @@ setup(
     # packages not prepared yet
     packages=find_packages(exclude=['tests', 'tests.*']),
     include_package_data=True,
+    package_data={
+        'karr_lab_tutorials': [
+            os.path.join('wc_modeling', 'wc_lang_tutorial', 'examples', 'test_wc_lang.xlsx')
+        ],
+    },
     entry_points={
         'console_scripts': [
             'karr_lab_tutorials = karr_lab_tutorials.__main__:main',

@@ -1,3 +1,0 @@
-Id	Name	Model	Initial volume	Comments	References
-c	Cell	ASP_test_2016_2	4.58e-17	Average volume of Mycoplasma pneumoniae is 66 aL [Ref-0001]. This equates to 45.8 aL at the beginning of the cell cycle (66 aL * ln(2)).	
-e	Extracellular space	ASP_test_2016_2	1e-12	Typical density of Mycoplasma pneumoniae cells in culture is 1e-9 cells/mL [Ref-0002].	
