@@ -1,4 +1,5 @@
 cement                                                   # framework for building command line programs
+ipython                                                  # interactive interpret
 numpy                                                    # numerical computations
 pgmpy                                                    # graphical models package
 scikit-learn                                             # data science package
