@@ -1,7 +1,9 @@
-Karr Lab tutorials
-==================
+Introduction to whole-cell (WC) modeling
+========================================
 
-The goal of these tutorials is to prepare you to be a productive computational systems biologist, particularly in the Karr Lab. 
+The goal of this website is to prepare you to be a productive whole-cell modeler through a variety of introductory readings and coding tutorials.
+
+Currently, this website contains a variety of provisional text and tutorials. Over time, we aim to develop additional content.
 
 .. toctree::
     :maxdepth: 3
