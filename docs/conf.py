@@ -65,8 +65,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'karr_lab_tutorials'
-copyright = '2017, Jonathan Karr'
-author = 'Jonathan Karr'
+copyright = '2017, Karr Lab'
+author = 'Karr Lab'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
