@@ -5,7 +5,8 @@ There are multiple ways to represent a model.
 
 Custom numerical simulation code
 --------------------------------
-At the lowest level, a model can be represented as a numerical simulation algorithm. For example, a stochastic model could be represented as Python code which implements the Gillepsie algorithm. This approach provides the modeler the most control over the numerical simulation of the model which can be helpful for efficiently simulating large models, but this approach leads to models that are difficult for other scientists to understand because understanding the model could require reading a large amount of code. Furthermore, because this approach requires models to write and test a large amount of code which is time-consuming.
+At the lowest level, a model can be represented as a numerical simulation algorithm. For example, a stochastic model could be represented in Python code which implements the Gillepsie algorithm. This approach provides a modeler with the most control over the numerical simulation of the model which can be helpful for efficiently simulating large models, but this approach leads to models that are difficult for other scientists to understand because they may need to read a large amount of code. Furthermore, because this approach
+has the disadvantage that it requires the modeler devote significant time writing and testing a large amount of code.
 
 Exercise
 ^^^^^^^^^
@@ -23,7 +24,7 @@ Write a program that uses StochPy to simulate a stochastic model.
 
 Enumerated modeling languages
 -----------------------------
-Alternatively, models can be described using domain-specific modeling languages such as `CellML <https://www.cellml.org>`_ and `SBML (Systems Biology Markup Language) <http://sbml.org>`_ that are supported by a large number of programs and that explicitly capture the biological semantics of models. SBML models are composed of the elements listed below, and SBML specification precisely defines how to simulate models encoded in SBML which can be accomplished by compiling models to a lower level.
+Alternatively, models can be described using domain-specific modeling languages such as `CellML <https://www.cellml.org>`_ and `SBML (Systems Biology Markup Language) <http://sbml.org>`_ that are supported by many programs and that explicitly capture the biological semantics of models. SBML models are composed of the elements listed below, and the SBML specification precisely defines how to simulate models encoded in SBML which can be accomplished by compiling models to a lower level.
 
 * Compartments
 * Species
@@ -37,7 +38,7 @@ Alternatively, models can be described using domain-specific modeling languages 
 * Unit definitions
 * Annotations
 
-This approach creates models that are much more comprehensible than models that are described directly in terms of their numerical integration. However, for large models this approach can require large numbers of species and reactions to represent all possible states and reactions. Furthermore, this enumerated representation becomes highly inefficient when the state space gets very large.
+This approach creates models that are much more comprehensible than models that are described directly in terms of their numerical integration. However, for large models this approach can require intractably many species and reactions to represent all possible states and reactions. Furthermore, this enumerated representation becomes highly inefficient when the state space gets very large.
 
 Exercise
 ^^^^^^^^^
