@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# karr_lab_tutorials documentation build configuration file, created by
+# intro_to_wc_modeling documentation build configuration file, created by
 # sphinx-quickstart on Fri May 12 03:28:12 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -20,7 +20,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
-import karr_lab_tutorials
+import intro_to_wc_modeling
 
 # -- General configuration ------------------------------------------------
 
@@ -64,7 +64,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'karr_lab_tutorials'
+project = 'intro_to_wc_modeling'
 copyright = '2017, Karr Lab'
 author = 'Karr Lab'
 
@@ -73,7 +73,7 @@ author = 'Karr Lab'
 # built documents.
 #
 # The short X.Y version.
-version = karr_lab_tutorials.__version__
+version = intro_to_wc_modeling.__version__
 # The full version, including alpha/beta/rc tags.
 release = version
 
@@ -165,7 +165,7 @@ html_static_path = ['_static']
 # html_last_updated_fmt = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'karr_lab_tutorialsdoc'
+htmlhelp_basename = 'intro_to_wc_modelingdoc'
 
 # Custom sidebar templates, maps document names to template names.
 #
@@ -254,7 +254,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'karr_lab_tutorials.tex', 'python\\_package\\_tutorial Documentation',
+    (master_doc, 'intro_to_wc_modeling.tex', 'python\\_package\\_tutorial Documentation',
      'Jonathan Karr', 'manual'),
 ]
 
@@ -264,7 +264,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'karr_lab_tutorials', 'karr_lab_tutorials Documentation',
+    (master_doc, 'intro_to_wc_modeling', 'intro_to_wc_modeling Documentation',
      [author], 1)
 ]
 
@@ -275,8 +275,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'karr_lab_tutorials', 'karr_lab_tutorials Documentation',
-     author, 'karr_lab_tutorials', 'One line description of project.',
+    (master_doc, 'intro_to_wc_modeling', 'intro_to_wc_modeling Documentation',
+     author, 'intro_to_wc_modeling', 'One line description of project.',
      'Miscellaneous'),
 ]
 

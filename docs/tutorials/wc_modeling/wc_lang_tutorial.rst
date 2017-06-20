@@ -173,7 +173,7 @@ Using ``wc_lang``
 ``wc_lang`` can be used in several ways. To read and use a model defined in one or more files, follow these steps:
 
 ..
-    # THIS CODE IS DUPLICATED IN karr_lab_tutorials/wc_modeling/wc_lang_tutorial/core.py
+    # THIS CODE IS DUPLICATED IN intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
     # KEEP THEM SYNCHRONIZED, OR, BETTER YET, REPLACE THEM WITH A SINGLE FILE AND CONVERSION PROGRAM(S).
 
 #. Install the required software for the tutorial:
@@ -183,7 +183,7 @@ Using ``wc_lang``
 
 #. Install the tutorial::
 
-    git clone https://github.com/KarrLab/karr_lab_tutorials.git
+    git clone https://github.com/KarrLab/intro_to_wc_modeling.git
     pip install \
         ipython \
         git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang \
@@ -191,7 +191,7 @@ Using ``wc_lang``
 
 #. Change to the directory for this tutorial::
 
-    cd karr_lab_tutorials/karr_lab_tutorials/wc_modeling/wc_lang_tutorial
+    cd intro_to_wc_modeling/intro_to_wc_modeling/wc_modeling/wc_lang_tutorial
 
 #. Open an interactive python interpreter::
     

@@ -47,9 +47,9 @@ Note: we are using a heavily modified Sphinx configuration file. See ``karr_lab_
 
 Writing documentation
 -----------------------
-In the remainder of the tutorial, we will write tests for the code located in ``/path/to/this/repo/karr_lab_tutorials/software_engineering/unit_testing/``.
+In the remainder of the tutorial, we will write tests for the code located in ``/path/to/this/repo/intro_to_wc_modeling/software_engineering/unit_testing/``.
 
-Using the `napoleon` style, you can document each class, method, and attribute. See ``karr_lab_tutorials/software_engineering/unit_testing/core.py`` for a complete example.
+Using the `napoleon` style, you can document each class, method, and attribute. See ``intro_to_wc_modeling/software_engineering/unit_testing/core.py`` for a complete example.
 
 Classes
 ^^^^^^^
@@ -95,13 +95,13 @@ README
 ^^^^^^^^^^^^^^^^^^^^^^^
 In addition to this documentation, we also recommend providing a brief README file with each repository and we recommend embedded status badges at the top of this file. These badges can be embedded as shown in the example below::
 
-    <!-- [![PyPI package](https://img.shields.io/pypi/v/karr_lab_tutorials.svg)](https://pypi.python.org/pypi/karr_lab_tutorials) -->
-    [![Documentation](https://readthedocs.org/projects/karrlab_karr_lab_tutorials/badge/?version=latest)](http://karrlab_karr_lab_tutorials.readthedocs.org)
-    [![Test results](https://circleci.com/gh/KarrLab/karr_lab_tutorials.svg?style=shield)](https://circleci.com/gh/KarrLab/karr_lab_tutorials)
-    [![Test coverage](https://coveralls.io/repos/github/KarrLab/karr_lab_tutorials/badge.svg)](https://coveralls.io/github/KarrLab/karr_lab_tutorials)
-    [![Code analysis](https://codeclimate.com/github/KarrLab/karr_lab_tutorials/badges/gpa.svg)](https://codeclimate.com/github/KarrLab/karr_lab_tutorials)
-    [![License](https://img.shields.io/github/license/KarrLab/karr_lab_tutorials.svg)](LICENSE)
-    ![Analytics](https://ga-beacon.appspot.com/UA-86759801-1/karr_lab_tutorials/README.md?pixel)
+    <!-- [![PyPI package](https://img.shields.io/pypi/v/intro_to_wc_modeling.svg)](https://pypi.python.org/pypi/intro_to_wc_modeling) -->
+    [![Documentation](https://readthedocs.org/projects/karrlab_intro_to_wc_modeling/badge/?version=latest)](http://karrlab_intro_to_wc_modeling.readthedocs.org)
+    [![Test results](https://circleci.com/gh/KarrLab/intro_to_wc_modeling.svg?style=shield)](https://circleci.com/gh/KarrLab/intro_to_wc_modeling)
+    [![Test coverage](https://coveralls.io/repos/github/KarrLab/intro_to_wc_modeling/badge.svg)](https://coveralls.io/github/KarrLab/intro_to_wc_modeling)
+    [![Code analysis](https://codeclimate.com/github/KarrLab/intro_to_wc_modeling/badges/gpa.svg)](https://codeclimate.com/github/KarrLab/intro_to_wc_modeling)
+    [![License](https://img.shields.io/github/license/KarrLab/intro_to_wc_modeling.svg)](LICENSE)
+    ![Analytics](https://ga-beacon.appspot.com/UA-86759801-1/intro_to_wc_modeling/README.md?pixel)
 
 
 Compiling the documentation

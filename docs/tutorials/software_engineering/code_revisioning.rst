@@ -59,10 +59,10 @@ Clone a repository (download it to your computer)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Git repositories are download from GitHub by "cloning" them. Execute the following command to clone the repository for these tutorials::
 
-    git clone https://github.com/KarrLab/karr_lab_tutorials.git
-    cd karr_lab_tutorials
+    git clone https://github.com/KarrLab/intro_to_wc_modeling.git
+    cd intro_to_wc_modeling
 
-This will create a directory with the name "karr_lab_tutorials", download all of the files for the repository from GitHub, and save them to the new directory.
+This will create a directory with the name "intro_to_wc_modeling", download all of the files for the repository from GitHub, and save them to the new directory.
 
 
 Reviewing the files that have been changed

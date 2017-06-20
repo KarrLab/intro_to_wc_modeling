@@ -6,7 +6,7 @@
 :License: MIT
 """
 
-from karr_lab_tutorials.software_engineering.unit_testing import core
+from intro_to_wc_modeling.software_engineering.unit_testing import core
 import capturer
 import numpy
 import unittest

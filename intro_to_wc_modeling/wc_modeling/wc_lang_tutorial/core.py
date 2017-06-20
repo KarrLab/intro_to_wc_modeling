@@ -8,7 +8,7 @@
 '''
 
 ##########################################################################################################
-# THIS CODE IS DUPLICATED IN karr_lab_tutorials/docs/tutorials/wc_modeling/wc_lang_tutorial.rst
+# THIS CODE IS DUPLICATED IN intro_to_wc_modeling/docs/tutorials/wc_modeling/wc_lang_tutorial.rst
 # MANUALLY KEEP THEM SYNCHRONIZED, OR, use ``literalinclude`` to link them.
 #
 #   .. literalinclude:: example.py
@@ -33,7 +33,7 @@ import wc_lang.io
 # instance, and string identifiers are used to indicate relationships among objects
 
 # This example illustrates how to read a model from an Excel file
-MODEL_FILENAME = pkg_resources.resource_filename('karr_lab_tutorials', os.path.join(
+MODEL_FILENAME = pkg_resources.resource_filename('intro_to_wc_modeling', os.path.join(
     'wc_modeling', 'wc_lang_tutorial', 'examples', 'example_model.xlsx'))
 model = wc_lang.io.Reader().run(MODEL_FILENAME)
 

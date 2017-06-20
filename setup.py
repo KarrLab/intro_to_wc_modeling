@@ -1,7 +1,7 @@
 import pip
 pip.main(['install', 'git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils'])
 
-import karr_lab_tutorials
+import intro_to_wc_modeling
 import os
 import setuptools
 import wc_utils.util.install
@@ -19,13 +19,13 @@ wc_utils.util.install.install_dependencies(dependency_links)
 
 # install package
 setuptools.setup(
-    name='karr_lab_tutorials',
-    version=karr_lab_tutorials.__version__,
+    name='intro_to_wc_modeling',
+    version=intro_to_wc_modeling.__version__,
 
     description='Python tutorial',
 
     # The project's main homepage.
-    url='https://github.com/KarrLab/karr_lab_tutorials',
+    url='https://github.com/KarrLab/intro_to_wc_modeling',
 
     author='Jonathan Karr',
     author_email='jonrkarr@gmail.com',
@@ -47,13 +47,13 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
     include_package_data=True,
     package_data={
-        'karr_lab_tutorials': [
+        'intro_to_wc_modeling': [
             os.path.join('wc_modeling', 'wc_lang_tutorial', 'examples', 'test_wc_lang.xlsx')
         ],
     },
     entry_points={
         'console_scripts': [
-            'karr_lab_tutorials = karr_lab_tutorials.__main__:main',
+            'intro_to_wc_modeling = intro_to_wc_modeling.__main__:main',
         ],
     },
 

@@ -46,12 +46,12 @@ Taken together, your test code should be organized as follows::
 
 Writing tests
 -----------------------
-In the remainder of the tutorial, we will write tests for the code located in ``/path/to/this/repo/karr_lab_tutorials/software_engineering/unit_testing/`` to run a simple stochastic simulation.
+In the remainder of the tutorial, we will write tests for the code located in ``/path/to/this/repo/intro_to_wc_modeling/software_engineering/unit_testing/`` to run a simple stochastic simulation.
 
 #. Create a file for the tests, `tests/software_engineering/unit_testing/test_core.py`
 #. Write a test file. For example::
 
-    from karr_lab_tutorials.software_engineering.unit_testing import core
+    from intro_to_wc_modeling.software_engineering.unit_testing import core
     import unittest
 
     class TestSimulation(unittest.TestCase):
@@ -137,7 +137,7 @@ Testing cement command line programs
 --------------------------------------
 Cement command line programs can be tested as illustrated below:
 
-    from karr_lab_tutorials import __main__
+    from intro_to_wc_modeling import __main__
     import capturer
 
     def test(self):
@@ -178,7 +178,7 @@ Analyzing the coverage of your tests
 
 Test coverage can be analyzed as follows:
 
-    python -m pytest --cov=karr_lab_tutorials tests
+    python -m pytest --cov=intro_to_wc_modeling tests
 
 
 This prints a summary of the coverage to the console and saves the details to ``.coverage``.
@@ -187,7 +187,7 @@ The following can be used to generated a more detailed HTML coverage report. The
 
     coverage html
 
-You can view the HTML report by opening ``file:///path/to/karr_lab_tutorials/htmlcov/index.html`` 
+You can view the HTML report by opening ``file:///path/to/intro_to_wc_modeling/htmlcov/index.html`` 
 in your browser. Green indicates lines that were executed by the tests. Red indicates lines that 
 were not executed. Large amounts of red lines means that more tests are needed. Ideally, code
 would be tested to 100% coverage.

@@ -30,7 +30,7 @@ class BaseController(controller.CementBaseController):
 class App(foundation.CementApp):
 
     class Meta:
-        label = "karr_lab_tutorials"
+        label = "intro_to_wc_modeling"
         base_controller = "base"
         handlers = [
             BaseController,

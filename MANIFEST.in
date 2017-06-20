@@ -8,4 +8,4 @@ include requirements.txt
 include README.rst
 
 # example files
-karr_lab_tutorials/wc_modeling/wc_lang_tutorial/examples/test_wc_lang.xlsx
+intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/examples/test_wc_lang.xlsx

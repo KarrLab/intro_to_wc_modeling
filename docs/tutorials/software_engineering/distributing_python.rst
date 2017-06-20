@@ -19,7 +19,7 @@ Prepare your package for distribution
 
 Annotate the version number of your package in ``__init__.py``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Save the following to the ``__init__.py`` file of your package, e.g. ``/path/to/package/karr_lab_tutorials/__init__.py``::
+Save the following to the ``__init__.py`` file of your package, e.g. ``/path/to/package/intro_to_wc_modeling/__init__.py``::
   
   __version__ = '0.0.1'
 
@@ -28,7 +28,7 @@ Create a ``README.md`` file with an overview of the package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Save a brief description of the package to ``/path/to/package/README.md``. GitHub will display the content of this file on the landing page for the repository. For example:
 
-    # karr_lab_tutorials
+    # intro_to_wc_modeling
 
     The goal of this tutorial is to teach you how to test and document Python code.
 
@@ -84,11 +84,11 @@ Create a setup configuration file by following this example and saving it to ``/
 
   [coverage:run]
   source = 
-      karr_lab_tutorials
+      intro_to_wc_modeling
 
   [sphinx-apidocs]
   packages = 
-      karr_lab_tutorials
+      intro_to_wc_modeling
 
 
 Create a ``MANIFEST.in`` file which describes additional files that should be packaged with your Python code
@@ -110,17 +110,17 @@ Create a setup script
 You can use the ``setuptools`` package to build a install script for your package. Simply edit this template and save it to ``/path/to/package/setup.py``::
   
     from setuptools import setup, find_packages
-    import karr_lab_tutorials
+    import intro_to_wc_modeling
 
     # install package
     setup(
-        name='karr_lab_tutorials',
-        version=karr_lab_tutorials.__version__,
+        name='intro_to_wc_modeling',
+        version=intro_to_wc_modeling.__version__,
 
         description='Python tutorial',
 
         # The project's main homepage.
-        url='https://github.com/KarrLab/karr_lab_tutorials',
+        url='https://github.com/KarrLab/intro_to_wc_modeling',
 
         author='Jonathan Karr',
         author_email='jonrkarr@gmail.com',
@@ -143,7 +143,7 @@ You can use the ``setuptools`` package to build a install script for your packag
         include_package_data=True,
         entry_points={
             'console_scripts': [
-                'karr_lab_tutorials = karr_lab_tutorials.__main__:main',
+                'intro_to_wc_modeling = intro_to_wc_modeling.__main__:main',
             ],
         },
 

@@ -24,8 +24,8 @@ How to install these tutorials
 **************************************************************************
 Run the following command to install the latest version from GitHub::
 
-    git clone git@github.com:KarrLab/karr_lab_tutorials.git    
-    pip install -e karr_lab_tutorials
+    git clone git@github.com:KarrLab/intro_to_wc_modeling.git    
+    pip install -e intro_to_wc_modeling
 
 
 **************************************************************************
@@ -133,5 +133,5 @@ Detailed instructions to install the tutorials and all of the requirements
 
 #. Install these tutorials::
 
-    git clone git@github.com:KarrLab/karr_lab_tutorials.git
-    pip install -e karr_lab_tutorials
+    git clone git@github.com:KarrLab/intro_to_wc_modeling.git
+    pip install -e intro_to_wc_modeling
