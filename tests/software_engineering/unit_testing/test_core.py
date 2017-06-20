@@ -60,7 +60,7 @@ class TestSimulation(unittest.TestCase):
             hist = sim.run(value_init=4, time_max=time_max)
             values[:, i_sample] = hist.values
 
-        numpy.testing.assert_almost_equal(numpy.mean(values[:]), 4., decimal=1)
+        numpy.testing.assert_allclose(numpy.mean(values[:]), 4., rtol=1e-1)
 
     def test_stdout(self):
         sim = core.Simulation(k_syn=1, k_deg=0.25, verbose=True)
