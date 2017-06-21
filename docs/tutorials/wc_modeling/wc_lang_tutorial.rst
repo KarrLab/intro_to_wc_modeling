@@ -187,7 +187,7 @@ and using these models:
     # THIS CODE IS DUPLICATED IN intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
     # KEEP THEM SYNCHRONIZED, OR, BETTER YET, REPLACE THEM WITH A SINGLE FILE AND CONVERSION PROGRAM(S).
 
-#. Install the required software for the tutorial::
+#. Install the required software for the tutorial:
 
     * Python
     * Pip
@@ -213,7 +213,7 @@ and using these models:
     import os
     import wc_lang.io
 
-#. Read a model from an Excel file::
+#. Read a model from an Excel file
 
     ``wc_lang`` can read and write models from specially formatted Excel workbooks in which each worksheet represents a Python class, each row
     represents a class instance, each column represents an instance attribute, each cell represents the value of an attribute of an
@@ -255,7 +255,7 @@ and using these models:
 
     csv files can be used similarly.
 
-#. Access properties of the model::
+#. Access properties of the model
 
     ``wc_lang`` models (instances of ``wc_lang.core.Model``) have multiple attributes:
 
@@ -288,7 +288,7 @@ and using these models:
         for submodel in model.get_submodels():
             print('id: {}, name: {}'.format(submodel.id, submodel.name))
 
-#. Programmatically build a new model and edit its model properties::
+#. Programmatically build a new model and edit its model properties
 
     You can also use the classes and methods in ``wc_lang.core`` to programmatically build and edit models.
 
@@ -318,7 +318,7 @@ and using these models:
         prog_model.id = 'programmatically_created_model'
         prog_model.name = 'Programmatically created model'
 
-#. Compare and difference ``model`` and ``model_from_tsv``::
+#. Compare and difference ``model`` and ``model_from_tsv``
 
     ``wc_lang`` provides methods that determine if two models are semantically equal and report any semantic
     differences between two models. The ``is_equal`` method determines if two models are semantically equal 
@@ -333,7 +333,7 @@ and using these models:
 
         assert(model.difference(model_from_tsv) == '')
 
-#. Normalize ``model`` into a reproducible order to facilitate reproducible numerical simulations::
+#. Normalize ``model`` into a reproducible order to facilitate reproducible numerical simulations
     
     The attribute order has no semantic meaning in ``wc_lang``. However, numerical simulation results derived from
     models described in ``wc_lang`` can be sensitive to the attribute order. To facilitate reproducible simulation results,
