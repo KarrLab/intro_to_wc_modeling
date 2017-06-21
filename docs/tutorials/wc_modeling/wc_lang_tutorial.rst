@@ -106,7 +106,7 @@ usually stored in a separate table, either a workbook's worksheet or delimiter-s
 
 ``Compartment``
     A named physical container in the biochemical system being modeled.
-    It could represent an organelle, a cell's cytoplasm, or another physical or conceptual structure. 
+    It could represent an organelle, a cell's cytoplasm, or another physical or conceptual structure.
     It includes an ``initial_volume`` in liters,
     and references to the initial concentrations of the ``Species`` it contains.
     A compartment can have a semi-permeable membrane, which is modeled by
@@ -179,7 +179,7 @@ These classes record the sources of the model's data.
 
 Using ``wc_lang``
 -----------------
-The following tutorial shows several ways to use ``wc_lang``, including 
+The following tutorial shows several ways to use ``wc_lang``, including
 reading a model defined in one or more files, defining a model programmatically,
 and using these models:
 
@@ -205,7 +205,7 @@ and using these models:
     cd intro_to_wc_modeling/intro_to_wc_modeling/wc_modeling/wc_lang_tutorial
 
 #. Open an interactive python interpreter::
-    
+
     ipython
 
 #. Import the ``os`` and ``wc_lang.io`` modules::
@@ -227,7 +227,7 @@ and using these models:
     * The structure of each species: InChI for small molecules; sequences for polymers
     * Where possible, ChEBI ids for each small molecule
     * Where possible, ids for each gene, transcript, and protein
-    * Where possible, EC numbers or KEGG ids for each reaction    
+    * Where possible, EC numbers or KEGG ids for each reaction
     * `Cell Component Ontology <http://brg.ai.sri.com/CCO>`_ (CCO) annotations for each compartment
     * `Systems Biology Ontology <http://www.ebi.ac.uk/sbo>`_ (SBO) annotations for each parameter
     * The citations which support each model decision
@@ -237,6 +237,8 @@ and using these models:
 
         MODEL_FILENAME = os.path.join('examples', 'example_model.xlsx')
         model = wc_lang.io.Reader().run(MODEL_FILENAME)
+
+    If a model file is invalid (for example, two species are defined with the same name), this operation will raise an exception which contains a list of all of the errors in the model definition.
 
     ``wc_lang`` can also read and write a model from a specially formatted set of delimiter-separated files. `wc_lang`` uses filename glob patterns
     to indicate sets of delimited files. The supported delimiters are *commas* for .csv files and *tabs* for .tsv files. These files use the same
@@ -282,7 +284,7 @@ and using these models:
     * ``get_parameters``
     * ``get_references``
 
-    For example, ``get_submodels`` returns a list of all of the submodels. As illustrated below, this can be 
+    For example, ``get_submodels`` returns a list of all of the submodels. As illustrated below, this can be
     used to print the ids and names of the submodels::
 
         for submodel in model.get_submodels():
@@ -318,11 +320,43 @@ and using these models:
         prog_model.id = 'programmatically_created_model'
         prog_model.name = 'Programmatically created model'
 
+#. Validating the programmatically generated model
+
+    The ``wc_lang.core.Model.validate`` method can be used to determine if a model is valid, and, if the model is invalid, return a list of all of the errors. The validate method performs the following checks:
+
+    * Check that only one model and taxon are defined
+    * Check that each submodel, compartment, species type, reaction, and reference is defined only once
+    * Check that each the species type and compartment referenced in each concentration and reaction exist
+    * Check that numeric values are provided for each numerically-valued attribute
+
+        * ``wc_lang.core.Compartment.initial_volume``: float
+        * ``wc_lang.core.Concentration.value``: float
+        * ``wc_lang.core.Parameter.value``: float
+        * ``wc_lang.core.RateLaw.k_cat``: float
+        * ``wc_lang.core.RateLaw.k_m``: float
+        * ``wc_lang.core.Reaction.reversible``: bool
+        * ``wc_lang.core.ReactionParticipant.coefficient``: float
+        * ``wc_lang.core.Reference.year``: integer
+        * ``wc_lang.core.SpeciesType.charge``: integer
+        * ``wc_lang.core.SpeciesType.molecular_weight``: float
+
+    * Check that valid values are provided for each enumerated attribute
+
+        * ``wc_lang.core.RateLaw.direction``
+        * ``wc_lang.core.Reference.type``
+        * ``wc_lang.core.SpeciesType.type``
+        * ``wc_lang.core.Submodel.algorithm``
+        * ``wc_lang.core.Taxon.rank``
+
+    The example illustrates how to validate ``prog_model``::
+
+        prog_model.validate()
+
 #. Compare and difference ``model`` and ``model_from_tsv``
 
     ``wc_lang`` provides methods that determine if two models are semantically equal and report any semantic
-    differences between two models. The ``is_equal`` method determines if two models are semantically equal 
-    (the two models recursively have the same attribute values, ignoring the order of the attributes which has 
+    differences between two models. The ``is_equal`` method determines if two models are semantically equal
+    (the two models recursively have the same attribute values, ignoring the order of the attributes which has
     no semantic meaning). The following code excerpt illustrates how to compare the semantic equality of
     ``model`` and ``model_from_tsv``::
 
@@ -334,7 +368,7 @@ and using these models:
         assert(model.difference(model_from_tsv) == '')
 
 #. Normalize ``model`` into a reproducible order to facilitate reproducible numerical simulations
-    
+
     The attribute order has no semantic meaning in ``wc_lang``. However, numerical simulation results derived from
     models described in ``wc_lang`` can be sensitive to the attribute order. To facilitate reproducible simulation results,
     ``wc_lang`` provides a ``normalize`` to sort models into a reproducible order.
