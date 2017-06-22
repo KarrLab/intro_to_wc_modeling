@@ -89,7 +89,7 @@ Detailed instructions to install the tutorials and all of the requirements
         sudo curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci
         sudo chmod +x /usr/local/bin/circleci
 
-    #. Purchase and install Illustrator by sending an email to Manbir Singh.
+    #. Purchase and install Illustrator
 
 
 #. Configure the packages
