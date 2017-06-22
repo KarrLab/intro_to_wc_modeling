@@ -2,7 +2,7 @@
 
 Drawing vector graphics with Adobe Illustrator and Inkscape
 ===========================================================
-Broadly, there are two types of graphics: vector graphics and raster graphics. Vector graphics are combinations of elemental graphical objects such as lines, curves, arcs, ellipses, and text. Consequently, vector graphics are vector graphics are infinitely scalable (i.e. they never become pixelated when they are enlarged) and well-suited for scientific diagrams. Two of the most common vector graphic editing programs are `Illustrator <https://www.adobe.com/products/illustrator.html>`_ and `Inkscape <https://inkscape.org>`_. Some of the most common file formats used to store vector graphics include .ai, .eps, .pdf, and .svg.
+Broadly, there are two types of graphics: vector graphics and raster graphics. Vector graphics are combinations of elemental graphical objects such as lines, curves, arcs, ellipses, text, strokes, fills, and gradients. Consequently, vector graphics are vector graphics are infinitely scalable (i.e. they never become pixelated when they are enlarged) and well-suited for scientific diagrams. Two of the most common vector graphic editing programs are `Illustrator <https://www.adobe.com/products/illustrator.html>`_ and `Inkscape <https://inkscape.org>`_. Some of the most common file formats used to store vector graphics include .ai, .eps, .pdf, and .svg.
 
 Raster graphics are matrices of colored pixels. Raster graphics are commonly used to describe photographs as well as to display graphics originally created as vector graphics in websites and other documents. Some of the most common raster graphic editing programs are `Photoshop <https://www.adobe.com/products/photoshop.html>`_ and `Gimp <https://www.gimp.org/>`_. Photoshop is a commercial program developed by Adobe and Gimp is a free, open-source program. Photoshop is the standard among graphics professionals, but Gimp is easier to learn and sufficient for our needs as scientists. Some of the most common file formats used to store raster graphics are .gif, .jpg, and .png format. 
 
@@ -52,6 +52,7 @@ As described above, vector graphics are composed of the following elemental grap
     
 * Groups
 * Masks
+* Layers
 
 Vector graphics drawing tools: Illustrator vs Inkscape
 ------------------------------------------------------
@@ -106,6 +107,14 @@ In this exercise we will learn how to use Illustrate by drawing a digram of a ce
 #. Save the diagram in AI format
 #. Save the diagram to PDF format to use in manuscripts
 #. Export the diagram to PNG format to use in PowerPoint and websites
+
+Other useful features
+^^^^^^^^^^^^^^^^^^^^
+
+ * Selecting similar objects
+ * Joining lines
+ * Placing other documents
+
 
 Screen capture
 ^^^^^^^^^^^^^^
