@@ -7,6 +7,7 @@ Currently, this website contains a variety of provisional text and tutorials. Ov
 
 .. toctree::
     :maxdepth: 3
+    :numbered:
 
     installation.rst
     tutorials.rst
