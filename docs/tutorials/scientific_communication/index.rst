@@ -13,4 +13,4 @@ Scientific communication: papers, presentations, graphics
     data_visualization.rst
     latex.rst
     vector_graphics.rst
-    raster_graphics.rst
+    raster_graphics/index.rst

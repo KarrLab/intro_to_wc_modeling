@@ -1,0 +1,2 @@
+# screen capture files
+*.wnk filter=lfs diff=lfs merge=lfs -text
