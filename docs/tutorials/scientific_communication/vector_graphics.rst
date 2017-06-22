@@ -13,16 +13,8 @@ Key concepts
 
 * Raster graphics vs. Vector graphics
 * Fundamental vector graphic objects    
-* Color models
-
-    * CMYK
-    * HSVK
-    * RGB
-    
+* Color models    
 * Selecting and editing graphical objects
-
-    * Direct selection
-
 * Grouping objects
 * Masking objects
 * Exporting diagrams
@@ -30,7 +22,7 @@ Key concepts
 
 Fundamental vector graphic objects
 ----------------------------------
-As described above, vector graphics are composed of the following elemental graphical objects:
+As introduced above, vector graphics are composed of the following elemental graphical objects:
 
 * Paths
 
@@ -54,6 +46,21 @@ As described above, vector graphics are composed of the following elemental grap
 * Masks
 * Layers
 
+
+Color models
+------------
+Vector graphics can be described using one of several common color models:
+
+* CMYK (Cyan, Magenta, Yellow, Black): CMYK is a subtractive color model which represents colors as tuple of cyan, magenta, yellow, and black values, each of which ranges from 0 to 100%. CMYK is the native color model for many printers. For this reason, some journals prefer CMYK.
+* RGB (Red, Green, Blue): RGB is an additive color model which represents colors as tuples of red, green, and blue values, each of which ranges from 0 to 255. RGB is the native color model for many monitors. For this reason, RGB is most common color model for web-based graphics and some journals prefer RGB.
+* HSB (Hue, Saturation, Brightness) / HSV (Hue, Saturation, Value): HSB is a cyclindrical color model which makes it easy to manipulate saturation and brightness separately from color. For this reason, HSB is useful to designing color palletes.
+* Grayscale: is an additive color model which represents colors as integers between 0 and 255.
+
+Illustrator supports all four of these color models, and documents created in any one of these color models can be exported to any of the other color models. Inkscape only supports the RGB color model.
+
+We recommend using RGB except for submissions to journals which require CMYK figures.
+
+
 Vector graphics drawing tools: Illustrator vs Inkscape
 ------------------------------------------------------
 Illustrator and Inkscape are two of the most popular vector graphics editing programs. Illustrator is a commercial program developed by Adobe and Inkscape is a free, open-source program. Illustrator is the industry standard and is more powerful than Inkscape. 
@@ -65,6 +72,7 @@ Illustrator and Inkscape share many of the same core functionality. However, Ink
 * Poor default options for subscripts, superscripts
 * No linked text boxes for continued text flow
 * No tool to edit spacing of dashes
+* No CMYK support
 * No native support for a binary file format such as .ai
 * Less control over .png export
 * No .gif, .jpg export
@@ -120,7 +128,7 @@ Screen capture
 ^^^^^^^^^^^^^^
 .. raw:: html
 
-    <object data="../../_static/tutorials/scientific_communication/vector_graphics/screen_capture.swf" width="697" height="403" >
+    <object data="../../_static/tutorials/scientific_communication/vector_graphics/screen_capture.swf" width="697" height="413" >
     </object>
 
 `Open the screen capture in a separate page <../../_static/tutorials/scientific_communication/vector_graphics/index.html>`_
