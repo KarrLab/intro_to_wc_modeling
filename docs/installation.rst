@@ -65,6 +65,12 @@ Detailed instructions to install the tutorials and all of the requirements
             software-properties-common \
             texlive
 
+    #. Install support for large file in Git repositories::
+
+        curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+        sudo apt-get install git-lfs
+        git lfs install
+
     #. Install the Sublime text editor::
 
         sudo add-apt-repository ppa:webupd8team/sublime-text-3
