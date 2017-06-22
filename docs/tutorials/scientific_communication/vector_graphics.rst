@@ -109,7 +109,7 @@ In this exercise we will learn how to use Illustrate by drawing a digram of a ce
 #. Export the diagram to PNG format to use in PowerPoint and websites
 
 Other useful features
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
  * Selecting similar objects
  * Joining lines
@@ -120,10 +120,10 @@ Screen capture
 ^^^^^^^^^^^^^^
 .. raw:: html
 
-    <object data="../../../_static/tutorials/scientific_communication/vector_graphics/screen_capture.swf" width="697" height="403" >
+    <object data="../../_static/tutorials/scientific_communication/vector_graphics/screen_capture.swf" width="697" height="403" >
     </object>
 
-`Open the screen capture in a separate page <../../../_static/tutorials/scientific_communication/vector_graphics/index.html>`_
+`Open the screen capture in a separate page <../../_static/tutorials/scientific_communication/vector_graphics/index.html>`_
 
 Inkscape exercise
 ---------------------
