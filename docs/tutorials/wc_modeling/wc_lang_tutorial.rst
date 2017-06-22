@@ -6,8 +6,9 @@ This tutorial teaches you how to use the ``wc_lang`` package to define whole-cal
 reactions, compartments and other parts of a biochemical system.
 It can be used to define models of entire cells, or models of smaller biochemical systems.
 ``wc_lang`` contains methods to read and write models from two types of files --
-spreadsheet workbooks and sets of delimited files. It also includes methods that transform
-and summarize models.
+spreadsheet workbooks and sets of delimited files. It also includes methods that
+analyze or transform models -- e.g., methods that validate, compare, and normalize them.
+
 ``wc_lang`` depends heavily on the ``obj_model`` package which defines a generic language for declaring
 interrelated typed data records in Python, transferring them from and to files, and validating their
 values.
@@ -36,13 +37,13 @@ a ``wc_lang`` model is organized in a highly-interconnected graph of related Pyt
 which is an ``obj_model.Model`` instance.
 For example, a ``Species`` instance contains ``reaction_participants``,
 which references each ``Reaction`` in which the ``Species`` participates.
-The graph contains many convenience relationships like this, which make it easy to retrieve useful
-related data from anywhere in the graph.
+The graph contains many convenience relationships like this, which make it easy to
+follow the relationships between ``obj_model.Model`` instances anywhere in a ``wc_lang`` model.
 
 A ``wc_lang`` model also supports some metadata.
 Named ``Parameter`` entities store arbitrary values, such as input parameters.
-Data sources used by the model should be recorded in a ``Reference`` which describes a published
-source, or in a ``CrossReference`` which identifies a biological or chemical database.
+Published data sources used by a model should be recorded in ``Reference`` entities,
+or in a ``CrossReference`` objects that identify a biological or chemical database.
 
 You should think of a ``wc_lang`` model as the description of a model in its initial state because
 a ``wc_lang``
@@ -53,18 +54,19 @@ such as data sources.
 ``wc_lang`` Classes Used to Define biochemical Models
 ------------------------------------------------------
 
-This subsection enumerates all the classes that store data in ``wc_lang`` models.
+This subsection enumerates the ``obj_model.Model`` classes that store data in ``wc_lang`` models.
 
 It is only necessary to import these types when they are being instantiated programmatically.
-Typically, their attributes are be accessed when using a model that has been read from file(s).
+Typically, their types are not imported, but their
+attributes are accessed when using a model that has been read from file(s).
 
-Many of these classes implement the methods ``serialize()`` and ``deserialize()``.
+Many of these classes implement the methods ``deserialize()`` and ``serialize()``.
 ``deserialize()`` parses an object's string representation -- as would be stored in a text file or spreadsheet
-representation of a biochemical model -- into a Python object instance.
-Thus, the ``deserialize()`` methods are used when reading models.
+representation of a biochemical model -- into one or more ``obj_model.Model`` instances.
+Thus, the ``deserialize()`` methods are used when reading models from files.
 ``deserialize()`` returns an error when a string representation cannot be parsed into a
 Python object.
-``serialize()`` converts a Python object instance into a string representation, and is used when
+``serialize()`` converts a ``wc_lang`` class instance into a string representation, and is used when
 writing a model to a file or files.
 ``serialize()`` and ``deserialize()`` invert each other.
 
@@ -117,7 +119,8 @@ usually stored in a separate table, either a workbook's worksheet or delimiter-s
 ``SpeciesType``
     The biochemical type of a species. It contains the type's ``name``, ``structure`` -- which is
     represented in InChI for metabolites and as sequences for DNA, RNA, and proteins, ``empirical_formula``,
-    ``molecular_weight``, ``charge``, and ``type`` -- which is the species` ``SpeciesTypeType``.
+    ``molecular_weight``, and ``charge``. A species' ``type`` is drawn from the attributes of
+    ``SpeciesTypeType``.
 
 ``Species``
     A particular ``SpeciesType`` contained in a particular ``Compartment``.
@@ -127,13 +130,17 @@ usually stored in a separate table, either a workbook's worksheet or delimiter-s
 
 ``Reaction``
     A biochemical reaction. Each ``Reaction`` belongs to one ``submodel``. It consists of a list
-    of the species that participate in the reaction, stored as a list of ``ReactionParticipant``
-    in ``participants``.
-    A boolean indicates whether the reaction is thermodynamically ``reversible``. A reaction
+    of the species that participate in the reaction, stored as a list of references to
+    ``ReactionParticipant`` instances in ``participants``.
+    A reaction
     that's simulated by a dynamic algorithm, such as an ODE system or SSA, must have a forward
-    rate law. It must also have a backward rate law if ``reversible`` is ``True``. Rate laws are
-    stored in the ``rate_laws`` list, and their directions are encoded in ``RateLawDirection``
-    attributes.
+    rate law. A Boolean indicates whether the reaction is thermodynamically ``reversible``.
+    If ``reversible`` is ``True``, then the reaction must also have a backward rate law. Rate laws are
+    stored in the ``rate_laws`` list, and their directions are drawn from the attributes of
+    ``RateLawDirection``.
+
+..
+    # todo: document the syntax and semantics of a serialized reaction ``participants`` attribute.
 
 ``ReactionParticipant``
     ``ReactionParticipant`` combines a ``Species`` and its stoichiometric reaction coefficient.
@@ -152,7 +159,6 @@ usually stored in a separate table, either a workbook's worksheet or delimiter-s
     attribute, and
     evaluated as a Python expression by a simulator. This evaluation must produce a number.
 
-    # todo: Expand this:
     The expression is constructed from species names, compartment names, stoichiometric
     reaction coefficients, k_cat and k_m, and Python functions and mathematical operators.
     ``SpeciesType`` and ``Compartment`` names must be valid Python identifiers, and the entire
@@ -160,6 +166,9 @@ usually stored in a separate table, either a workbook's worksheet or delimiter-s
     A species composed of a ``SpeciesType`` named
     ``species_x`` located in a ``Compartment`` named ``c`` is written ``species_x[c]``. Evaluating
     the rate law converts species into their concentration
+
+..
+    # todo: expand this documentation of the syntax and semantics of RateLawEquation expressions.
 
 ``Parameter``
     A ``Parameter`` holds an arbitrary floating point ``value``. It is named, associated with a
@@ -186,16 +195,17 @@ and using these models:
 ..
     # THIS CODE IS DUPLICATED IN intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
     # KEEP THEM SYNCHRONIZED, OR, BETTER YET, REPLACE THEM WITH A SINGLE FILE AND CONVERSION PROGRAM(S).
+    # TODO: RESYNCH THEM.
 
 #. Install the required software for the tutorial:
 
     * Python
     * Pip
 
-#. Install the tutorial::
+#. Install the tutorial and the whole-cell packages that it uses::
 
     git clone https://github.com/KarrLab/intro_to_wc_modeling.git
-    pip install \
+    pip install --upgrade \
         ipython \
         git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang \
         git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils
@@ -220,7 +230,7 @@ and using these models:
     instance, and string identifiers are used to indicate relationships among objects.
 
     In addition to defining a model, these Excel files should contain all of the annotation needed to understand the biological semantic meaning of
-    the model. Ideally, this should include
+    the model. Ideally, this should include:
 
     * NCBI Taxonomy ID for the taxon
     * Gene Ontology (GO) annotations for each submodel
@@ -238,7 +248,10 @@ and using these models:
         MODEL_FILENAME = os.path.join('examples', 'example_model.xlsx')
         model = wc_lang.io.Reader().run(MODEL_FILENAME)
 
-    If a model file is invalid (for example, two species are defined with the same name), this operation will raise an exception which contains a list of all of the errors in the model definition.
+    (You may ignore a ``UserWarning`` generated by these commands.)
+
+    If a model file is invalid (for example, two species are defined with the same name), this operation
+    will raise an exception which contains a list of all of the errors in the model definition.
 
     ``wc_lang`` can also read and write a model from a specially formatted set of delimiter-separated files. `wc_lang`` uses filename glob patterns
     to indicate sets of delimited files. The supported delimiters are *commas* for .csv files and *tabs* for .tsv files. These files use the same
@@ -271,21 +284,21 @@ and using these models:
     * ``parameters``
     * ``references``
 
-    ``wc_lang`` also provides several convenience methods to get all of the elements of a specific type
-    that are part of a model. Each of these methods returns a list of the instances of requested type.
+    ``wc_lang`` also provides some convenience methods that get all of the elements of a specific type
+    which are part of a model. Each of these methods returns a list of the instances of requested type.
 
-    * ``get_compartments``
-    * ``get_species_types``
-    * ``get_submodels``
-    * ``get_species``
-    * ``get_concentrations``
-    * ``get_reactions``
-    * ``get_rate_laws``
-    * ``get_parameters``
-    * ``get_references``
+    * ``get_compartments()``
+    * ``get_species_types()``
+    * ``get_submodels()``
+    * ``get_species()``
+    * ``get_concentrations()``
+    * ``get_reactions()``
+    * ``get_rate_laws()``
+    * ``get_parameters()``
+    * ``get_references()``
 
-    For example, ``get_submodels`` returns a list of all of the submodels. As illustrated below, this can be
-    used to print the ids and names of the submodels::
+    For example, ``get_submodels()`` returns a list of all of a model's submodels. As illustrated below,
+    this can be used to print the ids and names of the submodels::
 
         for submodel in model.get_submodels():
             print('id: {}, name: {}'.format(submodel.id, submodel.name))
@@ -293,6 +306,8 @@ and using these models:
 #. Programmatically build a new model and edit its model properties
 
     You can also use the classes and methods in ``wc_lang.core`` to programmatically build and edit models.
+    While users typically will not create models programmatically, creating model components
+    in this way gives you a feeling for how models are built.
 
     The following illustrates how to build a simple model programmatically::
 
@@ -309,11 +324,16 @@ and using these models:
         h = wc_lang.core.SpeciesType(id='h', name='H+', model=prog_model)
 
         atp_hydrolysis = wc_lang.core.Reaction(id='atp_hydrolysis', name='ATP hydrolysis')
-        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=atp, compartment=cytosol), coefficient=-1)
-        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=h2o, compartment=cytosol), coefficient=-1)
-        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=adp, compartment=cytosol), coefficient=1)
-        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=pi, compartment=cytosol), coefficient=1)
-        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=h, compartment=cytosol), coefficient=1)
+        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=atp,
+            compartment=cytosol), coefficient=-1)
+        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=h2o,
+            compartment=cytosol), coefficient=-1)
+        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=adp,
+            compartment=cytosol), coefficient=1)
+        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=pi,
+            compartment=cytosol), coefficient=1)
+        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=h,
+            compartment=cytosol), coefficient=1)
 
     The following illustrates how to edit a model programmatically::
 
@@ -355,17 +375,19 @@ and using these models:
 #. Compare and difference ``model`` and ``model_from_tsv``
 
     ``wc_lang`` provides methods that determine if two models are semantically equal and report any semantic
-    differences between two models. The ``is_equal`` method determines if two models are semantically equal
-    (the two models recursively have the same attribute values, ignoring the order of the attributes which has
-    no semantic meaning). The following code excerpt illustrates how to compare the semantic equality of
-    ``model`` and ``model_from_tsv``::
+    differences between two models. The ``is_equal`` method determines if two models are semantically equal 
+    (the two models recursively have the same attribute values, ignoring the order of the attributes which has 
+    no semantic meaning). The following code excerpt compares the semantic equality of
+    ``model`` and ``model_from_tsv``. Since ``model_from_tsv`` was generated by writing ``model``
+    to tsv files, ``is_equal`` should return ``True``::
 
-        assert(model.is_equal(model_from_tsv))
+        model.is_equal(model_from_tsv)
 
     The ``difference`` method produces a textual description of the differences between two models. The following
-    code excerpt illustrates how to print the differences between ``model`` and ``model_from_tsv``::
+    code excerpt prints the differences between ``model`` and ``model_from_tsv``. Since they are
+    equal, the differences should be the empty string::
 
-        assert(model.difference(model_from_tsv) == '')
+        model.difference(model_from_tsv)
 
 #. Normalize ``model`` into a reproducible order to facilitate reproducible numerical simulations
 
@@ -378,3 +400,17 @@ and using these models:
         model.normalize()
 
 #. Please see `http://code.karrlab.org <http://code.karrlab.org/>`_ for documentation of the entire ``wc_lang`` API.
+
+..
+    Complete and add this section:
+    #. Examine model global consistency
+
+    While the schema ensures that a model provided by ``wc_lang`` has local integrity it does not
+    evaluate global integrity. For example, we can infer the compartment which each submodel
+    represents by looking at the compartments of the reactants in the submodel's species.
+    But a submodel should not represent reactions in multiple compartments.
+    The function ``infer_submodel_compartments`` below evaluates this consistency.
+
+    This and other global model
+    properties must be checked after a model is instantiated. Other such properties include:
+
