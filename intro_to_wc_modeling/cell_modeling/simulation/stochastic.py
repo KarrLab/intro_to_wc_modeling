@@ -6,6 +6,8 @@
 :License: MIT
 """
 
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot
 import numpy
 import os
@@ -89,8 +91,6 @@ for i_sim in range(n_simulations):
     time_hist, copy_number_hist[:, i_sim] = simulate(reaction_stochiometries, kinetic_laws, init_copy_number, time_max, time_step)
 
 # plot results
-matplotlib.use('Agg')
-
 for i_sim in range(n_simulations):
     color = (
         float(i_sim) / (float(n_simulations) - 1.) / 2,
