@@ -4,6 +4,7 @@ robpol86-sphinxcontrib-googleanalytics
 matplotlib
 numpy
 optlang
+scipy
 sphinx
 sphinx-rtd-theme
 sqlalchemy

@@ -28,7 +28,15 @@ There are also several generalizations of Boolean and logical-valued models incl
 
 Ordinary differential equations (ODEs)
 --------------------------------------
-Ordinary differential equations (ODEs) is one of the most commonly used approaches for modeling dynamical systems. ODE models are based on microscopic analyses of how the concentration of each species in the cell changes over time in response to the concentrations of other species. Because ODE assume that cells are well-mixed and that they behave deterministically, ODE models are most appropriate for small systems that involve large concentrations and high fluxes. ODE models can be simulated by numerically integrating the differential equations.  
+Ordinary differential equations (ODEs) is one of the most commonly used approaches for modeling dynamical systems. ODE models are based on microscopic analyses of how the concentration of each species in the cell changes over time in response to the concentrations of other species. Because ODE assume that cells are well-mixed and that they behave deterministically, ODE models are most appropriate for small systems that involve large concentrations and high fluxes. 
+
+ODE models can be simulated by numerically integrating the differential equations. The most basic ODE integration method is Euler's method. Euler's method is a time stepped algorithm in which the next state is computed by adding the current state and the multiplication of the current differentials with the timestep.
+
+.. math::
+
+    y(t+\Delta t) = y(t) + \Delta t \frac{dy}{dt}
+
+Euler's method estimates :math:`y(t+\Delta t)` using a first-order approximation. ODE models can be simulated more accurately using higher order estimates, or Taylor series, of :math:`y(t+\Delta t)`. One of the most popular algorithms which implements this approach is the Runge-Kutta 4th order method. Yet more advanced integration methods select the time step adaptively. Some of the most sophisticated ODE integration packages include ODEPACK (lsoda) and Sundials (vode). These packages can be used in Python via scipy's integrate module.
 
 
 Stochastic simulation
@@ -98,7 +106,7 @@ dFBA enables dynamic simulations by (1) assuming that cells quickly reach pseudo
         Solve for the maximum growth rate and optimal fluxes
         Update the biomass concentration based on the predicted growth rate
         Update the environmental conditions based on the predicted exchange fluxes
-        
+
 
 Multi-algorithmic simulation
 ----------------------------
@@ -179,7 +187,8 @@ For Ubuntu, the following commands can be used to install all of the software re
     sudo pip install \
         matplotlib \
         numpy \
-        optlang 
+        optlang \
+        scipy
 
 
 Boolean simulation
@@ -316,13 +325,46 @@ Finally, compare the simulation results from the different update schemes. How d
 
 ODE simulation
 ^^^^^^^^^^^^^^
+In this exercise we will use lsoda to simulate the Goldbeter 1991 cell cycle model of cyclin, cdc2, and cyclin protease (`doi: 10.1073/pnas.88.20.9107 <https://doi.org/10.1073/pnas.88.20.9107>`_, `BIOMD0000000003 <http://www.ebi.ac.uk/biomodels-main/BIOMD0000000003>`_).
 
-* Write a Runge-kutta 4th order ODE integrator
+.. image:: ode-model.png
+
+First, open the `BioModels entry <http://www.ebi.ac.uk/biomodels-main/BIOMD0000000003>`_ for the model in your web browser. Identify the reactions, their rate laws, the parameter values, and the initial conditions of the model. Note, that the model uses two assignment rules for :math:`V1` and :math:`V3` which are not displayed on the BioModels page. These assignment rules must be identified from the SBML version of the model which can be exported from the BioModels page.
+
+Second, write a function to calculate the time derivative of the cyclin, cd2, and protease concentrations/activities by completing the code fragment below::
+
+    def d_conc_d_t(concs, time):
+        """ Calculate differentials for Goldbeter 1991 cell cycle model 
+        (`BIOMD0000000003 <http://www.ebi.ac.uk/biomodels-main/BIOMD0000000003>`_)
+
+        Args:
+            time (obj:`float`): time
+            concs (:obj:`numpy.ndarray`): array of current concentrations
+
+        Returns:
+            :obj:`numpy.ndarray
+        """
+        ...
+
+Next, create a vector to represent the initial conditions by completing this code fragment::
+
+    init_concs = ...
+
+Next, use ``scipy.integrate.odeint`` which implements the lsoda algorithm to simulate the model by completing this code fragment::
+
+    time_max = 100
+    time_step = 0.1
+    time_hist = numpy.linspace(0., time_max, time_max / time_step + 1)
+    conc_hist = scipy.integrate.odeint(...)
+
+Finally, use ``matplotlib`` to plot the simulation results. You should see results similar to those below.
+
+.. image:: ode-results.png
 
 
 Stochastic simulation
 ^^^^^^^^^^^^^^^^^^^^^
-In this exercise we will simulate the stochastic synthesis and degradation of a single RNA using the Gillespie algorith.
+In this exercise we will simulate the stochastic synthesis and degradation of a single RNA using the Gillespie algorithm.
 
 .. math::
 
