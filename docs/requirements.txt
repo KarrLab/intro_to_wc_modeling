@@ -1,7 +1,9 @@
 cement
 configparser
 robpol86-sphinxcontrib-googleanalytics
+matplotlib
 numpy
+optlang
 sphinx
 sphinx-rtd-theme
 sqlalchemy

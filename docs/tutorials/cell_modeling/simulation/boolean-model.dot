@@ -1,0 +1,12 @@
+digraph G {
+    rankdir=LR
+    bgcolor=transparent
+
+    A [shape=circle];
+    B [shape=circle];
+    C [shape=circle];
+
+    A -> B [arrowhead=tee];
+    B -> C [arrowhead=tee];
+    C -> A [arrowhead=tee];
+}

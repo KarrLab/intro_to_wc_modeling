@@ -13,7 +13,7 @@ Fundamentals of cell modeling
     model_representation.rst
     model_annotation.rst
     model_composition.rst
-    simulation.rst
+    simulation/index.rst
     testing_models.rst
     logging_results.rst
     organizing_results.rst
