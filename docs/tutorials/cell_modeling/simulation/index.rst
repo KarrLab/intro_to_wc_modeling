@@ -3,6 +3,7 @@ Mathematical representations and simulation algorithms
 
 There is wide range of mathematical representations that can be used model cells, ranging from coarse-grained representations such as Boolean networks to fine-grained representations such as spatial stochastic models. Below are several considerations for choosing a mathematical representation for a model.
 
+* What is the model's purpose? What properties of the cell are being analyzed by the model?
 * What are the relevant physical scales of the biology? Deterministic models are valid approximations when the fluctuations are small which often occurs when the flux scale is large. Conversely, stochastic models should be used when the fluctuations are large and/or they critically impact behavior.
 * How much information is known about the biology? If significant information is known, then fine-grained models are possible. Conversely, if the biology is not well-characterized a fine-grained representation may be infeasible and a coarse-grained representation should be used.
 * How much computational cost is acceptable? If you need a model to execute quickly or you anticipate running large numbers of simulations, it may be best to use a coarse-grained representation. Alternatively, if you want to build the most detailed model possible, you should use a fine-grained representation.
@@ -231,7 +232,7 @@ Third, write a Boolean simulator and synchronous, asynchronous deterministic, an
                 * :obj:`dict` of :obj:`str`, :obj:`numpy.ndarray`: dictionary of histories of each species
         """
 
-        # initalize data structures to store predicted time course and copy initial state to state history
+        # initialize data structures to store predicted time course and copy initial state to state history
         ...
 
         # set current state to initial state
@@ -317,6 +318,9 @@ Fifth, use the simulation functions to simulate the model::
     rand_sync_time_hist = rand_sync_time_hist / 3
 
 Next, use ``matplotlib`` to plot the simulation results. You should see results similar to those below.
+
+..
+    todo: plot values as step functions
 
 .. image:: boolean-results.png
 

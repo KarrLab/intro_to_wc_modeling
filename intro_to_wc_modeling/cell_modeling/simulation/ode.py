@@ -7,7 +7,8 @@
 """
 
 import matplotlib
-matplotlib.use('Agg')
+# select a supported matplotlib backend if necessary
+# matplotlib.use('Agg')
 import matplotlib.pyplot
 import numpy
 import scipy.integrate

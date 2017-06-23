@@ -7,7 +7,8 @@
 """
 
 import matplotlib
-matplotlib.use('Agg')
+# select a supported matplotlib backend if necessary
+# matplotlib.use('Agg')
 import matplotlib.pyplot
 import numpy
 import optlang
@@ -24,7 +25,7 @@ ntp_synth = optlang.Variable('ntp_synth', lb=0)
 # add a variable for the growth reaction
 growth = optlang.Variable('growth', lb=0)
 
-# add variaable for each exchange reaction
+# add variable for each exchange reaction
 glc_ex = optlang.Variable('glc_ex', lb=0)
 aa_ex = optlang.Variable('aa_ex', lb=0)
 biomass_ex = optlang.Variable('biomass_ex', lb=0)
@@ -61,8 +62,8 @@ conc_aa_e = init_conc_aa_e
 conc_biomass = init_conc_biomass
 for i_time in range(time_max + 1):
     # constrain fluxes based on avialable nutrients
-    glc_tx.ub = 5e-3 * conc_glc_e * conc_biomass
-    aa_tx.ub = 1e-3 * conc_aa_e * conc_biomass
+    glc_ex.ub = 5e-3 * conc_glc_e * conc_biomass
+    aa_ex.ub = 1e-3 * conc_aa_e * conc_biomass
 
     # solve for the maximum growth and optimal fluxes
     status = model.optimize()
