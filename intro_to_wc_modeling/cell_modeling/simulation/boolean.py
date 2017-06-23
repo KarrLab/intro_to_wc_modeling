@@ -17,6 +17,7 @@ import os
 #   A --| B --| C --| A
 ################################
 regulatory_functions = {
+    # the Python Language Reference for expressions defines the behavior of anonymous lambda functions
     'A': lambda nodes: not nodes['C'],
     'B': lambda nodes: not nodes['A'],
     'C': lambda nodes: not nodes['B'],
@@ -40,7 +41,7 @@ def simulate(regulatory_functions, initial_state, n_steps, update_scheme):
     """ Simulates a Boolean network for :obj:`n_steps` using :obj:`update_scheme`
 
     Args:
-        regulatory_functions (:obj:`dict` of :obj:`str`, :obj:`function`): dictionary of regulatory functions for each species
+        regulatory_functions (:obj:`dict` of :obj:`str`, :obj:`function`): dictionary of regulatory lambda functions for each species
         initial_state (:obj:`dict` of :obj:`str`, :obj:`bool`): dictionary of initial values of each species
         n_steps (:obj:`int`): number of steps to simulate
         update_scheme (:obj:`method`): update schema
