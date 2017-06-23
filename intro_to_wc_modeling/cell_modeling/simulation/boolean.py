@@ -144,6 +144,8 @@ det_async_time_hist = det_async_time_hist / 3
 rand_sync_time_hist = rand_sync_time_hist / 3
 
 # plot
+matplotlib.use('Agg')
+
 axis = matplotlib.pyplot.subplot(3, 1, 1)
 line_a, = matplotlib.pyplot.plot(sync_time_hist, sync_hist['A'], 'r-', label='A')
 line_b, = matplotlib.pyplot.plot(sync_time_hist, sync_hist['B'], 'g-', label='B')

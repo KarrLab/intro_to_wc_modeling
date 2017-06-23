@@ -85,6 +85,8 @@ for i_time in range(time_max + 1):
     conc_biomass = max(0, conc_biomass)
 
 # plot results
+matplotlib.use('Agg')
+
 line_glc, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 0], 'r-', label='Glucose')
 line_aa, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 1], 'g-', label='Amino acid')
 line_biomass, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 2], 'b-', label='Biomass')
