@@ -18,3 +18,4 @@ Fundamentals of cell modeling
     logging_results.rst
     organizing_results.rst
     analyzing_results.rst
+    bio_net_gen/bio_net_gen.rst
