@@ -2,7 +2,7 @@
 
 How to build a Ubuntu Linux container with Docker
 =================================================
-Docker containers are light weight virtual machines that can be used to run custom environments on top of other machines. Thus, Docker containers are a convenient way to distribute complicated software programs that have numerous dependencies and complicated configurations. We are using Docker containers because CircleCI allows users to use Docker containers to customize the environment used to execute each build. This makes it much easier to install programs into the environment used by CircleCI to run our builds. 
+Docker containers are lightweight virtual machines that can be used to run custom environments on top of other machines. Thus, Docker containers are a convenient way to distribute complicated software programs that have numerous dependencies and complicated configurations. We are using Docker containers because CircleCI allows users to use Docker containers to customize the environment used to execute each build. This makes it much easier to install programs into the environment used by CircleCI to run our builds. 
 
 Docker containers are built by compiling Dockerfiles which are explicit instructions on how to build the container. Importantly, this makes Docker containers very transparent.
 
@@ -32,7 +32,7 @@ Configuring a container
 -----------------------
 Docker uses Dockerfiles to configure containers. These files contain several directives
 
-* ``FROM``: the describes the base (and its version) from which to build a container. For example, the value of this derivate could be ``ubuntu:latest`` or a previous iteration of your container.
+* ``FROM``: this describes the base (and its version) from which to build a container. For example, the value of this directive could be ``ubuntu:latest`` or a previous iteration of your container.
 * ``RUN``: these describe how to install software onto the machine. Because Docker creates layers for each RUN directive, you should use "&" to group related commands together and minimize the number of layers (thus disk space and bandwidth).
 * ``CMD``: this tells Docker what the final execution state of the container should be. Often this is set to ``bash``.
 
@@ -63,7 +63,7 @@ Once you have built a container, you can upload it to Docker Hub
 #. Create an account at `Docker Hub <https://hub.docker.com>`_
 #. Login into `https://hub.docker.com <https://hub.docker.com>`_
 #. Click on the "Create Repository" button
-#. Follow the on screen instructions
+#. Follow the on-screen instructions
 #. Use the docker command line utility to log into Docker Hub::
 
     docker login
