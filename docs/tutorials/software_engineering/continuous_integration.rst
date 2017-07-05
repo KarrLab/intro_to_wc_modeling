@@ -37,18 +37,18 @@ Follow these instructions to use CircleCI to continuously test a GitHub reposito
 #. Click the `Follow Project` button for any repository you want to compile and test on CircleCI
 #. Add a CircleCI configuration file, ``/path/to/repo/.circleci/config.yml``, to the repository to instruct CircleCI what to execute within each build. This includes the following instructions
 
-  * Which container/virtual machine should be used to run the build. We are using a custom container so that little additional software needs to be installed to test our code. See the `Linux containers tutorial <building_linux_containers>` for more information about how to create and use custom Linux containers.
-  * Which GitHub repository to checkout.
-  * How to install any additional packages needed to execute the tests.
-  * Instructions on how to run the tests and store the results.
-  
-  See ``.circleci/config.yml`` for an example and see the `CircleCI documentation <https://circleci.com/docs/2.0/>`_ for more information about configuring CircleCI builds.
+    * Which container/virtual machine should be used to run the build. We are using a custom container so that little additional software needs to be installed to test our code. See the `Linux containers tutorial <building_linux_containers>` for more information about how to create and use custom Linux containers.
+    * Which GitHub repository to checkout.
+    * How to install any additional packages needed to execute the tests.
+    * Instructions on how to run the tests and store the results.
+    
+    See ``.circleci/config.yml`` for an example and see the `CircleCI documentation <https://circleci.com/docs/2.0/>`_ for more information about configuring CircleCI builds.
 
 #. In order to upload our test and coverage results to Code Climate, Coveralls, and our lab server, we must set three environment variables in the CircleCI settings for each repository. The values of these variables should be the tokens needed to authenticate with Code Climate, Coveralls, and our lab server. These tokens can be obtained from the corresponding Code Climate and Coveralls projects for each repository.
 
-    * ``CODECLIMATE_REPO_TOKEN``: `obtain from the corresponding Code Climate project`
-    * ``COVERALLS_REPO_TOKEN``: `obtain from the corresponding Coveralls project`
-    * ``TEST_SERVER_TOKEN``: ``jxdLhmaPkakbrdTs5MRgKD7p``
+      * ``CODECLIMATE_REPO_TOKEN``: `obtain from the corresponding Code Climate project`
+      * ``COVERALLS_REPO_TOKEN``: `obtain from the corresponding Coveralls project`
+      * ``TEST_SERVER_TOKEN``: ``jxdLhmaPkakbrdTs5MRgKD7p``
 
 
 Debugging CircleCI builds via SSH
