@@ -173,9 +173,14 @@ dFBA enables dynamic simulations by (1) assuming that cells quickly reach pseudo
         Update the environmental conditions based on the predicted exchange fluxes
 
 
-Multi-algorithmic simulation
-----------------------------
-To efficiently simulate entire cells, we must represent each aspect of a cell using the most appropriate mathematics and concurrently integrate or co-simulate the combined hybrid or multi-algorithmic model. For example, we must represent transcription as a stochastic model and represent metabolism as an FBA model. Hybrid simulation is an open area of research. Below is a summarize of several increasingly sophisticated hybrid simulation algorithms.
+Hybrid/multi-algorithmic simulation
+-----------------------------------
+Hybrid/multi-algorithmic simulation can be used to address two problems:
+
+* Hybrid/multi-algorithmic simulation can enable model components to be described with different resolutions. For example, hybrid simulation could be used to represent the know stochastic behavior of transcription and the known steady-state behavior of metabolism. In this case, the modeler selects the most appropriate simulation algorithm for each model component based on its level of characterization.
+* Hybrid/multi-algorithmic simulation can enable efficient simulation of models that span a range of scales, including low-concentration components whose dynamics are highly variable and high-concentration components whose dynamics exhibit little variation. In this case, the simulation algorithm selects the most appropriate simulation algorithm for each model component to optimize the trade off between computational accuracy and cost. Specifically, the simulation algorithm partitions the species and reactions into two or more submodels that represent different scales. For more information, we recommend reading recent papers about partitioned and slow-scale tau-leaping.
+
+Hybrid simulation algorithms must concurrently integrate the component submodels by alternately integrating the submodels and synchronizing their states. Below is a summarize of several increasingly sophisticated hybrid simulation algorithms.
 
 * Serial simulation: Divide the simulation into multiple small time steps. Within each time step, iteratively simulate the submodel and update the cell state. Optionally, simulate the models in a random order at each time step. This is a simple algorithm to implement. However, this algorithm violates the arrow of time by integrating submodels based on different states within each time step.
 * Partitioning and merging: Divide the simulation into multiple small time steps. With each time step, partition the pool of each species into separate pools for each submodel. Simulate the submodels independently using the independent pools. Update the global species pools by merging the submodel pools. Species can be partitioned uniformly, based on their utilization during the previous time point, or based on a preliminary integration of the submodels. This is a relatively simple algorithm to implement for models whose state only represents concentrations and/or species copy number. However, it can be challenging to partition and merge rule-based models whose states are represented by graphs.
