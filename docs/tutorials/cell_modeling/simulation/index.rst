@@ -48,6 +48,8 @@ Because stochastic simulations are random, stochastic models should generally be
 
 Stochastic simulation should be used to model systems that are sensitive to small fluctuations such as systems that involve small concentrations and small fluxes. However, stochastic simulation can be computationally expensive for large numbers due to the needs to resolve the exact order of every reaction and the need to run multiple simulations to sample the distribution of predicted cell behaviors.
 
+Gillespie Algorithm / Stochastic Simulation Algorithm / Direct Method
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Below is pseudo-code for the simplest stochastic simulation algorithm which is also known as the Gillespie algorithm::
     
     import numpy
@@ -70,12 +72,67 @@ Below is pseudo-code for the simplest stochastic simulation algorithm which is a
 
         # select the next reaction to fire
         i_reaction = numpy.random.choice(len(propensities), p=propensities / total_propensity)
+        
+        # reject the selected reaction if there are insufficient copies of the reactants for the reaction
 
         # update the time and cell state based on the selected reaction
         time += dt
         copy_numbers += reaction_stochiometries[:, i_reaction]
 
-In addition to the above algorithm, there are many algorithms which approximate the results of the above algorithm with significantly lower computational costs. The most commonly used algorithm of these approximate simulation algorithms is the `tau leaping algorithm <https://en.wikipedia.org/wiki/Tau-leaping>`_.
+Tau leaping
+^^^^^^^^^^^
+In addition to the Gillespie algorithm, there are many algorithms which approximate its results with significantly lower computational costs. One of the most common of these approximate simulation algorithms is the `tau-leaping algorithm <https://en.wikipedia.org/wiki/Tau-leaping>`_. The tau-leaping is a time-stepped algorithm similar to Euler's method which samples the number of firings of each reaction from a Poisson distribution with lambda equal to the product of the propensity of each reaction and the time step. Below is pseudocode for the tau-leaping algorithm::
+
+    # represent the reaction and rate laws of the model
+    reaction_stochiometries = numpy.array([ ... ])
+    kinetic_laws = [...]
+    
+    # select the desired time step
+    dt = 1
+   
+    # initialize the simulated state
+    time = 0
+    copy_numbers = numpy.array([...])
+    
+    # iterate over time
+    while time < time_max:
+        # calculate the rate of each reaction
+        propensities = [kinetic_law(copy_numbers) for kinetic_law in kinetic_laws]
+        
+        # sample the number of firings of each reaction
+        n_reactions = numpy.random.poisson(propensities * dt)
+        
+        # adjust the time step or reject reactions for which there are insufficient reactants
+        
+        # advance the time and copy numbers
+        time += dt
+        copy_numbers += reaction_stochiometries * n_reactions
+        
+The tau-leaping algorithm can be improved by adpatively optimizing time step:
+
+.. math::
+   
+   g_i &= -\min_j { S_{ij} }
+    \mu_i &= \sum_j { S_{ij} R_j (x) } \\
+    \sigma_i^2 &= \sum_j { S_{ij}^2 R_j (x) \\
+    dt &= \min_i { \left{ 
+            \frac{
+                \max{ \left{ 
+                    \epsilon x_i / g_i, 1 
+                \right} }  
+            }{
+            |\mu_i (x)|
+            }  ,
+            \frac{
+                \max { \left{
+                    \epsilon x_i / g_i, 1 
+                \right} }^2
+            }{
+            \sigma_i^2
+            }  
+        \right} } \\
+        
+where :math:`x_i` is the copy number of species :math:`i`, :math:`S_{ij}` is the stochiometry of species :math:`i` in reaction :math:`j`, :math:`R_j (x)` is the rate law for reaction :math:`j`, and :math:`\epsilon \approx 0.03` is the desired tolerance.
 
 
 Network-free simulation
