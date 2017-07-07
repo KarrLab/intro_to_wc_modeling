@@ -62,7 +62,7 @@ In this exercise, you will learn how to merge models by working through the nuan
     * `Martins et al., 2001 <10.1046/j.1432-1327.2001.02304.x>`_
     * `Teusink et al., 2000 <10.1046/j.1432-1327.2000.01527.x>`_
     
-* Obtain the original models in SBML format from `JWS online <http://jjj.biochem.sun.ac.za/>`_
+#. Obtain the original models in SBML format from `JWS online <http://jjj.biochem.sun.ac.za/>`_
 
     * `Cronwright model <http://jjj.biochem.sun.ac.za/models/cronwright/>`_
     * `Martins model <http://jjj.biochem.sun.ac.za/models/martins/>`_
