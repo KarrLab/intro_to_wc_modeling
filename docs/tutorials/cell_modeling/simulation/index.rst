@@ -112,25 +112,25 @@ The tau-leaping algorithm can be improved by adpatively optimizing time step:
 
 .. math::
    
-   g_i &= -\min_j { S_{ij} }
+    g_i &= -\min_j { S_{ij} } \\
     \mu_i &= \sum_j { S_{ij} R_j (x) } \\
-    \sigma_i^2 &= \sum_j { S_{ij}^2 R_j (x) \\
-    dt &= \min_i { \left{ 
+    \sigma_i^2 &= \sum_j { S_{ij}^2 R_j (x) } \\
+    dt &= \min_i { \left\{ 
             \frac{
-                \max{ \left{ 
+                \max{ \left\{ 
                     \epsilon x_i / g_i, 1 
-                \right} }  
+                \right\} }  
             }{
             |\mu_i (x)|
             }  ,
             \frac{
-                \max { \left{
+                \max { \left\{
                     \epsilon x_i / g_i, 1 
-                \right} }^2
+                \right\} }^2
             }{
             \sigma_i^2
             }  
-        \right} } \\
+        \right\} } \\
         
 where :math:`x_i` is the copy number of species :math:`i`, :math:`S_{ij}` is the stochiometry of species :math:`i` in reaction :math:`j`, :math:`R_j (x)` is the rate law for reaction :math:`j`, and :math:`\epsilon \approx 0.03` is the desired tolerance.
 
