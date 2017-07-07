@@ -86,9 +86,9 @@ In this exercise. you will learn how to merge models by working through the nuan
     
 #. Read the papers which describe the original models
 
-    * Pandit et al., 2001 <http://dx.doi.org/10.1016/S0006-3495(01)75943-7>`_
-    * Hinch et al., 2004 <http://dx.doi.org/10.1529/biophysj.104.049973>`_
-    * Niederer et al., 2006 <http://dx.doi.org/10.1529/biophysj.105.069534>`_
+    * `Pandit et al., 2001 <http://dx.doi.org/10.1016/S0006-3495(01)75943-7>`_
+    * `Hinch et al., 2004 <http://dx.doi.org/10.1529/biophysj.104.049973>`_
+    * `Niederer et al., 2006 <http://dx.doi.org/10.1529/biophysj.105.069534>`_
 
 #. Obtain the original models in CellML format from the `CellML model repository <https://models.cellml.org>`_
 
