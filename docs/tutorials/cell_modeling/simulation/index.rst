@@ -79,6 +79,13 @@ Below is pseudo-code for the simplest stochastic simulation algorithm which is a
         time += dt
         copy_numbers += reaction_stochiometries[:, i_reaction]
 
+Gillespie first reaction method
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Gibson-Bruck first reaction method
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+`The Gibson-Bruck first reaction method <http://doi.org/10.1021/jp993732q>`_ is a computational optimization of the Gillespie first reaction method which uses a dependency graph to only recalculate rate laws and resample putative next reaction times when necessary, namely when the participants in the rate law are updated, as well as an indexed priority queue to minimize the computational cost of identifying the reaction with the lowest putative next reaction time.
+
 Tau leaping
 ^^^^^^^^^^^
 In addition to the Gillespie algorithm, there are many algorithms which approximate its results with significantly lower computational costs. One of the most common of these approximate simulation algorithms is the `tau-leaping algorithm <https://en.wikipedia.org/wiki/Tau-leaping>`_. The tau-leaping is a time-stepped algorithm similar to Euler's method which samples the number of firings of each reaction from a Poisson distribution with lambda equal to the product of the propensity of each reaction and the time step. Below is pseudocode for the tau-leaping algorithm::
