@@ -44,7 +44,7 @@ Follow these instructions to use CircleCI to continuously test a GitHub reposito
     
     See ``.circleci/config.yml`` for an example and see the `CircleCI documentation <https://circleci.com/docs/2.0/>`_ for more information about configuring CircleCI builds.
 
-#. In order to upload our test and coverage results to Code Climate, Coveralls, and our lab server, we must set three environment variables in the CircleCI settings for each repository. The values of these variables should be the tokens needed to authenticate with Code Climate, Coveralls, and our lab server. These tokens can be obtained from the corresponding Code Climate and Coveralls projects for each repository.
+In order to upload our test and coverage results to Code Climate, Coveralls, and our lab server, we must set three environment variables in the CircleCI settings for each repository. The values of these variables should be the tokens needed to authenticate with Code Climate, Coveralls, and our lab server. These tokens can be obtained from the corresponding Code Climate and Coveralls projects for each repository.
 
       * ``CODECLIMATE_REPO_TOKEN``: `obtain from the corresponding Code Climate project`
       * ``COVERALLS_REPO_TOKEN``: `obtain from the corresponding Coveralls project`
@@ -68,6 +68,38 @@ After installing the CircleCI command line tool, you can use these commands to r
 Note, this will ignore the Git checkout instructions and instead execute the build instructions using the code in ``/path/to/repo``.
 
 See the `CircleCI documentation <https://circleci.com/docs/2.0/local-jobs/>`_ for more information about running builds locally.
+
+
+Changing package dependencies in a repo on CircleCI
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Occasionally, you may want to change the Python packages that a repository uses. You may add or delete
+package dependencies, or change the options of individual packages.
+
+To improve start-up performance,
+each repo on CircleCI has a cached state that includes all installed Python packages.
+To change a repo's package dependencies its cache must be updated. This requires a few steps
+
+#. Change the ``pip`` ``requirements.txt`` files used by the repository. Typically, a repository has independent ``requirements.txt`` files for code and documentation.
+#. Confirm that the changed package dependencies work by testing them on CirceCI by clicking on the ``Rebuild`` button on the repo's ``Builds`` page.
+#. Then update the repo's cached state on CirceCI.
+
+The only way to build and save a new cache is to change the repo's cache key in its ``.circleci/config.yml`` file.
+Change the cache version by incrementing ``XXX`` whereever it appears in ``cache-vXXX``, as illustrated below::
+
+      - restore_cache:
+          keys:
+            - cache-vXXX.-{{ .Branch }}-{{ checksum "requirements.txt" }}
+            - cache-vXXX-{{ .Branch }}-
+            - cache-vXXX-
+
+      ...
+
+      - save_cache:
+          key: cache-vXXX-{{ .Branch }}-{{ checksum "requirements.txt" }}
+
+Push the changes to GitHub and check that the tests run on CircleCI pass.
+
+Any other builds that require your repo will automatically pull the latest version because the CircleCI builds are configured to upgrade all dependencies (``pip -U --upgrade-strategy only-if-needed``).
 
 Code Climate
 ------------
