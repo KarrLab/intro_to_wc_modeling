@@ -7,5 +7,5 @@ optlang                                                  # numerical optimizatio
 # scikit-learn                                           # data science package
 scipy                                                    # scientific computing
 sqlalchemy                                               # relational databases
-git+ssh://github.com/KarrLab/wc_lang.git#egg=wc_lang   # wc-modeling language
-git+ssh://github.com/KarrLab/wc_utils.git#egg=wc_utils # wc-modeling utilities
+git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang   # wc-modeling language
+git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils # wc-modeling utilities
