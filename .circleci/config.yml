@@ -12,7 +12,10 @@ jobs:
             - cache-v5-{{ .Branch }}-{{ checksum "requirements.txt" }}
             - cache-v5-{{ .Branch }}-
             - cache-v5-
-      
+
+      - run: eval $(ssh-agent -s)
+      - run: ssh-add ~/.ssh/id_rsa
+
       - run: pip2 install -e .
       - run: pip2 install -U -e git+https://github.com/KarrLab/Karr-Lab-build-utils.git#egg=Karr-Lab-build-utils
       - run: karr-lab-build-utils-2 install-requirements
