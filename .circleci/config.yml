@@ -6,6 +6,7 @@ jobs:
       - image: karrlab/build:0.0.5
     steps:
       - checkout
+      - setup_remote_docker
       
       - restore_cache:
           keys:
@@ -13,7 +14,9 @@ jobs:
             - cache-v5-{{ .Branch }}-
             - cache-v5-
 
-      - run: nohup bash -c "eval $(ssh-agent -s)" &
+      - run: |
+          docker run -d --name ssh-agent karrlab/build:0.0.5
+          docker exec ssh-agent ssh-agent -s
       - run: ssh-add ~/.ssh/id_rsa
 
       - run: pip2 install -e .
