@@ -82,9 +82,10 @@ model.get_rate_laws()
 model.get_parameters()
 model.get_references()
 
-# For example, ``get_submodels`` returns a list of all of the submodels. This can be used to print the ids and names of the submodels:
+# For example, ``get_submodels`` returns a list of all of the submodels. This can be used to obtain the ids and names of the submodels:
+id_and_names = []
 for submodel in model.get_submodels():
-    print('id: {}, name: {}'.format(submodel.id, submodel.name))
+    id_and_names.append('id: {}, name: {}'.format(submodel.id, submodel.name))
 
 # API documentation for ``wc_lang`` is available at `http://code.karrlab.org <http://code.karrlab.org/>`_.
 
