@@ -48,6 +48,8 @@ Because stochastic simulations are random, stochastic models should generally be
 
 Stochastic simulation should be used to model systems that are sensitive to small fluctuations such as systems that involve small concentrations and small fluxes. However, stochastic simulation can be computationally expensive for large numbers due to the needs to resolve the exact order of every reaction and the need to run multiple simulations to sample the distribution of predicted cell behaviors.
 
+Gillespie Algorithm / Stochastic Simulation Algorithm / Direct Method
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Below is pseudo-code for the simplest stochastic simulation algorithm which is also known as the Gillespie algorithm::
     
     import numpy
@@ -70,12 +72,74 @@ Below is pseudo-code for the simplest stochastic simulation algorithm which is a
 
         # select the next reaction to fire
         i_reaction = numpy.random.choice(len(propensities), p=propensities / total_propensity)
+        
+        # reject the selected reaction if there are insufficient copies of the reactants for the reaction
 
         # update the time and cell state based on the selected reaction
         time += dt
         copy_numbers += reaction_stochiometries[:, i_reaction]
 
-In addition to the above algorithm, there are many algorithms which approximate the results of the above algorithm with significantly lower computational costs. The most commonly used algorithm of these approximate simulation algorithms is the `tau leaping algorithm <https://en.wikipedia.org/wiki/Tau-leaping>`_.
+Gillespie first reaction method
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Gibson-Bruck first reaction method
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+`The Gibson-Bruck first reaction method <http://doi.org/10.1021/jp993732q>`_ is a computational optimization of the Gillespie first reaction method which uses a dependency graph to only recalculate rate laws and resample putative next reaction times when necessary, namely when the participants in the rate law are updated, as well as an indexed priority queue to minimize the computational cost of identifying the reaction with the lowest putative next reaction time.
+
+Tau leaping
+^^^^^^^^^^^
+In addition to the Gillespie algorithm, there are many algorithms which approximate its results with significantly lower computational costs. One of the most common of these approximate simulation algorithms is the `tau-leaping algorithm <https://en.wikipedia.org/wiki/Tau-leaping>`_. The tau-leaping is a time-stepped algorithm similar to Euler's method which samples the number of firings of each reaction from a Poisson distribution with lambda equal to the product of the propensity of each reaction and the time step. Below is pseudocode for the tau-leaping algorithm::
+
+    # represent the reaction and rate laws of the model
+    reaction_stochiometries = numpy.array([ ... ])
+    kinetic_laws = [...]
+    
+    # select the desired time step
+    dt = 1
+   
+    # initialize the simulated state
+    time = 0
+    copy_numbers = numpy.array([...])
+    
+    # iterate over time
+    while time < time_max:
+        # calculate the rate of each reaction
+        propensities = [kinetic_law(copy_numbers) for kinetic_law in kinetic_laws]
+        
+        # sample the number of firings of each reaction
+        n_reactions = numpy.random.poisson(propensities * dt)
+        
+        # adjust the time step or reject reactions for which there are insufficient reactants
+        
+        # advance the time and copy numbers
+        time += dt
+        copy_numbers += reaction_stochiometries * n_reactions
+        
+The tau-leaping algorithm can be improved by adpatively optimizing time step:
+
+.. math::
+   
+    g_i &= -\min_j { S_{ij} } \\
+    \mu_i &= \sum_j { S_{ij} R_j (x) } \\
+    \sigma_i^2 &= \sum_j { S_{ij}^2 R_j (x) } \\
+    dt &= \min_i { \left\{ 
+            \frac{
+                \max{ \left\{ 
+                    \epsilon x_i / g_i, 1 
+                \right\} }  
+            }{
+            |\mu_i (x)|
+            }  ,
+            \frac{
+                \max { \left\{
+                    \epsilon x_i / g_i, 1 
+                \right\} }^2
+            }{
+            \sigma_i^2
+            }  
+        \right\} } \\
+        
+where :math:`x_i` is the copy number of species :math:`i`, :math:`S_{ij}` is the stochiometry of species :math:`i` in reaction :math:`j`, :math:`R_j (x)` is the rate law for reaction :math:`j`, and :math:`\epsilon \approx 0.03` is the desired tolerance.
 
 
 Network-free simulation
@@ -109,9 +173,14 @@ dFBA enables dynamic simulations by (1) assuming that cells quickly reach pseudo
         Update the environmental conditions based on the predicted exchange fluxes
 
 
-Multi-algorithmic simulation
-----------------------------
-To efficiently simulate entire cells, we must represent each aspect of a cell using the most appropriate mathematics and concurrently integrate or co-simulate the combined hybrid or multi-algorithmic model. For example, we must represent transcription as a stochastic model and represent metabolism as an FBA model. Hybrid simulation is an open area of research. Below is a summarize of several increasingly sophisticated hybrid simulation algorithms.
+Hybrid/multi-algorithmic simulation
+-----------------------------------
+Hybrid/multi-algorithmic simulation can be used to address two problems:
+
+* Hybrid/multi-algorithmic simulation can enable model components to be described with different resolutions. For example, hybrid simulation could be used to represent the know stochastic behavior of transcription and the known steady-state behavior of metabolism. In this case, the modeler selects the most appropriate simulation algorithm for each model component based on its level of characterization.
+* Hybrid/multi-algorithmic simulation can enable efficient simulation of models that span a range of scales, including low-concentration components whose dynamics are highly variable and high-concentration components whose dynamics exhibit little variation. In this case, the simulation algorithm selects the most appropriate simulation algorithm for each model component to optimize the trade off between computational accuracy and cost. Specifically, the simulation algorithm partitions the species and reactions into two or more submodels that represent different scales. For more information, we recommend reading recent papers about partitioned and slow-scale tau-leaping.
+
+Hybrid simulation algorithms must concurrently integrate the component submodels by alternately integrating the submodels and synchronizing their states. Below is a summarize of several increasingly sophisticated hybrid simulation algorithms.
 
 * Serial simulation: Divide the simulation into multiple small time steps. Within each time step, iteratively simulate the submodel and update the cell state. Optionally, simulate the models in a random order at each time step. This is a simple algorithm to implement. However, this algorithm violates the arrow of time by integrating submodels based on different states within each time step.
 * Partitioning and merging: Divide the simulation into multiple small time steps. With each time step, partition the pool of each species into separate pools for each submodel. Simulate the submodels independently using the independent pools. Update the global species pools by merging the submodel pools. Species can be partitioned uniformly, based on their utilization during the previous time point, or based on a preliminary integration of the submodels. This is a relatively simple algorithm to implement for models whose state only represents concentrations and/or species copy number. However, it can be challenging to partition and merge rule-based models whose states are represented by graphs.
