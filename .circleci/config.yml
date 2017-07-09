@@ -13,8 +13,6 @@ jobs:
             - cache-v5-{{ .Branch }}-
             - cache-v5-
 
-      - run: ssh -T git@github.com
-
       - run: pip2 install -e .
       - run: pip2 install -U -e git+https://github.com/KarrLab/Karr-Lab-build-utils.git#egg=Karr-Lab-build-utils
       - run: karr-lab-build-utils-2 install-requirements
