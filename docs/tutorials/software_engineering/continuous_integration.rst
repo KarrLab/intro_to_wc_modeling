@@ -50,41 +50,13 @@ In order to upload our test and coverage results to Code Climate, Coveralls, and
       * ``COVERALLS_REPO_TOKEN``: `obtain from the corresponding Coveralls project`
       * ``TEST_SERVER_TOKEN``: ``jxdLhmaPkakbrdTs5MRgKD7p``
 
+Optimizing the runtime of CircleCI builds by loading rather than compiling dependent packages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+There are two main mechanisms to decrease the runtime of CircleCI builds by loading rather than compiling dependent packages:
 
-Debugging CircleCI builds via SSH
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-There are three ways to debug CircleCI builds. (1) You can make and push changes to your .circleci/config.yml file. However, this is slow because it is not interactive. (2) At the end of each build, you can SSH into the machine that ran the build for up to 30 minutes and interactively debug the build during that time. This is easy to do, but the time is limited to 30 minutes and CircleCI machines are somewhat slow because they are running on top of shared hardware. (3) You can emulate CircleCI locally. This takes more effort to setup, but is the most powerful way to debug CircleCI builds.
+* Use CircleCI's cache to avoid repeatedly compiling the dependent packages. 
 
-To debug builds via SSH, either chose the option to run a build with SSH enable or click the button in the CircleCI page for a build to enable SSH access. In either case, CircleCI will then provide you an IP address and instructions on how to SSH into the machine which ran your build.
-
-
-Debugging CircleCI builds locally
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-After installing the CircleCI command line tool, you can use these commands to run a build locally::
-
-  cd /path/to/repo
-  circleci build
-
-Note, this will ignore the Git checkout instructions and instead execute the build instructions using the code in ``/path/to/repo``.
-
-See the `CircleCI documentation <https://circleci.com/docs/2.0/local-jobs/>`_ for more information about running builds locally.
-
-
-Changing package dependencies in a repo on CircleCI
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Occasionally, you may want to change the Python packages that a repository uses. You may add or delete
-package dependencies, or change the options of individual packages.
-
-To improve start-up performance,
-each repo on CircleCI has a cached state that includes all installed Python packages.
-To change a repo's package dependencies its cache must be updated. This requires a few steps
-
-#. Change the ``pip`` ``requirements.txt`` files used by the repository. Typically, a repository has independent ``requirements.txt`` files for code and documentation.
-#. Confirm that the changed package dependencies work by testing them on CirceCI by clicking on the ``Rebuild`` button on the repo's ``Builds`` page.
-#. Then update the repo's cached state on CirceCI.
-
-The only way to build and save a new cache is to change the repo's cache key in its ``.circleci/config.yml`` file.
-Change the cache version by incrementing ``XXX`` whereever it appears in ``cache-vXXX``, as illustrated below::
+    This can configured in ``.circleci/config.yml`` as illustrated below::
 
       - restore_cache:
           keys:
@@ -97,9 +69,76 @@ Change the cache version by incrementing ``XXX`` whereever it appears in ``cache
       - save_cache:
           key: cache-vXXX-{{ .Branch }}-{{ checksum "requirements.txt" }}
 
-Push the changes to GitHub and check that the tests run on CircleCI pass.
+    You can clear these caches by incrementing by the version number ``vXXX`` in ``.circleci/config.yml`` and pushing the updated file to GitHub. This helpful if you want to force the build to compile the dependent package.
 
-Any other builds that require your repo will automatically pull the latest version because the CircleCI builds are configured to upgrade all dependencies (``pip -U --upgrade-strategy only-if-needed``).
+* Create your own Docker image which already has the packages compiled
+
+    The Dockerfile for the Docker image that the Karr Lab uses with CircleCI is located at `https://github.com/KarrLab/karr_lab_docker_images/tree/master/build <https://github.com/KarrLab/karr_lab_docker_images/tree/master/build>`_.
+
+    See the :ref:`Docker tutorial <building_linux_containers>` for more information.
+
+The Karr Lab uses both of these mechanisms
+
+Changing package dependencies for a CircleCI build
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Occasionally, you may need to change the dependencies of a repository. The following recipe can be used to update the PyPI dependencies of a repository:
+
+#. Update the ``pip`` ``requirements.txt`` files which describe the dependencies of the package, its tests, and its documenation. This includes ``./requirements.txt`` which describes the dependencies of the package, ``./tests/requirements.txt`` which describes the dependencies of the package's tests, and ``./docs/requirements.txt`` which describes the dependencies of the package's documentation.
+#. Commit the changes to the ``requirements.txt`` files to your code repository.
+
+If there are errors in the compilation and/or installation of the new dependencies, you can try rebuilding the build without its cache. As described above, we recommend using CircleCI's cache to avoid repeatedly recompiling dependent packages. The cache avoids recompiling dependent packages by storing them after the first time they are built, and loading them on subsequent builds. You can force CircleCI to create a new cache by incrementing the cache version number ``vXXX`` specified in ``.circleci/config.yml`` and pushing the updated configuration file to your code repository::
+
+    - restore_cache:
+        keys:
+          - cache-vXXX.-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          - cache-vXXX-{{ .Branch }}-
+          - cache-vXXX-
+
+    ...
+
+    - save_cache:
+        key: cache-vXXX-{{ .Branch }}-{{ checksum "requirements.txt" }}
+
+All other builds that require your package should be configured to update its requirements at the beginning of every build. This can be implementing using pip's ``-U`` option. Note, the Karr Lab's builds are already configured to update their requirements at the beginning of every build.
+
+Debugging CircleCI builds
+^^^^^^^^^^^^^^^^^^^^^^^^^
+There are four ways to debug CircleCI builds.
+
+* You can iteratively edit and push your ``.circleci/config.yml`` file. However, this is slow because it is not interactive. 
+* From the CircleCI website, you can rebuild a build with SSH access using the "Rebuild" button at the top-right of the page for the build. After the new build starts, CircleCI will provide you the IP address to SSH into the machine which is running your build. However, this is limited to 2 h, the CircleCI virtual machines are somewhat slow because they are running on top of shared hardware, and any changes you make are not saved to the build image.
+* You can use the CircleCI local executor (see below) to emulate CircleCI locally. This is a powerful way to debug CircleCI builds. However, this takes more effort to setup because it requires docker.
+* You can interactively run your code on the docker build image. This is also a powerful way to debug CircleCI builds. However, this takes more effort to setup because it requires docker.
+
+
+Debugging CircleCI builds locally
+"""""""""""""""""""""""""""""""""
+The CircleCI local executor and iteractively running your code on the build image are powerful ways to debug CircleCI builds. Below are instructions for utilizing these approaches.
+
+#. Install docker (see :ref:`installation instructions <installation>`)
+#. Install the CircleCI command line tool::
+  
+    sudo curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci
+    sudo chmod +x /usr/local/bin/circleci
+
+#. Use the docker CLI to run a build locally
+
+    .. code-block:: text
+
+      cd /path/to/repo
+      circleci build
+
+    Note, this will ignore the Git checkout instructions and instead execute the build instructions using the code in ``/path/to/repo``.
+
+    Note also, if your builds need to SSH keys to clone code from a private repository, you will need to prepare a docker image with the SSH key(s) loaded into it. See this `example Dockerfile <https://github.com/KarrLab/karr_lab_docker_images/blob/master/build/Dockerfile_with_ssh_key>`_.
+
+    See the `CircleCI documentation <https://circleci.com/docs/2.0/local-jobs/>`_ for more information about running builds locally.
+
+#. Use docker to interactively run the docker build image::
+
+    docker run -it karrlab/build:latest bash
+
+See `https://github.com/KarrLab/karr_lab_docker_images/blob/master/build/test_packages.py <https://github.com/KarrLab/karr_lab_docker_images/blob/master/build/test_packages.py>`_ for a detailed example of how to run builds locally using the CircleCI CLI and docker.
 
 Code Climate
 ------------
