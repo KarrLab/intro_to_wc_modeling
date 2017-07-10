@@ -27,9 +27,10 @@ Below are the steps to merging models.
 #. Align the models to a common namespace by annotate the species and reactions using common ontologies
 #. Make all of the implicit connections among the models implicit. For example, to combine a metabolism model with a signaling model, make ATP an explicit component of the signaling model and update the effective rate constants accordingly.
 #. Identify the common species and reactions among the models
+#. Enumerate all emergent combinatorial complexity from the model merging
 #. Align the assumptions, granularity, and mathematical representation of the models
 
-    #. Aligh the assumptions of all of the models. This is typically challenging to do because the assumptions underyling models are rarely explicitly stated.
+    #. Align the assumptions of all of the models. This is typically challenging to do because the assumptions underyling models are rarely explicitly stated.
     #. Align the granularities of all common species and reactions    
     #. Convert all models into explicit time-driven models. For example, convert Boolean models into stochastic models by assuming typical time and copy number scales.
     
