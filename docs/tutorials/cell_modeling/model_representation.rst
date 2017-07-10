@@ -5,7 +5,7 @@ There are multiple ways to represent a model.
 
 Custom numerical simulation code
 --------------------------------
-At the lowest level, a model can be represented as a numerical simulation algorithm. For example, a stochastic model could be represented in Python code which implements the Gillepsie algorithm. This approach provides a modeler with the most control over the numerical simulation of the model which can be helpful for efficiently simulating large models, but this approach leads to models that are difficult for other scientists to understand because they may need to read a large amount of code. Furthermore, because this approach
+At the lowest level, a model can be represented as a numerical simulation algorithm. For example, a stochastic model could be represented in Python code which implements the Gillespie algorithm. This approach provides a modeler with the most control over the numerical simulation of the model which can be helpful for efficiently simulating large models, but this approach leads to models that are difficult for other scientists to understand because they may need to read a large amount of code. Furthermore, because this approach
 has the disadvantage that it requires the modeler devote significant time writing and testing a large amount of code.
 
 Exercise
@@ -65,6 +65,6 @@ Exercise
 Describe the same stochastic model with PySB.
 
 
-High-level rule-based modeling langauge
+High-level rule-based modeling language
 ---------------------------------------
 To overcome the above limitations, we are developing a new higher-level rule-based modeling language and a corresponding higher-level network-free simulator.

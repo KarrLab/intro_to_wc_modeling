@@ -83,7 +83,7 @@ Changing package dependencies for a CircleCI build
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Occasionally, you may need to change the dependencies of a repository. The following recipe can be used to update the PyPI dependencies of a repository:
 
-#. Update the ``pip`` ``requirements.txt`` files which describe the dependencies of the package, its tests, and its documenation. This includes ``./requirements.txt`` which describes the dependencies of the package, ``./tests/requirements.txt`` which describes the dependencies of the package's tests, and ``./docs/requirements.txt`` which describes the dependencies of the package's documentation.
+#. Update the ``pip`` ``requirements.txt`` files which describe the dependencies of the package, its tests, and its documentation. This includes ``./requirements.txt`` which describes the dependencies of the package, ``./tests/requirements.txt`` which describes the dependencies of the package's tests, and ``./docs/requirements.txt`` which describes the dependencies of the package's documentation.
 #. Commit the changes to the ``requirements.txt`` files to your code repository.
 
 If there are errors in the compilation and/or installation of the new dependencies, you can try rebuilding the build without its cache. As described above, we recommend using CircleCI's cache to avoid repeatedly recompiling dependent packages. The cache avoids recompiling dependent packages by storing them after the first time they are built, and loading them on subsequent builds. You can force CircleCI to create a new cache by incrementing the cache version number ``vXXX`` specified in ``.circleci/config.yml`` and pushing the updated configuration file to your code repository::
@@ -113,7 +113,7 @@ There are four ways to debug CircleCI builds.
 
 Debugging CircleCI builds locally
 """""""""""""""""""""""""""""""""
-The CircleCI local executor and iteractively running your code on the build image are powerful ways to debug CircleCI builds. Below are instructions for utilizing these approaches.
+The CircleCI local executor and interactively running your code on the build image are powerful ways to debug CircleCI builds. Below are instructions for utilizing these approaches.
 
 #. Install docker (see :ref:`installation instructions <installation>`)
 #. Install the CircleCI command line tool::

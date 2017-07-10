@@ -38,7 +38,7 @@ def simulate(reaction_stochiometries, kinetic_laws, init_copy_number, time_max, 
        kinetic_laws (:obj:`list` of :obj:`function`): list of kinetic law function
        init_copy_number (:obj:`int`): initial copy number
        time_max (:obj:`float`): simulation length
-       time_step (:obj:`float`): freuency to record predicted dynamics
+       time_step (:obj:`float`): frequency to record predicted dynamics
 
     Returns:
         :obj:`tuple`:

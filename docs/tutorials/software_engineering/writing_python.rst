@@ -40,7 +40,7 @@ Open Sublime and edit the following settings
 
     [{"keys": ["ctrl+shift+r"], "command": "auto_pep8", "args": {"preview": false}}]
 
-Open PyCharm and set the following settings to configure Pycharm
+Open PyCharm and set the following settings to configure PyCharm
 
     * File >> Settings >> Tools >> Python Integrated Tools >> Default test runner: set to py.test
     * Run >> Edit configurations >> Defaults >> Python tests >> py.test: add additional arguments "--capture=no"

@@ -53,7 +53,7 @@ Vector graphics can be described using one of several common color models:
 
 * CMYK (Cyan, Magenta, Yellow, Black): CMYK is a subtractive color model which represents colors as tuple of cyan, magenta, yellow, and black values, each of which ranges from 0 to 100%. CMYK is the native color model for many printers. For this reason, some journals prefer CMYK.
 * RGB (Red, Green, Blue): RGB is an additive color model which represents colors as tuples of red, green, and blue values, each of which ranges from 0 to 255. RGB is the native color model for many monitors. For this reason, RGB is most common color model for web-based graphics and some journals prefer RGB.
-* HSB (Hue, Saturation, Brightness) / HSV (Hue, Saturation, Value): HSB is a cyclindrical color model which makes it easy to manipulate saturation and brightness separately from color. For this reason, HSB is useful to designing color palletes.
+* HSB (Hue, Saturation, Brightness) / HSV (Hue, Saturation, Value): HSB is a cylindrical color model which makes it easy to manipulate saturation and brightness separately from color. For this reason, HSB is useful to designing color palettes.
 * Grayscale: is an additive color model which represents colors as integers between 0 and 255.
 
 Illustrator supports all four of these color models, and documents created in any one of these color models can be exported to any of the other color models. Inkscape only supports the RGB color model.

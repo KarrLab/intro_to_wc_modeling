@@ -1,6 +1,6 @@
 Editing raster graphics with Gimp
 =================================
-As described in the :ref:`vector graphics tutorial <vector_graphics>`, there are two types of graphics: vector graphics (generally diagrams in .ai, .eps, .pdf, or .svg format) and raster graphics (generally photos in .gif, .jpg, or .png format). This tutorial will teach you how to edit raster graphics with `Gimp <https://www.gimp.org/>`_, an open-source raster graphic editing program, by creating a headshot for a website.
+As described in the :ref:`vector graphics tutorial <vector_graphics>`, there are two types of graphics: vector graphics (generally diagrams in .ai, .eps, .pdf, or .svg format) and raster graphics (generally photos in .gif, .jpg, or .png format). This tutorial will teach you how to edit raster graphics with `Gimp <https://www.gimp.org/>`_, an open-source raster graphic editing program, by creating a head shot for a website.
 
 Concepts
 --------
@@ -28,7 +28,7 @@ On Ubuntu, Gimp can be installed by running this command::
 
 Exercise
 ------------
-In this exercise, we will learn how to edit raster graphics by creating a headshot of President Obama for a website. This will include selecting the face, removing the background, cropping the image, resizing the image, and exporting the image for fast.
+In this exercise, we will learn how to edit raster graphics by creating a head shot of President Obama for a website. This will include selecting the face, removing the background, cropping the image, resizing the image, and exporting the image for fast.
 
 #. Download a photo of :download:`President Obama <example_photo.jpg>`
 #. Open Gimp
@@ -39,7 +39,7 @@ In this exercise, we will learn how to edit raster graphics by creating a headsh
 #. Feather the selection so that the transition between the face and background is not so abrupt when we cut out the background ("Select" >> "Feather...")
 #. Select the background by inverting the selection ("Select" >> "Invert")
 #. Delete the background ("Edit" >> "Clear")
-#. Change the color mode to grey scale ("Image" >> "Mode" >> Select "Grayscale")
+#. Change the color mode to gray scale ("Image" >> "Mode" >> Select "Grayscale")
 #. Crop the head and make the image square ("Tools" >> "Transform Tools" >> "Crop"). 
     
     #. Disable "Current layer only"

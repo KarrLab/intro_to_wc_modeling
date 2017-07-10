@@ -30,7 +30,7 @@ Below are the steps to merging models.
 #. Enumerate all emergent combinatorial complexity from the model merging
 #. Align the assumptions, granularity, and mathematical representation of the models
 
-    #. Align the assumptions of all of the models. This is typically challenging to do because the assumptions underyling models are rarely explicitly stated.
+    #. Align the assumptions of all of the models. This is typically challenging to do because the assumptions underlying models are rarely explicitly stated.
     #. Align the granularities of all common species and reactions    
     #. Convert all models into explicit time-driven models. For example, convert Boolean models into stochastic models by assuming typical time and copy number scales.
     
@@ -51,7 +51,7 @@ Software tools
 --------------
 Several software tools have been developed to help researchers merge models and simulate merge models.
 
-* Model merging: The tools below help users merge models. However, these tools only help users carryout the simplest model merging tasks, namely annotating the semantic meaning of model components and identifying common model components. These software programs do not help models carryout the more complicated tasks of resolving inconsistent assummptions and granularities and recalibrating models.
+* Model merging: The tools below help users merge models. However, these tools only help users carryout the simplest model merging tasks, namely annotating the semantic meaning of model components and identifying common model components. These software programs do not help models carryout the more complicated tasks of resolving inconsistent assumptions and granularities and recalibrating models.
 
     * semanticSBML: helps users annotate models and identify common elements
     * SemGen: helps users annotate models and identify common elements
@@ -60,7 +60,7 @@ Several software tools have been developed to help researchers merge models and 
 
     * E-Cell: multi-algorithmic simulator that uses a nested simulation algorithm
     * iBioSim: implements a hierarchical SSA algorithm that can simulate a specific class of merged stochastic models
-    * COPASI: partitions a biochemical network into a high partical count subnet simulated by ODE and a low particle count subnet simulated by SSA
+    * COPASI: partitions a biochemical network into a high particle count subnet simulated by ODE and a low particle count subnet simulated by SSA
 
 
 Exercises
@@ -68,7 +68,7 @@ Exercises
 
 Merging metabolic models
 ^^^^^^^^^^^^^^^^^^^^^^^^
-In this exercise, you will learn how to merge models by working through the nuances of merging three separately published models of glyolysis.
+In this exercise, you will learn how to merge models by working through the nuances of merging three separately published models of glycolysis.
 
 #. Read the paper which describes the merged model, `Snoep et al., 2006 <https://doi.org/10.1016/j.biosystems.2005.07.006>`_
 #. Read the papers which describe the individual models
@@ -89,8 +89,8 @@ In this exercise, you will learn how to merge models by working through the nuan
 #. Compare your simulation results to those reported in Snoep et al., 2006.
 
 
-Merging electrophyiological models
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Merging electrophysiological models
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In this exercise. you will learn how to merge models by working through the nuances of merging three separately published models of the electrophysiology, calcium dynamics, and tension development of cardiac myocytes.
 
 #. Read the papers which describe the merged model

@@ -42,7 +42,7 @@ Euler's method estimates :math:`y(t+\Delta t)` using a first-order approximation
 
 Stochastic simulation
 ---------------------
-Like ODE models, stochastic models are based on microscopic analyses of how the concentration of each species in the cell changes over time in response to the concentrations of other species. However, stochastic simulation algorithms relax the assumption that cells behave deterministically. Instead, stochastic simulation algorithms assume that the rate of each reaction is Poisson-distributed. As a result, stochastic simulation algorithms generate sequences of reaction events at which the simuated state discretely changes.
+Like ODE models, stochastic models are based on microscopic analyses of how the concentration of each species in the cell changes over time in response to the concentrations of other species. However, stochastic simulation algorithms relax the assumption that cells behave deterministically. Instead, stochastic simulation algorithms assume that the rate of each reaction is Poisson-distributed. As a result, stochastic simulation algorithms generate sequences of reaction events at which the simulated state discretely changes.
 
 Stochastic simulation should be used to model systems that are sensitive to small fluctuations such as systems that involve small concentrations and small fluxes. However, stochastic simulation can be computationally expensive for large numbers due to the needs to resolve the exact order of every reaction and the need to run multiple simulations to sample the distribution of predicted cell behaviors.
 
@@ -201,7 +201,7 @@ In addition to the Gillespie algorithm, the Gillespie first reaction method, and
         time += dt
         copy_numbers += reaction_stochiometries * n_reactions
         
-The tau-leaping algorithm can be improved by adpatively optimizing time step based on its sensitivity to the propensities:
+The tau-leaping algorithm can be improved by adaptively optimizing time step based on its sensitivity to the propensities:
 
 .. math::
    
@@ -225,7 +225,7 @@ The tau-leaping algorithm can be improved by adpatively optimizing time step bas
             }  
         \right\} } \\
         
-where :math:`x_i` is the copy number of species :math:`i`, :math:`S_{ij}` is the stochiometry of species :math:`i` in reaction :math:`j`, :math:`R_j (x)` is the rate law for reaction :math:`j`, and :math:`\epsilon \approx 0.03` is the desired tolerance. See `Cao, 2006 <http://doi.org/10.1063/1.2159468>`_ for more information.
+where :math:`x_i` is the copy number of species :math:`i`, :math:`S_{ij}` is the stoichiometry of species :math:`i` in reaction :math:`j`, :math:`R_j (x)` is the rate law for reaction :math:`j`, and :math:`\epsilon \approx 0.03` is the desired tolerance. See `Cao, 2006 <http://doi.org/10.1063/1.2159468>`_ for more information.
 
 
 Network-free simulation
@@ -244,7 +244,7 @@ Flux balance analysis (FBA) is a popular approach to simulating metabolism. Like
     S v &= 0 \\
     v^\text{min} &\leq v \leq v^\text{max}, \\
 
-where :math:`S_{ij}` is the stochiometry of species :math:`i` in reaction :math:`j`, :math:`v_j` is the flux of reaction :math:`j`, :math:`v^\text{min}_{j}` and :math:`v^\text{max}_j` are the upper and lower bounds of the flux of reaction :math:`j`, and :math:`f_\mu` is 1 for the biomass composition and 0 otherwise.
+where :math:`S_{ij}` is the stoichiometry of species :math:`i` in reaction :math:`j`, :math:`v_j` is the flux of reaction :math:`j`, :math:`v^\text{min}_{j}` and :math:`v^\text{max}_j` are the upper and lower bounds of the flux of reaction :math:`j`, and :math:`f_\mu` is 1 for the biomass composition and 0 otherwise.
 
 In addition, there are a variety of generalizations of FBA for using genomic and other experimental data to generate more accurate flux bounds (see `review <https://doi.org/10.1371/journal.pcbi.1003580>`_), dynamic FBA simulations (dFBA), and combined regulatory and FBA metabolism simulations (`rFBA <http://doi.org/10.1038/nature02456>`_, `PROM <http://doi.org/10.1073/pnas.1005139107>`_).
 
@@ -299,7 +299,7 @@ To simulate a model, we must specify every aspect of the simulation including
 * The desired simulation algorithm
 * The parameters of the simulation algorithm such as the initial seed and state of the random number generator
 
-The `Simulation Experiment Description Markup Language <http://sed-ml.org>`_ (SED-ML) is one of the most commonly used languages for describing simulations. SED-ML is primarily designed to describe simulations of XML-based models such as models encoded in CellML and SBML. However, SED-ML can be used to describe the simulation of any model. `Simulation Experiment Specification via a Scala Layer <http://sessl.org>`_ (SESSL) is competing langauge simulation description language. 
+The `Simulation Experiment Description Markup Language <http://sed-ml.org>`_ (SED-ML) is one of the most commonly used languages for describing simulations. SED-ML is primarily designed to describe simulations of XML-based models such as models encoded in CellML and SBML. However, SED-ML can be used to describe the simulation of any model. `Simulation Experiment Specification via a Scala Layer <http://sessl.org>`_ (SESSL) is competing language simulation description language. 
 
 
 Software tools
@@ -479,7 +479,7 @@ Next, use ``matplotlib`` to plot the simulation results. You should see results 
 
 .. image:: boolean-results.png
 
-Finally, compare the simulation results from the different update schemes. How do they differ? Which ones reach steady states or repitive oscillations?
+Finally, compare the simulation results from the different update schemes. How do they differ? Which ones reach steady states or repetitive oscillations?
 
 
 ODE simulation
@@ -551,7 +551,7 @@ Second, define the initial copy number::
 
     init_copy_number = 10
 
-Third, implement the Gillepsie algorithm by completing the code skeleton below::
+Third, implement the Gillespie algorithm by completing the code skeleton below::
 
     def simulate(reaction_stochiometries, kinetic_laws, init_copy_number, time_max, time_step):
         """ Run a stochastic simulation
@@ -561,7 +561,7 @@ Third, implement the Gillepsie algorithm by completing the code skeleton below::
            kinetic_laws (:obj:`list` of :obj:`function`): list of kinetic law function
            init_copy_number (:obj:`int`): initial copy number
            time_max (:obj:`float`): simulation length
-           time_step (:obj:`float`): freuency to record predicted dynamics
+           time_step (:obj:`float`): frequency to record predicted dynamics
 
         Returns:
             :obj:`tuple`:
