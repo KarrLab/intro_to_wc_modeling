@@ -3,18 +3,15 @@ jobs:
   build:
     working_directory: /root/project
     docker:
-      - image: karrlab/build:0.0.5
+      - image: karrlab/build:0.0.6
     steps:
       - checkout
       
       - restore_cache:
           keys:
-            - cache-v5-{{ .Branch }}-{{ checksum "requirements.txt" }}
-            - cache-v5-{{ .Branch }}-
-            - cache-v5-
-  
-      - run: pip2 install -U pyexcel            
-      - run: pip3 install -U pyexcel
+            - cache-v6-{{ .Branch }}-{{ checksum "requirements.txt" }}
+            - cache-v6-{{ .Branch }}-
+            - cache-v6-
 
       - run: pip2 install -e .
       - run: pip2 install -U -e git+https://github.com/KarrLab/Karr-Lab-build-utils.git#egg=Karr-Lab-build-utils
@@ -25,7 +22,7 @@ jobs:
       - run: karr-lab-build-utils-3 install-requirements
       
       - save_cache:
-          key: cache-v5-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: cache-v6-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - /usr/local/lib/python2.7/site-packages
             - /usr/local/lib/python3.6/site-packages
