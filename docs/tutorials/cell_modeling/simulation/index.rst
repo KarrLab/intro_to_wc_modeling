@@ -42,15 +42,26 @@ Euler's method estimates :math:`y(t+\Delta t)` using a first-order approximation
 
 Stochastic simulation
 ---------------------
-Like ODE models, stochastic models are based on microscopic analyses of how the concentration of each species in the cell changes over time in response to the concentrations of other species. However, stochastic simulation algorithms relax the assumption that cells behave deterministically. Instead, stochastic simulation algorithms assume that the rate of each reaction is Poisson-distributed. As a result, stochastic simulation algorithms generate sequences of reaction events at which the state of the cell discretely changes.
-
-Because stochastic simulations are random, stochastic models should generally be simulated multiple times to sample the distribution of predicted cell behaviors. In general, these simulations should be run both using different random number generator seeds and different random initial conditions.
+Like ODE models, stochastic models are based on microscopic analyses of how the concentration of each species in the cell changes over time in response to the concentrations of other species. However, stochastic simulation algorithms relax the assumption that cells behave deterministically. Instead, stochastic simulation algorithms assume that the rate of each reaction is Poisson-distributed. As a result, stochastic simulation algorithms generate sequences of reaction events at which the simuated state discretely changes.
 
 Stochastic simulation should be used to model systems that are sensitive to small fluctuations such as systems that involve small concentrations and small fluxes. However, stochastic simulation can be computationally expensive for large numbers due to the needs to resolve the exact order of every reaction and the need to run multiple simulations to sample the distribution of predicted cell behaviors.
 
+Because stochastic simulations are random, stochastic models should generally be simulated multiple times to sample the distribution of predicted cell behaviors. In general, these simulations should be run both using different random number generator seeds and different random initial conditions.
+
 Gillespie Algorithm / Stochastic Simulation Algorithm / Direct Method
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Below is pseudo-code for the simplest stochastic simulation algorithm which is also known as the Gillespie algorithm::
+The simplest way to stochastically simulate a model is to iteratively 
+
+#. Calculate the instantaneous rate of each reaction, :math:`p`, also known as the reaction `propensities`
+#. Sum these rates
+#. Sample the time to the next reaction by sampling from a exponential distribution with parameter :math:`1/\sum{p}` by utilizing these mathematical facts
+
+    * The sum of independent Poisson processes with parameters :math:`\lambda_1` and :math:`\lambda_2` is a Poisson process with parameter :math:`\lambda = \lambda_1 + \lambda_2`, and
+    * The time to the next event of a Poisson is exponentially distributed with parameter :math:`1/\lambda`.
+
+#. Sample the next reaction from a multinomial distribution with parameter :math:`p/\sum{p}` equal to the condition probability that each reaction fires given that a reaction fires.
+
+Below is pseudo-code for this algorithm which is also known as the Gillespie algorithm, the Stochastic Simulation Algorithm (SSA), and the direct method::
     
     import numpy
 
@@ -81,14 +92,89 @@ Below is pseudo-code for the simplest stochastic simulation algorithm which is a
 
 Gillespie first reaction method
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Rather than sampling the time to the next reaction and then selecting the next reaction, alternatively we can stochastically simulate a model by (1) sampling the putative time to the next firing of each reaction and (b) firing the reaction with the minimum putative next reaction time. This algorithm is mathematically equivalent to the Gillespie algorithm. However, it is slower than the Gillespie algorithm because it draws more random number samples during each iteration.::
+    
+    import numpy
 
-Gibson-Bruck first reaction method
+    # represent the reaction and rate laws of the model
+    reaction_stochiometries = numpy.array([ ... ])
+    kinetic_laws = [...]
+
+    # initialize the time and cell state
+    time = 0
+    copy_numbers = numpy.array([ ... ])
+    
+    while time < time_max:
+        # calculate reaction properties/rates
+        propensities = [kinetic_law(copy_numbers) for kinetic_law in kinetic_laws]
+
+        # calculate putative next reaction times for each reaction
+        dt = numpy.random.exponential(1 / propensities)
+
+        # select the next reaction to fire
+        i_reaction = numpy.argmin(dt)
+        
+        # reject the selected reaction if there are insufficient copies of the reactants for the reaction
+
+        # update the time and cell state based on the selected reaction
+        time += dt[i_reaction]
+        copy_numbers += reaction_stochiometries[:, i_reaction]
+
+
+Gibson-Bruck next reaction method
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-`The Gibson-Bruck first reaction method <http://doi.org/10.1021/jp993732q>`_ is a computational optimization of the Gillespie first reaction method which uses a dependency graph to only recalculate rate laws and resample putative next reaction times when necessary, namely when the participants in the rate law are updated, as well as an indexed priority queue to minimize the computational cost of identifying the reaction with the lowest putative next reaction time.
+`The Gibson-Bruck first reaction method <http://doi.org/10.1021/jp993732q>`_ is a computational optimization of the Gillespie first reaction method which uses (a) a dependency graph to only recalculate rate laws and resample putative next reaction times when necessary, namely when the participants in the rate law are updated and (b) an `indexed priority queue` to minimize the computational cost of identifying the reaction with the lowest putative next reaction time and updating the data structure which stores these putative next reaction times.
 
-Tau leaping
+An indexed priority queue is a data structure that provides efficient identification (:math:`O(1)`) of the minimum value of the list and efficient updating of the list (:math:`O(\log{n})`. Indexed priority queues are implemented by the Python ``pqdict`` package. See the `pqdict documentation <http://pqdict.readthedocs.io/en/latest/intro.html#what-is-an-indexed-priority-queue>`_ for more information about indexed priority queues.
+
+Note, the Gibson-Bruck first reaction method is mathematically equivalent to the Gillespie direct and Gillespie first reaction methods.
+
+Below is pseudo code for the Gibson-Bruck next reaction method::
+
+    import numpy
+    import pqdict 
+
+    # represent the reaction and rate laws of the model
+    reaction_stochiometries = numpy.array([ ... ])
+    kinetic_laws = [...]
+
+    # represent the dependency of the kinetic laws on the species
+    dependency_graph = numpy.array([...])
+
+    # initialize the time and cell state
+    time = 0
+    copy_numbers = numpy.array([ ... ])
+
+    # calculate reaction properties/rates
+    propensities = [kinetic_law(copy_numbers) for kinetic_law in kinetic_laws]
+
+    # calculate putative next reaction times for each reaction
+    dt = pqdict.pqdict( ... numpy.random.exponential(1 / propensities) ... )
+    
+    while time < time_max:
+        # select the next reaction to fire
+        i_reaction = numpy.argmin(dt)
+        
+        # reject the selected reaction if there are insufficient copies of the reactants for the reaction
+
+        # update the time and cell state based on the selected reaction
+        time += dt[i_reaction]
+        copy_numbers += reaction_stochiometries[:, i_reaction]
+
+        chosen_dt = dt[i_reaction]
+        for species in reaction_stochiometries[:, i_reaction]:
+            for reaction in dependency_graph[:, species]:
+                old_propensity = propensities[reaction]
+                propensities[reaction] = kinetic_laws[reaction]
+                if reaction == i_reaction:                
+                    dt[reaction] = numpy.random.exponential(1 / propensities[reaction])
+                else:
+                    dt[reaction] = old_propensity / propensities[reaction] * (dt[reaction] - chosen_dt)
+
+
+Tau-leaping
 ^^^^^^^^^^^
-In addition to the Gillespie algorithm, there are many algorithms which approximate its results with significantly lower computational costs. One of the most common of these approximate simulation algorithms is the `tau-leaping algorithm <https://en.wikipedia.org/wiki/Tau-leaping>`_. The tau-leaping is a time-stepped algorithm similar to Euler's method which samples the number of firings of each reaction from a Poisson distribution with lambda equal to the product of the propensity of each reaction and the time step. Below is pseudocode for the tau-leaping algorithm::
+In addition to the Gillespie algorithm, the Gillespie first reaction method, and the Gibson-Bruck method, there are many algorithms which approximate their results with significantly lower computational costs. One of the most common of these approximate simulation algorithms is the `tau-leaping algorithm <https://en.wikipedia.org/wiki/Tau-leaping>`_. The tau-leaping algorithm is a time-stepped algorithm similar to Euler's method which samples the number of firings of each reaction from a Poisson distribution with lambda equal to the product of the propensity of each reaction and the time step. Below is pseudocode for the tau-leaping algorithm::
 
     # represent the reaction and rate laws of the model
     reaction_stochiometries = numpy.array([ ... ])
@@ -115,7 +201,7 @@ In addition to the Gillespie algorithm, there are many algorithms which approxim
         time += dt
         copy_numbers += reaction_stochiometries * n_reactions
         
-The tau-leaping algorithm can be improved by adpatively optimizing time step:
+The tau-leaping algorithm can be improved by adpatively optimizing time step based on its sensitivity to the propensities:
 
 .. math::
    
@@ -139,7 +225,7 @@ The tau-leaping algorithm can be improved by adpatively optimizing time step:
             }  
         \right\} } \\
         
-where :math:`x_i` is the copy number of species :math:`i`, :math:`S_{ij}` is the stochiometry of species :math:`i` in reaction :math:`j`, :math:`R_j (x)` is the rate law for reaction :math:`j`, and :math:`\epsilon \approx 0.03` is the desired tolerance.
+where :math:`x_i` is the copy number of species :math:`i`, :math:`S_{ij}` is the stochiometry of species :math:`i` in reaction :math:`j`, :math:`R_j (x)` is the rate law for reaction :math:`j`, and :math:`\epsilon \approx 0.03` is the desired tolerance. See `Cao, 2006 <http://doi.org/10.1063/1.2159468>`_ for more information.
 
 
 Network-free simulation
