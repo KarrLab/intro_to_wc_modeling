@@ -13,16 +13,11 @@ jobs:
             - cache-v5-{{ .Branch }}-
             - cache-v5-
 
-      - run: ssh -Tv git@github.com || true
-      - run: ssh-add -E md5 -l
-      - run: git clone https://github.com/KarrLab/wc_lang.git
-      - run: pip install git+https://github.com/KarrLab/wc_lang.git
-
-      - run: pip2 install -e .
+      - run: pip2 install -U -e .
       - run: pip2 install -U -e git+https://github.com/KarrLab/Karr-Lab-build-utils.git#egg=Karr-Lab-build-utils
       - run: karr-lab-build-utils-2 install-requirements
 
-      - run: pip3 install -e .
+      - run: pip3 install -U -e .
       - run: pip3 install -U -e git+https://github.com/KarrLab/Karr-Lab-build-utils.git#egg=Karr-Lab-build-utils
       - run: karr-lab-build-utils-3 install-requirements
       
