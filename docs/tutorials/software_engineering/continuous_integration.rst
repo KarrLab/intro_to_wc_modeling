@@ -77,7 +77,7 @@ There are two main mechanisms to decrease the runtime of CircleCI builds by load
 
     See the :ref:`Docker tutorial <building_linux_containers>` for more information.
 
-The Karr Lab uses both of these mechanisms
+The Karr Lab uses both of these mechanisms.
 
 Changing package dependencies for a CircleCI build
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -107,21 +107,21 @@ There are four ways to debug CircleCI builds.
 
 * You can iteratively edit and push your ``.circleci/config.yml`` file. However, this is slow because it is not interactive. 
 * From the CircleCI website, you can rebuild a build with SSH access using the "Rebuild" button at the top-right of the page for the build. After the new build starts, CircleCI will provide you the IP address to SSH into the machine which is running your build. However, this is limited to 2 h, the CircleCI virtual machines are somewhat slow because they are running on top of shared hardware, and any changes you make are not saved to the build image.
-* You can use the CircleCI local executor (see below) to emulate CircleCI locally. This is a powerful way to debug CircleCI builds. However, this takes more effort to setup because it requires docker.
-* You can interactively run your code on the docker build image. This is also a powerful way to debug CircleCI builds. However, this takes more effort to setup because it requires docker.
+* You can use the CircleCI local executor (see below) to emulate CircleCI locally. This is a powerful way to debug CircleCI builds. However, this takes more effort to setup because it requires Docker.
+* You can interactively run your code on the Docker build image. This is also a powerful way to debug CircleCI builds. However, this takes more effort to setup because it requires Docker.
 
 
 Debugging CircleCI builds locally
 """""""""""""""""""""""""""""""""
 The CircleCI local executor and interactively running your code on the build image are powerful ways to debug CircleCI builds. Below are instructions for utilizing these approaches.
 
-#. Install docker (see :ref:`installation instructions <installation>`)
+#. Install Docker (see :ref:`installation instructions <installation>`)
 #. Install the CircleCI command line tool::
   
     sudo curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci
     sudo chmod +x /usr/local/bin/circleci
 
-#. Use the docker CLI to run a build locally
+#. Use the Docker CLI to run a build locally
 
     .. code-block:: text
 
@@ -130,15 +130,15 @@ The CircleCI local executor and interactively running your code on the build ima
 
     Note, this will ignore the Git checkout instructions and instead execute the build instructions using the code in ``/path/to/repo``.
 
-    Note also, if your builds need to SSH keys to clone code from a private repository, you will need to prepare a docker image with the SSH key(s) loaded into it. See this `example Dockerfile <https://github.com/KarrLab/karr_lab_docker_images/blob/master/build/Dockerfile_with_ssh_key>`_.
+    Note also, if your builds need SSH keys to clone code from a private repository, you will need to prepare a Docker image with the SSH key(s) loaded into it. See this `example Dockerfile <https://github.com/KarrLab/karr_lab_docker_images/blob/master/build/Dockerfile_with_ssh_key>`_.
 
     See the `CircleCI documentation <https://circleci.com/docs/2.0/local-jobs/>`_ for more information about running builds locally.
 
-#. Use docker to interactively run the docker build image::
+#. Use Docker to interactively run the Docker build image::
 
     docker run -it karrlab/build:latest bash
 
-See `https://github.com/KarrLab/karr_lab_docker_images/blob/master/build/test_packages.py <https://github.com/KarrLab/karr_lab_docker_images/blob/master/build/test_packages.py>`_ for a detailed example of how to run builds locally using the CircleCI CLI and docker.
+See `https://github.com/KarrLab/karr_lab_docker_images/blob/master/build/test_packages.py <https://github.com/KarrLab/karr_lab_docker_images/blob/master/build/test_packages.py>`_ for a detailed example of how to run builds locally using the CircleCI CLI and Docker.
 
 Code Climate
 ------------
