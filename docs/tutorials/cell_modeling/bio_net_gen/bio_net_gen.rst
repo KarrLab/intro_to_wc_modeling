@@ -71,7 +71,7 @@ Now look at the results by clicking on the ``birth-death_ode.gdat`` and ``birth-
 tabs.
 Did you anticipate the model's predictions?
 
-The ODE sover predicts that the population of ``A`` grows smoothly and rises asymptotically to 50.
+The ODE solver predicts that the population of ``A`` grows smoothly and rises asymptotically to 50.
 (The y-axis label says 'Concentration', but it should say 'population'.
 The model doesn't have a volume, so it cannot calculate concentration.)
 

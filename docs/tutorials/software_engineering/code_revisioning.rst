@@ -1,6 +1,6 @@
 .. _code_revisioning:
 
-How to revision code with Git, GitHub, and Meld
+Revisioning code with Git, GitHub, and Meld
 ===============================================
 
 This tutorial will teach you how to use Git, GitHub, and Meld to manage code revisions/versions/changes.

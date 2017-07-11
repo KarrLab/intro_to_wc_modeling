@@ -21,6 +21,7 @@ programmatically
 proteome
 pseudocode
 resample
+Revisioning
 schemas
 stdout
 stoichiometries
@@ -78,6 +79,7 @@ Heer
 iBioSim
 Icahn
 Inkscape
+ipython
 ipyvega
 jpg
 Kutta
@@ -103,6 +105,7 @@ Prezi
 py
 pytest
 PyCharm
+pycharm
 reStructuredText
 scikit
 scipy
