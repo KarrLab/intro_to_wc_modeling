@@ -64,7 +64,7 @@ Once you have built a container, you can upload it to Docker Hub
 #. Login into `https://hub.docker.com <https://hub.docker.com>`_
 #. Click on the "Create Repository" button
 #. Follow the on-screen instructions
-#. Use the docker command line utility to log into Docker Hub::
+#. Use the Docker command line utility to log into Docker Hub::
 
     docker login
 
@@ -91,6 +91,6 @@ You can use the ``run`` command to run containers::
 
     docker run -it [repository:tag] [cmd]
 
-If no command is provided, then docker will run the final command in the container's configuration.
+If no command is provided, then Docker will run the final command in the container's configuration.
 
 Any modifications made to the machine such as installed packages or saved files will not be discarded when the container terminates. When the container is booted up again, the container will start its execution from exactly the same state as all previous executions of the container. This design forces you to use Doxyfiles to explicitly describe container configurations.

@@ -134,7 +134,7 @@ Detailed instructions to install the tutorials and all of the requirements
         * Run >> Edit configurations >> Defaults >> Python tests >> py.test: add additional arguments "--capture=no"
         * Run >> Edit configurations >> Defaults >> Python tests >> Nosetests: add additional arguments "--nocapture"
 
-    #. Configure docker::
+    #. Configure Docker::
 
         sudo usermod -aG docker $USER
 
