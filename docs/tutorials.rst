@@ -1,6 +1,6 @@
-#########
-Tutorials
-#########
+#####################
+Primers and tutorials
+#####################
 
 .. toctree::
     :maxdepth: 2
