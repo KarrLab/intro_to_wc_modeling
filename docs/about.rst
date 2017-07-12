@@ -1,11 +1,11 @@
 ############################
-About the tutorials
+About this resource
 ############################
 
 ****************************
 License
 ****************************
-The software is released under the MIT license
+This resource is released under the MIT license
 
 .. literalinclude:: ../LICENSE
     :language: text
@@ -13,7 +13,10 @@ The software is released under the MIT license
 ****************************
 Development team
 ****************************
-This package was developed by the `Karr Lab <http://www.karrlab.org/>`_ at the Icahn School of Medicine at Mount Sinai in New York, USA.
+The resource was developed by the `Karr Lab <http://www.karrlab.org/>`_ at the Icahn School of Medicine at Mount Sinai in New York, USA with contributions from the individuals listed below:
+
+* Jonathan Karr
+* Arthur Goldberg
 
 ****************************
 Questions and comments

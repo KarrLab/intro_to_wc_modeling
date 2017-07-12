@@ -1,5 +1,5 @@
-Introduction to whole-cell (WC) modeling
-========================================
+An introduction to whole-cell (WC) modeling
+===========================================
 
 The goal of this website is to prepare you to be a productive whole-cell modeler through a variety of introductory readings and coding tutorials.
 

@@ -64,7 +64,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'intro_to_wc_modeling'
+project = 'An introduction to whole-cell modeling'
 copyright = '2017, Karr Lab'
 author = 'Karr Lab'
 
@@ -165,7 +165,7 @@ html_static_path = ['_static']
 # html_last_updated_fmt = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'intro_to_wc_modelingdoc'
+htmlhelp_basename = 'intro_to_wc_modeling'
 
 # Custom sidebar templates, maps document names to template names.
 #
@@ -264,7 +264,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'intro_to_wc_modeling', 'intro_to_wc_modeling Documentation',
+    (master_doc, 'intro_to_wc_modeling', 'An introduction to whole-cell modeling',
      [author], 1)
 ]
 
@@ -275,8 +275,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'intro_to_wc_modeling', 'intro_to_wc_modeling Documentation',
-     author, 'intro_to_wc_modeling', 'One line description of project.',
+    (master_doc, 'intro_to_wc_modeling', 'An introduction to whole-cell modeling',
+     author, 'intro_to_wc_modeling', 'A primer on whole-cell modeling including the fundamentals of cell modeling, software engineering, scientific communication, and funding whole-cell modeling research. Includes detailed tutorials and coding exercises.',
      'Miscellaneous'),
 ]
 
