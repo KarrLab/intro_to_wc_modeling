@@ -7,6 +7,8 @@ Software engineering
     :caption: Table of contents
     
     python_introduction.rst
+    numpy.rst
+    matplotlib.rst
     writing_python.rst
     python_2_and_3.rst
     organizing_python_code.rst

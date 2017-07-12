@@ -1,5 +1,5 @@
-An introduction to Python for modelers
-======================================
+An introduction to Python
+=========================
 The goal of this tutorial is to introduce the fundamentals of Python. This tutorial assumes familiarity with at least one other object-oriented programming language such as Java, MATLAB, or Perl.
 
 For a more elementary introduction to Python for individuals with little or no programming experience, we recommend the following five websites. The first four of the websites provide interactive coding exercises.
@@ -15,15 +15,25 @@ Key concepts
 ------------
 This tutorial will teach you how to use the following Python elements
 
-* Key data types including ``NumPy`` matrices
-* Variables
-* Loops
-* Functions
-* Classes
-* Modules
-* Printing to console
+* Core language features
+
+    * Core builtin data types
+    * Variables
+    * Operators
+    * Boolean statements
+    * Loops
+    * Context managers
+    * Functions
+    * Classes
+    * Modules
+    * Decorators
+
+* Copying variables
+* String formatting
+* Printing to standard out
+* Numerical computing with ``NumPy``
 * Plotting graphs with ``matplotlib``
-* Reading and writing to/from files
+* Reading and writing to/from text, csv, and Excel files
 * Exceptions and warnings
 
 
@@ -74,23 +84,6 @@ The individual elements of a list, tuple, or dictionary can be accessed as illus
     dict_var['a'] # get the value of the 'a' key
 
 
-Matrices
-^^^^^^^^
-The ``NumPy`` package provides several classes to represent matrices (``numpy.ndarray``). The following code illustrates how to create a matrix and access its elements::
-
-    import numpy
-
-    numpy.array([[1, 2, 3], [4, 5, 6]]) # a 2x3 matrix with elements equal to 1..6
-    numpy.zeros((2, 2)) # a 2x2 matrix with each element equal to 0.0
-    numpy.ones((3, 4)) # a 2x3 matrix with each element equal to 1.0
-    numpy.full((2, 3), 2.0) # a 2x3 matrix with each element equal to 2.0
-
-    mat_var = numpy.array([[1, 2, 3], [4, 5, 6]])
-    mat_var[1, 2] # get the value at second row and third column
-    mat_var[0, :] # get the first row
-    mat_var[:, 0] # get the first column
-
-
 Variables
 ---------
 The ``=`` operator can be used to create or set the value of a variable as illustrated below::
@@ -99,6 +92,16 @@ The ``=`` operator can be used to create or set the value of a variable as illus
     my_var = 'a' # reassign my_var to a string
 
 Note, Python variables do not have to be declared and are not typed.
+
+
+Boolean statements
+------------------
+As illustrated below, Boolean statements can be created using a variety of comparison operators (``==``, ``>=``, ``<=``, etc.) and binary operators (``and``, ``or``, ``not``)::
+
+    x and y
+    x or y
+    x >= 1 and x <= 2
+    x == 1.0
 
 
 If statements
@@ -118,8 +121,6 @@ The ``elif`` directive can be used to achieve a similar behavior to the switch d
         ...
     else:
         ...
-
-Conditional statements created using a variety of comparison operators (``==``, ``>=``, ``<=``, etc.) and binary operators (``and``, ``or``, ``not``).
 
 
 Loops
@@ -256,8 +257,8 @@ The ``print`` method can be used to write to standard output::
     print('Message')
 
 
-Reading and writing to/from files
----------------------------------
+Reading and writing to/from files with ``csv`` and ``pyexcel``
+--------------------------------------------------------------
 The follow example illustrates how to read and write text files::
 
     # write content to a file
@@ -304,42 +305,6 @@ The following example illustrates how to reading and write Excel files using the
 
     book = pxexcel.get_book(file_name="example.xlsx")
     book.save_as("another_file.xlsx")
-
-
-Numerical computing with ``NumPy``
-----------------------------------
-``NumPy`` is the most popular numerical computing package for Python. The following examples illustrate the basic functionality of ``NumPy``
-
-Slicing
-^^^^^^^
-
-Concatenation
-^^^^^^^^^^^^^
-
-Transposition
-^^^^^^^^^^^^^
-
-Algebra
-^^^^^^^
-
-Random number generation
-^^^^^^^^^^^^^^^^^^^^^^^^
-numpy.random.seed
-numpy.random.rand
-numpy.random.randint
-numpy.random.poisson
-
-
-NumPy introduction for MATLAB users
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The `NumPy documentation <https://docs.scipy.org/doc/numpy-dev/user/numpy-for-matlab-users.html>`_ contains a concise summary of the NumPy analog for each MATLAB function.
-
-
-Plotting graphs with ``matplotlib``
------------------------------------
-``matplotlib`` is one of the simplest and popular plotting libraries for Python. The following examples illustrate the basic functionality of ``matplotlib``::
-
-    write me
 
 
 Warnings and exceptions
@@ -390,3 +355,15 @@ Python provides a variety of additional powerful language features
 * Customizable operators: the methods executed by operators such as ``==``, ``>=``, and ``<=`` can be customized by overriding the ``__eq__``, ``__geq__``, and ``__leq__`` methods
 * Decorators: decorators can be used to wrap the execution of a method. Examples of decorators include ``@classmethod``
 * Getters and setters: Getters and setters can be implemented by defining methods and decorating them with the ``@property`` and ``@property.setter`` decorators
+
+
+Exercises
+---------
+
+* Write a function which computes the volume of a spherical cell
+* Write a function which uses if statements to return the type of a codon (start, stop, other)
+* Write a class which represents RNA, with an attribute that stores the sequence of each transcript and a method which uses a dictionary to compute the amino acid sequence of the protein coded by the transcript
+* Import the ``csv`` package and use it to read a comma-separated file with a header row into a list of dictionaries
+* Use the ``print`` and ``format`` methods to write `Hello {your name}!` to standard out
+
+See `intro_to_wc_modeling/software_engineering/python_introduction.py <https://github.com/KarrLab/intro_to_wc_modeling/tree/master/intro_to_wc_modeling/software_engineering/python_introduction.py>`_ for solutions to these exercises.
