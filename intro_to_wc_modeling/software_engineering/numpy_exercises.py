@@ -54,7 +54,7 @@ numpy.std(arr)
 
 #########################################
 #########################################
-# Calculate the element-wise multipliation of two random arrays of size 3x3
+# Calculate the element-wise multiplication of two random arrays of size 3x3
 arr1 = numpy.random.rand(3, 3)
 arr2 = numpy.random.rand(3, 3)
 arr3 = arr1 * arr2

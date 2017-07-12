@@ -145,7 +145,7 @@ Exercises
 * Reshape a random 2x3 array into a 3x2 array
 * Create a random 2x3 array and round it
 * Create a random 100x1 array of Poisson-distributed values with lambda = 10 and calculate its min, max, mean, and standard deviation
-* Calculate the element-wise multipliation of two random arrays of size 3x3
+* Calculate the element-wise multiplication of two random arrays of size 3x3
 * Calculate the matrix multiplication of two random arrays of size 2x3 and 3x4
 * Check that infinity is greater than :math:`10^{10}`
 
