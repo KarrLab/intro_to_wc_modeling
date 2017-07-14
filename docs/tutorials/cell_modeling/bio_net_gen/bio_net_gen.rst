@@ -3,8 +3,12 @@ Rule-based Modeling with BioNetGen, BNGL, and RuleBender
 
 Description of Rule-based Modeling, BioNetGen, BNGL, and RuleBender
 -------------------------------------------------------------------
-# todo
 
+As the Summary of the `The BioNetGen Online Manual <http://bionetgen.org/index.php/The_BioNetGen_Online_Manual>`_ [#]_ says:
+
+    Rule-based modeling involves the representation of molecules as structured objects and molecular interactions as rules for transforming the attributes of these objects. The approach is notable in that it allows one to systematically incorporate site-specific details about protein-protein interactions into a model for the dynamics of a signal-transduction system, but the method has other applications as well, such as following the fates of individual carbon atoms in metabolic reactions. The consequences of protein-protein interactions are difficult to specify and track with a conventional modeling approach because of the large number of protein phosphoforms and protein complexes that these interactions potentially generate.
+
+.. [#] Contributors: James R. Faeder, Michael L. Blinov, William S. Hlavacek, Leonard A. Harris, Justin S. Hogg, Arshi Arora
 
 BNGL and RuleBender Basic Functionality
 ----------------------------------------------
