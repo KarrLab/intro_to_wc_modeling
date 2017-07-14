@@ -261,12 +261,30 @@ dFBA enables dynamic simulations by (1) assuming that cells quickly reach pseudo
 
 Hybrid/multi-algorithmic simulation
 -----------------------------------
-Hybrid/multi-algorithmic simulation can be used to address two problems:
+A hybrid or multi-algorithmic simulation is a co-simulation of multiple submodels, each with distinct simulation algorithms. Often this requires the merging of discrete and continuous variables. For example, a hybrid simulation can involve the co-simulation of one discrete stochastic submodel with the stochastic simulation algorithm and a second deterministic continuous submodel with the runge-kutta 4th order method.
 
-* Hybrid/multi-algorithmic simulation can enable model components to be described with different resolutions. For example, hybrid simulation could be used to represent the know stochastic behavior of transcription and the known steady-state behavior of metabolism. In this case, the modeler selects the most appropriate simulation algorithm for each model component based on its level of characterization.
-* Hybrid/multi-algorithmic simulation can enable efficient simulation of models that span a range of scales, including low-concentration components whose dynamics are highly variable and high-concentration components whose dynamics exhibit little variation. In this case, the simulation algorithm selects the most appropriate simulation algorithm for each model component to optimize the trade off between computational accuracy and cost. Specifically, the simulation algorithm partitions the species and reactions into two or more submodels that represent different scales. For more information, we recommend reading recent papers about partitioned and slow-scale tau-leaping.
+Hybrid/multi-algorithmic simulation can be a powerful strategy for managing heterogeneity in the scales of the model system, heterogeneity in the interest in specific aspects of the model system, heterogeneity in the amount of knowledge of specific aspects of the model system, and heterogeneous model design decisions among multiple collaborating modelers:
 
-Hybrid simulation algorithms must concurrently integrate the component submodels by alternately integrating the submodels and synchronizing their states. Below is a summarize of several increasingly sophisticated hybrid simulation algorithms.
+* Hybrid simulation can enable efficient simulation of models that span a range of scales, including low-concentration components whose dynamics are highly variable and high-concentration components whose dynamics exhibit little variation. In this case, the simulation algorithm selects the most appropriate simulation algorithm for each model component to optimize the trade off between computational accuracy and cost. Specifically, the simulation algorithm partitions the species and reactions into two or more submodels that represent different scales. For more information, we recommend reading recent papers about partitioned and slow-scale tau-leaping.
+* Hybrid simulation can enable model components to be described with different resolutions either due to different levels of interest or prior knowledge about specific aspects of the model system. For example, hybrid simulation could be used to represent the know stochastic behavior of transcription and the known steady-state behavior of metabolism. In this case, the modeler selects the most appropriate simulation algorithm for each model component based on its level of characterization.
+* Hybrid simulation can enable multiple collaborating investigators to make mathematically incompartible model design decisions. This can make it easier for modelers to build submodels of large models in parallel, including separately calibrating and verifying the submodels.
+
+Approaches to constructing hybrid simulations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Broadly, there are two ways to construct hybrid simulations:
+
+* Hybrid simulations can be designed by the modeler(s) to maximize the utility of the model. In this case, the modeler(s) use their expert knowledge to assign each component of the model to a specific simulation algorithm. Examples of hybrid simulations that have been designed by modelers include `integrated flux balance analysis (iFBA) <http://doi.org/10.1093/bioinformatics/btn352>`_ and `regulatory flux balance analysis (rFBA) <http://doi.org/10.1038/nature02456>`_
+* Hybrid simulations can be chosen by the simulation software system to optimize the tradeoff between prediction accuracy and computational cost. In this case, the simulator automatically partitions the model into algorithmically-distinct submodels. Examples of hybrid simulations that are chosen by simulation software systems include `partitioned tau-leaping <https://doi.org/10.1063/1.2354085>`_ and `slow scale tau-leaping <https://dx.doi.org/10.1016%2Fj.cma.2008.02.024>`_.
+
+
+Numerical simulation
+^^^^^^^^^^^^^^^^^^^^
+Hybrid simulation algorithms must concurrently integrate the component submodels, for example by alternately integrating the submodels and synchronizing their states. To simplify this problem, submodels that should be simulated with the same simulation algorithm can first be analytically merged, thereby reducing the number of submodels that must be concurrently integrated. Thus, hybrid simulation broadly requires two steps:
+
+#. Analytically merge all of the algorithmically-like submodels
+#. Co-simulate or concurrently integrate the merged submodels
+
+Below is a summarize of several increasingly sophisticated co-simulation algorithms:
 
 * Serial simulation: Divide the simulation into multiple small time steps. Within each time step, iteratively simulate the submodel and update the cell state. Optionally, simulate the models in a random order at each time step. This is a simple algorithm to implement. However, this algorithm violates the arrow of time by integrating submodels based on different states within each time step.
 * Partitioning and merging: Divide the simulation into multiple small time steps. With each time step, partition the pool of each species into separate pools for each submodel. Simulate the submodels independently using the independent pools. Update the global species pools by merging the submodel pools. Species can be partitioned uniformly, based on their utilization during the previous time point, or based on a preliminary integration of the submodels. This is a relatively simple algorithm to implement for models whose state only represents concentrations and/or species copy number. However, it can be challenging to partition and merge rule-based models whose states are represented by graphs.
@@ -274,6 +292,16 @@ Hybrid simulation algorithms must concurrently integrate the component submodels
 * Scheduling: Build a higher-order stochastic model which contains one pseudo-reaction per submodel. Set the propensity of each pseudo-reaction to the total propensity of the submodel. Use the Gillespie method to schedule the firing of the pseudo-reactions/submodels. This is the strategy used by E-Cell (Takahashi et al., 2004).
 * Upscaling: For models that are composed of one discrete and one continuous model, we can append all of the continuous reactions model to the discrete model; periodically set their propensities by evaluating their kinetic laws, or in the case of FBA, calculating the optimal flux distribution; and select and fire the continuous reactions using the same mechanism as the discrete reactions. This algorithm is compelling, but is computationally expensive due to the need to resolve the order of every reaction including every continuous reaction.
 
+
+Synchronizing discrete and continuous variables
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Synchronizing discrete and continuous models can require rounding continuous variables and/or rates. In such cases, we recommend stochastically rounding the decimal portion of each the continuous-valued rate, weighted by the decimal portion of the rate. This method has the following advantages over other potential methods:
+
+* This method will not prevent models from reaching rare states unlike deterministic rounding which will deterministically round down small probabilities.
+* This method satisfies mass, atom, and charge balance unlike rounding the values of the model variables.
+* This method will only inject a small amount of stochastic variation into the model unlike other potential stochastic rounding schemes such as Poisson-distributed random rounding.
+
+See `Vasudeva et al., 2003 <http://doi.org/10.1093/bioinformatics/btg376>`_ for additional discussion about rounding continuous quantities for synchronization with discrete quantities.
 
 Simulating individual submodels
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
