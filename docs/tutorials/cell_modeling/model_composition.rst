@@ -1,21 +1,20 @@
 Model composition
 =================
 Abstraction and composition are essential strategies for building large engineered systems such as big software programs. Abstraction allows engineers to build highly functional systems with complex and sophisticated internal implementations while only exposing
-the functional features that users of the systems need.
-The exposed features are called the system's external interface.
-Accessing the interface lets users obtain all the benefits of a system's
-sophisticated implementation without needing to understand the
-implementation.
-For example, the Python collection data structures like list, dictionary, and set are all built using sophisticated implementations, but
-Python programmers just use simple operations like insert, find and delete.
+the functional features that users of the systems need. The exposed features are called the system's external interface. Accessing the interface lets users obtain all the benefits of a system's sophisticated implementation without needing to understand the implementation. For example, the Python collection data structures like list, dictionary, and set are all built using sophisticated implementations, but Python programmers just use simple operations like insert, find and delete.
 
 Composition of abstracted modules enables engineers to build complex systems by combining multiple parts, each of which has a simple external interface. In this way, abstraction and composition enable engineers to transform challenging high-dimensional problems into multiple, simpler lower dimensional problems. In particular, abstraction and composition enable teams of engineers to collaboratively build complex systems by enabling smaller groups or individual engineers to independently and simultaneously building individual components.
 
 Because models are engineering software systems, abstraction and composition can also be powerful approaches to build large models. In particular, abstraction and composition can enable teams of modelers to work together to build large models by enabling smaller groups of modelers to model individual components.
 
-Biological pathways are natural subsystems to abstract in dynamical biochemical models because they tend to interact tightly on fast timescales, and teams of microbiologists tend to focus their expertise on pathways.
-Furthermore, composition of
-models of pathways is a reasonable approximation due to the relatively fast dynamics of individual cellular pathways compared to dynamics of interactions between pathways. For example, the timescale of transcription is :math:`10^{1}` s whereas the timescale of the transcriptome, which is the timescale of the impact of RNA on translation, is :math:`10^2` s.
+Biological pathways are natural subsystems to abstract in dynamical biochemical models because they tend to interact tightly on fast timescales, and teams of microbiologists tend to focus their expertise on pathways. Furthermore, composition of models of pathways is a reasonable approximation due to the relatively fast dynamics of individual cellular pathways compared to dynamics of interactions between pathways. For example, the timescale of transcription is :math:`10^{1}` s whereas the timescale of the transcriptome, which is the timescale of the impact of RNA on translation, is :math:`10^2` s.
+
+There are several specific motivations of building models via composition:
+
+* Composition facilitates collaborative model design among multiple modelers by enabling each modeler to develop, calibrate, and test separate submodels. In particular, this enables each modeler to focus on a specific portion of the modeler without having to know all of the details of all of the other model components.
+* Composition facilitates hybrid simulation of multiple mathematicallly distinct models. In particular, this can be a powerful strategy for modeling systems that involve either heterogeneous scales, heterogeneous amounts of scientific interest, or heterogeneous granularities of prior knowledge.
+* Composition can reduce the dimensionality of model calibration by facilitating the calibration of separate subsets of models.
+* Composition can reduce the dimensionality of model verification by facilitating the calibration of separate subsets of models.
 
 Broadly, there are two types of model composition: composition of mathematically-like models and composition of mathematically-dissimilar models into hybrid or multi-algorithmic models. Mathematically-like models can be merged analytically simply by taking the union of their variables/species and equations/reactions. Mathematically-dissimilar models must be merged computationally by concurrently integrating the individual models. In addition to merging models mathematically and/or computationally, it is often also necessary to align the models to a common namespace and representation.
 
