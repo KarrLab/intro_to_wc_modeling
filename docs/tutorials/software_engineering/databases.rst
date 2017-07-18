@@ -318,6 +318,9 @@ The following examples illustrate how to edit and remove records::
     session.delete(e_coli)
     session.commit()
 
+SQLAlchemy documentation
+^^^^^^^^^^^^^^^^^^^^^^^^
+See the `SQLAlchemy documentation <http://docs.sqlalchemy.org>`_ for additional information about building and querying databases with SQLAlchemy.
 
 Additional tutorials
 ^^^^^^^^^^^^^^^^^^^^
