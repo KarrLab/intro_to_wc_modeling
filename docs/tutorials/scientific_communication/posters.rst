@@ -5,16 +5,16 @@ Abstracts
 ---------
 Conference abstracts often follow the same hourglass structure as paper abstracts (see the :ref:`manuscript abstract tutorial <paper_abstracts>`). However, there are a few salient differences between paper and conference abstracts.
 
-* Conference abstracts can often be longer than paper abstracts. As a result, conference abstracts can contain more details about your methods and results than paper abstract.
-* Unlike paper abstracts, conference abstracts can be written from the perspective of where you anticipate the project will be at the time of conference. In particular, conference abstracts can describe ongoing work which papers typically do not discuss.
-* Oral and poster conference presentations are more about the individual presenter than papers. Accordingly, conference abstracts can be written from the first-person singular.
-* Abstracts for oral presentations can be written in terms of what the presenter will tell the audience.
+* Conference abstracts can often be longer than paper abstracts. As a result, a conference abstract can contain more details about your methods and results than a paper abstract.
+* Unlike paper abstracts, conference abstracts can be written from the perspective of the anticipated state of your project at the time of the conference. In particular, conference abstracts can describe ongoing work which papers typically do not discuss.
+* Oral and poster conference presentations rely heavily on the individual presenter. Accordingly, conference abstracts can be written from the first-person singular.
+* Abstracts for oral presentations should summarize the material that the presenter will tell the audience.
 * Abstracts for oral presentations can focus on the presenter's body of work rather than a specific project.
 
 
 Content
 -------
-Because posters provide limited space for text, figures, and tables, posters should focus on the very most aspects of your work. It is not necessary to provide all of the details necessary to understand your work. Because you will be standing next to your poster, you will be able to communicate directly with readers and verbally answer any questions they have. Furthermore, you can refer readers to papers and websites which contain further information about your project.
+Because posters provide limited space for text, figures, and tables, posters should focus on the most essential aspects of your work. It is not necessary to provide all of the details of your work. Because you will be standing next to your poster, you will be able to communicate directly with readers and verbally answer any questions they have. Furthermore, you can refer readers to papers and websites which contain additional information about your project.
 
 
 Layout
@@ -25,9 +25,10 @@ Often it is helpful to divide your poster into blocks or columns. Often it is he
 * Authors
 * Affiliations
 * Abstract
-* Overview of the problem you're solving and why its significant
+* Overview of the problem you're solving and why it's significant
 * Methodology
 * Results
+* Future work
 * Conclusion
 * Acknowledgements
 * References
