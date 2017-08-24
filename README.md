@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/github/license/KarrLab/intro_to_wc_modeling.svg)](LICENSE)
 ![Analytics](https://ga-beacon.appspot.com/UA-86759801-1/intro_to_wc_modeling/README.md?pixel)
 
-# Introduction to whole-cell modeling
+# An introduction to whole-cell modeling
 
 This repository provides an introduction to whole-cell (WC) modeling, including a variety of written explanations and interactive tutorials. The goal of this resource is to prepare you to be a productive WC modeler. 
 
