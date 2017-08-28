@@ -1,12 +1,12 @@
 .. _building_linux_containers:
 
-How to build a Ubuntu Linux container with Docker
+How to build a Ubuntu Linux image with Docker
 =================================================
-Docker containers are lightweight virtual machines that can be used to run custom environments on top of other machines. Thus, Docker containers are a convenient way to distribute complicated software programs that have numerous dependencies and complicated configurations. We are using Docker containers because CircleCI allows users to use Docker containers to customize the environment used to execute each build. This makes it much easier to install programs into the environment used by CircleCI to run our builds. 
+Docker images are lightweight virtual machines that can be used to run custom environments on top of other machines. Thus, Docker images are a convenient way to distribute complicated software programs that have numerous dependencies and complicated configurations. We are using Docker images because CircleCI allows users to use Docker images to customize the environment used to execute each build. This makes it much easier to install programs into the environment used by CircleCI to run our builds. 
 
-Docker containers are built by compiling Dockerfiles which are explicit instructions on how to build the container. Importantly, this makes Docker containers very transparent.
+Docker images are built by compiling Dockerfiles which are explicit instructions on how to build the image. Importantly, this makes Docker images very transparent.
 
-`Docker Hub <https://hub.docker.com>`_ is a cloud-based system for sharing a distributing Docker containers. Docker Hub allows users to create container repositories, upload containers, make container repositories public, and download containers. CircleCI can build code using any container that is publicly available from Docker Hub.
+`Docker Hub <https://hub.docker.com>`_ is a cloud-based system for sharing a distributing Docker images. Docker Hub allows users to create image repositories, upload images, make image repositories public, and download images. CircleCI can build code using any image that is publicly available from Docker Hub.
 
 
 Required packages
@@ -25,23 +25,36 @@ Execute the following commands to install and configure the packages required fo
         curl \
         docker-ce \
         software-properties-common
-    sudo usermod -aG docker $USER
+    sudo groupadd docker
+	sudo usermod -aG docker $USER
+	sudo systemctl enable docker
+		
+Next, logout and login again.
+
+Run the following to check that you installed Docker correctly::
+
+	docker run hello-world
+
+If you have network access errors, comment out `dns=dnsmasq` in ``/etc/NetworkManager/NetworkManager.conf`` and restart ``network-manager`` and ``docker``::
+
+	sudo service network-manager restart
+	sudo service docker restart
 
 
-Configuring a container
+Configuring a image
 -----------------------
-Docker uses Dockerfiles to configure containers. These files contain several directives
+Docker uses Dockerfiles to configure images. These files contain several directives
 
-* ``FROM``: this describes the base (and its version) from which to build a container. For example, the value of this directive could be ``ubuntu:latest`` or a previous iteration of your container.
+* ``FROM``: this describes the base (and its version) from which to build a image. For example, the value of this directive could be ``ubuntu:latest`` or a previous iteration of your image.
 * ``RUN``: these describe how to install software onto the machine. Because Docker creates layers for each RUN directive, you should use "&" to group related commands together and minimize the number of layers (thus disk space and bandwidth).
-* ``CMD``: this tells Docker what the final execution state of the container should be. Often this is set to ``bash``.
+* ``CMD``: this tells Docker what the final execution state of the image should be. Often this is set to ``bash``.
 
 See the `Dockerfile reference <https://docs.docker.com/engine/reference/builder/>`_ and `Docker explained <https://www.digitalocean.com/community/tutorials/docker-explained-using-dockerfiles-to-automate-building-of-images>`_ for more information about Dockerfiles.
 
     
-Building a container
+Building a image
 --------------------
-Once you have configured the container, you can use ``docker build`` to compile the container::
+Once you have configured the image, you can use ``docker build`` to compile the image::
 
     docker build \
       --tag repository:tag \
@@ -53,12 +66,12 @@ Once you have configured the container, you can use ``docker build`` to compile 
       Dockerfile \
       .
 
-If you do not specify a Docker file, then Docker will use the file located at ./Dockerfile. Optionally, you can also use ``docker build`` to tag the versions of containers.
+If you do not specify a Docker file, then Docker will use the file located at ./Dockerfile. Optionally, you can also use ``docker build`` to tag the versions of images.
 
 
-Uploading containers to Docker Hub
+Uploading images to Docker Hub
 ----------------------------------
-Once you have built a container, you can upload it to Docker Hub
+Once you have built a image, you can upload it to Docker Hub
 
 #. Create an account at `Docker Hub <https://hub.docker.com>`_
 #. Login into `https://hub.docker.com <https://hub.docker.com>`_
@@ -68,29 +81,29 @@ Once you have built a container, you can upload it to Docker Hub
 
     docker login
 
-#. Push the container to the repository and optionally, tag the version of the uploaded container::
+#. Push the image to the repository and optionally, tag the version of the uploaded image::
 
     docker push repository[:tag]
 
 
-Listing existing containers
+Listing existing images
 ----------------------------
-You can list of all the containers that are already available on your machine by running ``docker images``.
+You can list of all the images that are already available on your machine by running ``docker images``.
 
 
-Removing containers
+Removing images
 ----------------------------
-You can remove a container by running the ``rmi`` command::
+You can remove a image by running the ``rmi`` command::
 
     docker rmi [repository:tag] [image_id]
 
 
-Running a container
+Running an image
 -------------------
-You can use the ``run`` command to run containers::
+You can use the ``run`` command to run images::
 
     docker run -it [repository:tag] [cmd]
 
-If no command is provided, then Docker will run the final command in the container's configuration.
+If no command is provided, then Docker will run the final command in the image's configuration.
 
-Any modifications made to the machine such as installed packages or saved files will not be discarded when the container terminates. When the container is booted up again, the container will start its execution from exactly the same state as all previous executions of the container. This design forces you to use Doxyfiles to explicitly describe container configurations.
+Any modifications made to the machine such as installed packages or saved files will not be discarded when the image terminates. When the image is booted up again, the image will start its execution from exactly the same state as all previous executions of the image. This design forces you to use Doxyfiles to explicitly describe image configurations.
