@@ -135,7 +135,7 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # The name for this set of Sphinx documents.
 # "<project> v<release> documentation" by default.
 #
-# html_title = 'Object model v0.0.1'
+# html_title = 'Introduction to whole-cell modeling v0.0.1'
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #
@@ -233,7 +233,7 @@ html_show_copyright = True
 # html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'obj_model_doc'
+htmlhelp_basename = 'intro_to_wc_modeling_doc'
 
 # -- Options for LaTeX output ---------------------------------------------
 

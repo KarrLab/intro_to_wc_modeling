@@ -146,7 +146,8 @@ an equilibrium. Can they be adjusted to reduce the variance of the SSA predictio
 
 Debugging models is easier when re-executing a simulation run produces identical output, that is,
 reproduces a previous run.
-Can you rename ``A`` and program RuleBender and BNGL to exactly reproduce these SSA predictions?
+Reproducibility is also an important feature of the scientific method.
+Can you program RuleBender and BNGL to exactly reproduce these SSA predictions?
 (I'm not aware of a way to do so.)
 
 Molecular sites, their states, and bonds
