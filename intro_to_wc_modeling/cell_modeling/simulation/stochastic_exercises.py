@@ -834,7 +834,10 @@ class SsaSimulation(object):
         n_trajectories = m.shape[1]
 
         for i_trajectory in range(n_trajectories):
-            gray = 0.5 + 0.5 * i_trajectory / (n_trajectories - 1)
+            if n_trajectories == 1:
+                gray = 0.
+            else:
+                gray = 0.5 - 0.5 * i_trajectory / (n_trajectories - 1)
             axes[0].plot(t, m[:, i_trajectory], color=(gray, gray, gray))
             axes[1].plot(t, n[:, i_trajectory], color=(gray, gray, gray))
 
@@ -957,19 +960,32 @@ def trajectory_exercise():
     sim.simulate
 
     ##########################################################
-    # B. Simulate several trajectories
+    # B.i Simulate one trajectory
     ##########################################################
     # seed random number generator
     numpy.random.seed(0)
 
     # simulate
-    n_trajectories = 50
-    t, m, n = sim.simulate_ensemble(n_trajectories, t_end=2., t_step=0.2)
+    t, m, n = sim.simulate_ensemble(1, t_end=5., t_step=0.001)
 
     # plot
     fig = sim.plot_trajectories(t, m, n)
     # fig.show()
     filename = os.path.join(OUT_DIR, 'stochastic-exercises-trajectory-simulation.png')
+    fig.savefig(filename, transparent=True, bbox_inches='tight')
+    matplotlib.pyplot.close(fig)
+
+    ##########################################################
+    # B.i Simulate several trajectories
+    ##########################################################
+    # simulate
+    n_trajectories = 50
+    t, m, n = sim.simulate_ensemble(n_trajectories, t_end=2., t_step=0.2)    
+
+    # plot
+    fig = sim.plot_trajectories(t, m, n)
+    # fig.show()
+    filename = os.path.join(OUT_DIR, 'stochastic-exercises-trajectory-simulations.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
 
