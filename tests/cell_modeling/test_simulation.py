@@ -26,6 +26,5 @@ class TestSimulationTutorial(unittest.TestCase):
     def test_stochastic_simulation_exercises(self):
         from intro_to_wc_modeling.cell_modeling.simulation import stochastic_exercises
         stochastic_exercises.deterministic_exercise()
-        stochastic_exercises.probability_distribution_exercise_mrna()
         stochastic_exercises.probability_distribution_exercise()
         stochastic_exercises.trajectory_exercise()
