@@ -235,7 +235,10 @@ Network-free simulation is a variant of stochastic simulation for simulating rul
 
 Flux balance analysis (FBA)
 ---------------------------
-Flux balance analysis (FBA) is a popular approach to simulating metabolism. Like ODE models, FBA is based on microscopic analyses of how the concentration of each species in the cell changes over time in response to the concentrations of other species. However, FBA leverages two additional sets of data and two additional assumptions. First, FBA incorporates estimates of the minimum and maximum possible flux of each reaction which, for a subset of reactions, can be obtained from experimental observations. Second, FBA incorporates an additional reaction which represents the assembly of metabolites into a cell and can be calibrated based on the observed cellular composition. Third, FBA assumes that the each species is at steady-state (:math:`\frac{dx}{dt} = 0`). This assumptions greatly constrains the model, thereby reducing the amount of data needed to build the model. However, this assumption also prevents FBA from making predictions about the dynamics of metabolic networks. Fourth, FBA assumes that cells have evolved to grow maximally fast. Together, these additional data and assumptions pose cell simulation as a linear optimization problem which can be solved using linear programming.
+Flux balance analysis (FBA) is a popular approach for simulating metabolism. Like ODE models, FBA is based on microscopic analyses of how the concentration of each species in the cell changes over time in response to the concentrations of other species. However, unlike ODE models which assume that each reaction can be annotated with a rate law, FBA does not assume that rate laws can be determined but does assume that cells have evolved to maximize their growth rates. In addition, FBA assumes that all species are at steady-state (:math:`\frac{dx}{dt} = 0`), which greatly constrains the model, thereby reducing the amount of data needed. However, this assumption also prevents FBA from making predictions about the dynamics of metabolic networks.
+
+Together, these assumptions enable FBA to determine reaction fluxes by posing an optimization problem that maximizes growth. To achieve this, FBA leverages two additional sets of data. First, it incorporates estimates of the minimum and maximum possible flux of each reaction which, for a subset of reactions, can be obtained from experimental observations. These constrain the optimization solution space.
+Second, FBA expresses the growth of a cell via an additional pseudo-reaction called the biomass reaction that represents the assembly of metabolites into the molecules which are incorporated in the growth of a cell. It can be calibrated based on the observed cellular composition. Together, these assumptions and additional data enable FBA to pose cell simulation as a linear optimization problem that can be solved with linear programming.
 
 .. math::
 
@@ -244,16 +247,19 @@ Flux balance analysis (FBA) is a popular approach to simulating metabolism. Like
     S v &= 0 \\
     v^\text{min} &\leq v \leq v^\text{max}, \\
 
-where :math:`S_{ij}` is the stoichiometry of species :math:`i` in reaction :math:`j`, :math:`v_j` is the flux of reaction :math:`j`, :math:`v^\text{min}_{j}` and :math:`v^\text{max}_j` are the upper and lower bounds of the flux of reaction :math:`j`, and :math:`f_\mu` is 1 for the biomass composition and 0 otherwise.
+where :math:`v_j` is the flux of reaction :math:`j`, :math:`f_\mu` is 1 for the biomass reaction and 0 otherwise, :math:`S_{ij}` is the stoichiometry of species :math:`i` in reaction :math:`j`, and :math:`v^\text{min}_{j}` and :math:`v^\text{max}_j` are the upper and lower bounds of the flux of reaction :math:`j`.
 
-In addition, there are a variety of generalizations of FBA for using genomic and other experimental data to generate more accurate flux bounds (see `review <https://doi.org/10.1371/journal.pcbi.1003580>`_), dynamic FBA simulations (dFBA), and combined regulatory and FBA metabolism simulations (`rFBA <http://doi.org/10.1038/nature02456>`_, `PROM <http://doi.org/10.1073/pnas.1005139107>`_).
+In addition, there are a variety of generalizations of FBA for using genomic and other experimental data to generate more accurate flux bounds (see `review <https://doi.org/10.1371/journal.pcbi.1003580>`_), and combined regulatory and FBA metabolism simulations (`rFBA <http://doi.org/10.1038/nature02456>`_, `PROM <http://doi.org/10.1073/pnas.1005139107>`_).
 
-dFBA enables dynamic simulations by (1) assuming that cells quickly reach pseudo-steady states with their environment because their internal dynamics are significantly faster than that of the external environment, (2) iteratively forming and solving FBA models, and (3) updating the extracellular concentrations based on the predicted fluxes. Below is pseudo-code for dFBA::
+.. todo: discuss how extracellular concentrations can be incorporated in FBA models
+
+Dynamic FBA simulations (dFBA) enables dynamic models of metabolism by (1) assuming that cells quickly reach pseudo-steady states with their environment because their internal dynamics are significantly faster than that of the external environment, (2) iteratively forming and solving FBA models, and (3) updating the extracellular concentrations based on the predicted fluxes. Below is pseudo-code for dFBA::
 
     Set the initial biomass concentration
     Set the initial conditions of the environment
     From the starting time to the final time
-        Set the upper and lower bounds of the exchange reactions based on the currnt biomass concentration and environmental conditions
+        Based on the current biomass concentration and environmental conditions,
+            set the upper and lower bounds of the exchange reactions
         Solve for the maximum growth rate and optimal fluxes
         Update the biomass concentration based on the predicted growth rate
         Update the environmental conditions based on the predicted exchange fluxes
