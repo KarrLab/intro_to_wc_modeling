@@ -1,7 +1,7 @@
 """ Stochastic simulation tutorial
 
 :Author: Jonathan Karr <jonrkarr@gmail.com>
-:Date: 2017-06-22
+:Date: 2017-08-30
 :Copyright: 2017, Karr Lab
 :License: MIT
 """
@@ -277,13 +277,13 @@ def deterministic_exercise():
     sim = OdeSimulation()
 
     ##########################################################
-    # A. Write the system in vector form
+    # Write the system in vector form
     ##########################################################
     sim.x_0
     sim.dx_dt(sim.x_0)
 
     ##########################################################
-    # B. Plot the vector field
+    # Plot the vector field
     ##########################################################
     fig = sim.plot_vector_field()
     # fig.show()
@@ -292,17 +292,17 @@ def deterministic_exercise():
     matplotlib.pyplot.close(fig)
 
     ##########################################################
-    # C. Calculate the Jacobian
+    # Calculate the Jacobian
     ##########################################################
     sim.jacobian(sim.x_0)
 
     ##########################################################
-    # D. Calculate the critical point(s) and their stability
+    # Calculate the critical point(s) and their stability
     ##########################################################
     m_ss, n_ss, stability = sim.get_steady_state()
 
     ##########################################################
-    # E. Execute deterministic simulation
+    # Execute deterministic simulation
     ##########################################################
     t, m, n = sim.simulate(t_end=100, t_step=1)
 
@@ -611,12 +611,12 @@ def probability_distribution_exercise():
     sim.p_0[1, 98] = 1
 
     ##########################################################
-    # A. Generate the master equation
+    # Generate the master equation
     ##########################################################
     sim.dp_dt
 
     ##########################################################
-    # B. Simulate the temporal dynamics
+    # Simulate the temporal dynamics
     ##########################################################
     t, p = sim.simulate(t_end=2, t_step=0.01)
     fig = sim.plot_simulation_results(t, p)
@@ -626,7 +626,7 @@ def probability_distribution_exercise():
     matplotlib.pyplot.close(fig)
 
     ##########################################################
-    # C. Calculate the steady state
+    # Calculate the steady state
     ##########################################################
     # calculate steady-state
     p_ss = sim.get_steady_state()
@@ -957,12 +957,12 @@ def trajectory_exercise():
     sim = SsaSimulation()
 
     ##########################################################
-    # A. Implement SSA
+    # Implement SSA
     ##########################################################
     sim.simulate
 
     ##########################################################
-    # B.i Simulate one trajectory
+    # Simulate one trajectory
     ##########################################################
     # seed random number generator
     numpy.random.seed(0)
@@ -978,7 +978,7 @@ def trajectory_exercise():
     matplotlib.pyplot.close(fig)
 
     ##########################################################
-    # B.i Simulate several trajectories
+    # Simulate several trajectories
     ##########################################################
     # simulate
     n_trajectories = 50
@@ -992,7 +992,7 @@ def trajectory_exercise():
     matplotlib.pyplot.close(fig)
 
     ##########################################################
-    # C. Plot the average of multiple trajectories
+    # Plot the average of multiple trajectories
     ##########################################################
     fig = sim.plot_average_trajectory(t, m, n)
     # fig.show()
