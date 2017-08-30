@@ -776,8 +776,10 @@ class SsaSimulation(object):
             # select the next reaction to fire
             i_reaction = numpy.random.choice(4, p=propensities / total_propensity)
 
-            # update the time and copy number based on the selected reaction
+            # update the time
             t += dt
+
+            # update the copy numbers based on the selected reaction
             if i_reaction == 0:
                 m += 1
             elif i_reaction == 1:
