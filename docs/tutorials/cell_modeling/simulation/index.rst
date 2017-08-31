@@ -651,12 +651,21 @@ Finally, examine the result simulation results. Is the simulation approaching st
 
 Network-free simulation of rule-based models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Please see the `PySB tutorial <http://pysb.readthedocs.io/en/latest/tutorial.html>`_ to learn about how to simulate rule-based models from Python
+Please see the `PySB tutorial <http://pysb.readthedocs.io/en/latest/tutorial.html>`_ to learn how to simulate rule-based models from Python.
 
 
 FBA simulation
 ^^^^^^^^^^^^^^
-In this exercise we will use the ``optlang`` package to simulate the mock metabolic dFBA model illustrated below.
+In this exercise we will use the `optlang <http://optlang.readthedocs.io/en/latest>`_ package, which provides a modeling language for solving mathematical optimization problems, to simulate the mock metabolic dFBA model illustrated below.
+Instead of setting up an optimization problem with a reaction flux vector and a stoichiometric matrix and using a linear solver, as presented in the Flux balance analysis section above, this approach explicitly declares steady-state constraints on species concentrations and uses a general-purpose solver to optimize growth.
+
+where vjvj is the flux of reaction jj, fμfμ is 1 for the biomass reaction and 0 otherwise, SijSij is the  of species
+
+.. todo: it would be helpful if one of the participants in these reactions had a stochiometry
+    coefficient different from 1, so students could see it used
+
+.. todo: in the figure I think that glc + ntp + aa -> biomass SB glc_c + ntp_c + aa_c -> biomass
+        also, lets label the cell wall
 
 .. image:: fba-model.png
 
@@ -673,7 +682,10 @@ Second, add a variable for each reaction flux. For example, the following two co
     glc_tx = optlang.Variable('glc_tx', lb=0)
     glc_ex = optlang.Variable('glc_ex', lb=0)
 
-Next, add a constraint to represent the rate of change of each species. For example, the following command will create a variable for the rate of change of the extracellular concentration of glucose and constrain that rate to zero::
+``lb=0`` indicates that these variables have a lower bound of ``0``.
+
+Next, constrain the rate of change of each species to 0, as FBA assumes.
+For example, the following command will create a variable for the rate of change of the extracellular concentration of glucose and constrain that rate to zero by constraining as the difference between the fluxes of reaction(s) that produce the specie and those that consume it to 0::
 
     glc_e = optlang.Constraint(glc_ex - glc_tx, lb=0, ub=0)
     model.add([glc_e])
