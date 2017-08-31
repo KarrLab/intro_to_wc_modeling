@@ -11,8 +11,8 @@
 """
 
 import matplotlib
-matplotlib.use('TkAgg')
-# matplotlib.use('Agg')
+# matplotlib.use('TkAgg')
+matplotlib.use('Agg')
 
 from scipy.integrate import odeint
 from matplotlib import pyplot
