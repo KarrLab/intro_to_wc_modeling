@@ -1,7 +1,9 @@
 cement                                                   # framework for building command line programs
+cobra
 ipython                                                  # interactive interpret
 matplotlib                                               # plotting
 numpy                                                    # numerical computing
+openpyxl
 optlang                                                  # numerical optimization
 # pgmpy                                                  # graphical models package
 # scikit-learn                                           # data science package

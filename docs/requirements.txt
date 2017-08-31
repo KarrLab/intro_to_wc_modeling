@@ -1,8 +1,10 @@
 cement
+cobra
 configparser
 robpol86-sphinxcontrib-googleanalytics
 matplotlib
 numpy
+openpyxl
 optlang
 scipy
 sphinx
