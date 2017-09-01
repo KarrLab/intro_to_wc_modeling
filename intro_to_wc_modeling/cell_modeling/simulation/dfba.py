@@ -9,8 +9,8 @@
 
 import matplotlib
 # select a supported matplotlib backend if necessary
-# matplotlib.use('Agg')  # for non-interactive usage, e.g. on servers
-matplotlib.use('TkAgg') # for GUI display
+matplotlib.use('Agg')  # for non-interactive usage, e.g. on servers
+# matplotlib.use('TkAgg') # for GUI display
 import matplotlib.pyplot
 import numpy
 import optlang
@@ -116,10 +116,10 @@ matplotlib.pyplot.gca().spines['top'].set_visible(False)
 matplotlib.pyplot.gca().spines['right'].set_visible(False)
 
 # display figure
-matplotlib.pyplot.show()
+# matplotlib.pyplot.show()
 
 # save figure
 filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs', 'tutorials',
-                        'cell_modeling', 'simulation', 'fba-results.png')
+                        'cell_modeling', 'simulation', 'dfba-results.png')
 matplotlib.pyplot.savefig(filename, transparent=True, bbox_inches='tight')
 matplotlib.pyplot.close()

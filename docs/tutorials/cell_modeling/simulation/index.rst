@@ -711,8 +711,8 @@ Network-free simulation of rule-based models
 Please see the `PySB tutorial <http://pysb.readthedocs.io/en/latest/tutorial.html>`_ to learn how to simulate rule-based models from Python.
 
 
-FBA simulation
-^^^^^^^^^^^^^^
+Dynamic FBA (dFBA) simulation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 In this exercise we will use the `optlang <http://optlang.readthedocs.io/en/latest>`_ package, which provides a modeling language for solving mathematical optimization problems, to simulate the mock metabolic dFBA model illustrated below.
 Instead of setting up an optimization problem with a reaction flux vector and a stoichiometric matrix and using a linear solver, as presented in the Flux balance analysis section above, this approach explicitly declares steady-state constraints on species concentrations and uses a general-purpose solver to optimize growth.
 
@@ -796,7 +796,7 @@ Next, complete the code fragment below to simulate the model::
 
 Next, use ``matplotlib`` to plot the predicted concentration dynamics. You should see results similar to those below.
 
-.. image:: fba-results.png
+.. image:: dfba-results.png
 
 
 Hybrid simulation
