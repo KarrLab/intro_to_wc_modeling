@@ -101,10 +101,10 @@ PyCharm IDE
 ^^^^^^^^^^^
 Execute the following command to install the PyCharm IDE::
 
-mv ~/Downloads/pycharm-community-2017.1.tar.gz /opt/
-    tar -xzf pycharm-community-2017.1.tar.gz
-    cd pycharm-community-2017.1
-    ./pycharm.sh
+    mv ~/Downloads/pycharm-community-2017.1.tar.gz /opt/
+        tar -xzf pycharm-community-2017.1.tar.gz
+        cd pycharm-community-2017.1
+        ./pycharm.sh
 
 We also recommend editing the following settings:
 

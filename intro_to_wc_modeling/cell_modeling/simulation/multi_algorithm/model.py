@@ -291,7 +291,7 @@ class FbaSubmodel(Submodel):
     reactionFluxes = np.zeros(0)
     growth = np.nan
 
-    solver = 'gurobi'
+    solver = 'glpk'
 
     def __init__(self, *args, **kwargs):
         Submodel.__init__(self, *args, **kwargs)
@@ -322,8 +322,10 @@ class FbaSubmodel(Submodel):
             cobraModel.add_reactions([cbRxn])
 
             cbMets = {}
-            for part in rxn.participants:
+            for part in rxn.participants:                
                 cbMets[part.id] = part.coefficient
+                if rxn.id == 'MetabolismProduction' and part.id == 'H2O[c]' and self.solver == 'glpk': # to compensate for GLPK bug
+                    del cbMets[part.id]
             cbRxn.add_metabolites(cbMets)
 
         # add external exchange reactions

@@ -12,7 +12,7 @@ Fundamentals of cell modeling
     model_calibration.rst
     model_representation.rst
     model_annotation.rst
-    model_composition.rst
+    model_composition/index.rst
     simulation/index.rst
     testing_models.rst
     logging_results.rst

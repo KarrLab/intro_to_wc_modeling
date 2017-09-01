@@ -23,11 +23,11 @@ class TestSimulationTutorial(unittest.TestCase):
     def test_fba_exercise(self):
         import intro_to_wc_modeling.cell_modeling.simulation.fba
 
-    def test_stochastic_exercises(self):
-        from intro_to_wc_modeling.cell_modeling.simulation import stochastic_exercises
-        stochastic_exercises.deterministic_exercise()
-        stochastic_exercises.probability_distribution_exercise()
-        stochastic_exercises.trajectory_exercise()
+    def test_mrna_and_proteins_using_several_methods(self):
+        from intro_to_wc_modeling.cell_modeling.simulation import mrna_and_proteins_using_several_methods
+        mrna_and_proteins_using_several_methods.deterministic_exercise()
+        mrna_and_proteins_using_several_methods.probability_distribution_exercise()
+        mrna_and_proteins_using_several_methods.trajectory_exercise()
 
     def test_multi_algorithm_simulation(self):
         from intro_to_wc_modeling.cell_modeling.simulation.multi_algorithm import simulation

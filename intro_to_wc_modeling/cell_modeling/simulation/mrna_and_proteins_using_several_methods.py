@@ -287,7 +287,7 @@ def deterministic_exercise():
     ##########################################################
     fig = sim.plot_vector_field()
     # fig.show()
-    filename = os.path.join(OUT_DIR, 'stochastic-exercises-deterministic-vector-field.png')
+    filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-deterministic-vector-field.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
 
@@ -308,7 +308,7 @@ def deterministic_exercise():
 
     fig = sim.plot_simulation_results(t, m, n)
     # fig.show()
-    filename = os.path.join(OUT_DIR, 'stochastic-exercises-deterministic-simulation.png')
+    filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-deterministic-simulation.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
 
@@ -621,7 +621,7 @@ def probability_distribution_exercise():
     t, p = sim.simulate(t_end=2, t_step=0.01)
     fig = sim.plot_simulation_results(t, p)
     # fig.show()
-    filename = os.path.join(OUT_DIR, 'stochastic-exercises-probability-distribution-simulation.png')
+    filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-probability-distribution-simulation.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
 
@@ -638,7 +638,7 @@ def probability_distribution_exercise():
     # plot
     fig = sim.plot_probability_distribution(p_ss)
     # fig.show()
-    filename = os.path.join(OUT_DIR, 'stochastic-exercises-probability-distribution-steady-state.png')
+    filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-probability-distribution-steady-state.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
 
@@ -973,7 +973,7 @@ def trajectory_exercise():
     # plot
     fig = sim.plot_trajectories(t, m, n)
     # fig.show()
-    filename = os.path.join(OUT_DIR, 'stochastic-exercises-trajectory-simulation.png')
+    filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-trajectory-simulation.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
 
@@ -987,7 +987,7 @@ def trajectory_exercise():
     # plot
     fig = sim.plot_trajectories(t, m, n)
     # fig.show()
-    filename = os.path.join(OUT_DIR, 'stochastic-exercises-trajectory-simulations.png')
+    filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-trajectory-simulations.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
 
@@ -996,12 +996,12 @@ def trajectory_exercise():
     ##########################################################
     fig = sim.plot_average_trajectory(t, m, n)
     # fig.show()
-    filename = os.path.join(OUT_DIR, 'stochastic-exercises-trajectory-average.png')
+    filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-trajectory-average.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
 
     fig = sim.plot_mrna_protein_distribution(m, n)
     # fig.show()
-    filename = os.path.join(OUT_DIR, 'stochastic-exercises-trajectory-histogram.png')
+    filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-trajectory-histogram.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)

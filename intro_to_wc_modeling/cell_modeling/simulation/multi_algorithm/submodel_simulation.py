@@ -158,7 +158,7 @@ def analyzeResults(model, time, volume, growth, speciesCounts):
         speciesCounts=speciesCounts,
         selectedSpeciesCompartments=['ALA[c]', 'ARG[c]', 'ASN[c]', 'ASP[c]'],
         units='uM',
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'Amino acids.png')
+        fileName=os.path.join(OUTPUT_DIRECTORY, 'Amino-acids.png')
     )
 
     analysis.plot(

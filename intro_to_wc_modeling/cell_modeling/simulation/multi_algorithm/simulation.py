@@ -158,14 +158,14 @@ def analyzeResults(model, time, volume, growth, speciesCounts):
         model=model,
         time=time,
         yDatas={'RNA': totalRna},
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'Total RNA.png')
+        fileName=os.path.join(OUTPUT_DIRECTORY, 'Total-RNA.png')
     )
 
     analysis.plot(
         model=model,
         time=time,
         yDatas={'Protein': totalProt},
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'Total protein.png')
+        fileName=os.path.join(OUTPUT_DIRECTORY, 'Total-protein.png')
     )
 
     analysis.plot(
@@ -195,7 +195,7 @@ def analyzeResults(model, time, volume, growth, speciesCounts):
         speciesCounts=speciesCounts,
         selectedSpeciesCompartments=['ALA[c]', 'ARG[c]', 'ASN[c]', 'ASP[c]'],
         units='uM',
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'Amino acids.png')
+        fileName=os.path.join(OUTPUT_DIRECTORY, 'Amino-acids.png')
     )
 
     analysis.plot(

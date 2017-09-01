@@ -67,25 +67,29 @@ Exercises
 
 Merging metabolic models
 ^^^^^^^^^^^^^^^^^^^^^^^^
-In this exercise, you will learn how to merge models by working through the nuances of merging three separately published models of glycolysis.
+In this exercise, you will learn how to merge models by working through the nuances of merging two separately published models of glycolysis (A) and glycerol synthesis (B).
 
-#. Read the paper which describes the merged model, `Snoep et al., 2006 <https://doi.org/10.1016/j.biosystems.2005.07.006>`_
+.. image:: model-overviews.jpg
+
 #. Read the papers which describe the individual models
 
     * `Cronwright et al., 2002 <http://doi.org/10.1128/AEM.68.9.4448-4456.2002>`_
-    * `Martins et al., 2001 <10.1046/j.1432-1327.2001.02304.x>`_
     * `Teusink et al., 2000 <10.1046/j.1432-1327.2000.01527.x>`_
     
-#. Obtain the original models in SBML format from `JWS online <http://jjj.biochem.sun.ac.za/>`_
+#. Obtain the original models from `JWS online <http://jjj.biochem.sun.ac.za/>`_
 
     * `Cronwright model <http://jjj.biochem.sun.ac.za/models/cronwright/>`_
-    * `Martins model <http://jjj.biochem.sun.ac.za/models/martins/>`_
     * `Teusink model <http://jjj.biochem.sun.ac.za/models/teusink/>`_
     
-#. Identify the common species and reactions among the models by annotating the model components against a single namespace
+#. Identify the common species and reactions among the models
 #. Merge the corresponding variables and equations
-#. Simulate the merged model
-#. Compare your simulation results to those reported in Snoep et al., 2006.
+#. Compare your merged model with `our solution <https://github.com/KarrLab/intro_to_wc_modeling/tree/master/intro_to_wc_modeling/cell_modeling/model_composition.py>`_
+#. Simulate the individual and merged models
+#. Compare the predictions of the individual and merged models. You should see results similar to those below.
+
+    .. image:: merged-model.png
+
+#. Read this paper which describes an even larger merged model that includes a third submodel: `Snoep et al., 2006 <https://doi.org/10.1016/j.biosystems.2005.07.006>`_
 
 
 Merging electrophysiological models

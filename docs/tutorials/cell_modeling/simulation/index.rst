@@ -569,7 +569,7 @@ In this exercise we will simulate the stochastic synthesis and degradation of a 
     k_\text{deg} &= 0.5\,\text{s}^{-1}\,\text{molecule}^{-1}\\
     \text{mRNA}(t=0) &= 10\,\text{molecules} \\ 
 
-First, define data structures to represent the stoichiometries are rate laws of the reactions::
+First, define data structures to represent the stoichiometries and rate laws of the reactions::
 
     reaction_stochiometries = [1, -1]
 
@@ -647,6 +647,63 @@ Fifth, use the ``simulate`` function to run 100-25 s simulations, store the resu
 .. image:: stochastic-results.png
 
 Finally, examine the result simulation results. Is the simulation approaching steady-state? How could you analytically calculate the steady-state?
+
+
+Deterministic, probalistic, and stochastic simulation of mRNA and protein synthesis and degradation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+In this exercise, you will compare deterministic, probalistic, and stochastic simulations of a simple model of mRNA and protein synthesis and degradation:
+
+* Zeroth order mRNA synthesis: :math:`k_m`
+* First order protein synthesis: :math:`m k_n`
+* First order RNA degradation: :math:`m \gamma_m`
+* First order protein degradation: :math:`n \gamma n`
+* :math:`k_m = 5` h\ :sup:`-1`
+* :math:`k_n = 20` molecule\ :sup:`-1` h\ :sup:`-1`
+* :math:`\gamma_m = \frac{\ln{2}}{3}` min\ :sup:`-1`
+* :math:`\gamma_n = \frac{\ln{2}}{10}` h\ :sup:`-1`
+* :math:`m(t=0) = 1`
+* :math:`n(t=0) = 98`
+
+Please follow `our solution <https://github.com/KarrLab/intro_to_wc_modeling/tree/master/intro_to_wc_modeling/cell_modeling/simulation/mrna_and_proteins_using_several_methods.py>`_ for more detailed instructions.
+
+#. Implement an ODE simulation of this model
+#. Draw the vector field for the ODE model. You should obtain results similar to those below.
+
+    .. image:: mrna-and-protein-using-several-methods-deterministic-vector-field.png
+
+#. Analyze the Jacobian of the ODE model to determine the critical point of the model and its stability
+#. Numerically simulate the ODE model. You should obtain results similar to those below.
+
+    .. image:: mrna-and-protein-using-several-methods-deterministic-simulation.png
+
+#. Generate the set of chemical master equation ODEs for the same model for :math:`m = {0, 1, ..., 3}` and :math:`n = {54, 55, ..., 154}`
+#. Calculate and plot the steady probability distribution. You should obtain results similar to those below.
+
+    .. image:: mrna-and-protein-using-several-methods-probability-distribution-steady-state.png
+
+#. Numerically simulate the chemical master equation ODEs with :math:`P_{1,98} = 1`. You should obtain results similar to those below.
+
+    .. image:: mrna-and-protein-using-several-methods-probability-distribution-simulation.png
+
+#. Implement an SSA simulation of the same model.
+#. Numerically simulate one trajectory. You should obtain results similar to those below.
+
+    .. image:: mrna-and-protein-using-several-methods-trajectory-simulation.png
+
+#. Numerically simulate one trajectory. You should obtain results similar to those below.
+
+    .. image:: mrna-and-protein-using-several-methods-trajectory-simulations.png
+
+#. Average the results over the trajectories and then over time and plot the results. You should obtain results similar to those below.
+
+    .. image:: mrna-and-protein-using-several-methods-trajectory-average.png
+
+    .. image:: mrna-and-protein-using-several-methods-trajectory-histogram.png
+
+#. Compare the simulations. 
+
+    * What is the steady-state of each of the simulations? How long does it take to reach those steady states?
+    * Which of the simulations captures protein bursts?
 
 
 Network-free simulation of rule-based models
@@ -744,5 +801,64 @@ Next, use ``matplotlib`` to plot the predicted concentration dynamics. You shoul
 
 Hybrid simulation
 ^^^^^^^^^^^^^^^^^
-* Write a hybrid FBA/SSA simulator
-* Build a composite model and simulate one of its submodels by coupling it to coarse-grained versions of all of the other submodels
+In this exercise you will implement a hybrid simulation of metabolism, transcription, translation, and RNA degradation.
+
+Please follow `our solution <https://github.com/KarrLab/intro_to_wc_modeling/tree/master/intro_to_wc_modeling/cell_modeling/simulation/multi_algorithm>`_ for more detailed instructions.
+
+#. Implement an hybrid SSA/FBA simulation of this model
+#. Plot the predicted growth, volume, NMPs, NTPs, amino acids, protein, and RNA. You should see results similar to those below.
+
+    * Predicted growth
+
+        .. image:: multi_algorithm_simulation/Growth.png
+
+    * Predicted volume
+
+        .. image:: multi_algorithm_simulation/Volume.png
+
+    * Predicted NMPs
+
+        .. image:: multi_algorithm_simulation/NMPs.png
+
+    * Predicted NTPs
+
+        .. image:: multi_algorithm_simulation/NTPs.png
+
+    * Predicted amino acids
+
+        .. image:: multi_algorithm_simulation/Amino-acids.png
+
+    * Predicted total protein
+
+        .. image:: multi_algorithm_simulation/Total-protein.png
+
+    * Predicted key proteins
+
+        .. image:: multi_algorithm_simulation/Proteins.png
+
+    * Predicted total RNA
+
+        .. image:: multi_algorithm_simulation/Total-RNA.png
+
+#. Implement a simulation of just the metabolism submodel coupled to mocked versions of the transcription, translation, and RNA degradation submodels.
+#. Plot the predicted growth, volume, NMPs, NTPs, amino acids, protein, and RNA. You should see results similar to those below.
+
+    * Predicted growth
+
+        .. image:: multi_algorithm_submodel_simulation/Growth.png
+
+    * Predicted volume
+    
+        .. image:: multi_algorithm_submodel_simulation/Volume.png
+
+    * Predicted NTPs
+    
+        .. image:: multi_algorithm_submodel_simulation/NTPs.png
+
+    * Predicted amino acids
+    
+        .. image:: multi_algorithm_submodel_simulation/Amino-acids.png
+
+    * Predicted key proteins
+    
+        .. image:: multi_algorithm_submodel_simulation/Proteins.png
