@@ -1,5 +1,5 @@
 cement                                                   # framework for building command line programs
-cobra
+cobra >= 0.8.2
 ipython                                                  # interactive interpret
 matplotlib                                               # plotting
 numpy                                                    # numerical computing
