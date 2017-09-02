@@ -40,13 +40,35 @@ class Model:
     extracellularVolume = None  # media volume
     growth = None
 
-    def __init__(self, submodels=[], compartments=[], species=[], reactions=[], parameters=[], references=[]):
+    def __init__(self, submodels=None, compartments=None, species=None, reactions=None, parameters=None, references=None):
+        if submodels is None:
+            submodels = []
+        if compartments is None:
+            compartments = []
+        if species is None:
+            species = []
+        if reactions is None:
+            reactions = []
+        if parameters is None:
+            parameters = []
+        if references is None:
+            references = []
         self.submodels = submodels
         self.compartments = compartments
         self.species = species
         self.reactions = reactions
         self.parameters = parameters
         self.references = references
+
+    '''
+    def __init__(self):
+        self.submodels = []
+        self.compartments = []
+        self.species = []
+        self.reactions = []
+        self.parameters = []
+        self.references = []
+    '''
 
     def setupSimulation(self):
         self.fractionDryWeight = self.getComponentById('fractionDryWeight', self.parameters).value
@@ -207,6 +229,7 @@ class Submodel:
     volume = np.zeros(0)
     extracellularVolume = np.zeros(0)
 
+    # fix
     def __init__(self, id='', name='', reactions=[], species=[]):
         self.id = id
         self.name = name
@@ -522,6 +545,7 @@ class Species:
     crossRefs = []
     comments = ''
 
+    # fix
     def __init__(self, id='', name='', structure='', empiricalFormula='', molecularWeight=None,
                  charge=None, type='', concentrations=[], crossRefs=[], comments=''):
 
@@ -557,6 +581,7 @@ class Reaction:
     crossRefs = []
     comments = ''
 
+    # fix
     def __init__(self, id='', name='', submodel='', reversible=None, participants=[],
                  enzyme='', rateLaw='', vmax=None, km=None, crossRefs=[], comments=''):
 
@@ -649,6 +674,7 @@ class Reference:
     crossRefs = []
     comments = ''
 
+    # fix
     def __init__(self, id='', name='', crossRefs=[], comments=''):
         self.id = id
         self.name = name
@@ -716,6 +742,10 @@ class ReactionParticipant:
     def calcIdName(self):
         self.id = '%s[%s]' % (self.species.id, self.compartment.id)
         self.name = '%s (%s)' % (self.species.name, self.compartment.name)
+
+    def __str__(self):
+        return "ReactionParticipant: species: {}; compartment: {}; coefficient: {}; id: {}; name: {}".format(
+            self.species, self.compartment, self.coefficient, self.id, self.name)
 
 
 class RateLaw:
@@ -911,6 +941,7 @@ def getModelFromExcel(filename):
         reaction.submodel = obj
 
         for part in reaction.participants:
+
             id = part.species
             obj = model.getComponentById(id, model.species)
             if id and obj is None:
@@ -945,7 +976,7 @@ def getModelFromExcel(filename):
         undefinedComponents.sort()
         raise Exception('Undefined components:\n- %s' % ('\n- '.join(undefinedComponents)))
 
-    ''' Assemble back rerferences'''
+    ''' Assemble back references'''
     for subModel in model.submodels:
         subModel.reactions = []
         subModel.species = []
