@@ -79,7 +79,7 @@ Detailed instructions to install the tutorials and all of the requirements
         sudo apt-get update
         sudo apt-get install sublime-text-installer
 
-    #. Install the `PyCharm IDE<https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=mac&code=PCC>`_::
+    #. Install the `PyCharm IDE <https://www.jetbrains.com/pycharm/download/download-thanks.html>`_::
 
         sudo mv ~/Downloads/pycharm-community-2017.2.3.tar.gz /opt/
         sudo tar -xzf pycharm-community-2017.2.3.tar.gz
