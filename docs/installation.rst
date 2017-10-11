@@ -124,6 +124,7 @@ Detailed instructions to install the tutorials and all of the requirements
                 { "keys": ["ctrl+shift+r"], "command": "unbound"}
             ]
             
+        * Tools >> Install Package Control
         * Preferences >> Package control >> Install package >> AutoPEP8
         * Preferences >> Package settings >> AutoPep8 >> Settings-User::
 
