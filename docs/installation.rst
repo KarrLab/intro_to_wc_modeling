@@ -139,8 +139,3 @@ Detailed instructions to install the tutorials and all of the requirements
     #. Configure Docker::
 
         sudo usermod -aG docker $USER
-
-#. Install these tutorials::
-
-    git clone git@github.com:KarrLab/intro_to_wc_modeling.git
-    pip install -e intro_to_wc_modeling
