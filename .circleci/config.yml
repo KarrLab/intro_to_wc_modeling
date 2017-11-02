@@ -13,6 +13,9 @@ jobs:
             - cache-v6-{{ .Branch }}-
             - cache-v6-
 
+      - run: apt-get install enchant
+      - run: apt-get upgrade enchant
+
       #- run: pip2 install -e .
       #- run: pip2 install -U -e git+https://github.com/KarrLab/Karr-Lab-build-utils.git#egg=Karr-Lab-build-utils
       #- run: karr-lab-build-utils-2 install-requirements
