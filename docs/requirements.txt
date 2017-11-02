@@ -7,7 +7,7 @@ numpy
 openpyxl
 optlang
 scipy
-sphinx
+sphinx >= 1.6
 sphinx-rtd-theme
 sphinxcontrib-bibtex
 sqlalchemy
