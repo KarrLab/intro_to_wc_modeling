@@ -119,7 +119,7 @@ matplotlib.pyplot.gca().spines['right'].set_visible(False)
 # matplotlib.pyplot.show()
 
 # save figure
-filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs', 'tutorials',
+filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs',
                         'cell_modeling', 'simulation', 'dfba-results.png')
 matplotlib.pyplot.savefig(filename, transparent=True, bbox_inches='tight')
 matplotlib.pyplot.close()

@@ -15,7 +15,7 @@ import os
 MODEL_FILENAME = os.path.join(os.path.dirname(__file__), 'Model-Simulation.xlsx')
 TIME_STEP = 10  # time step on simulation (s)
 TIME_STEP_RECORD = TIME_STEP  # Frequency at which to observe predicted cell state (s)
-OUTPUT_DIRECTORY = os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'docs', 'tutorials',
+OUTPUT_DIRECTORY = os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'docs',
                                 'cell_modeling', 'simulation', 'multi_algorithm_submodel_simulation')
 
 

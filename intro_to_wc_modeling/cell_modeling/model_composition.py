@@ -19,7 +19,7 @@ from matplotlib import pyplot
 import numpy
 import os
 
-OUT_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'docs', 'tutorials', 'cell_modeling', 'model_composition')
+OUT_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'docs', 'cell_modeling', 'model_composition')
 #:obj:`str`: directory to save graphs
 
 

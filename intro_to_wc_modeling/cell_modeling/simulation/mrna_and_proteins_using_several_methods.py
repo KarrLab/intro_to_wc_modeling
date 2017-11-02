@@ -19,7 +19,7 @@ from scipy import optimize
 from scipy import stats
 
 
-OUT_DIR = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs', 'tutorials', 'cell_modeling', 'simulation')
+OUT_DIR = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs', 'cell_modeling', 'simulation')
 #:obj:`str`: directory to save graphs
 
 

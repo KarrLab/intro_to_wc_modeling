@@ -7,9 +7,9 @@
 :License: MIT
 '''
 
-# todo: synchronize with intro_to_wc_modeling/docs/tutorials/wc_modeling/wc_lang_tutorial.rst
+# todo: synchronize with intro_to_wc_modeling/docs/wc_modeling/wc_lang_tutorial.rst
 ##########################################################################################################
-# THIS CODE IS DUPLICATED IN intro_to_wc_modeling/docs/tutorials/wc_modeling/wc_lang_tutorial.rst
+# THIS CODE IS DUPLICATED IN intro_to_wc_modeling/docs/wc_modeling/wc_lang_tutorial.rst
 # MANUALLY KEEP THEM SYNCHRONIZED, OR, use ``literalinclude`` to link them.
 #
 #   .. literalinclude:: example.py

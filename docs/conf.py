@@ -33,10 +33,14 @@ import intro_to_wc_modeling
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.autosectionlabel',
+    'sphinx.ext.imgconverter',
+    'sphinx.ext.linkcode',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
+    'sphinxcontrib.bibtex',
     'sphinxcontrib.googleanalytics',
-    #'sphinxcontrib.spelling',
+    'sphinxcontrib.spelling',
 ]
 
 # napoleon options
@@ -66,7 +70,7 @@ master_doc = 'index'
 # General information about the project.
 project = 'An introduction to whole-cell modeling'
 copyright = '2017, Karr Lab'
-author = 'Karr Lab'
+author = 'Jonathan Karr and Arthur Goldberg'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -94,6 +98,22 @@ pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = False
+
+
+numfig = True
+image_converter_args = ['-density', '150']
+
+# -- linkcode options -----------------------------------------------------
+def linkcode_resolve(domain, info):
+    if domain != 'py':
+        return None
+    if not info['module']:
+        return None
+    rel_filename = info['module'].replace('.', '/')
+    if os.path.isfile(os.path.join(os.path.dirname(__file__), '..', rel_filename + '.py')):
+        return "https://github.com/KarrLab/intro_to_wc_modeling/blob/master/{}.py".format(rel_filename)
+    else:
+        return "https://github.com/KarrLab/intro_to_wc_modeling/blob/master/{}/__init__.py".format(rel_filename)
 
 
 # -- napoleon options -----------------------------------------------------
@@ -259,8 +279,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'intro_to_wc_modeling.tex', 'python\\_package\\_tutorial Documentation',
-     'Jonathan Karr', 'manual'),
+    (master_doc, 'intro_to_wc_modeling.tex', 'An introduction to whole-cell modeling',
+     'Jonathan Karr\\Arthur Goldberg', 'manual'),
 ]
 
 

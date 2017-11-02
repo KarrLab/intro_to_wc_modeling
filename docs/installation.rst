@@ -1,15 +1,15 @@
 .. _installation:
 
-############
-Installation
-############
+######################################################################
+Appendix: Installing the code in this primer and the required packages
+######################################################################
 
 Each tutorial outlines how to install all of the necessary software. The following is a consolidated guide to installing all of the software needed for the tutorials.
 
 
-**************************************************************************
+==========================================================================
 Requirements
-**************************************************************************
+==========================================================================
 * Docker
 * Gimp
 * Git
@@ -21,19 +21,19 @@ Requirements
 * Python
 
 
-**************************************************************************
+==========================================================================
 How to install these tutorials
-**************************************************************************
+==========================================================================
 Run the following command to install the latest version from GitHub::
 
     git clone git@github.com:KarrLab/intro_to_wc_modeling.git    
     pip install -e intro_to_wc_modeling
 
 
-**************************************************************************
+==========================================================================
 Detailed instructions to install the tutorials and all of the requirements
-**************************************************************************
-#. :ref:`Build a Mint Linux virtual machine <building_linux_virtual_machines>`
+==========================================================================
+#. Follow the instructions in :numref:`Section %s <building_linux_containers>` to build a Linux virtual machine
 #. Install several packages
 
     #. Enable the Docker Aptitude repository::
