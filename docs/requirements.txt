@@ -10,6 +10,7 @@ scipy
 sphinx >= 1.6
 sphinx-rtd-theme
 sphinxcontrib-bibtex
+sphinxcontrib-spelling
 sqlalchemy
 # git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang  # wc-modeling language
 git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils  # wc-modeling utilities
