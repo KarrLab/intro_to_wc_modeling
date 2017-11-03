@@ -290,7 +290,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'intro_to_wc_modeling.tex', 'An introduction to whole-cell modeling',
-     'Jonathan Karr\\Arthur Goldberg', 'manual'),
+     'Jonathan Karr\\\\Arthur Goldberg', 'manual'),
 ]
 
 
