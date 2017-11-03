@@ -42,7 +42,14 @@ Historically, the main motivation for WC modeling has been to help scientists un
 Medicine: personalize medicine for individual genomes
 -------------------------------------------------------------------------
 
-Recent studies have shown that each patient has a unique genome, that genetic variation can occur in any gene and pathway, and that small genetic differences can cause patients to respond differentially to the same drugs. Together, this suggests that medicine could be improved by tailoring therapy to each patient's genome. Physicians are beginning to use data-driven models to tailor medicine to a small number of well-established genetic variants that have large phenotypic effects. Tailoring medicine for all genetic variation requires WC models that represent every gene and that can predict the phenotypic effect of any combination of genetic variation. Such WC models would help physicians predict the most likely prognosis for each patient and identify the best combination of drugs for each patient. For example, WC models could help oncologists conduct personalized in silico drug trials to identify the best chemotherapy regimen for each patient. Similarly, WC models could help obstetricians identify diseases in early fetuses. In addition, WC models could help pharmacologists avoid harmful gene-drug interactions.
+Recent studies have shown that each patient has a unique genome, that genetic variation can occur in any gene and pathway, and that small genetic differences can cause patients to respond differentially to the same drugs. Together, this suggests that medicine could be improved by tailoring therapy to each patient's genome. Physicians are beginning to use data-driven models to tailor medicine to a small number of well-established genetic variants that have large phenotypic effects. Tailoring medicine for all genetic variation requires WC models that represent every gene and that can predict the phenotypic effect of any combination of genetic variation. Such WC models would help physicians predict the most likely prognosis for each patient and identify the best combination of drugs for each patient (:numref:`fig_medical_vision`). For example, WC models could help oncologists conduct personalized in silico drug trials to identify the best chemotherapy regimen for each patient. Similarly, WC models could help obstetricians identify diseases in early fetuses. In addition, WC models could help pharmacologists avoid harmful gene-drug interactions.
+
+.. _fig_medical_vision:
+
+.. figure:: figures/medical-vision/v1.png
+    :align: center
+
+    WC models could transform medicine by helping physicians use patient-specific models informed by genomic data to design personalized prognoses and therapies.
 
 Synthetic biology: rationally design microbial genomes
 -------------------------------------------------------------------------
@@ -53,20 +60,19 @@ Synthetic biology promises to create microorganisms for a wide range of industri
 The biology that WC models should aim to represent and predict
 ==============================================================
 
-In the previous section, we argued that medicine and bioengineering need comprehensive models that can predict phenotype from genotype. Here, we outline the specific phenotypes that we believe that WC models should aim to predict and the specific physiochemical mechanisms that we believe that WC models should aim to represent to support medicine and bioengineering (Figure :numref:`fig_mechanisms_and_phenotypes`). In the following sections, we outline why we believe that WC models are becoming feasible and describe how to build and simulate WC models.
+In the previous section, we argued that medicine and bioengineering need comprehensive models that can predict phenotype from genotype. Here, we outline the specific phenotypes that we believe that WC models should aim to predict and the specific physiochemical mechanisms that we believe that WC models should aim to represent to support medicine and bioengineering (:numref:`fig_mechanisms_and_phenotypes`). In the following sections, we outline why we believe that WC models are becoming feasible and describe how to build and simulate WC models.
 
 .. _fig_mechanisms_and_phenotypes:
 
-.. figure:: figures/mechanisms-and-phenotypes/v7.pdf
+.. figure:: figures/mechanisms-and-phenotypes/v14.png
     :align: center
-    :width: 100%
 
     The physical and chemical mechanisms that WC models should aim to represent (**a**) and the phenotypes that WC models should aim to predict (**b**).
 
 Phenotypes that WC models should aim to predict
 -------------------------------------------------------------------------
 
-To support medicine and bioengineering, we believe that WC models should aim to predict the phenotypes of individual cells over their entire life cycles (Figure :numref:`fig_mechanisms_and_phenotypes`\ b). Specifically, we believe that WC models should aim to predict the following five levels of phenotypes:
+To support medicine and bioengineering, we believe that WC models should aim to predict the phenotypes of individual cells over their entire life cycles (:numref:`fig_mechanisms_and_phenotypes`\ b). Specifically, we believe that WC models should aim to predict the following five levels of phenotypes:
 
     * **Stochastic dynamics:** To help physicians understand how genetic variation affects how cells respond to drugs, and to help bioengineers design microorganisms that are robust to stochastic variation, WC models should predict the stochastic behavior of each molecular species and molecular interaction. For example, this would help physicians design drugs that are robust to variation in RNA splicing, protein modification, and protein complexation. This would also help bioengineers design feedback loops that can control the expression of key RNA and proteins.
 
@@ -81,7 +87,7 @@ To support medicine and bioengineering, we believe that WC models should aim to 
 Physics and chemistry that WC models should aim to represent
 -------------------------------------------------------------------------
 
-To predict these phenotypes, we believe that WC models should aim to represent all of the chemical reactions inside cells and all of the physical processes that influence their rates (Figure :numref:`fig_mechanisms_and_phenotypes`\ a). Specifically, we propose that WC models aim to represent the following seven aspects of cells:
+To predict these phenotypes, we believe that WC models should aim to represent all of the chemical reactions inside cells and all of the physical processes that influence their rates (:numref:`fig_mechanisms_and_phenotypes`\ a). Specifically, we propose that WC models aim to represent the following seven aspects of cells:
 
     * **Sequences:** To predict how genotype influence phenotype, including the contribution of each individual variant and gene, WC models should represent the sequence of each chromosome, RNA, and protein; the location of each feature of each chromosome such as genes, operons, promoters, and terminators; and the location of each site of each RNA and protein.
 
@@ -115,7 +121,7 @@ The most fundamental challenge to WC modeling is integrating the behavior of ind
 Sensitivity of phenotypic predictions to molecular parameter values
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The first challenge to integrating molecular behavior to the cellular level is the sensitivity of model predictions to the values of critical parameters, which necessitates accurate parameter values. Accurately identifying these values is challenging because, as described below, it is challenging to optimize high-dimensional functions and because, as described in :numref:`Section %s <imperfect_data>`, our experimental data is incomplete and imprecise.
+The first challenge to integrating molecular behavior to the cellular level is the sensitivity of model predictions to the values of critical parameters, which necessitates accurate parameter values. Accurately identifying these values is challenging because, as described below, it is challenging to optimize high-dimensional functions and because, as described in :numref:`imperfect_data`, our experimental data is incomplete and imprecise.
 
 High computational cost of simulating large fine-grained models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -125,7 +131,16 @@ A second challenge to integrating molecular behavior to the cellular level is th
 Assembling a unified molecular understanding of cells from imperfect data
 -------------------------------------------------------------------------
 
-In our opinion, the greatest challenge to WC modeling is assembling a unified molecular understanding of cell biology from our incomplete, imprecise, heterogeneous, scattered, and poorly annotated experimental data. Here, we summarize these limitations of our experimental data and the challenges they present for WC modeling.
+In our opinion, the greatest challenge to WC modeling is assembling a unified molecular understanding of cell biology. As illustrated in :numref:`fig_needed_data`, this requires assembling comprehensive data about every molecular species and molecular interaction. For example, to model *M. genitalium* we reconstructed (a) its subcellular organization; (b) its chromosome sequence; (c) the location, length, direction and essentiality of each gene; (d) the organization and promoter of each transcription unit; (e) the expression and degradation rate of each RNA transcript; (f) the specific folding and maturation pathway of each RNA and protein species including the localization, N-terminal cleavage, signal sequence, prosthetic groups, disulfide bonds and chaperone interactions of each protein species; (g) the subunit composition of each macromolecular complex; (h) its genetic code; (i) the binding sites and footprint of every DNA-binding protein; (j) the structure, charge and hydrophobicity of every metabolite; (k) the stoichiometry, catalysis, coenzymes, energetics and kinetics of every chemical reaction; (l) the regulatory role of each transcription factor; (m) its chemical composition and (n) the composition of its growth medium :cite:`karr2013wholecellkb`.
+
+.. _fig_needed_data:
+
+.. figure:: figures/needed-data/v4.png
+    :align: center
+
+    WC models require comprehensive data about every molecular species and molecular interaction.
+
+This is challenging because our data is incomplete, imprecise, heterogeneous, scattered, and poorly annotated. Here, we summarize these limitations and the challenges they present for WC modeling.
 
 Incomplete data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -189,7 +204,7 @@ Advances in biochemical, genomic, and single-cell measurement are rapidly genera
 Data repositories
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Researchers are rapidly aggregating the experimental data needed for WC modeling into repositories (Table S5). This includes specialized repositories for individual types of data such as ECMDB :cite:`sajed2016ecmdb` and YMDB :cite:`ramirez2017ymdb` for metabolite concentrations; ArrayExpress :cite:`kolesnikov2015arrayexpress` and the Gene Expression Omnibus :cite:`clough2016gene` (GEO) for RNA abundances; PaxDb :cite:`wang2015version` for protein abundances; and SABIO-RK for kinetic parameters :cite:`wittig2012sabio`, as well as general purpose repositories such as FigShare :cite:`figshare2017`, SimTk :cite:`simtk2017`, and Zenodo :cite:`zenodo2017`.
+Researchers are rapidly aggregating the experimental data needed for WC modeling into repositories (Table S5). This includes specialized repositories for individual types of data such as ECMDB :cite:`sajed2016ecmdb` and YMDB :cite:`ramirez2017ymdb` for metabolite concentrations; ArrayExpress :cite:`kolesnikov2015arrayexpress` and the Gene Expression Omnibus :cite:`clough2016gene` (GEO) for RNA abundances; PaxDb :cite:`wang2015version` for protein abundances; BiGG :cite:`king2015bigg` for metabolic reactions, and SABIO-RK for kinetic parameters :cite:`wittig2012sabio`, as well as general purpose repositories such as FigShare :cite:`figshare2017`, SimTk :cite:`simtk2017`, and Zenodo :cite:`zenodo2017`.
 
 Some researchers are making the data in these repositories more accessible by standardizing and integrating the data into meta-databases. For example, KEGG contains a variety of information about metabolites, proteins, reactions, and pathways :cite:`kanehisa2017kegg`; Pathway Commons contains extensive information about protein-protein interactions and pathways :cite:`cerami2010pathway`; and UniProt contains a multitude of information about proteins :cite:`uniprot2017uniprot`.
 
@@ -272,7 +287,7 @@ Multi-algorithmic simulations are ideal for WC modeling because they can simulat
 Simulation experiment formats
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Simulation Experiment Description Markup Language (SED-ML) :cite:`waltemath2011reproducible` and the Simulation Experiment Specification via a Scala Layer (SESSL) :cite:`ewald2014sessl` formats have been developed to represent simulation experiments. Both formats are capable of representing all of the model parameters and simulator arguments needed to simulate a model. However, both formats are limited to a small range of model formats and simulators. SED-ML is limited to models that are represented using XML-based formats such as SBML, and SESSL is currently limited to Java-based simulators. Consequently, neither is currently well-suited to WC modeling. 
+The Minimum Information About a Simulation Experiment (MIASE) guidelines have been developed to establish the minimum metadata that should be provided about a simulation experiment to enable other researchers to reproduce and understand the simulation :cite:`waltemath2011minimum`. The Simulation Experiment Description Markup Language (SED-ML) :cite:`waltemath2011reproducible` and the Simulation Experiment Specification via a Scala Layer (SESSL) :cite:`ewald2014sessl` formats have been developed to represent simulation experiments. Both formats are capable of representing all of the model parameters and simulator arguments needed to simulate a model. However, both formats are limited to a small range of model formats and simulators. SED-ML is limited to models that are represented using XML-based formats such as SBML, and SESSL is currently limited to Java-based simulators. Consequently, neither is currently well-suited to WC modeling. 
 
 Simulation tools
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -311,12 +326,14 @@ HDF5 is an ideal format for storing simulation results :cite:`folk2011overview`.
 Simulation results databases
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Several database systems have been developed to organize simulation results for visual and mathematical analysis and disseminate simulation results to the community. We developed ``WholeCellSimDB``, a hybrid relational/HDF5 database, to organize, search, and share WC simulation results :cite:`karr2014wholecellsimdb`. However, further work is needed to scale WholeCellSimDB to larger models and to develop tools for quickly searching WholeCellSimDB.
+Several database systems have been developed to organize simulation results for visual and mathematical analysis and disseminate simulation results to the community :cite:`vohra2010bookshelf,finocchiaro2003dsmm,van2010dynameomics,meyer2010model,lemson2006halo,riebe2013multidark,wolstencroft2011seek`. We developed ``WholeCellSimDB``, a hybrid relational/HDF5 database, to organize, search, and share WC simulation results :cite:`karr2014wholecellsimdb`. WholeCellSimDB uses HDF5 to store simulation results and a relational database to store their metadata. This enables WholeCellSimDB to efficiently store simulation results, quickly search simulations by their metadata, and quickly retrieve slices of simulation results. WholeCellSimDB providers uses two interfaces to deposit simulation results; a web-based interface to search, browse, and visualize simulation results; and a JSON web service to retrieve simulation results. However, further work is needed to scale WholeCellSimDB to larger models and to develop tools for quickly searching WholeCellSimDB.
 
 Simulation results analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Several tools have been developed to analyze and visualize simulation results. The most popular simulation software programs, including COPASI :cite:`bergmann2017copasi` and Virtual Cell :cite:`resasco2012virtual`, provide basic tools for visualizing simulation results. We have also developed ``WholeCellViz`` to visualize WC simulation results in their biological context :cite:`lee2013wholecellviz`. However, further work is needed to scale WholeCellViz to larger models and to make it easier to incorporate new visualizations into WholeCellViz.
+Several tools have been developed to analyze and visualize simulation results. The most popular simulation software programs, including COPASI :cite:`bergmann2017copasi` and Virtual Cell :cite:`resasco2012virtual`, provide basic tools for visualizing simulation results. Tools such as Escher :cite:`king2015escher` and Pathway Tools Omics Viewer :cite:`paley2006pathway` can also be used to visualize simulation results. 
+
+We developed ``WholeCellViz`` to visualize WC simulation results in their biological context :cite:`lee2013wholecellviz`. WholeCellViz provides users time series plots and interactive animations to visualize model predictions, and enables users to arrange grids of plots and animations to help users compare predictions across multiple simulation runs and simulated conditions. However, further work is needed to scale WholeCellViz to larger models and to make it easier to incorporate new visualizations into WholeCellViz.
 
 .. _existing_models:
 
@@ -328,13 +345,12 @@ Since the 1950's, researchers have been using the tools described above to model
 Models of individual pathways
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Over the past 30 years, researchers have developed a wide range of models of individual cellular pathways :cite:`chelliah2015biomodels` (Figure :numref:`fig_existing_models`, Table S1). In particular, researchers have developed models of cell cycle regulation :cite:`sible2007mathematical`; circadian rhythms :cite:`goldbeter2002computational`; electrical signaling :cite:`herz2006modeling`; metabolism :cite:`swainston2016recon,agren2012reconstruction,uhlen2017pathology`; signaling pathways such as the JAK/STAT, NF-:math:`\kappa`\ B, p53, and TGF\ :math:`\beta` pathways :cite:`hughey2010computational`; transcriptional regulation :cite:`gerstein2012architecture`, and multicellular processes such as developmental patterning :cite:`kondo2010reaction` and infection. However, many pathways have not been modeled at the scale of entire cells, including several well-studied pathways. For example, although we have extensive knowledge of the mutations responsible for cancer, we have few models of DNA repair; although we have extensive structural and catalytic information about RNA modification, we have few kinetic models of RNA modification; and although we have detailed atomistic models of protein folding, we have few cell-scale models of chaperone-mediated folding.
+Over the past 30 years, researchers have developed a wide range of models of individual cellular pathways :cite:`chelliah2015biomodels` (:numref:`fig_existing_models`, Table S1). In particular, researchers have developed models of cell cycle regulation :cite:`sible2007mathematical`; circadian rhythms :cite:`goldbeter2002computational`; electrical signaling :cite:`herz2006modeling`; metabolism :cite:`swainston2016recon,agren2012reconstruction,uhlen2017pathology`; signaling pathways such as the JAK/STAT, NF-:math:`\kappa`\ B, p53, and TGF\ :math:`\beta` pathways :cite:`hughey2010computational`; transcriptional regulation :cite:`gerstein2012architecture`, and multicellular processes such as developmental patterning :cite:`kondo2010reaction` and infection. However, many pathways have not been modeled at the scale of entire cells, including several well-studied pathways. For example, although we have extensive knowledge of the mutations responsible for cancer, we have few models of DNA repair; although we have extensive structural and catalytic information about RNA modification, we have few kinetic models of RNA modification; and although we have detailed atomistic models of protein folding, we have few cell-scale models of chaperone-mediated folding.
 
 .. _fig_existing_models:
 
-.. figure:: figures/existing-models/v15.pdf
+.. figure:: figures/existing-models/v21.png
     :align: center
-    :width: 100%
 
     WC models can be built by leveraging existing models of well-studied processes (colors) and developing new models of other processes (gray).
 
@@ -360,7 +376,7 @@ In the previous section, we outlined the ongoing technological advances that are
 Principles of WC modeling
 -------------------------------------------------------------------------
 
-Based on our experience, we propose several guiding principles for WC modeling.
+Based on our experience, we propose several guiding principles for WC modeling (:numref:`fig_principles`).
 
     * **Modular modeling.** Similar to other large engineered systems such as software, WC models should be built by partitioning cells into pathways, outlining the interfaces among these pathways, building submodels of each pathway, and combining these submodels into a single model. This approach reduces the dimensionality of model construction, calibration, and validation and facilitates collaborative modeling.
 
@@ -378,29 +394,36 @@ Based on our experience, we propose several guiding principles for WC modeling.
 
     * **Focus on model organisms.** To facilitate collaboration, early WC modeling efforts should focus on a small number of organisms and cell lines that are easy to culture, well-characterized, karyotypically and phenotypically "normal", genomically stable and relevant to a wide range of basic science, medicine, and bioengineering. This includes well-characterized bacteria such as *Escherichia coli* and well-characterized human cell lines such as the H1 human embryonic stem cell (hESC) line.
 
-    * **Continual innovation.** Because we do not yet know exactly what WC models should represent, what WC models should predict, or how to build WC models, we should periodically evaluate the quality of our models and methods and iteratively improve our models and methods as we learn more about cell biology and WC modeling. This should include how we partition cells into pathways, the interfaces that we define among the pathways, and how we simulate multi-algorithmic models.
+    * **Reproducibility, transparency, extensibility, and openness.** To facilitate collaboration and maximize impact, WC models and simulations should be reproducible, comprehensible, and extensible. For example, to enable other modelers to understand a model, the biological semantic meaning of each species and reaction should be annotated, the data sources and assumptions used to design the model should be annotated, and the parameter values used to produce each simulation result should be recorded. Furthermore, each WC model and WC modeling technology should be free and open-source.
+
+    * **Constant innovation.** Because we do not yet know exactly what WC models should represent, what WC models should predict, or how to build WC models, we should periodically evaluate the quality of our models and methods and iteratively improve our models and methods as we learn more about cell biology and WC modeling. This should include how we partition cells into pathways, the interfaces that we define among the pathways, and how we simulate multi-algorithmic models.
 
     * **Interdisciplinary collaboration.** WC modeling should be an interdisciplinary collaboration among modelers, experimentalists, computer scientists, and engineers, and research sponsors. Furthermore, there should be open and frequent communication among the WC modeling community.
+    
+.. _fig_principles:
 
-    * **Reproducibility, transparency, extensibility, and openness.** To facilitate collaboration and maximize impact, WC models and simulations should be reproducible, comprehensible, and extensible. For example, to enable other modelers to understand a model, the biological semantic meaning of each species and reaction should be annotated, the data sources and assumptions used to design the model should be annotated, and the parameter values used to produce each simulation result should be recorded. Furthermore, each WC model and WC modeling technology should be free and open-source.
+.. figure:: figures/principles/v1.png
+    :align: center
+
+    Principles of WC modeling.
+
 
 Methods for WC modeling
 -------------------------------------------------------------------------
 
-To enable WC models, we and others are adapting and integrating the technologies described in :numref:` Section %s <foundational_resources_modeling>` into a workflow for scalably building, simulating, and validating WC models (Figure :numref:`fig_workflow`). (1) Modelers will use ``Datanator`` to aggregate, standardize, and integrate the experimental data that they will need to build, calibrate, and validate their model into a single dataset. (2) Modelers will use this data to design submodels of each individual pathway using the most appropriate mathematical representation for each pathway, and encode their model in ``wc_rules``, a rule-based format for describing WC models. (3) Modelers will construct reduced models, and use them to calibrate each submodel and their entire model. (4) Modelers will use formal verification and/or unit testing to verify that their model functions as intended and recapitulates the data used to build the model. (5) Modelers will use ``wc_sim``, a scalable, network-free, multi-algorithmic simulator, to simulate their model. (6) Modelers will use ``WholeCellSimDB`` to organize their simulation results and use ``WholeCellViz`` to visually analyze these results. Importantly, every tool in this workflow will facilitate collaboration to help researchers work together, and these tools will be modular to enable us and others to continuously improve this methodology. We plan to implement this workflow by leveraging recent advances in computational and experimental technology (:numref:`Section %s <foundational_resources>`). Here, we describe the six steps of this emerging workflow.
+To enable WC models, we and others are adapting and integrating the technologies described in :numref:` Section %s <foundational_resources_modeling>` into a workflow for scalably building, simulating, and validating WC models (:numref:`fig_workflow`). (1) Modelers will use ``Datanator`` to aggregate, standardize, and integrate the experimental data that they will need to build, calibrate, and validate their model into a single dataset. (2) Modelers will use this data to design submodels of each individual pathway using the most appropriate mathematical representation for each pathway, and encode their model in ``wc_rules``, a rule-based format for describing WC models. (3) Modelers will construct reduced models, and use them to calibrate each submodel and their entire model. (4) Modelers will use formal verification and/or unit testing to verify that their model functions as intended and recapitulates the data used to build the model. (5) Modelers will use ``wc_sim``, a scalable, network-free, multi-algorithmic simulator, to simulate their model. (6) Modelers will use ``WholeCellSimDB`` to organize their simulation results and use ``WholeCellViz`` to visually analyze these results. Importantly, every tool in this workflow will facilitate collaboration to help researchers work together, and these tools will be modular to enable us and others to continuously improve this methodology. We plan to implement this workflow by leveraging recent advances in computational and experimental technology (:numref:`foundational_resources`). Here, we describe the six steps of this emerging workflow.
 
 .. _fig_workflow:
 
-.. figure:: figures/workflow/v2.pdf
+.. figure:: figures/workflow/v2.png
     :align: center
-    :width: 100%
 
     Emerging workflow for scalably building, simulating, and validating WC models. (**a**) Modelers will aggregate the data for WC modeling into a single dataset. (**b**) Modelers will use this data to design multi-algorithmic WC models. (**c,d**) Modelers will use reduced models to calibrate, verify, and validate models. (**e**) Modelers will simulate multi-algorithmic WC models by co-simulating their submodels. (**f**) Modelers will visualize and analyze their results to discover new biology, personalize medicine, and design microorganisms.
 
 Data aggregation, standardization, and integration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The first step of WC modeling is to aggregate, standardize, integrate, and select the experimental data needed for WC modeling into a single dataset for model building, calibration, and validation (Figure :numref:`fig_workflow`\ a).
+The first step of WC modeling is to aggregate, standardize, integrate, and select the experimental data needed for WC modeling into a single dataset for model building, calibration, and validation (:numref:`fig_workflow`\ a).
 
 First, we must aggregate a wide range of experimental data from a wide range of databases such as such as biochemical data about metabolite concentrations from ECMDB :cite:`sajed2016ecmdb`, RNA-seq data about RNA concentrations from ArrayExpress :cite:`kolesnikov2015arrayexpress`, and mass-spectrometry data about metabolite concentrations from PaxDb :cite:`wang2015version`. Where possible, data should be aggregated using database downloads and web services. Otherwise, data should be aggregated by scraping webpages. In addition to aggregating data from databases, we should also aggregate data from collaborators, individual publications, and bioinformatics prediction tools such as PSORTb :cite:`yu2010psortb` and TargetScan :cite:`agarwal2015predicting`.
 
@@ -412,14 +435,14 @@ Third, we must integrate this data by linking the data together through common m
 
 Fourth, we must identify the most relevant data within our database for the species and environmental condition that we want to model. For each experimental measurement that we need to constrain a model, we must search our database for data observed for similar biology (e.g., metabolites, RNA, proteins, and interactions), genotypes (e.g., species, strain, and genetic variants), and environmental conditions (e.g., temperature, pH, growth media); calculate the relevance of each experimental observation; and calculate the consensus of the relevant observations, weighted by their relevance. 
 
-Fifth, we should organize these consensus experimental values and their provenance (experimental evidence and the method used to calculate the consensus value) into a single dataset. Pathway/genome databases (PGDB) can be used to organize this information because PGDBs are well-suited to representing relationships among experimental data about a single species. We have developed the ``WholeCellKB`` PGDB to organize the data needed for WC modeling.
+Fifth, we should organize these consensus experimental values and their provenance (experimental evidence and the method used to calculate the consensus value) into a single dataset. Pathway/genome databases (PGDB) can be used to organize this information because PGDBs are well-suited to representing relationships among experimental data about a single species. We have developed the ``WholeCellKB`` PGDB to organize the data needed for WC modeling. WholeCellKB provides users three interfaces to deposit experimental data for WC models, extensive functionality for validating this data, a web-based user interface to search and browse this data, and a JSON web service to programmatically retrieve data for model construction.
 
 .. _wc_methods_model_design:
 
 Model design
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The second step of WC modeling is to use the data aggregated in the first step to design models, including each species and interaction (Figure :numref:`fig_workflow`\ b). To represent the details of well-characterized pathways, as well as coarsely represent poorly-characterized pathways, WC models should be built by partitioning cells into pathways, modeling each pathway using the most appropriate mathematical representation, and combining pathway submodels into composite, multi-algorithmic models. 
+The second step of WC modeling is to use the data aggregated in the first step to design models, including each species and interaction (:numref:`fig_workflow`\ b). To represent the details of well-characterized pathways, as well as coarsely represent poorly-characterized pathways, WC models should be built by partitioning cells into pathways, modeling each pathway using the most appropriate mathematical representation, and combining pathway submodels into composite, multi-algorithmic models. 
 
 To capture the large number of possible cellular phenotypes, WC models should also capture the combinatorial complexity of cellular biochemistry. For example, WC models should represent the combinatorial number of RNA transcripts that can be produced from the interactions of transcription, RNA editing, RNA folding, and RNA degradation; WC models should represent the combinatorial number of possible interactions among the subunits of protein complexes; and the combinatorial number of phosphorylation states of each protein complex. 
 
@@ -434,12 +457,12 @@ To enable other researchers to reproduce, understand, reuse, and extend WC model
 Model calibration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The third step in WC modeling is to calibrate model parameters (Figure :numref:`fig_workflow`\ c). This should be done by using numerical optimization methods to minimize the distance between the model's predictions and related experimental observations. One promising method for calibrating composite WC models is to (a) use multi-algorithmic modeling to only create parameters whose values can be constrained by one or a small number of experimental measurements, (b) estimate the value of each individual parameter using one or a small number of experimental observations, (c) construct a set of reduced models, one for each submodel, to estimate the joint values of the parameters, and (d) use distributed global optimization tools such as saCeSS :cite:`penas2017parameter` to refine the joint values of the parameters :cite:`karr2015summary`. This method avoids the need to calibrate large numbers of parameters of physiological data; performs the majority of model calibration using low dimensional models of individual species, reactions, and pathways; and generates successively better starting points for more refined calibration.
+The third step in WC modeling is to calibrate model parameters (:numref:`fig_workflow`\ c). This should be done by using numerical optimization methods to minimize the distance between the model's predictions and related experimental observations. One promising method for calibrating composite WC models is to (a) use multi-algorithmic modeling to only create parameters whose values can be constrained by one or a small number of experimental measurements, (b) estimate the value of each individual parameter using one or a small number of experimental observations, (c) construct a set of reduced models, one for each submodel, to estimate the joint values of the parameters, and (d) use distributed global optimization tools such as saCeSS :cite:`penas2017parameter` to refine the joint values of the parameters :cite:`karr2015summary`. This method avoids the need to calibrate large numbers of parameters of physiological data; performs the majority of model calibration using low dimensional models of individual species, reactions, and pathways; and generates successively better starting points for more refined calibration.
 
 Model verification and validation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The fourth step in WC modeling is to verify that models behave as intended and validate that models recapitulate the true biology (Figure :numref:`fig_workflow`\ d). First, WC should be verified models using a series of increasingly comprehensive unit tests that test each individual species, reaction, and pathway, as well as groups of pathways and entire models. Importantly, these tests should cover all of the logic of the model. For example, these tests should test the edge cases of every rate law. Reduced models should be used to efficiently test individual species, reactions, and pathway submodels. Furthermore, to quickly identify errors, continuous integration systems such as Jenkins :cite:`jenkins2017` should be used to automatically execute tests each time models are revised. Alternatively, models can be verified using formal verification systems such as PRISM :cite:`kwiatkowska2011prism`. However, substantial work remains to adapt formal verification to multi-algorithmic dynamical modeling.
+The fourth step in WC modeling is to verify that models behave as intended and validate that models recapitulate the true biology (:numref:`fig_workflow`\ d). First, WC should be verified models using a series of increasingly comprehensive unit tests that test each individual species, reaction, and pathway, as well as groups of pathways and entire models. Importantly, these tests should cover all of the logic of the model. For example, these tests should test the edge cases of every rate law. Reduced models should be used to efficiently test individual species, reactions, and pathway submodels. Furthermore, to quickly identify errors, continuous integration systems such as Jenkins :cite:`jenkins2017` should be used to automatically execute tests each time models are revised. Alternatively, models can be verified using formal verification systems such as PRISM :cite:`kwiatkowska2011prism`. However, substantial work remains to adapt formal verification to multi-algorithmic dynamical modeling.
 
 Second, WC models should be validated by comparing their simulation results to independent experimental data that was not used for model construction or calibration. To be effective, models should be tested using a broad range of data that spans different types of predictions, genetic perturbations, and environmental conditions.
 
@@ -448,7 +471,7 @@ Third, because it is infeasible to validate possible model prediction, modelers 
 Network-free multi-algorithmic simulation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The fifth step of WC modeling is to numerically simulate WC models (Figure :numref:`fig_workflow`\ e). Because WC models should be described using rules and composed of multiple mathematically-dissimilar submodels, WC models simulated by co-simulating their submodels. This can be achieved in three steps. First, all of the submodels should be converted to explicit time-driven submodels. For example, Boolean submodels should be converted to SSA submodels by assuming typical concentrations and kinetic rates. Second, all of the mathematically-similar submodels should be analytically merged into a single mathematically-equivalent submodel. Third, for WC models that are composed only of FBA, ODE, and ODE submodels, (a) the SSA submodel should be used as the master clock for the integration and synchronization of the submodels, (b) each time the SSA submodel advances to the next iteration, the FBA and ODE submodels should be synchronized with the SSA submodel and integrated for the same timestep as the SSA submodel, (c) and the SSA submodel should be synchronized with the FBA and ODE models. If the FBA or ODE models generate unphysical states such as negative concentrations, they must be rolled back and reintegrated for multiple smaller timesteps. To efficiently simulate WC models, the FBA and ODE models should only be evaluated periodically. 
+The fifth step of WC modeling is to numerically simulate WC models (:numref:`fig_workflow`\ e). Because WC models should be described using rules and composed of multiple mathematically-dissimilar submodels, WC models simulated by co-simulating their submodels. This can be achieved in three steps. First, all of the submodels should be converted to explicit time-driven submodels. For example, Boolean submodels should be converted to SSA submodels by assuming typical concentrations and kinetic rates. Second, all of the mathematically-similar submodels should be analytically merged into a single mathematically-equivalent submodel. Third, for WC models that are composed only of FBA, ODE, and ODE submodels, (a) the SSA submodel should be used as the master clock for the integration and synchronization of the submodels, (b) each time the SSA submodel advances to the next iteration, the FBA and ODE submodels should be synchronized with the SSA submodel and integrated for the same timestep as the SSA submodel, (c) and the SSA submodel should be synchronized with the FBA and ODE models. If the FBA or ODE models generate unphysical states such as negative concentrations, they must be rolled back and reintegrated for multiple smaller timesteps. To efficiently simulate WC models, the FBA and ODE models should only be evaluated periodically. 
 
 To efficiently simulate the combinatorial complexity represented by WC models, most submodels should be simulated using SSA and SSA should be implemented using network-free graph-based methods. Specifically, SSA should be implemented by representing each molecule as a graph, representing each reaction rule as a graph, searching for matching pairs of species-reaction graphs to determine the rate of each reaction, randomly selecting a reaction to fire, updating the species involved in the selected reaction, and using a species-reaction dependency graph to update the rates of all affected reactions. This methodology will enable WC simulations to scale to large numbers of possible species and reactions by only representing the configuration of each active molecule rather than representing the copy number of each possible species. 
 
@@ -459,7 +482,7 @@ To make WC simulations comprehensible and reproducible, WC simulations should be
 Visualization and analysis of simulation results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The sixth step of WC modeling is to visualize and analyze WC simulation results to discover new biology, personalize medicine, or design microbial genomes (Figure :numref:`fig_workflow`\ f). First, all of the metadata needed to understand and reproduce simulation results should be recorded, including the model, the version of the model, the parameter values, and the random number generator seed that was simulated. Second, simulation results should be logged and stored in HDF5 format :cite:`folk2011overview`. Third, WC simulation results and their metadata should be organized using a tool such as ``WholeCellSimDB`` that helps researchers search, slice, reduce, and share simulation results. Fourth, researchers should use tools such as ``WholeCellViz`` to visually analyze WC simulation results and use visualization grammars such as Vega :cite:`satyanarayan2017vega` to develop custom diagrams.
+The sixth step of WC modeling is to visualize and analyze WC simulation results to discover new biology, personalize medicine, or design microbial genomes (:numref:`fig_workflow`\ f). First, all of the metadata needed to understand and reproduce simulation results should be recorded, including the model, the version of the model, the parameter values, and the random number generator seed that was simulated. Second, simulation results should be logged and stored in HDF5 format :cite:`folk2011overview`. Third, WC simulation results and their metadata should be organized using a tool such as ``WholeCellSimDB`` that helps researchers search, slice, reduce, and share simulation results. Fourth, researchers should use tools such as ``WholeCellViz`` to visually analyze WC simulation results and use visualization grammars such as Vega :cite:`satyanarayan2017vega` to develop custom diagrams.
 
 
 Latest WC models and their limitations
@@ -475,7 +498,14 @@ To represent multiple pathways, most of these models have been developed by comb
 WC models
 -------------------------------------------------------------------------
 
-Toward WC models, recently, we and others demonstrated the first model which represents every characterized gene function of a cell :cite:`karr2012whole`. The model represents 28 pathways of *M. genitalium*, and was developed by building and combining 28 separate submodels of each pathway using data from over 900 databases and publications. To help us organize the data used to build the model, we developed WholeCellKB, a pathway/genome database (PGDB) software system tailored for WC modeling :cite:`karr2013wholecellkb`, and developed scripts to generate the model from the PGDB.
+Toward WC models, recently, we and others demonstrated the first model which represents every characterized gene function of a cell :cite:`karr2012whole` (:numref:`fig_mgen_model`\ a). The model represents 28 pathways of *M. genitalium*, and was developed by building and combining 28 separate submodels of each pathway using data from over 900 databases and publications. To help us organize the data used to build the model, we developed WholeCellKB, a pathway/genome database (PGDB) software system tailored for WC modeling :cite:`karr2013wholecellkb`, and developed scripts to generate the model from the PGDB.
+
+.. _fig_mgen_model:
+
+.. figure:: figures/mgen_model/v1.png
+    :align: center
+
+    A WC model of *M. genitalium* predicts high-level cellular behaviors from the molecular level. (a) The model combines multiple submodels of individual cellular subsystems. We validated the model by comparing its outputs to experimental data which describes its rate of growth (b) and RNA polymerase occupancy (c). We have used the model to understand how cells regulate their cell cycle (d) and allocate energy (e).
 
 To capture our varying level of knowledge about each pathway, we described each pathway using the most appropriate mathematical representation. For example, we represented transcription and translation as stochastic models, represented metabolism using FBA, and represented cell division with ODEs. We combined the submodels into a single model by mapping their inputs and outputs onto a common set of global variables that we formed by taking the union of the state variables of the individual submodels. 
 
@@ -483,7 +513,9 @@ We developed a novel algorithm to simulate the combined model by co-simulating t
 
 We calibrated the model by constructing a set of reduced models that focused on each pathway submodel, calibrating the individual submodels, and using the parameter values learn from calibrating the individual submodels as a starting point for calibrating the entire model :cite:`karr2015summary`.
 
-We validated the model by constructing numerous reduced models that focused on individual submodels and groups of submodels, checking that the submodels and groups of submodels are consistent with our knowledge such as the Central Dogma, and checking that the submodels and groups of submodels are consistent with the experimental data that we used to build the model and additional independent experimental data. In particular, we demonstrated that the model recapitulates the observed *M. genitalium* growth rate and predicts the essentiality of each gene with 80% accuracy.
+We validated the model by constructing numerous reduced models that focused on individual submodels and groups of submodels, checking that the submodels and groups of submodels are consistent with our knowledge such as the Central Dogma, and checking that the submodels and groups of submodels are consistent with the experimental data that we used to build the model and additional independent experimental data (:numref:`fig_mgen_model`\ b,c). In particular, we demonstrated that the model recapitulates the observed *M. genitalium* growth rate and predicts the essentiality of each gene with 80% accuracy.
+
+In addition, we have used the model to demonstrate how WC models could be used to help design synthetic circuits :cite:`purcell2013towards` and we have used the model to demonstrate how WC models could help reposition antibiotics among distance bacteria :cite:`kazakiewicz2015combined`.
 
 Despite this progress, the model does not represent several important cell functions such as the maintenance of electrochemical gradients across the cell membrane, and the model mispredicts several important phenotypes such as the growth rates of many single-gene deletion strains. Furthermore, the model took over 10 person-years to construct because it was largely built by hand; the model is difficult to understand, reuse, and extend because it was described directly in terms of its numerical simulation rather than using a high-level format such as SBML; the model's simulation software is not reusable because it was built to simulate a single model; the model's simulation algorithm violates the arrow of time and is unscalable because it only partitions a portions of the state variables among the submodels.
 
@@ -493,13 +525,12 @@ Despite this progress, the model does not represent several important cell funct
 Bottlenecks to more comprehensive and predictive WC models
 ==================================================================================
 
-In the previous sections, we described how we and others are beginning to build WC models. Despite this progress, it is still challenging to build and simulate WC models. To help focus the community's efforts to accelerate WC modeling, here, we summarize the major remaining bottlenecks to WC modeling (Figure :numref:`fig_bottlenecks`). These bottlenecks are based on our own experience and a community survey of the bottlenecks to biomodeling that we conducted in 2017 :cite:`szigeti2018blueprint`. In the following sections, we suggest ways to overcome these bottlenecks.
+In the previous sections, we described how we and others are beginning to build WC models. Despite this progress, it is still challenging to build and simulate WC models. To help focus the community's efforts to accelerate WC modeling, here, we summarize the major remaining bottlenecks to WC modeling (:numref:`fig_bottlenecks`). These bottlenecks are based on our own experience and a community survey of the bottlenecks to biomodeling that we conducted in 2017 :cite:`szigeti2018blueprint`. In the following sections, we suggest ways to overcome these bottlenecks.
 
 .. _fig_bottlenecks:
 
-.. figure:: figures/bottlenecks/v5.pdf
+.. figure:: figures/bottlenecks/v5.png
     :align: center
-    :width: 100%
 
     Major bottlenecks to WC modeling and the major methods, tools, and resources needed to advance WC modeling.
 
@@ -508,14 +539,14 @@ In the previous sections, we described how we and others are beginning to build 
 Inadequate experimental methods and data repositories
 -------------------------------------------------------------------------
 
-In our opinion, one of the biggest bottlenecks to WC modeling is collecting and aggregating enough high-quality experimental data to build WC models. This is a significant bottleneck because WC models require extensive data, and because, as described in :numref:`Section %s <imperfect_data>`, we do not yet have sufficient methods for characterizing cells, sufficient tools for annotating the semantic meaning of experimental data, sufficient repositories for aggregating and integrating experimental data, and sufficient incentives for researchers to share their data.
+In our opinion, one of the biggest bottlenecks to WC modeling is collecting and aggregating enough high-quality experimental data to build WC models. This is a significant bottleneck because WC models require extensive data, and because, as described in :numref:`imperfect_data`, we do not yet have sufficient methods for characterizing cells, sufficient tools for annotating the semantic meaning of experimental data, sufficient repositories for aggregating and integrating experimental data, and sufficient incentives for researchers to share their data.
 
 New measurement methods, data repositories, and data aggregation tools are needed to overcome this bottleneck: (a) improved proteome-wide methods for measuring protein abundances would facilitate more accurate models of many pathways; (b) improved metabolome-wide methods for measuring metabolite concentrations would enable more accurate models of metabolism; (c) new single-cell measurement methods would facilitate more accurate models of the phenotypic variation of single cells; (d) a new central data repository that uses consistent representations, identifiers, and units would accelerate data aggregation :cite:`howe2008big`; and (e) new tools for searching this repository would help researchers identify relevant data for WC modeling, including data from related organisms and environments.
 
 Incomplete, inconsistent, scattered, and poorly annotated pathway models
 -------------------------------------------------------------------------
 
-As discussed in :numref:`Section %s <wc_methods>`, the most promising strategy for building WC models is to combine multiple separate models. However, the lack of a complete set of compatible, well-annotated, and high-quality pathway models is a major bottleneck to WC modeling :cite:`krause2009annotation,neal2014reappraisal,snoep2006towards,gonccalves2013bridging`. Here, we summarize the limitations of our pathway models.
+As discussed in :numref:`wc_methods`, the most promising strategy for building WC models is to combine multiple separate models. However, the lack of a complete set of compatible, well-annotated, and high-quality pathway models is a major bottleneck to WC modeling :cite:`krause2009annotation,neal2014reappraisal,snoep2006towards,gonccalves2013bridging`. Here, we summarize the limitations of our pathway models.
 
 Incomplete models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -547,14 +578,14 @@ Many reported models are also not sufficiently well-annotated to combine them in
 Inadequate software tools for WC modeling
 -------------------------------------------------------------------------
 
-As described in :numref:`Section %s <foundational_resources>`, a wide range of tools have been developed for modeling individual pathways. However, few of these tools support all of the features needed for WC modeling. In particular, few of these tools support the scale required for WC modeling, few of these tools support composite, multi-algorithmic modeling, few of these tools support collaboration, and these tools do not support all of the metadata needed to understand models and their provenance. 
+As described in :numref:`foundational_resources`, a wide range of tools have been developed for modeling individual pathways. However, few of these tools support all of the features needed for WC modeling. In particular, few of these tools support the scale required for WC modeling, few of these tools support composite, multi-algorithmic modeling, few of these tools support collaboration, and these tools do not support all of the metadata needed to understand models and their provenance. 
 
 .. _bottlenecks_model_formats:
 
 Inadequate model formats
 -------------------------------------------------------------------------
 
-As described in :numref:`Section %s <foundational_resources_model_formats>`, several formats have been developed to describe cell models. However, the lack of a format that supports all of the features needed for WC modeling is a major bottleneck. In particular, no existing format can represent (a) the combinatorial complexity of pathways such as transcription elongation which involve billions of sequence-based reactions; (b) the multiple scales that must be represented by WC models such as the sequence of each protein, the subunit composition of each complex, and the DNA binding of each complex; and (c) multi-algorithmic models that are composed of multiple mathematically-distinct submodels :cite:`waltemath2016toward`.
+As described in :numref:`foundational_resources_model_formats`, several formats have been developed to describe cell models. However, the lack of a format that supports all of the features needed for WC modeling is a major bottleneck. In particular, no existing format can represent (a) the combinatorial complexity of pathways such as transcription elongation which involve billions of sequence-based reactions; (b) the multiple scales that must be represented by WC models such as the sequence of each protein, the subunit composition of each complex, and the DNA binding of each complex; and (c) multi-algorithmic models that are composed of multiple mathematically-distinct submodels :cite:`waltemath2016toward`.
 
 Lack of coordination among the cell modeling community
 -------------------------------------------------------------------------
@@ -575,12 +606,12 @@ While substantial data about cellular populations already exists, additional dat
 Tools for aggregating, standardizing, and integrating heterogeneous data
 -------------------------------------------------------------------------
 
-As described in :numref:`Section %s <data>`-:numref:`data_repos`, extensive data is now available for WC modeling. However, this data spans a wide range of data types, organisms, and environments; the data is often not annotated and normalized; it is scattered across many repositories and publications and it is described using inconsistent identifiers and units. To make this data more usable for modeling, we must develop tools for aggregating data from multiple sources; merging data from multiple specimens, environmental conditions, and experimental procedures; standardizing data to common identifiers and units; identifying the most relevant data for a model; and averaging across multiple imprecise and noisy observations.
+As described in :numref:`data`-:numref:`%s <data_repos>`, extensive data is now available for WC modeling. However, this data spans a wide range of data types, organisms, and environments; the data is often not annotated and normalized; it is scattered across many repositories and publications and it is described using inconsistent identifiers and units. To make this data more usable for modeling, we must develop tools for aggregating data from multiple sources; merging data from multiple specimens, environmental conditions, and experimental procedures; standardizing data to common identifiers and units; identifying the most relevant data for a model; and averaging across multiple imprecise and noisy observations.
 
 Tools for scalably designing models from large datasets
 -------------------------------------------------------------------------
 
-To scalably build WC models, we must develop tools for defining the interfaces among pathway submodels, collaboratively designing composite, multi-algorithmic models directly from large datasets, automatically identifying inconsistencies and gaps in dynamical models, recording how data and assumptions are used to build models, and encoding models in a rule-based format. As described in :numref:`Section %s <foundational_resources_model_design>`-:numref:`foundational_resources_model_refinement`, several tools support each of these features. To accelerate WC modeling, we should develop a single tool that supports all of these functions at the scale required for WC modeling.
+To scalably build WC models, we must develop tools for defining the interfaces among pathway submodels, collaboratively designing composite, multi-algorithmic models directly from large datasets, automatically identifying inconsistencies and gaps in dynamical models, recording how data and assumptions are used to build models, and encoding models in a rule-based format. As described in :numref:`foundational_resources_model_design`-:numref:`%s <foundational_resources_model_refinement>`, several tools support each of these features. To accelerate WC modeling, we should develop a single tool that supports all of these functions at the scale required for WC modeling.
 
 Rule-based format for representing models
 -------------------------------------------------------------------------
@@ -595,12 +626,12 @@ To simultaneously represent well-characterized pathways with fine detail and coa
 Scalable tools for calibrating models
 -------------------------------------------------------------------------
 
-As discussed in :numref:`Section %s <foundational_resources_calibration>`, several tools are available for calibrating small single-algorithm models. However, these tools are not well-suited to calibrating large multi-algorithmic models. To calibrate WC models, we must develop new methods and software tools for scalably calibrating rule-based multi-algorithmic models. We and others have begun to explore using reduced models to efficiently calibrate WC models :cite:`karr2015summary`. However, further work is needed to formalize these methods, including developing automated methods for reducing WC models.
+As discussed in :numref:`foundational_resources_calibration`, several tools are available for calibrating small single-algorithm models. However, these tools are not well-suited to calibrating large multi-algorithmic models. To calibrate WC models, we must develop new methods and software tools for scalably calibrating rule-based multi-algorithmic models. We and others have begun to explore using reduced models to efficiently calibrate WC models :cite:`karr2015summary`. However, further work is needed to formalize these methods, including developing automated methods for reducing WC models.
 
 Scalable tools for verifying models
 -------------------------------------------------------------------------
 
-To fulfill our vision of using WC models to drive medicine and bioengineering, it will be critical for modelers to rigorously verify that WC models function as intended. As discussed in :numref:`Section %s <foundational_resources_verification>`, researchers are beginning to adapt tools from computer science and software engineering to verify cell models. However, none of the existing or planned tools support rule-based, multi-algorithmic models. To help modelers verify WC models, we must adapt formal verification and/or unit testing for WC modeling. Furthermore, to help researchers quickly verify models, these tools should help researchers verify entire WC models, as well as help researchers verify reduced models and individual submodels.
+To fulfill our vision of using WC models to drive medicine and bioengineering, it will be critical for modelers to rigorously verify that WC models function as intended. As discussed in :numref:`foundational_resources_verification`, researchers are beginning to adapt tools from computer science and software engineering to verify cell models. However, none of the existing or planned tools support rule-based, multi-algorithmic models. To help modelers verify WC models, we must adapt formal verification and/or unit testing for WC modeling. Furthermore, to help researchers quickly verify models, these tools should help researchers verify entire WC models, as well as help researchers verify reduced models and individual submodels.
 
 Additional tools that would help accelerate WC modeling
 -------------------------------------------------------------------------
@@ -629,13 +660,12 @@ In addition to these essential tools, we believe that WC modeling would also be 
 A plan for achieving comprehensive WC models as a community
 ============================================================================
 
-In the previous sections, we described the potential of WC models to advance medicine and bioengineering, summarized the major bottlenecks to WC modeling, and outlined several technological solutions to these bottlenecks. To maximize our efforts to achieve WC models, we believe that we should begin to develop a plan for achieving WC models. Here, we propose a three-phase plan to achieve the first comprehensive WC model (Figure :numref:`fig_human_wc_modeling_blueprint`). The plan focuses on developing a WC model of H1-hESCs because we believe that the community should initially focus on a single cell line and because H1-hESCs are relatively easy to culture, well-characterized, karyotypically and phenotypically "normal", genomically stable and relevant to a wide range of basic science, medicine, and bioengineering. Although the plan focuses on a single cell line, the methods and tools developed under the plan would be applicable to any organism, and the H1-hESC model could be contextualized to represent other cell lines, cell types, and individuals.
+In the previous sections, we described the potential of WC models to advance medicine and bioengineering, summarized the major bottlenecks to WC modeling, and outlined several technological solutions to these bottlenecks. To maximize our efforts to achieve WC models, we believe that we should begin to develop a plan for achieving WC models. Here, we propose a three-phase plan to achieve the first comprehensive WC model (:numref:`fig_wc_modeling_plan`). The plan focuses on developing a WC model of H1-hESCs because we believe that the community should initially focus on a single cell line and because H1-hESCs are relatively easy to culture, well-characterized, karyotypically and phenotypically "normal", genomically stable and relevant to a wide range of basic science, medicine, and bioengineering. Although the plan focuses on a single cell line, the methods and tools developed under the plan would be applicable to any organism, and the H1-hESC model could be contextualized to represent other cell lines, cell types, and individuals.
 
-.. _fig_human_wc_modeling_blueprint:
+.. _fig_wc_modeling_plan:
 
-.. figure:: figures/human-wc-modeling-blueprint/v6.pdf
+.. figure:: figures/wc-modeling-plan/v7.png
     :align: center
-    :width: 100%
     
     The first WC models can be achieved in three phases: (1) demonstrating the feasibility of WC models by developing scalable modeling tools and using them to model several core processes, (2) demonstrating the feasibility of collaborative modeling by developing a collaborative modeling platform and using it to model additional processes, and (3) developing a comprehensive model as a community.
 
@@ -698,7 +728,7 @@ Currently, we are developing three technologies for aggregating the data needed 
 Data aggregation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-WC modeling requires a wide range of data. Unfortunately, as described in :numref:`Section %s <bottlenecks_data>`, aggregating this data is a major bottleneck to WC modeling because this data is scattered across a wide range of databases and publications. To help modelers obtain the data needed for WC modeling, we are developing a methodology for systematically and scalably identifying, aggregating, standardizing, and integrating the data needed for WC modeling, and we are developing a software program called ``Datanator`` which implements this methodology. The methodology consists of eight steps:
+WC modeling requires a wide range of data. Unfortunately, as described in :numref:`bottlenecks_data`, aggregating this data is a major bottleneck to WC modeling because this data is scattered across a wide range of databases and publications. To help modelers obtain the data needed for WC modeling, we are developing a methodology for systematically and scalably identifying, aggregating, standardizing, and integrating the data needed for WC modeling, and we are developing a software program called ``Datanator`` which implements this methodology. The methodology consists of eight steps:
 
     #. **Aggregation.** Modelers should retrieve a wide range of data from a wide range of sources such as metabolite concentrations from ECMDB, RNA concentrations from ArrayExpress, protein concentrations from PaxDb, reaction stoichiometries from KEGG, and kinetic parameters from SABIO-RK. Where possible, this should be implemented using downloads and web services. Where this is not possible, this should be implemented by scraping web pages and manually curating individual publications. Importantly, modelers should also record the provenance of each downloaded dataset.
 
@@ -721,14 +751,14 @@ We have already developed a common platform which implements this methodology, a
 Model representation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As described in :numref:`Section %s <bottlenecks_model_formats>`, no existing format is well-suited to representing composite, multi-algorithmic WC models. In particular, there is no format which is well-suited to describing all of the combinatorial complexity of cellular biochemistry, representing composite, multi-algorithmic models, and representing the semantic biological meaning and provenance of models.
+As described in :numref:`bottlenecks_model_formats`, no existing format is well-suited to representing composite, multi-algorithmic WC models. In particular, there is no format which is well-suited to describing all of the combinatorial complexity of cellular biochemistry, representing composite, multi-algorithmic models, and representing the semantic biological meaning and provenance of models.
 
 To accelerate WC modeling, we are developing, ``wc_rules``, a more abstract rule-based format for describing WC models. The format will be able to represent each molecular species at multiple levels of granularity (for example, as a single species, as a set of sites, and as a sequence); represent all of the combinatorial complexity of each molecular species and interaction; represent composite, multi-algorithmic models; represent the data, assumptions, and design decisions used to build models; and represent the semantic biological meaning of models. We are developing tools to export models described with ``wc_rules`` to BioNetGen and SBML, as well as a simulator for simulating models described with ``wc_rules``.
 
 Simulation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As described in :numref:`Section %s <bottlenecks_simulation>`, no existing simulator is well-suited to simulating computationally-expensive, high-dimensional, rule-based, multi-algorithmic WC models. In particular, there are only a few parallel simulators, only a few rule-based simulators, only a couple of multi-algorithmic simulators, and no simulator which supports all of these technologies.
+As described in :numref:`bottlenecks_simulation`, no existing simulator is well-suited to simulating computationally-expensive, high-dimensional, rule-based, multi-algorithmic WC models. In particular, there are only a few parallel simulators, only a few rule-based simulators, only a couple of multi-algorithmic simulators, and no simulator which supports all of these technologies.
 
 To accelerate WC modeling, we are beginning to use the Viatra :cite:`varro2016road` graph transformation engine and the ROSS :cite:`carothers2002ross` PDES engine to develop ``wc_sim``, a parallel, network-free, multi-algorithmic simulator that can simulate models described in ``wc_rules`` :cite:`goldberg2016toward`. Simulations will consist of six steps:
 
@@ -764,4 +794,4 @@ The `WC modeling forum <http://wholecell.org/forum>`_ is an online platform whic
 Outlook
 ============================================================================
 
-Despite several challenges, we believe that WC models are rapidly becoming feasible thanks to ongoing advances in experimental and computational technology. In particular, in :numref:`Section %s <plan>`, we have proposed a three-stage plan to achieve comprehensive WC models as a community. The cornerstones of this plan include developing practical solutions to the key bottlenecks; forming a collaborative interdisciplinary community; and adhering to common interfaces, formats, identifiers, and protocols. We have already developed tools for organizing the data needed for WC modeling, organizing WC simulation results, and visualizing WC simulation results, and we have begun to organize a WC modeling community. Currently, we are developing tools for aggregating the data needed for WC modeling, concisely describing WC models, and scalably simulating WC models, and we are continuing to organize WC modeling meetings. We are eager to advance WC modeling, and hope you will join us!
+Despite several challenges, we believe that WC models are rapidly becoming feasible thanks to ongoing advances in experimental and computational technology. In particular, in :numref:`plan`, we have proposed a three-stage plan to achieve comprehensive WC models as a community. The cornerstones of this plan include developing practical solutions to the key bottlenecks; forming a collaborative interdisciplinary community; and adhering to common interfaces, formats, identifiers, and protocols. We have already developed tools for organizing the data needed for WC modeling, organizing WC simulation results, and visualizing WC simulation results, and we have begun to organize a WC modeling community. Currently, we are developing tools for aggregating the data needed for WC modeling, concisely describing WC models, and scalably simulating WC models, and we are continuing to organize WC modeling meetings. We are eager to advance WC modeling, and hope you will join us!

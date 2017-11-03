@@ -26,6 +26,9 @@ Appendix: Acronyms
     InChI
         IUPAC International Chemical Identifier
 
+    MIASE
+        Minimum Information About a Simulation Experiment
+
     ODE
         ordinary differential equations
 

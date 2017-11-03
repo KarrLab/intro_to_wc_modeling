@@ -101,7 +101,17 @@ todo_include_todos = False
 
 
 numfig = True
-image_converter_args = ['-density', '150']
+image_converter_args = [
+    '-density', '150',
+    '-quality', '00',
+    ]
+
+numfig_format = {
+    'figure': 'Figure %s',
+    'table': 'Table %s',
+    'code-block': 'Listing %s',
+    'section': 'Section %s',
+}
 
 # -- linkcode options -----------------------------------------------------
 def linkcode_resolve(domain, info):

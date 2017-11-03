@@ -40,11 +40,19 @@ Appendix: Glossary
         
         *See also:* :term:`simplified molecular-input line-entry system (SMILES)`
 
+    Minimum Information About a Simulation Experiment (MIASE)
+        Standard for the minimum metadata that should be recorded about a simulation experiment :cite:`waltemath2011minimum`.
+
     multi-algorithmic simulation
         A simulation in which multiple submodels are simultaneously simulated using different simulation algorithms such as ODE integration, SSA, and FBA :cite:`takahashi2004multi`. Multi-algorithmic simulations are frequently used to simultaneously simulate both well-characterized pathways with fine-grained simulation algorithms and poorly-characterized pathways with coarse-grained simulation algorithms.
 
     model calibration
         The process of determining the parameters values of models, typically by numerically minimizing the distance between model predictions and experimental observations.
+
+    model organism database
+        A database that contains integrated experimental information about a single species.
+
+        *See also:* :term:`pathway/genome database (PGDB)`
 
     model reduction
         The process of reducing a model to reduced model.
@@ -61,10 +69,18 @@ Appendix: Glossary
         A parallel implementation of discrete event simulation.
 
     pathway/genome database (PGDB)
-        A database that contains integrated experimental information about a single species such as its genome sequence, genes, protein complexes, and metabolic reactions.
+        A model organism database that contains integrated experimental information about the molecular biology of a single species such as its genome sequence, genes, protein complexes, and metabolic reactions.
+
+        *See also:* :term:`model organism database`
 
     provenance
         Metadata about the origin of data or models such as how a model was developed including who developed the model; when the model was developed; and the data source, assumptions, and design decisions that were used to build the model.
+
+    reaction network modeling
+        The conventional, low-level representation of biochemical models which enumerates each individual species and each individual reaction. In contrast, rule-based modeling is an abstraction for representing reaction networks in terms of species and reaction patterns that can generate all of the individual species and reactions.
+
+    reconstruction
+        The process of determining the molecular species and reactions of a biological process.
 
     reduced model
         A smaller, less complex, and/or computationally cheaper model that approximates the behavior of the original model. Reduced models can be created either by lumping species, reactions, and/or parameters to create a second smaller, mechanistic model or by fitting model predictions to a smaller data-driven model.
@@ -72,10 +88,7 @@ Appendix: Glossary
         *See also:* :term:`model reduction`
 
     rule-based modeling
-        An abstraction for representing models in terms of species and reaction patterns which describe multiple individual species and reaction instances. Rule-based modeling is particularly effective for describing models with large numbers of species and reactions that emerge from the combinatorial interactions among species. Rule-based models can be simulated using conventional methods by statistically enumerating the reaction network or using network-free simulation which dynamically discovers the reaction network during simulation.
-
-    reaction network modeling
-        The conventional, low-level representation of biochemical models which enumerates each individual species and each individual reaction. In contrast, rule-based modeling is an abstraction for representing reaction networks in terms of species and reaction patterns that can generate all of the individual species and reactions.
+        An abstraction for representing models in terms of species and reaction patterns which describe multiple individual species and reaction instances. Rule-based modeling is particularly effective for describing models with large numbers of species and reactions that emerge from the combinatorial interactions among species. Rule-based models can be simulated using conventional methods by statistically enumerating the reaction network or using network-free simulation which dynamically discovers the reaction network during simulation.    
 
     schema
        A description of the types of entities and the attributes of each type of entity, including attributes which describe relationships among types of entities.
