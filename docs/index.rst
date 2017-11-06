@@ -18,11 +18,10 @@ Please note, this primer is under active development. Over time, we aim to devel
     cell_modeling/index.rst
     wc_modeling/index.rst    
     
-    funding/index.rst
-
-    Appendix: About this primer <about.rst>
-    installation.rst
-    Appendix: Documentation for the code used in this primer <../source/intro_to_wc_modeling.rst>    
+    Appendix: Funding WC modeling research <funding/index.rst>    
+    Appendix: Installing the code in this primer <installation.rst>
+    Appendix: Documentation for the code in this primer <../source/intro_to_wc_modeling.rst>    
     acronyms.rst
     glossary.rst
     references.rst
+    Appendix: About this primer <about.rst>

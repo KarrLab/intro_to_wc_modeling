@@ -1,8 +1,8 @@
 .. _funding:
 
-*********************************************************
-Funding WC modeling research with grants and fellowships
-*********************************************************
+******************************************************************
+Appendix: Funding WC modeling research with grants and fellowships
+******************************************************************
 
 .. toctree::
     :maxdepth: 2

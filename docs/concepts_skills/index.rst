@@ -1,8 +1,8 @@
 .. _fundational_concepts_and_skills:
 
-################################
-Foundational concepts and skills
-################################
+##########################################################
+Foundational concepts and skills for computational biology
+##########################################################
 
 .. toctree::
     :maxdepth: 2

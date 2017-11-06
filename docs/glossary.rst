@@ -30,10 +30,10 @@ Appendix: Glossary
         
         *See also:* :term:`Stochastic Simulation Algorithm (SSA)`
 
-    Stochastic Simulation Algorithm (SSA)
-        An algorithm for exactly simulating biochemical networks.
-        
-        *See also:* :term:`Gillespie's algorithm`
+    identifiability
+        The ability of the value of a parameter to be uniquely, accurately, and precisely determined from experimental observations. For example, the values of parameters that only appear in combination with other parameters cannot be estimated by calibrated model predictions to experimental observations.
+
+        *See also:* :term:`model calibration`, :term:`parameter estimation`
 
     IUPAC International Chemical Identifier (InChI)
         A textual format for describing the structure of a chemical compound including its chemical formula, bond connectivity, protonation, charge, stereochemistry, and isotope composition.
@@ -47,7 +47,9 @@ Appendix: Glossary
         A simulation in which multiple submodels are simultaneously simulated using different simulation algorithms such as ODE integration, SSA, and FBA :cite:`takahashi2004multi`. Multi-algorithmic simulations are frequently used to simultaneously simulate both well-characterized pathways with fine-grained simulation algorithms and poorly-characterized pathways with coarse-grained simulation algorithms.
 
     model calibration
-        The process of determining the parameters values of models, typically by numerically minimizing the distance between model predictions and experimental observations.
+        The process of determining the values of the parameters of a model typically by numerically minimizing the distance between model predictions and experimental observations.
+
+        *See also:* :term:`identifiability`, :term:`parameter estimation`
 
     model organism database
         A database that contains integrated experimental information about a single species.
@@ -67,6 +69,11 @@ Appendix: Glossary
 
     parallel discrete event simulation (PDES)
         A parallel implementation of discrete event simulation.
+
+    parameter estimation
+        The process of estimating the values of the parameters of a model, typically by numerically minimizing the distance between model predictions and experimental observations.
+
+        *See also:* :term:`identifiability`, :term:`model calibration`
 
     pathway/genome database (PGDB)
         A model organism database that contains integrated experimental information about the molecular biology of a single species such as its genome sequence, genes, protein complexes, and metabolic reactions.
@@ -102,11 +109,13 @@ Appendix: Glossary
 
     Stochastic Simulation Algorithm (SSA)
         An algorithm for exactly simulating biochemical networks.
+        
+        *See also:* :term:`Gillespie's algorithm`
 
     surrogate model
         A, typically computationally cheaper, model which approximates the behavior of another model.
         
-        *See also:* :term:`model reduction`, :term:`reduced model`
+        *See also:* function approximation, metamodeling, model emulation, :term:`model reduction`, :term:`reduced model`, response surface modeling
 
     Systems Biology Markup Language (SBML)
         An extensible format for describing cell models in terms of species and reactions.
