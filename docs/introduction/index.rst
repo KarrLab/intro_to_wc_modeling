@@ -18,7 +18,7 @@ Over the last 20 years, researchers have begun to build more comprehensive model
 
 Although we do not yet have all of the data and methods needed to model entire cells, we believe that WC models are rapidly becoming feasible due to ongoing advances in measurement and computational technology. In particular, we now have a wide array of experimental methods for characterizing cells, numerous repositories which contain much of the data needed for WC modeling, and a variety of tools for extrapolating experimental data to other organisms and conditions. In addition, we now have a wide range of modeling and simulation tools, including tools for designing models, rule-based model formats for describing complex models, and tools for simulating multi-algorithmic models. However, few of these resources support the scale required for WC modeling, and many these resources remain siloed.
 
-Nevertheless, we and others are beginning to model entire cells :cite:`tomita1999cell,atlas2008incorporating,roberts2011noise,karr2012whole,bordbar2015personalized`. In 2012, we and others reported the first dynamical model that represents all of the characterized genes in a cell :cite:`karr2012whole`. The model represents 28 pathways of the small bacterium *Mycoplasma genitalium* and predicts the essentiality of its genes with 80% accuracy.
+Nevertheless, we and others are beginning to model entire cells :cite:`tomita1999cell,atlas2008incorporating,roberts2009long,karr2012whole,bordbar2015personalized`. In 2012, we and others reported the first dynamical model that represents all of the characterized genes in a cell :cite:`karr2012whole`. The model represents 28 pathways of the small bacterium *Mycoplasma genitalium* and predicts the essentiality of its genes with 80% accuracy.
 
 However, several bottlenecks remain to build more comprehensive and more accurate WC models. In particular, we do not yet have all of the data needed for WC modeling or tools for designing, describing, or simulating WC models. To accelerate WC modeling, we must develop new methods for characterizing the single-cell dynamics of each metabolite and protein; develop new methods for scalably designing, simulating, and calibrating high-dimensional dynamical models; develop new standards for describing and verifying dynamical models; and assemble an interdisciplinary WC modeling community.
 
@@ -206,7 +206,9 @@ Data repositories
 
 Researchers are rapidly aggregating the experimental data needed for WC modeling into repositories (Table S5). This includes specialized repositories for individual types of data such as ECMDB :cite:`sajed2016ecmdb` and YMDB :cite:`ramirez2017ymdb` for metabolite concentrations; ArrayExpress :cite:`kolesnikov2015arrayexpress` and the Gene Expression Omnibus :cite:`clough2016gene` (GEO) for RNA abundances; PaxDb :cite:`wang2015version` for protein abundances; BiGG :cite:`king2015bigg` for metabolic reactions, and SABIO-RK for kinetic parameters :cite:`wittig2012sabio`, as well as general purpose repositories such as FigShare :cite:`figshare2017`, SimTk :cite:`simtk2017`, and Zenodo :cite:`zenodo2017`.
 
-Some researchers are making the data in these repositories more accessible by standardizing and integrating the data into meta-databases. For example, KEGG contains a variety of information about metabolites, proteins, reactions, and pathways :cite:`kanehisa2017kegg`; Pathway Commons contains extensive information about protein-protein interactions and pathways :cite:`cerami2010pathway`; and UniProt contains a multitude of information about proteins :cite:`uniprot2017uniprot`.
+Some researchers are making the data in these repositories more accessible by providing common interfaces to multiple repositories such as BioMart :cite:`smedley2015biomart`, BioServices :cite:`cokelaer2013bioservices`, and Intermine :cite:`kalderimis2014intermine`.
+
+Other researchers are making the data in these repositories more accessible by integrating the data into meta-databases. For example, KEGG contains a variety of information about metabolites, proteins, reactions, and pathways :cite:`kanehisa2017kegg`; Pathway Commons contains extensive information about protein-protein interactions and pathways :cite:`cerami2010pathway`; and UniProt contains a multitude of information about proteins :cite:`uniprot2017uniprot`.
 
 In addition, some researchers are integrating information about individual organisms into PGDBs such as the BioCyc family of databases :cite:`caspi2016metacyc,keseler2017ecocyc`. These databases contain a wide range of information including the stoichiometries of individual reactions, the compositions of individual protein complexes, and the genes regulated by individual transcription factors. Because PGDBs already contain integrated data about a single organism, PGDBs could readily be leveraged to build WC models. In fact, Latendresse developed MetaFlux to build constraint-based models of metabolism from EcoCyc :cite:`latendresse2012construction`.
 
@@ -236,7 +238,7 @@ To make the large amount of publicly available data usable for modeling, researc
 Model design tools
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Several software tools have been developed for designing models of individual cellular pathways including CellDesigner :cite:`matsuoka2014modeling`, COPASI :cite:`bergmann2017copasi`, and Virtual Cell :cite:`resasco2012virtual` which support dynamical modeling; RuleBender which supports rule-based modeling :cite:`smith2012rulebender`; and COBRApy :cite:`ebrahim2013cobrapy`, FAME :cite:`boele2012fame`, and RAVEN :cite:`agren2013raven` which support constraint-based metabolic modeling; and (Table S7). 
+Several software tools have been developed for designing models of individual cellular pathways including BioUML :cite:`kolpakov2011biouml`, CellDesigner :cite:`matsuoka2014modeling`, COPASI :cite:`bergmann2017copasi`, JDesigner :cite:`sauro2003next`, and Virtual Cell :cite:`resasco2012virtual` which support dynamical modeling; RuleBender which supports rule-based modeling :cite:`smith2012rulebender`; and COBRApy :cite:`ebrahim2013cobrapy`, FAME :cite:`boele2012fame`, and RAVEN :cite:`agren2013raven` which support constraint-based metabolic modeling; and (Table S7). 
 
 Recently, researchers have developed several tools that support some of the features needed for WC modeling. This includes SEEK which helps researchers design models from data tables :cite:`wolstencroft2015seek`, Virtual Cell which helps researchers design models from KEGG pathways :cite:`resasco2012virtual,kanehisa2017kegg`, MetaFlux which helps researchers design metabolic models from PGDBs :cite:`latendresse2012construction`, the Cell Collective :cite:`helikar2013cell` and JWS Online :cite:`du2013jws` which help researchers build models collaboratively, PySB which helps researchers design models programmatically :cite:`lopez2013programming`, and semanticSBML :cite:`krause2009annotation` and SemGen :cite:`neal2014reappraisal` which help researchers merge models.
 
@@ -292,7 +294,7 @@ The Minimum Information About a Simulation Experiment (MIASE) guidelines have be
 Simulation tools
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Numerous tools have been developed to simulate cell models including the Cell Collective :cite:`helikar2013cell`, COBRApy :cite:`ebrahim2013cobrapy`, COPASI :cite:`bergmann2017copasi`, E-Cell :cite:`dhar2006cell`, FAME :cite:`boele2012fame`, libRoadRunner :cite:`somogyi2015libroadrunner`, JWS Online :cite:`du2013jws`, NFsim :cite:`sneddon2011efficient`, RAVEN :cite:`agren2013raven`, and Virtual Cell :cite:`resasco2012virtual`.
+Numerous tools have been developed to simulate cell models including the BioUML :cite:`kolpakov2011biouml`, Cell Collective :cite:`helikar2013cell`, COBRApy :cite:`ebrahim2013cobrapy`, COPASI :cite:`bergmann2017copasi`, E-Cell :cite:`dhar2006cell`, FAME :cite:`boele2012fame`, iBioSim :cite:`myers2009ibiosim`, libRoadRunner :cite:`somogyi2015libroadrunner`, JWS Online :cite:`du2013jws`, NFsim :cite:`sneddon2011efficient`, RAVEN :cite:`agren2013raven`, and Virtual Cell :cite:`resasco2012virtual`.
 
 COPASI is the most commonly used simulation tool. COPASI supports several deterministic, stochastic, and hybrid deterministic/stochastic simulation algorithms. However, COPASI does not support network-free stochastic simulation, FBA, logical, or multi-algorithmic simulation and COPASI does not support high-performance parallel simulation of large models.
 
@@ -309,7 +311,11 @@ Several tools including cupSODA :cite:`nobile2013cupsoda`, cuTauLeaping :cite:`n
 Calibration tools
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Several methods tools have been developed to calibrate cell models :cite:`chis2011structural,ashyraliyev2009systems,chou2009recent,sun2012parameter,moles2003parameter`. In addition, aerospace and mechanical engineers have developed methods for using reduced models to efficiently calibrate large models :cite:`forrester2009recent`. DAISY is one of the most advanced tools for evaluating the identifiability of a model :cite:`bellu2007daisy`. Several of the most popular simulation programs, including COPASI :cite:`bergmann2017copasi` and Virtual Cell :cite:`resasco2012virtual`, provide tools for calibrating models. Some of the most advanced model calibration tools include ABC-SysBio which uses approximate Bayesian computation :cite:`liepe2014framework`, saCeSS which supports distributed, collaborative calibration :cite:`penas2017parameter`, and SBSI which supports several distributed calibration methods :cite:`adams2013sbsi`. However, none of these tools support multi-algorithmic models.
+Accurate parameter values are essential for reliable predictions. Many methods have been developed to calibrate models by numerically optimizing their parameters, including derivative-based initial value methods and stochastic multiple shooting methods :cite:`banga2008parameter`. In addition, aerospace and mechanical engineers have developed methods for using reduced models to efficiently calibrate large models :cite:`forrester2009recent`. 
+
+Several software tools have also been developed to help researchers calibrate cell models :cite:`chis2011structural,ashyraliyev2009systems,chou2009recent,sun2012parameter,moles2003parameter`. For example, some of the most popular simulation programs, including COPASI :cite:`bergmann2017copasi` and Virtual Cell :cite:`resasco2012virtual`, provide tools for calibrating models. Some of the most advanced model calibration tools include DAISY which can evaluate the identifiability of a model :cite:`bellu2007daisy`, ABC-SysBio which uses approximate Bayesian computation :cite:`liepe2014framework`, saCeSS which supports distributed, collaborative optimization :cite:`penas2017parameter`, and SBSI which supports several distributed optimization methods :cite:`adams2013sbsi`.
+
+However, none of these tools support multi-algorithmic models and few are tractable for computationally expensive cell models. To efficiently calibrate WC models, we should combine numerical optimization methods with additional techniques such as surrogate modeling, model reduction, distributed computing, and automatic differentiation.
 
 .. _foundational_resources_verification:
 
@@ -331,7 +337,7 @@ Several database systems have been developed to organize simulation results for 
 Simulation results analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Several tools have been developed to analyze and visualize simulation results. The most popular simulation software programs, including COPASI :cite:`bergmann2017copasi` and Virtual Cell :cite:`resasco2012virtual`, provide basic tools for visualizing simulation results. Tools such as Escher :cite:`king2015escher` and Pathway Tools Omics Viewer :cite:`paley2006pathway` can also be used to visualize simulation results. 
+Several tools have been developed to analyze and visualize simulation results. The most popular simulation software programs, including COPASI :cite:`bergmann2017copasi`, E-Cell :cite:`dhar2006cell`, and Virtual Cell :cite:`resasco2012virtual`, provide basic tools for visualizing simulation results. Tools such as Escher :cite:`king2015escher` and Pathway Tools Omics Viewer :cite:`paley2006pathway` can also be used to visualize simulation results. 
 
 We developed ``WholeCellViz`` to visualize WC simulation results in their biological context :cite:`lee2013wholecellviz`. WholeCellViz provides users time series plots and interactive animations to visualize model predictions, and enables users to arrange grids of plots and animations to help users compare predictions across multiple simulation runs and simulated conditions. However, further work is needed to scale WholeCellViz to larger models and to make it easier to incorporate new visualizations into WholeCellViz.
 
@@ -359,6 +365,13 @@ Collectively, these models span a broad range of scales. For example, although m
 Collectively, these models also use a wide range of computational representations and simulation algorithms. Many of these models are represented as reaction networks. However, some of the largest of these models must be represented using rules :cite:`harris2016bionetgen` or Boolean networks. Many of these models can be simulated by integrating ODEs. However, some of the largest models must be simulated using network-free methods :cite:`sneddon2011efficient`, the steady-state metabolism models must be simulated with FBA :cite:`orth2010flux`, some of the spatiotemporal models must be simulated by integrating PDEs, and some of the network models must be simulated by iteratively evaluating Boolean regulatory functions :cite:`karlebach2008modelling`.
 
 These pathway models could be used to help build WC models. However, substantial work would be required to integrate these models into a single model because these models describe different scales, make different assumptions, are represented using different mathematical formalisms, are calibrated to different organisms and conditions, and are represented using different identifiers and formats. To avoid needing to substantially revise pathway models for incorporation into WC models, modelers should build pathway models explicitly for integration into WC models. This requires the modeling community to embrace a common format, common identifiers, common units, and common standards for model calibration and validation.
+
+Models of multiple pathways
+-------------------------------------------------------------------------
+
+Since 1999 when Tomita *et al.* reported one of the first models of multiple pathways of *M. genitalium* :cite:`tomita1999cell`, researchers have been trying to build increasingly comprehensive models of multiple pathways. In particular, this has led to models of *Escherichia coli* and *Saccharomyces cerevisiae* which describe their metabolism and transcriptional regulation :cite:`covert2004integrating,chandrasekaran2010probabilistic`; their metabolism, signaling, and transcriptional regulation :cite:`covert2008integrating,lee2008dynamic,carrera2014integrative`; and their metabolism and RNA and protein synthesis and degradation :cite:`thiele2009genome`. Table S2 summarizes several recently published and proposed models of multiple pathways. Despite this progress, these models only represent a small number of pathways and a small number of organisms.
+
+To represent multiple pathways, most of these models have been developed by combining separate submodels of each pathway, using the most appropriate mathematical representation for each pathway. This has led to multi-algorithmic models which must be simulated by co-simulating the individual submodels. Because there are few multi-algorithmic simulation tools and most of these models only combine two or three submodels, the developers of most of these models have developed ad hoc methods to simulate their models. For example, Covert et al. developed an ad hoc method to simulate their hybrid dynamic FBA / Boolean model of the metabolism and transcriptional regulation of *E. coli* :cite:`covert2004integrating` and Chandrasekaran and Price developed a different ad hoc method to simulate their hybrid FBA / Bayesian model of the metabolism and transcriptional regulation of *E. coli* :cite:`chandrasekaran2010probabilistic`. Because there are few tools for working with such integrative models, these models have also been described with different ad hoc formats and identifiers, simulated with different ad hoc simulation software programs, and calibrated and validated with different ad hoc methods.
 
 Model repositories
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -487,18 +500,18 @@ The sixth step of WC modeling is to visualize and analyze WC simulation results 
 
 Latest WC models and their limitations
 ==============================================================
+Because it is not yet possible to completely model a cell, researchers are pursuing several complementary approaches to modeling entire cells. Historically, researchers such as Michael Shuler focused on building coarse-grained models of the major functions of cells :cite:`atlas2008incorporating,shuler1979mathematical`. Over the last ten years, researchers have begun to leverage the growing wealth of experimental data and our increasing computational power to build fine-grained models of the molecular biology of entire cells. This includes bottom-up efforts to represent the contribution of each gene to cellular behavior starting from genome sequences and annotations :cite:`karr2012whole`, top-down efforts to represent the integrated behavior of each cellular process, and bottom-up efforts to model diffusion at the cell scale :cite:`roberts2014cellular,hallock2014simulation,roberts2009long`. More recently, researchers have begun to merge these fine-grained approaches. For example, Schulten recently demonstrated a hybrid FBA-diffusion model of *E. coli* :cite:`cole2015spatially`. Here, we describe recent progress in each of these major approaches to WC modeling.
 
-Models of multiple pathways
+
+Coarse-grained models
 -------------------------------------------------------------------------
 
-Since 1999 when Tomita *et al.* reported one of the first models of multiple pathways of *M. genitalium* :cite:`tomita1999cell`, researchers have been trying to build increasingly comprehensive models of multiple pathways. In particular, this has led to models of *Escherichia coli* and *Saccharomyces cerevisiae* which describe their metabolism and transcriptional regulation :cite:`covert2004integrating,chandrasekaran2010probabilistic`; their metabolism, signaling, and transcriptional regulation :cite:`covert2008integrating,lee2008dynamic,carrera2014integrative`; and their metabolism and RNA and protein synthesis and degradation :cite:`thiele2009genome`. Table S2 summarizes several recently published and proposed models of multiple pathways. Despite this progress, these models only represent a small number of pathways and a small number of organisms.
+In adddition fine-grained models, researchers have also developed several coarse-grained models of multiple cellular processes :cite:`atlas2008incorporating,shuler1979mathematical`. These models could be used to help inform the global structure and mathematical behavior of WC models. However, they generally cannot be directly incorporated into WC models because they use coarse-grained representations that are incompatible with that of fine-grained WC models.
 
-To represent multiple pathways, most of these models have been developed by combining separate submodels of each pathway, using the most appropriate mathematical representation for each pathway. This has led to multi-algorithmic models which must be simulated by co-simulating the individual submodels. Because there are few multi-algorithmic simulation tools and most of these models only combine two or three submodels, the developers of most of these models have developed ad hoc methods to simulate their models. For example, Covert et al. developed an ad hoc method to simulate their hybrid dynamic FBA / Boolean model of the metabolism and transcriptional regulation of *E. coli* :cite:`covert2004integrating` and Chandrasekaran and Price developed a different ad hoc method to simulate their hybrid FBA / Bayesian model of the metabolism and transcriptional regulation of *E. coli* :cite:`chandrasekaran2010probabilistic`. Because there are few tools for working with such integrative models, these models have also been described with different ad hoc formats and identifiers, simulated with different ad hoc simulation software programs, and calibrated and validated with different ad hoc methods.
-
-WC models
+Genomically-centric bottom-up fine-grained models
 -------------------------------------------------------------------------
 
-Toward WC models, recently, we and others demonstrated the first model which represents every characterized gene function of a cell :cite:`karr2012whole` (:numref:`fig_mgen_model`\ a). The model represents 28 pathways of *M. genitalium*, and was developed by building and combining 28 separate submodels of each pathway using data from over 900 databases and publications. To help us organize the data used to build the model, we developed WholeCellKB, a pathway/genome database (PGDB) software system tailored for WC modeling :cite:`karr2013wholecellkb`, and developed scripts to generate the model from the PGDB.
+Toward WC models, recently, we and others demonstrated the first model which represents every characterized gene function of a cell :cite:`karr2012whole` (:numref:`fig_mgen_model`\ a). The model represents 28 pathways of *M. genitalium*. The model was developed by annotating the *M. genitalium* genome, reconstructing the species encoded by each gene and the reactions catalyzed by each gene using data from over 900 databases and publications, partitioning the species and reactions into 28 pathways, developing separate submodels of each pathway, and integrating the submodels into a single model. To help us organize the data used to build the model, we developed WholeCellKB, a pathway/genome database (PGDB) software system tailored for WC modeling :cite:`karr2013wholecellkb`, and developed scripts to generate the model from the PGDB.
 
 .. _fig_mgen_model:
 
@@ -518,6 +531,25 @@ We validated the model by constructing numerous reduced models that focused on i
 In addition, we have used the model to demonstrate how WC models could be used to help design synthetic circuits :cite:`purcell2013towards` and we have used the model to demonstrate how WC models could help reposition antibiotics among distance bacteria :cite:`kazakiewicz2015combined`.
 
 Despite this progress, the model does not represent several important cell functions such as the maintenance of electrochemical gradients across the cell membrane, and the model mispredicts several important phenotypes such as the growth rates of many single-gene deletion strains. Furthermore, the model took over 10 person-years to construct because it was largely built by hand; the model is difficult to understand, reuse, and extend because it was described directly in terms of its numerical simulation rather than using a high-level format such as SBML; the model's simulation software is not reusable because it was built to simulate a single model; the model's simulation algorithm violates the arrow of time and is unscalable because it only partitions a portions of the state variables among the submodels.
+
+.. _physiologically_centric_wc_models:
+
+Physiologically-centric top-down fine-grained models
+-------------------------------------------------------------------------
+
+In parallel, researchers such as Edda Klipp are taking a complementary top-down physiologically-centric approach to WC modeling to our genomically-centric bottom-up approach to WC modeling. In contrast to our approach which starts from annotated genomes, Edda Klipp and her colleagues are modeling entire cells by enumerating the major processes present in cells, developing submodels of each process, and combining the submodels into a single model. 
+
+.. _spatially_centric_wc_models:
+
+Spatially-centric bottom-up fine-grained models
+-------------------------------------------------------------------------
+
+In parallel, researchers such as Elijah Roberts and Zaida Luthy-Schulten are taking another complementary spatially-centric approach to WC modeling :cite:`roberts2014cellular,hallock2014simulation,roberts2009long`. This approach focuses on representing the spatial distribution and diffusion of each molecular species, and uses molecular dynamics simulation methods to predict their spatiotemporal dynamics. However, because it is computationally expensive to simulate diffusion on the scale of entire cells, this approach is currently limited to second-scale simulations.
+
+Hybrid models
+-------------------------------------------------------------------------
+
+As introduced above, Zaida Luthey-Schulten and her collegues have begun to merge these fine-grained approaches to WC modeling by combining a diffusion model with an FBA model :cite:`cole2015spatially`.
 
 
 .. _bottlenecks:
@@ -692,10 +724,10 @@ Ongoing efforts to advance WC modeling
 
 In the previous section, we proposed a plan for achieving the first comprehensive WC model as a community. Although we do not yet have an organized WC modeling community, we and others are beginning to pilot WC models and the technology needed to achieve them. Here, we summarize the ongoing efforts to pioneer WC modeling.
 
-Pilot models
+Genomically-centric models
 -------------------------------------------------------------------------
 
-Currently, there are three WC models in development of *Mycoplasma pneumoniae*, *E. coli*, and H1-hESCs.
+Currently, there are three genomically-centric WC models in development of *Mycoplasma pneumoniae*, *E. coli*, and H1-hESCs.
 
 *Mycoplasma pneumoniae*
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -719,6 +751,11 @@ To explore how to model eukaryotic cells, we are also beginning to model H1-hESC
 Furthermore, we have chosen to focus on H1-hESCs because they can be cultured with feeder-free media and because they have been extensively characterized. For example, H1 was one of the three cell lines most deeply characterized by the ENCODE project :cite:`encode2012integrated`. In addition, H1 was one of the first five hESC lines :cite:`thomson1998embryonic`, H1 was the first cell line to approved under NIH's Guidelines for Stem Cell Research, and, as of 2010, H1 was studied in 30% of all hESC studies :cite:`loser2010human`.
 
 Because human cells are vastly more complex than bacteria, we are beginning by modeling the core pathways responsible for stem cell growth, maintenance, and self-renewal, including metabolism, transcription, translation, RNA and protein degradation, signal transduction, and cell cycle regulation. This model will also be based both on genomic, transcriptomic, and proteomic data about H1-hESCs aggregated from publications, as well as biochemical and single-cell data about related cell lines aggregated from several databases. In addition to using the model to demonstrate the feasibility of human WC models and driving the development of WC modeling methods, we hope to use the model to gain new insights into the biochemical mechanisms responsible for regulating the rate of stem cell growth.
+
+Physiologically-centric, spatially-centric, and hybrid models
+-------------------------------------------------------------------------
+
+As described in :numref:`physiologically_centric_wc_models`-:numref:`% <spatially_centric_wc_models>`, Klipp, Roberts, and others are also developing physiogically-centric models of *S. cerevisiae*, spatially-centric models of *E. coli*, and hybrid spatially-centric/FBA models of *E. coli*.
 
 Technology development
 -------------------------------------------------------------------------
@@ -755,7 +792,7 @@ As described in :numref:`bottlenecks_model_formats`, no existing format is well-
 
 To accelerate WC modeling, we are developing, ``wc_rules``, a more abstract rule-based format for describing WC models. The format will be able to represent each molecular species at multiple levels of granularity (for example, as a single species, as a set of sites, and as a sequence); represent all of the combinatorial complexity of each molecular species and interaction; represent composite, multi-algorithmic models; represent the data, assumptions, and design decisions used to build models; and represent the semantic biological meaning of models. We are developing tools to export models described with ``wc_rules`` to BioNetGen and SBML, as well as a simulator for simulating models described with ``wc_rules``.
 
-Simulation
+Simulation of genomically-centric models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As described in :numref:`bottlenecks_simulation`, no existing simulator is well-suited to simulating computationally-expensive, high-dimensional, rule-based, multi-algorithmic WC models. In particular, there are only a few parallel simulators, only a few rule-based simulators, only a couple of multi-algorithmic simulators, and no simulator which supports all of these technologies.
