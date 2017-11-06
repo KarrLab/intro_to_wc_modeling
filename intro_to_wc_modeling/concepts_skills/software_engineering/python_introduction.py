@@ -150,7 +150,7 @@ os.remove(filename)
 #########################################
 # Use the ``print`` and ``format`` methods to write `Hello {your name}!` to standard out
 import capturer
-with capturer.CaptureOutput() as captured:
+with capturer.CaptureOutput(termination_delay=0.1) as captured:
     print('Hello {}'.format('reader'))
     stdout = captured.get_text()
 
