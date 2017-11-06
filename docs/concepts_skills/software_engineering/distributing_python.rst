@@ -162,7 +162,7 @@ You can test the install script by running it locally::
 
 Distributing source code with GitHub
 ------------------------------------
-GitHub can be used to distribute source code simply by changing the public/private setting of a repository. The versions of key revisions should be marked using Git tags. See :numref:`Section %s <code_revisioning>` for more information about using Git and GitHub.
+GitHub can be used to distribute source code simply by changing the public/private setting of a repository. The versions of key revisions should be marked using Git tags. See :numref:`code_revisioning` for more information about using Git and GitHub.
 
 
 Distributing Python packages with PyPI
@@ -208,7 +208,7 @@ There are also several online tutorials with more information about how to uploa
 
 Distributing containers with Docker Hub
 ---------------------------------------
-Docker Hub can be used to distribute virtual machines simply by changing the public/private setting of a repository. See :numref:`Section %s <building_linux_containers>` for more information about using Docker and Docker Hub.
+Docker Hub can be used to distribute virtual machines simply by changing the public/private setting of a repository. See :numref:`building_linux_containers` for more information about using Docker and Docker Hub.
 
 
 Distributing documentation with Read The Docs

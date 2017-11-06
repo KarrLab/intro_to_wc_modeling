@@ -1,6 +1,6 @@
 Editing raster graphics with Gimp
 =================================
-As described in :numref:`Section %s <vector_graphics>`, there are two types of graphics: vector graphics (generally diagrams in .ai, .eps, .pdf, or .svg format) and raster graphics (generally photos in .gif, .jpg, or .png format). This tutorial will teach you how to edit raster graphics with `Gimp <https://www.gimp.org/>`_, an open-source raster graphic editing program, by creating a head shot for a website.
+As described in :numref:`vector_graphics`, there are two types of graphics: vector graphics (generally diagrams in .ai, .eps, .pdf, or .svg format) and raster graphics (generally photos in .gif, .jpg, or .png format). This tutorial will teach you how to edit raster graphics with `Gimp <https://www.gimp.org/>`_, an open-source raster graphic editing program, by creating a head shot for a website.
 
 Concepts
 --------

@@ -10,7 +10,7 @@ Conference presentations and seminars are excellent opportunities to get other s
 
 Presentation structure
 ----------------------
-Effective presentations often follow the same hour-glass structure as abstracts and papers (see the :numref:`Section %s <paper_abstracts>`). However, there are few salient differences between presentations and papers
+Effective presentations often follow the same hour-glass structure as abstracts and papers (see the :numref:`paper_abstracts`). However, there are few salient differences between presentations and papers
 
 * Presentations should focus on your broader body of work rather than one specific project
 * Presentations should emphasize your own contributions to the work and your own opinions

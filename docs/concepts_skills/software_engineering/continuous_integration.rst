@@ -37,7 +37,7 @@ Follow these instructions to use CircleCI to continuously test a GitHub reposito
 #. Click the `Follow Project` button for any repository you want to compile and test on CircleCI
 #. Add a CircleCI configuration file, ``/path/to/repo/.circleci/config.yml``, to the repository to instruct CircleCI what to execute within each build. This includes the following instructions
 
-    * Which container/virtual machine should be used to run the build. We are using a custom container so that little additional software needs to be installed to test our code. See :numref:`Section %s <building_linux_containers>` for more information about how to create and use custom Linux containers.
+    * Which container/virtual machine should be used to run the build. We are using a custom container so that little additional software needs to be installed to test our code. See :numref:`building_linux_containers` for more information about how to create and use custom Linux containers.
     * Which GitHub repository to checkout.
     * How to install any additional packages needed to execute the tests.
     * Instructions on how to run the tests and store the results.
@@ -75,7 +75,7 @@ There are two main mechanisms to decrease the runtime of CircleCI builds by load
 
     The Dockerfile for the Docker image that the Karr Lab uses with CircleCI is located at `https://github.com/KarrLab/karr_lab_docker_images/tree/master/build <https://github.com/KarrLab/karr_lab_docker_images/tree/master/build>`_.
 
-    See the :numref:`Section %s <building_linux_containers>` for more information.
+    See the :numref:`building_linux_containers` for more information.
 
 The Karr Lab uses both of these mechanisms.
 
@@ -115,7 +115,7 @@ Debugging CircleCI builds locally
 """""""""""""""""""""""""""""""""
 The CircleCI local executor and interactively running your code on the build image are powerful ways to debug CircleCI builds. Below are instructions for utilizing these approaches.
 
-#. Install Docker (see :numref:`Section %s <installation>`)
+#. Install Docker (see :numref:`installation`)
 #. Install the CircleCI command line tool::
   
     sudo curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci

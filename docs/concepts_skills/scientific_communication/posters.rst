@@ -3,7 +3,7 @@ Making posters
 
 Abstracts
 ---------
-Conference abstracts often follow the same hourglass structure as paper abstracts (see :numref:`Section %s <paper_abstracts>`). However, there are a few salient differences between paper and conference abstracts.
+Conference abstracts often follow the same hourglass structure as paper abstracts (see :numref:`paper_abstracts`). However, there are a few salient differences between paper and conference abstracts.
 
 * Conference abstracts can often be longer than paper abstracts. As a result, a conference abstract can contain more details about your methods and results than a paper abstract.
 * Unlike paper abstracts, conference abstracts can be written from the perspective of the anticipated state of your project at the time of the conference. In particular, conference abstracts can describe ongoing work which papers typically do not discuss.

@@ -39,7 +39,7 @@ This tutorial will teach you how to use the following Python elements
 
 Installing Python and Python development tools
 ----------------------------------------------
-To get started using Python, we recommend installing Python 3, the `pip package manager <https://pip.pypa.io>`_, the `Sublime text editor <https://www.sublimetext.com/>`_, and the `ipython interactive shell <https://ipython.org>`_. See :numref:`Section %s <software_development_tools_installation>` for more information.
+To get started using Python, we recommend installing Python 3, the `pip package manager <https://pip.pypa.io>`_, the `Sublime text editor <https://www.sublimetext.com/>`_, and the `ipython interactive shell <https://ipython.org>`_. See :numref:`software_development_tools_installation` for more information.
 
 
 Data types

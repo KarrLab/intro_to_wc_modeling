@@ -33,7 +33,7 @@ Run the following command to install the latest version from GitHub::
 ==========================================================================
 Detailed instructions to install the tutorials and all of the requirements
 ==========================================================================
-#. Follow the instructions in :numref:`Section %s <building_linux_containers>` to build a Linux virtual machine
+#. Follow the instructions in :numref:`building_linux_containers` to build a Linux virtual machine
 #. Install several packages
 
     #. Enable the Docker Aptitude repository::
