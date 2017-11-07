@@ -18,6 +18,7 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
+import six
 import sys
 sys.path.insert(0, os.path.abspath('..'))
 import intro_to_wc_modeling
@@ -40,8 +41,10 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinxcontrib.bibtex',
     'sphinxcontrib.googleanalytics',
-    'sphinxcontrib.spelling',
 ]
+
+if six.PY3:
+    extensions.append('sphinxcontrib.spelling')
 
 # napoleon options
 napoleon_google_docstring = True

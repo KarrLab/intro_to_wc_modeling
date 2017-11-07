@@ -8,10 +8,11 @@ numpy
 openpyxl
 optlang
 scipy
+six
 sphinx >= 1.6
 sphinx-rtd-theme
 sphinxcontrib-bibtex
-sphinxcontrib-spelling
+sphinxcontrib-spelling; python_version >= '3.0'
 sqlalchemy
 sympy
 # git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang  # wc-modeling language
