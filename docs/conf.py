@@ -35,10 +35,12 @@ import intro_to_wc_modeling
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosectionlabel',
+    'sphinx.ext.coverage',
     'sphinx.ext.imgconverter',
     'sphinx.ext.linkcode',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode',
     'sphinxcontrib.bibtex',
     'sphinxcontrib.googleanalytics',
 ]
@@ -103,18 +105,22 @@ pygments_style = 'sphinx'
 todo_include_todos = False
 
 
+# -- section/figure/table numbering options -------------------------------
 numfig = True
-image_converter_args = [
-    '-density', '150',
-    '-quality', '00',
-    ]
-
 numfig_format = {
     'figure': 'Figure %s',
     'table': 'Table %s',
     'code-block': 'Listing %s',
     'section': 'Section %s',
 }
+
+
+# -- image converter options ----------------------------------------------
+image_converter_args = [
+    '-density', '150',
+    '-quality', '00',
+    ]
+
 
 # -- linkcode options -----------------------------------------------------
 def linkcode_resolve(domain, info):
