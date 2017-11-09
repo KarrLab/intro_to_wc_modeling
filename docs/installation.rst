@@ -10,9 +10,14 @@ Each tutorial outlines how to install all of the necessary software. The followi
 ==========================================================================
 Requirements
 ==========================================================================
+
+Below is a list of all of the packages needed for the tutorials. Note, each tutorial only requires a subset of these packages. Please see the tutorials for information about the packages required for each tutorial.
+
+* CPLEX
 * Docker
 * Gimp
 * Git
+* Gurobi
 * Illustrator
 * Inkscape
 * Meld
@@ -72,6 +77,50 @@ Detailed instructions to install the tutorials and all of the requirements
         curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
         sudo apt-get install git-lfs
         git lfs install
+
+    #. Install the Gurobi optimization package and the Gurobi Python binding
+
+        #. Get a Gurobi license from `http://www.gurobi.com <http://www.gurobi.com>`_. Gurobi provides free licenses for academic users.
+
+        #. Install Gurobi::
+
+            apt-get install
+            wget http://packages.gurobi.com/7.5/gurobi7.5.1_linux64.tar.gz
+            tar xvfz gurobi7.5.1_linux64.tar.gz
+            mv gurobi751 /opt/
+
+        #. Use your license to activate Gurobi::
+
+            /opt/gurobi751/linux64/bin/grbgetkey "<license>"
+
+        #. Install the Python binding::
+
+            cd /opt/gurobi751/linux64
+            python2.7 setup.py install
+            python3.6 setup.py install
+
+    #. Install the CPLEX optimization package and the CPLEX Python binding
+
+        #. Install the pre-requisities::
+
+            apt-get install zip
+
+        #. Download CPLEX from `https://ibm.onthehub.com <https://ibm.onthehub.com>`_
+
+        #. Install CPLEX::
+
+            chmod ugo+x cplex_studio12.7.1.linux-x86-64.bin
+            ./cplex_studio12.7.1.linux-x86-64.bin
+
+        #. Install the Python binding. Note, as of this writing CPLEX didn't yet support Python 3.6.::
+
+            # Python 2.7
+            cd /opt/ibm/ILOG/CPLEX_Studio1271/cplex/python/2.7/x86-64_linux/
+            python2.7 setup.py install
+
+            # Python 3.5
+            cd /opt/ibm/ILOG/CPLEX_Studio1271/cplex/python/3.5/x86-64_linux/
+            python3.5 setup.py install
 
     #. Install the Sublime text editor::
 
