@@ -40,7 +40,7 @@ extensions = [
     'sphinx.ext.linkcode',
     'sphinx.ext.mathjax',
     'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode',
+    'sphinx.ext.todo',
     'sphinxcontrib.bibtex',
     'sphinxcontrib.googleanalytics',
 ]
