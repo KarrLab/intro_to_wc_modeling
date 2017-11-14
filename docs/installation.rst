@@ -129,6 +129,33 @@ Detailed instructions to install the tutorials and all of the requirements
             replace "version_info < (3, 6, 0)" "version_info < (3, 7, 0)" -- cplex/_internal/_pycplex_platform.py
             pip3.6 install .
 
+    #. Optionally, install the COIN-OR Cbc optimization package and the CyLP Python binding. Note, we have not been able to get CyLP to pass any of its unit tests. It is unclear what combination of versions is needed to correctly configure COIN-OR/Cbc/CyLP.::
+
+        # set environment variables
+        echo "" >> ~/.bashrc
+        echo "# COIN-OR: Cbc" >> ~/.bashrc
+        echo "export COIN_INSTALL_DIR=/opt/coin-or/cbc" >> ~/.bashrc
+        echo "export PATH=\${PATH}:/opt/coin-or/cbc/bin" >> ~/.bashrc
+        echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/opt/coin-or/cbc/lib" >> ~/.bashrc
+        ~/.bashrc
+        ldconfig
+
+        # COIN-OR Cbc
+        /tmp
+        wget --no-check-certificate https://www.coin-or.org/download/source/Cbc/Cbc-2.8.5.tgz
+        tar -xvvf Cbc-2.8.5.tgz
+        cd Cbc-2.8.5
+        mkdir build
+        cd build
+        ../configure -C --prefix=/opt/coin-or/cbc --enable-gnu-packages
+        make
+        make test
+        make install
+
+        # CyLP Python binding
+        pip2.7 install cylp
+        # pip3.6 install cylp # cylp is not compatible with Python 3
+
     #. Optionally, install the Gurobi optimization package and the Gurobi Python binding
 
         #. Get a Gurobi license from `http://www.gurobi.com <http://www.gurobi.com>`_. Gurobi provides free licenses for academic users.
