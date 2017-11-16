@@ -124,9 +124,8 @@ Detailed instructions to install the tutorials and all of the requirements
             # but CPLEX can be used on Python 3.6 by editing three files as shown below
             cp -r /opt/ibm/ILOG/CPLEX_Studio1271/cplex/python/3.5 /opt/ibm/ILOG/CPLEX_Studio1271/cplex/python/3.6
             cd /opt/ibm/ILOG/CPLEX_Studio1271/cplex/python/3.6/x86-64_linux/
-            replace "version_info < (3, 6, 0)" "version_info < (3, 7, 0)" -- setup.py
-            replace "version_info < (3, 6, 0)" "version_info < (3, 7, 0)" -- build/lib/cplex/_internal/_pycplex_platform.py
-            replace "version_info < (3, 6, 0)" "version_info < (3, 7, 0)" -- cplex/_internal/_pycplex_platform.py
+            sed -i 's/version_info < (3, 6, 0)/version_info < (3, 7, 0)/g' setup.py
+            sed -i 's/version_info < (3, 6, 0)/version_info < (3, 7, 0)/g' cplex/_internal/_pycplex_platform.py
             pip3.6 install .
 
     #. Optionally, install the COIN-OR Cbc optimization package and the CyLP Python binding. Note, we have not been able to get CyLP to pass any of its unit tests. It is unclear what combination of versions is needed to correctly configure COIN-OR/Cbc/CyLP.::
