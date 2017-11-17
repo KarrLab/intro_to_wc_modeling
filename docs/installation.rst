@@ -64,6 +64,8 @@ Detailed instructions to install the tutorials and all of the requirements
             ipython3 \
             inkscape \
             libgnome-keyring-dev \
+            libpython-dev \
+            libpython3-dev \
             meld \
             mysql-server \
             python \
@@ -71,7 +73,8 @@ Detailed instructions to install the tutorials and all of the requirements
             python-pip \
             python3-pip \
             software-properties-common \
-            texlive
+            texlive \
+            zip
 
     #. Install support for large file in Git repositories::
 
@@ -102,10 +105,6 @@ Detailed instructions to install the tutorials and all of the requirements
         ldconfig
 
     #. Install the CPLEX optimization package and the CPLEX Python binding
-
-        #. Install the pre-requisities::
-
-            apt-get install zip
         
         #. Register for an academic account and download CPLEX from `https://ibm.onthehub.com <https://ibm.onthehub.com>`_
 
@@ -128,16 +127,29 @@ Detailed instructions to install the tutorials and all of the requirements
             sed -i 's/version_info < (3, 6, 0)/version_info < (3, 7, 0)/g' cplex/_internal/_pycplex_platform.py
             pip3.6 install .
 
-    #. Optionally, install the COIN-OR Cbc optimization package and the CyLP Python binding. Note, we have not been able to get CyLP to pass any of its unit tests. It is unclear what combination of versions is needed to correctly configure COIN-OR/Cbc/CyLP.::
+    #. Optionally, install the COIN-OR Cbc optimization package and the CyLP Python binding::
 
         # set environment variables
         echo "" >> ~/.bashrc
-        echo "# COIN-OR: Cbc" >> ~/.bashrc
+        echo "# COIN-OR: CoinUtils, Cbc" >> ~/.bashrc
         echo "export COIN_INSTALL_DIR=/opt/coin-or/cbc" >> ~/.bashrc
-        echo "export PATH=\${PATH}:/opt/coin-or/cbc/bin" >> ~/.bashrc
-        echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/opt/coin-or/cbc/lib" >> ~/.bashrc
+        echo "export PATH=\${PATH}:/opt/coin-or/cbc/bin:/opt/coin-or/coinutils/bin" >> ~/.bashrc
+        echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/opt/coin-or/cbc/lib:/opt/coin-or/coinutils/lib" >> ~/.bashrc
         ~/.bashrc
         ldconfig
+        
+        # CoinUtils
+        cd /tmp
+        wget --no-check-certificate https://www.coin-or.org/download/source/CoinUtils/
+        CoinUtils-2.10.14.tgz
+        tar -xvvf CoinUtils-2.10.14.tgz
+        cd CoinUtils-2.10.14
+        mkdir build
+        cd build
+        mkdir -p /opt/coin-or/coinutils
+        ../configure -C --prefix=/opt/coin-or/coinutils --enable-gnu-packages
+        make
+        make install
 
         # COIN-OR Cbc
         /tmp
@@ -148,12 +160,7 @@ Detailed instructions to install the tutorials and all of the requirements
         cd build
         ../configure -C --prefix=/opt/coin-or/cbc --enable-gnu-packages
         make
-        make test
         make install
-
-        # CyLP Python binding
-        pip2.7 install cylp
-        # pip3.6 install cylp # cylp is not compatible with Python 3
 
     #. Optionally, install the Gurobi optimization package and the Gurobi Python binding
 
@@ -179,8 +186,7 @@ Detailed instructions to install the tutorials and all of the requirements
         #. Install the Python binding::
 
             cd /opt/gurobi751/linux64
-            python2.7 setup.py install
-            python3.6 setup.py install
+            python setup.py install
 
     #. Optionally, install the MOSEK optimization package and the Mosek Python binding
 
@@ -209,16 +215,43 @@ Detailed instructions to install the tutorials and all of the requirements
             cd /opt/mosek/8/tools/platform/linux64x86/python/3/
             python3.6 setup.py install
 
+    .. commented out because we haven't figured out how to get qpOASES to work with newer versions of Python
+
+        #. Optionally, install the COIN-OR qpOASES optimization package::
+
+            #. Install qpOASES::
+
+                echo "" >> ~/.bashrc
+                echo "# COIN-OR: qpOASES" >> ~/.bashrc
+                echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/opt/coin-or/qpoases/lib" >> ~/.bashrc
+                ~/.bashrc
+                ldconfig
+
+                cd /tmp
+                wget --no-check-certificate https://www.coin-or.org/download/source/qpOASES/qpOASES-3.2.1.tgz
+                tar -xvvf qpOASES-3.2.1.tgz
+                cd qpOASES-3.2.1
+                make
+                mkdir -p /opt/coin-or/qpoases/lib
+                cp bin/libqpOASES.* /opt/coin-or/qpoases/lib
+                cp -r include/ /opt/coin-or/qpoases
+
+            #. Install the Python binding::
+                
+                cd interfaces/python
+                pip install cython numpy
+                python setup.py install
+
     #. Optionally, install the XPRESS optimization package and the XPRESS Python binding
 
         #. Download and unpack XPRESS::
         
             cd /tmp
-            wget https://clientarea.xpress.fico.com/downloads/8.4.0/xp8.4.0_linux_x86_64_setup.tar
+            wget --no-check-certificate https://clientarea.xpress.fico.com/downloads/8.4.0/xp8.4.0_linux_x86_64_setup.tar
             mkdir xp8.4.0_linux_x86_64_setup
             tar -xvvf xp8.4.0_linux_x86_64_setup.tar -C xp8.4.0_linux_x86_64_setup
 
-        #. Get your host id
+        #. Get your host id::
 
             cd /tmp/xp8.4.0_linux_x86_64_setup
             utils/xphostid | grep -m 1 "<id>" | cut -d ">" -f 2 | cut -d "<" -f 1
@@ -240,7 +273,10 @@ Detailed instructions to install the tutorials and all of the requirements
 
         #. Setup the XPRESS Python binding::
 
+            # Python 2.7
             echo -e "/opt/xpressmp/lib" | tee /usr/local/lib/python2.7/site-packages/xpress.pth
+
+            # Python 3.6
             echo -e "/opt/xpressmp/lib" | tee /usr/local/lib/python3.6/site-packages/xpress.pth
 
     #. Install the Sublime text editor::
