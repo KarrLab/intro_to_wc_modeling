@@ -8,29 +8,39 @@ Required packages
 ---------------------------
 Execute the following commands to install the packages required for this tutorial::
 
-    apt-get install pandoc
-    pip install \
-        setuptools \
-        twine
+  apt-get install pandoc
+  pip install \
+      pypandoc \
+      setuptools \
+      twine \
+      wheel
 
 
 Prepare your package for distribution
 -------------------------------------
 
-Annotate the version number of your package in ``__init__.py``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Annotate the version number of your package in ``VERSION`` and ``__init__.py``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Save the following to the ``VERSION`` file of your package, e.g. ``/path/to/intro_to_wc_modeling/intro_to_wc_modeling/VERSION``::
+  
+  0.0.1
+
 Save the following to the ``__init__.py`` file of your package, e.g. ``/path/to/package/intro_to_wc_modeling/__init__.py``::
   
-  __version__ = '0.0.1'
+  import pkg_resources
+
+  with open(pkg_resources.resource_filename('intro_to_wc_modeling', 'VERSION'), 'r') as file:
+      __version__ = file.read().strip()
+  # :obj:`str`: version
 
 
 Create a ``README.md`` file with an overview of the package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Save a brief description of the package to ``/path/to/package/README.md``. GitHub will display the content of this file on the landing page for the repository. For example:
+Save a brief description of the package to ``/path/to/package/README.md``. GitHub will display the content of this file on the landing page for the repository. For example::
 
-    # intro_to_wc_modeling
+  # intro_to_wc_modeling
 
-    The goal of this tutorial is to teach you how to test and document Python code.
+  The goal of this tutorial is to teach you how to test and document Python code.
 
 
 Create a file ``requirements.txt`` which lists the required packages
@@ -49,35 +59,32 @@ Create a license file
 ^^^^^^^^^^^^^^^^^^^^^
 Save the following to `/path/to/package/LICENSE`::
 
-    The MIT License (MIT)
+  The MIT License (MIT)
 
-    Copyright (c) <Year> Karr Lab
+  Copyright (c) <Year> Karr Lab
 
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
 
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
 
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    SOFTWARE.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
 
 
 Create a setup configuration file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Create a setup configuration file by following this example and saving it to ``/path/to/package/setup.cfg``::
-
-  [metadata]
-  long_description = file: README.rst
 
   [bdist_wheel]
   universal = 1
@@ -95,61 +102,79 @@ Create a ``MANIFEST.in`` file which describes additional files that should be pa
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 For example, save the following to ``/path/to/package/MANIFEST.in``::
 
-    # license
-    include LICENSE
+  # documentation
+  include README.rst
 
-    # requirements
-    include requirements.txt
+  # version
+  include package/VERSION
 
-    # documentation
-    include README.rst
+  # license
+  include LICENSE
+
+  # requirements
+  include requirements.txt
 
 
 Create a setup script
 ^^^^^^^^^^^^^^^^^^^^^
-You can use the ``setuptools`` package to build a install script for your package. Simply edit this template and save it to ``/path/to/package/setup.py``::
+You can use the ``setuptools`` package to build a install script for your package. Simply edit this template and save it to ``/path/to/intro_to_wc_modeling/setup.py``::
   
-    from setuptools import setup, find_packages
-    import intro_to_wc_modeling
+  from setuptools import setup, find_packages
 
-    # install package
-    setup(
-        name='intro_to_wc_modeling',
-        version=intro_to_wc_modeling.__version__,
+  # get long description
+  if os.path.isfile('README.rst'):
+      with open('README.rst', 'r') as file:
+          long_description = file.read()
+  else:
+      long_description = ''
 
-        description='Python tutorial',
+  # get version
+  with open('intro_to_wc_modeling/VERSION', 'r') as file:
+      version = file.read().strip()
 
-        # The project's main homepage.
-        url='https://github.com/KarrLab/intro_to_wc_modeling',
+  # install package
+  setup(
+      name='intro_to_wc_modeling',
+      version=version,
 
-        author='Jonathan Karr',
-        author_email='jonrkarr@gmail.com',
+      description='Python tutorial',
+      long_description=long_description,
 
-        license='MIT',
+      # The project's main homepage.
+      url='https://github.com/KarrLab/intro_to_wc_modeling',
 
-        # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
-        classifiers=[
-            'Development Status :: 3 - Alpha',
-            'Intended Audience :: Developers',
-            'Topic :: Software Development',
-            'License :: OSI Approved :: MIT License',
-            'Programming Language :: Python',
-        ],
+      author='Jonathan Karr',
+      author_email='jonrkarr@gmail.com',
 
-        keywords='python, tutorial',
+      license='MIT',
 
-        # packages not prepared yet
-        packages=find_packages(exclude=['tests', 'tests.*']),
-        include_package_data=True,
-        entry_points={
-            'console_scripts': [
-                'intro_to_wc_modeling = intro_to_wc_modeling.__main__:main',
-            ],
-        },
+      # See https://pypi.python.org/pypi?%3Aaction=list_classifiers
+      classifiers=[
+          'Development Status :: 3 - Alpha',
+          'Intended Audience :: Developers',
+          'Topic :: Software Development',
+          'License :: OSI Approved :: MIT License',
+          'Programming Language :: Python',
+      ],
 
-        install_requires=['numpy'],
-        tests_require=['pytest'],
-    )
+      keywords='python, tutorial',
+
+      # packages not prepared yet
+      packages=find_packages(exclude=['tests', 'tests.*']),
+      package_data={
+          'intro_to_wc_modeling': [
+              'VERSION',
+          ],
+      },
+      entry_points={
+          'console_scripts': [
+              'intro_to_wc_modeling = intro_to_wc_modeling.__main__:main',
+          ],
+      },
+
+      install_requires=['numpy'],
+      tests_require=['pytest'],
+  )
 
 Use the ``entry_points`` argument to specify the location(s) of command line programs that should be created. Use the ``install_requires`` argument to list any dependencies. Use the ``tests_require`` argument to specify any additional packages needed to run the tests.
 
@@ -157,12 +182,17 @@ See `The Hitchhiker's Guide to Packaging <http://the-hitchhikers-guide-to-packag
 
 You can test the install script by running it locally::
 
-    pip install -e .
+  pip install -e .
 
 
 Distributing source code with GitHub
 ------------------------------------
-GitHub can be used to distribute source code simply by changing the public/private setting of a repository. The versions of key revisions should be marked using Git tags. See :numref:`code_revisioning` for more information about using Git and GitHub.
+GitHub can be used to distribute source code simply by changing the public/private setting of a repository. The versions of key revisions should be marked using Git tags as illustrated below. See :numref:`code_revisioning` for more information about using Git and GitHub.::
+
+  git add <path>
+  git commit -m "<message>"
+  git tag 0.0.8
+  git push --tags
 
 
 Distributing Python packages with PyPI
@@ -177,13 +207,9 @@ Follow the steps below to distribute your code via PyPI.
         pypi
 
     [pypi]
-    repository=https://pypi.python.org/pypi
+    repository=https://upload.pypi.org/legacy/
     username:<username>
     password:<password>
-
-#. Register your package with PyPI::
-
-    python setup.py register
 
 #. Convert your ``README.md`` file to ``.rst`` format::
 
@@ -220,16 +246,43 @@ After you have configured Sphinx, committed your code to GitHub, and made your r
 #. Click the "Import a repository" button
 #. Select the repository that you wish to distribute
 #. Create the project
-#. Edit the settings for the project
+#. Use the "Settings" and "Advanced Settings" panels to edit the settings for the project. 
 
-    * Advanced settings panel
+    * Set the homepage and tags
+    * Set the requirements file to ``docs/requirements.txt``
+    * Set the Python configuration file to ``docs/conf.py``
+    * Set the Python interpreter to ``CPython 3.x``
 
-      * Set the requirements file to ``docs/requirements.txt``
+#. Optionally, use YAML files to configure the conda environment used to build the documentation within Read the Docs. This is helpful for documenting packages that depend on OS packages. The default Read the Docs conda environment cannot install OS packages, but some of these dependencies can be obtained from conda.::
+  
+    * Add the following to ``/path/to/package/.readthedocs.yml``::
 
-    * Notifications panel
+        python:
+           version: 3
+           setup_py_install: true
+        requirements_file: docs/requirements.txt
+        conda:
+            file: docs/conda.environment.yml
 
-      * Add your email so that you receive notifications documentation compilation errors
+    * Add the following to ``/path/to/package/docs/conda.environment.yml``::
 
+        name: <package>-docs
+        channels:
+          - conda-forge
+          - defaults
+        dependencies:
+          - cython
+          - pip
+          - python
+          - sphinx
+          - pip:
+            - configparser
+            - sphinx_rtd_theme
+            - robpol86-sphinxcontrib-googleanalytics
+            - sphinxcontrib-bibtex
+            - sphinxcontrib-spelling
+
+#. Add your email in the "Notifications panel" so that you receive notifications documentation compilation errors
 #. Check for errors
 
   * Navigate to "Builds"
