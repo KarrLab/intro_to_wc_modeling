@@ -133,8 +133,8 @@ Detailed instructions to install the tutorials and all of the requirements
         echo "" >> ~/.bashrc
         echo "# COIN-OR: CoinUtils, Cbc" >> ~/.bashrc
         echo "export COIN_INSTALL_DIR=/opt/coin-or/cbc" >> ~/.bashrc
-        echo "export PATH=\${PATH}:/opt/coin-or/cbc/bin:/opt/coin-or/coinutils/bin" >> ~/.bashrc
-        echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/opt/coin-or/cbc/lib:/opt/coin-or/coinutils/lib" >> ~/.bashrc
+        echo "export PATH=\"\${PATH}:/opt/coin-or/cbc/bin:/opt/coin-or/coinutils/bin\"" >> ~/.bashrc
+        echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:/opt/coin-or/cbc/lib:/opt/coin-or/coinutils/lib\"" >> ~/.bashrc
         ~/.bashrc
         ldconfig
         
@@ -176,8 +176,8 @@ Detailed instructions to install the tutorials and all of the requirements
             echo "" >> ~/.bashrc
             echo "# Gurobi" >> ~/.bashrc
             echo "export GUROBI_HOME=/opt/gurobi751/linux64" >> ~/.bashrc
-            echo "export PATH=\${PATH}:\${GUROBI_HOME}/bin" >> ~/.bashrc
-            echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:\${GUROBI_HOME}/lib" >> ~/.bashrc
+            echo "export PATH=\"\${PATH}:\${GUROBI_HOME}/bin\"" >> ~/.bashrc
+            echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:\${GUROBI_HOME}/lib\"" >> ~/.bashrc
 
         #. Use your license to activate Gurobi::
 
@@ -202,8 +202,8 @@ Detailed instructions to install the tutorials and all of the requirements
 
             echo "" >> ~/.bashrc
             echo "# Mosek" >> ~/.bashrc
-            echo "export PATH=\${PATH}:/opt/mosek/8/tools/platform/linux64x86/bin" >> ~/.bashrc
-            echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/opt/mosek/8/tools/platform/linux64x86/bin" >> ~/.bashrc
+            echo "export PATH=\"\${PATH}:/opt/mosek/8/tools/platform/linux64x86/bin\"" >> ~/.bashrc
+            echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:/opt/mosek/8/tools/platform/linux64x86/bin\"" >> ~/.bashrc
 
         #. Install the Python binding::
 
@@ -223,7 +223,7 @@ Detailed instructions to install the tutorials and all of the requirements
 
                 echo "" >> ~/.bashrc
                 echo "# COIN-OR: qpOASES" >> ~/.bashrc
-                echo "export LD_LIBRARY_PATH=\${LD_LIBRARY_PATH}:/opt/coin-or/qpoases/lib" >> ~/.bashrc
+                echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:/opt/coin-or/qpoases/lib\"" >> ~/.bashrc
                 ~/.bashrc
                 ldconfig
 
@@ -266,10 +266,10 @@ Detailed instructions to install the tutorials and all of the requirements
             echo "" >> ~/.bashrc
             echo "# XPRESS" >> ~/.bashrc
             echo "export XPRESSDIR=/opt/xpressmp" >> ~/.bashrc
-            echo "export PATH=\$PATH:\$XPRESSDIR/bin" >> ~/.bashrc
-            echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$XPRESSDIR/lib" >> ~/.bashrc
-            echo "export CLASSPATH=\$CLASSPATH:\$XPRESSDIR/lib/xprs.jar:\$XPRESSDIR/lib/xprb.jar:\$XPRESSDIR/lib/xprm.jar" >> ~/.bashrc
-            echo "export XPRESS=\$XPRESSDIR/bin" >> ~/.bashrc
+            echo "export PATH=\"\${PATH}:\${XPRESSDIR}/bin\"" >> ~/.bashrc
+            echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:\${XPRESSDIR}/lib\"" >> ~/.bashrc
+            echo "export CLASSPATH=\"\${CLASSPATH}:\${XPRESSDIR}/lib/xprs.jar:\${XPRESSDIR}/lib/xprb.jar:\${XPRESSDIR}/lib/xprm.jar\"" >> ~/.bashrc
+            echo "export XPRESS=\"\${XPRESSDIR}/bin\"" >> ~/.bashrc
 
         #. Setup the XPRESS Python binding::
 
