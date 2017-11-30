@@ -27,6 +27,7 @@ Below are several recommended programs for developing Python code:
 * Test coverage tools
 
     * `coverage <https://coverage.readthedocs.io>`_
+    * `instrumental <http://instrumental.readthedocs.io>`_
 
 * Profilers
     

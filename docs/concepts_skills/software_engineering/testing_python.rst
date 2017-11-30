@@ -9,7 +9,12 @@ The goal of this tutorial to teach you how to effectively test and debug Python 
 
 To use unit testing effectively, it is best to begin by writing tests of individual pieces of your code, debugging each individual piece until they all work, and then proceeding to write larger tests of larger assemblies of code. 
 
-Collectively, your tests should cover or execute every line of your code. This line coverage can be assessed using the coverage and pytest-cov packages.
+Collectively, your tests should cover all of the logic of your code. The following are the most popular metrics for evaluating the coverage of your tests. We recommend using statement coverage because this the simplest metric to evaluate and the most widely supported metric.
+
+* **Statement/line coverage**: This metric evaluates the fraction of the lines of your code which were evaluated during your tests and which specific lines were not evaluated by your tests. Statement coverage is the most popular coverage metric. Statement coverage can be assessed using the ``coverage`` and ``pytest-cov`` packages and the results can be analyzed using ``coverage``, `Coveralls <https://coveralls.io>`_, and `Code Climate <https://codeclimate.com>`_.
+* **Branch coverage**: This metric evalutes the fraction of the branches (if, elif, else, try, except, finally, for, while statements) of your code that were evaluated during your tests and which specific branches were not covered. Branch coverage can be a more reliable metric of the completeness of your coverage because it isn't biased by large blocks of simple code. Branch coverage can be analyzed using the ``coverage`` package.
+* **Decision/multiple condition converage**: This metric evaluates the fraction of the conditions of your branches that were covered by your tests, and the specific conditions that were not covered. Decision coverage is a more thorough metric than branch coverage because it checks every condition of every branch. Decision coverage can be analyzed using the ``instrumental`` package.
+* **Path coverage**: This metric evaluates the fraction of paths of your code that were evaluated by your tests. This is a more thorough metric than decision coverage which is evaluates every combination of conditions. However, path coverage is not a practical metric due to the combinatorial number of paths in large codes. To our knowledge, there is no package for path coverage.
 
 
 Required packages
