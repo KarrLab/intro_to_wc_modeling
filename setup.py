@@ -45,7 +45,6 @@ setuptools.setup(
 
     # packages not prepared yet
     packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
-    include_package_data=True,
     package_data={
         'intro_to_wc_modeling': [
             os.path.join('wc_modeling', 'wc_lang_tutorial', 'examples', 'test_wc_lang.xlsx')
