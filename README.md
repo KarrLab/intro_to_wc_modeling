@@ -1,4 +1,4 @@
-<!-- [![PyPI package](https://img.shields.io/pypi/v/intro_to_wc_modeling.svg)](https://pypi.python.org/pypi/intro_to_wc_modeling) -->
+[//]: # ( [![PyPI package](https://img.shields.io/pypi/v/intro_to_wc_modeling.svg)](https://pypi.python.org/pypi/intro_to_wc_modeling) )
 [![Documentation](https://readthedocs.org/projects/intro_to_wc_modeling/badge/?version=latest)](http://intro_to_wc_modeling.readthedocs.org)
 [![Test results](https://circleci.com/gh/KarrLab/intro_to_wc_modeling.svg?style=shield)](https://circleci.com/gh/KarrLab/intro_to_wc_modeling)
 [![Test coverage](https://coveralls.io/repos/github/KarrLab/intro_to_wc_modeling/badge.svg)](https://coveralls.io/github/KarrLab/intro_to_wc_modeling)

@@ -1,10 +1,20 @@
 import pip
 pip.main(['install', 'git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils'])
 
-import intro_to_wc_modeling
 import os
 import setuptools
 import wc_utils.util.install
+
+# get long description
+if os.path.isfile('README.rst'):
+    with open('README.rst', 'r') as file:
+        long_description = file.read()
+else:
+    long_description = ''
+
+# get version
+with open('intro_to_wc_modeling/VERSION', 'r') as file:
+    version = file.read().strip()
 
 # parse dependencies and links from requirements.txt files
 with open('requirements.txt', 'r') as file:
@@ -20,9 +30,10 @@ wc_utils.util.install.install_dependencies(dependency_links)
 # install package
 setuptools.setup(
     name='intro_to_wc_modeling',
-    version=intro_to_wc_modeling.__version__,
+    version=version,
 
     description='Python tutorial',
+    long_description=long_description,
 
     # The project's main homepage.
     url='https://github.com/KarrLab/intro_to_wc_modeling',
@@ -47,7 +58,8 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
     package_data={
         'intro_to_wc_modeling': [
-            os.path.join('wc_modeling', 'wc_lang_tutorial', 'examples', 'test_wc_lang.xlsx')
+            'VERSION',
+            os.path.join('wc_modeling', 'wc_lang_tutorial', 'examples', 'test_wc_lang.xlsx'),
         ],
     },
     entry_points={
