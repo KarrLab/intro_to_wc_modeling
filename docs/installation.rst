@@ -140,8 +140,7 @@ Detailed instructions to install the tutorials and all of the requirements
         
         # CoinUtils
         cd /tmp
-        wget --no-check-certificate https://www.coin-or.org/download/source/CoinUtils/
-        CoinUtils-2.10.14.tgz
+        wget --no-check-certificate https://www.coin-or.org/download/source/CoinUtils/CoinUtils-2.10.14.tgz
         tar -xvvf CoinUtils-2.10.14.tgz
         cd CoinUtils-2.10.14
         mkdir build
@@ -161,6 +160,10 @@ Detailed instructions to install the tutorials and all of the requirements
         ../configure -C --prefix=/opt/coin-or/cbc --enable-gnu-packages
         make
         make install
+
+        # CyLP 
+        pip install numpy scipy
+        pip install git+https://github.com/jjhelmus/CyLP.git@py3#egg=cylp
 
     #. Optionally, install the Gurobi optimization package and the Gurobi Python binding
 
@@ -271,13 +274,34 @@ Detailed instructions to install the tutorials and all of the requirements
             echo "export CLASSPATH=\"\${CLASSPATH}:\${XPRESSDIR}/lib/xprs.jar:\${XPRESSDIR}/lib/xprb.jar:\${XPRESSDIR}/lib/xprm.jar\"" >> ~/.bashrc
             echo "export XPRESS=\"\${XPRESSDIR}/bin\"" >> ~/.bashrc
 
-        #. Setup the XPRESS Python binding::
+        #. Setup the XPRESS Python binding:
 
-            # Python 2.7
-            echo -e "/opt/xpressmp/lib" | tee /usr/local/lib/python2.7/site-packages/xpress.pth
+            * Add XPRESS to your Python path::
 
-            # Python 3.6
-            echo -e "/opt/xpressmp/lib" | tee /usr/local/lib/python3.6/site-packages/xpress.pth
+                # Python 2.7
+                echo "/opt/xpressmp/lib" | tee /usr/local/lib/python2.7/site-packages/xpress.pth
+
+                # Python 3.6
+                echo "/opt/xpressmp/lib" | tee /usr/local/lib/python3.6/site-packages/xpress.pth
+
+            * Save the following package meta data to `/usr/local/lib/python2.7/site-packages/xpress-8.4.0.egg-info` for Python 2.7 and/or `/usr/local/lib/python3.6/site-packages/xpress-8.4.0.egg-info` for Python 3.6::
+
+                Metadata-Version: 1.0
+                Name: xpress
+                Version: UNKNOWN
+                Summary: FICO Xpress-Optimizer Python interface
+                Home-page: http://www.fico.com/en/products/fico-xpress-optimization
+                Author: Fair Isaac Corporation
+                Author-email: UNKNOWN
+                License: UNKNOWN
+                Description:
+                    Xpress-Python interface
+                    Copyright (C) Fair Isaac 2016
+                    Create, modify, and solve optimization problems in Python using the Xpress Optimization suit
+                Platform: UNKNOWN
+
+        Note: If you want to install XPRESS onto a cluster, virtual machine, or docker image, you should first install a XPRESS license server on a static host
+        and then install XPRESS using a floating license. See the XPRESS documentation for more information.
 
     #. Install the Sublime text editor::
 

@@ -43,16 +43,24 @@ Save a brief description of the package to ``/path/to/package/README.md``. GitHu
   The goal of this tutorial is to teach you how to test and document Python code.
 
 
-Create a file ``requirements.txt`` which lists the required packages
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The following examples illustrate how to list packages, how to specify package sources, and how to specify required versions in ``/path/to/package/requirements.txt``.::
+Create a file ``requirements.txt`` which lists the required and optional dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The following example illustrates how to use ``/path/to/package/requirements.txt`` to specify requirements including how to specify package sources, how to specify version dependencies, and how to specify optional dependencies.::
   
   numpy
   scipy<=1.2
-  matplotlib==2.3
+  matplotlib==2.3[option]
   git+https://github.com/KarrLab/obj_model.git#egg=obj_model
 
-Similarly, save lists of required packages for testing and documentation to ``docs/requirements.txt`` and ``tests/requirements.txt``.
+Packages that should be installed from PyPI should be listed by their names. Packages that should be installed from GitHub should be listed by their GitHub URL.
+
+Version dependencies can be specified with '<', '>', '<=', '>=', and '='.
+
+Optional dependencies can be specified by post-pending option names to each dependency. These dependencies can be installed by adding the same annotation during the package installation::
+
+  pip install package-name[option-name]
+
+Similarly, ``docs/requirements.txt`` and ``tests/requirements.txt`` can be used to specify packages required for testing and documentation.
 
 
 Create a license file
@@ -253,7 +261,7 @@ After you have configured Sphinx, committed your code to GitHub, and made your r
     * Set the Python configuration file to ``docs/conf.py``
     * Set the Python interpreter to ``CPython 3.x``
 
-#. Optionally, use YAML files to configure the conda environment used to build the documentation within Read the Docs. This is helpful for documenting packages that depend on OS packages. The default Read the Docs conda environment cannot install OS packages, but some of these dependencies can be obtained from conda.::
+#. Optionally, use YAML files to configure the conda environment used to build the documentation within Read the Docs. This is helpful for documenting packages that depend on OS packages. The default Read the Docs conda environment cannot install OS packages, but some of these dependencies can be obtained from conda.:
   
     * Add the following to ``/path/to/package/.readthedocs.yml``::
 
