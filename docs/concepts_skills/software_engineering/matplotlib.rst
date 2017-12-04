@@ -4,7 +4,8 @@ Plotting data with ``matplotlib``
 
 .. literalinclude:: ../../../intro_to_wc_modeling/concepts_skills/software_engineering/matplotlib_example.py
     :language: Python
-    :lines: 9-89
+    :lines: 21-92
+    :dedent: 4
 
 .. image:: matplotlib-example.png
 
