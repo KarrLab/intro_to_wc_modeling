@@ -6,10 +6,11 @@
 :License: MIT
 '''
 
+from intro_to_wc_modeling.wc_modeling.wc_lang_tutorial import core
 import unittest
 
 
 class TestWC_Lang(unittest.TestCase):
 
     def test(self):
-        from intro_to_wc_modeling.wc_modeling.wc_lang_tutorial import core
+        core.main()

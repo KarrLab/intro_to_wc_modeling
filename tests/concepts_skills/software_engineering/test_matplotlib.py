@@ -6,10 +6,11 @@
 :License: MIT
 """
 
+from intro_to_wc_modeling.concepts_skills.software_engineering import matplotlib_example
 import unittest
 
 
 class TestMatplotlibExample(unittest.TestCase):
 
     def test(self):
-        import intro_to_wc_modeling.concepts_skills.software_engineering.matplotlib_example
+        matplotlib_example.main()

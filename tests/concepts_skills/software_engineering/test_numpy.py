@@ -6,10 +6,11 @@
 :License: MIT
 """
 
+from intro_to_wc_modeling.concepts_skills.software_engineering import numpy_exercises
 import unittest
 
 
 class TestNumPyExercises(unittest.TestCase):
 
     def test(self):
-        import intro_to_wc_modeling.concepts_skills.software_engineering.numpy_exercises
+        numpy_exercises.main()

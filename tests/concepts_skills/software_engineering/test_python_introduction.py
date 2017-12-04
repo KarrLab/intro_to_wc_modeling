@@ -6,10 +6,11 @@
 :License: MIT
 """
 
+from intro_to_wc_modeling.concepts_skills.software_engineering import python_introduction
 import unittest
 
 
 class TestPythonIntroduction(unittest.TestCase):
 
     def test(self):
-        import intro_to_wc_modeling.concepts_skills.software_engineering.python_introduction
+        python_introduction.main()

@@ -89,152 +89,151 @@ class Reaction(Base):
                                           backref=sqlalchemy.orm.backref('reactions', cascade="all, delete-orphan", single_parent=True))
 
 
-######################
-# Create the database
-######################
+def create_database():
+    DATABASE_FILENAME = os.path.join(os.path.dirname(__file__), 'core.sqlite')
+    # :obj:`str`: path to store database
 
-DATABASE_FILENAME = os.path.join(os.path.dirname(__file__), 'core.sqlite')
-# :obj:`str`: path to store database
+    engine = sqlalchemy.create_engine('sqlite:///' + DATABASE_FILENAME)
+    # :obj:`sqlalchemy.engine.Engine`: database engine
 
+    # create the database
+    Base.metadata.drop_all(engine)
+    Base.metadata.create_all(engine)
 
-engine = sqlalchemy.create_engine('sqlite:///' + DATABASE_FILENAME)
-# :obj:`sqlalchemy.engine.Engine`: database engine
-
-# create the database
-Base.metadata.drop_all(engine)
-Base.metadata.create_all(engine)
+    return engine
 
 
-###################################
-# Insert records into the database
-###################################
+def create_session(engine):
+    session = sqlalchemy.orm.sessionmaker(bind=engine)()
+    # :obj:`sqlalchemy.orm.session.Session`: sqlalchemy session
 
-session = sqlalchemy.orm.sessionmaker(bind=engine)()
-# :obj:`sqlalchemy.orm.session.Session`: sqlalchemy session
-
-
-# create homo sapiens organism with one reaction
-organism = Organism(ncbi_id=9606, name='Homo sapiens')
-session.add(organism)
-
-compartment = Compartment(name='cytosol')
-organism.compartments.append(compartment)
-
-atp = Specie(name='atp')
-compartment.species.append(atp)
-
-adp = Specie(name='adp')
-compartment.species.append(adp)
-
-pi = Specie(name='pi')
-compartment.species.append(pi)
-
-h2o = Specie(name='h2o')
-compartment.species.append(h2o)
-
-h = Specie(name='h')
-compartment.species.append(h)
-
-reaction = Reaction(name='atp_hydrolysis')
-reaction.species = [atp, adp, pi, h2o, h]
+    return session
 
 
-# create E. colii organism with one reaction
-organism = Organism(ncbi_id=562, name='Escherichia coli')
-session.add(organism)
+def insert_records(session):
+    # create homo sapiens organism with one reaction
+    organism = Organism(ncbi_id=9606, name='Homo sapiens')
+    session.add(organism)
 
-compartment = Compartment(name='cytosol')
-organism.compartments.append(compartment)
+    compartment = Compartment(name='cytosol')
+    organism.compartments.append(compartment)
 
-gtp = Specie(name='gtp')
-compartment.species.append(gtp)
+    atp = Specie(name='atp')
+    compartment.species.append(atp)
 
-gdp = Specie(name='gdp')
-compartment.species.append(gdp)
+    adp = Specie(name='adp')
+    compartment.species.append(adp)
 
-pi = Specie(name='pi')
-compartment.species.append(pi)
+    pi = Specie(name='pi')
+    compartment.species.append(pi)
 
-h2o = Specie(name='h2o')
-compartment.species.append(h2o)
+    h2o = Specie(name='h2o')
+    compartment.species.append(h2o)
 
-h = Specie(name='h')
-compartment.species.append(h)
+    h = Specie(name='h')
+    compartment.species.append(h)
 
-reaction = Reaction(name='gtp_hydrolysis')
-reaction.species = [gtp, gdp, pi, h2o, h]
+    reaction = Reaction(name='atp_hydrolysis')
+    reaction.species = [atp, adp, pi, h2o, h]
+
+    # create E. colii organism with one reaction
+    organism = Organism(ncbi_id=562, name='Escherichia coli')
+    session.add(organism)
+
+    compartment = Compartment(name='cytosol')
+    organism.compartments.append(compartment)
+
+    gtp = Specie(name='gtp')
+    compartment.species.append(gtp)
+
+    gdp = Specie(name='gdp')
+    compartment.species.append(gdp)
+
+    pi = Specie(name='pi')
+    compartment.species.append(pi)
+
+    h2o = Specie(name='h2o')
+    compartment.species.append(h2o)
+
+    h = Specie(name='h')
+    compartment.species.append(h)
+
+    reaction = Reaction(name='gtp_hydrolysis')
+    reaction.species = [gtp, gdp, pi, h2o, h]
+
+    # save the new objects to the database
+    session.commit()
 
 
-# save the new objects to the database
-session.commit()
+def query_database(session):
+    # get the number organisms
+    organisms = session.query(Organism) \
+        .count()
+
+    # select all of the organisms
+    organisms = session.query(Organism) \
+        .all()
+
+    # order the organisms by their names
+    organisms = session.query(Organism) \
+        .order_by(Organism.name) \
+        .all()
+
+    # order the organisms by their names in descending order
+    organisms = session.query(Organism) \
+        .order_by(Organism.name.desc()) \
+        .all()
+
+    # select only organism names
+    organisms = session.query(Organism.name) \
+        .all()
+
+    # select a subset of the database
+    homo_sapiens = session.query(Organism) \
+        .filter(Organism.ncbi_id == 9606) \
+        .first()
+
+    # using joining to select a subset based on reaction names
+    homo_sapiens = session.query(Organism) \
+        .join(Compartment, Organism.compartments) \
+        .join(Specie, Compartment.species) \
+        .join(Reaction, Specie.reactions) \
+        .filter(Reaction.name == 'atp_hydrolysis') \
+        .first()
+
+    # get the number of species per organism
+    homo_sapiens = session.query(Organism, sqlalchemy.func.count(Organism._id)) \
+        .join(Compartment, Organism.compartments) \
+        .join(Specie, Compartment.species) \
+        .group_by(Organism._id) \
+        .all()
 
 
-###################################
-# querying the database
-###################################
+def edit_database(session):
+    # edit the name of Homo sapiens to "H. sapiens"
+    homo_sapiens = session.query(Organism) \
+        .filter(Organism.ncbi_id == 9606) \
+        .first()
+    homo_sapiens.name = 'H. sapiens'
+    session.commit()
 
-# get the number organisms
-organisms = session.query(Organism) \
-    .count()
+    # delete H. sapiens
+    session.query(Organism) \
+        .filter(Organism.ncbi_id == 9606) \
+        .delete()
+    session.commit()
 
-# select all of the organisms
-organisms = session.query(Organism) \
-    .all()
+    # delete E. coli
+    e_coli = session.query(Organism) \
+        .filter(Organism.ncbi_id == 562) \
+        .first()
+    session.delete(e_coli)
+    session.commit()
 
-# order the organisms by their names
-organisms = session.query(Organism) \
-    .order_by(Organism.name) \
-    .all()
 
-# order the organisms by their names in descending order
-organisms = session.query(Organism) \
-    .order_by(Organism.name.desc()) \
-    .all()
-
-# select only organism names
-organisms = session.query(Organism.name) \
-    .all()
-
-# select a subset of the database
-homo_sapiens = session.query(Organism) \
-    .filter(Organism.ncbi_id==9606) \
-    .first()
-
-# using joining to select a subset based on reaction names
-homo_sapiens = session.query(Organism) \
-    .join(Compartment, Organism.compartments) \
-    .join(Specie, Compartment.species) \
-    .join(Reaction, Specie.reactions) \
-    .filter(Reaction.name=='atp_hydrolysis') \
-    .first()
-
-# get the number of species per organism
-homo_sapiens = session.query(Organism, sqlalchemy.func.count(Organism._id)) \
-    .join(Compartment, Organism.compartments) \
-    .join(Specie, Compartment.species) \
-    .group_by(Organism._id) \
-    .all()
-
-#######################################
-# Editing and deleting database records
-#######################################
-
-# edit the name of Homo sapiens to "H. sapiens"
-homo_sapiens = session.query(Organism) \
-    .filter(Organism.ncbi_id==9606) \
-    .first()
-homo_sapiens.name = 'H. sapiens'
-session.commit()
-
-# delete H. sapiens
-session.query(Organism) \
-    .filter(Organism.ncbi_id==9606) \
-    .delete()
-session.commit()
-
-# delete E. coli
-e_coli = session.query(Organism) \
-    .filter(Organism.ncbi_id==562) \
-    .first()
-session.delete(e_coli)
-session.commit()
+def main():
+    engine = create_database()
+    session = create_session(engine)
+    insert_records(session)
+    query_database(session)
+    edit_database(session)

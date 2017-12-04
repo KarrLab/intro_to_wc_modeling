@@ -6,10 +6,11 @@
 :License: MIT
 """
 
+from intro_to_wc_modeling.concepts_skills.software_engineering.databases import core
 import unittest
 
 
 class TestDatabaseTutorial(unittest.TestCase):
 
     def test(self):
-        from intro_to_wc_modeling.concepts_skills.software_engineering.databases import core
+        core.main()
