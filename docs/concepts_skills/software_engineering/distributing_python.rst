@@ -43,9 +43,9 @@ Save a brief description of the package to ``/path/to/package/README.md``. GitHu
   The goal of this tutorial is to teach you how to test and document Python code.
 
 
-Create a file ``requirements.txt`` which lists the required and optional dependencies
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The following example illustrates how to use ``/path/to/package/requirements.txt`` to specify requirements including how to specify package sources, how to specify version dependencies, and how to specify optional dependencies.::
+Create a file ``requirements.txt`` which lists the required dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The following example illustrates how to use ``/path/to/package/requirements.txt`` to specify requirements including how to specify package sources, how to specify version dependencies, and how to specify required options.::
   
   numpy
   scipy<=1.2
@@ -56,11 +56,23 @@ Packages that should be installed from PyPI should be listed by their names. Pac
 
 Version dependencies can be specified with '<', '>', '<=', '>=', and '='.
 
-Optional dependencies can be specified by post-pending option names to each dependency. These dependencies can be installed by adding the same annotation during the package installation::
-
-  pip install package-name[option-name]
+Required options can be specified by post-pending option names to each dependency. 
 
 Similarly, ``docs/requirements.txt`` and ``tests/requirements.txt`` can be used to specify packages required for testing and documentation.
+
+Create a file ``requirements.optional.txt`` which lists the dependencies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional dependencies can be listed in ``/path/to/package/requirements.optional.txt`` according this syntax:
+
+  [option]
+  dependency_1
+  dependency_2
+  ...
+
+These optional dependencies can be installed by post-pending the option name(s) during pip and setup.py commands, e.g.:: 
+
+  pip install package_name[option_name]
 
 
 Create a license file
@@ -121,35 +133,39 @@ For example, save the following to ``/path/to/package/MANIFEST.in``::
 
   # requirements
   include requirements.txt
+  include requirements.optional.txt
 
 
 Create a setup script
 ^^^^^^^^^^^^^^^^^^^^^
 You can use the ``setuptools`` package to build a install script for your package. Simply edit this template and save it to ``/path/to/intro_to_wc_modeling/setup.py``::
   
-  from setuptools import setup, find_packages
+  import setuptools
+  try:
+      import setuptools_utils
+  except ImportError:
+      import pip
+      pip.main(['install', 'git+https://github.com/KarrLab/setuptools_utils.git#egg=setuptools_utils'])
+      import setuptools_utils
+  import os
 
-  # get long description
-  if os.path.isfile('README.rst'):
-      with open('README.rst', 'r') as file:
-          long_description = file.read()
-  else:
-      long_description = ''
+  name = 'intro_to_wc_modeling'
+  dirname = os.path.dirname(__file__)
 
-  # get version
-  with open('intro_to_wc_modeling/VERSION', 'r') as file:
-      version = file.read().strip()
+  # get package metadata
+  md = setuptools_utils.get_package_metadata(dirname, name)
 
   # install package
   setup(
-      name='intro_to_wc_modeling',
-      version=version,
+      name=name,
+      version=md.version,
 
       description='Python tutorial',
-      long_description=long_description,
+      long_description=md.long_description,
 
       # The project's main homepage.
-      url='https://github.com/KarrLab/intro_to_wc_modeling',
+      url='https://github.com/KarrLab/' + name,
+      download_url='https://github.com/KarrLab/' + name,
 
       author='Jonathan Karr',
       author_email='jonrkarr@gmail.com',
@@ -168,9 +184,9 @@ You can use the ``setuptools`` package to build a install script for your packag
       keywords='python, tutorial',
 
       # packages not prepared yet
-      packages=find_packages(exclude=['tests', 'tests.*']),
+      packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
       package_data={
-          'intro_to_wc_modeling': [
+          name: [
               'VERSION',
           ],
       },
@@ -180,8 +196,10 @@ You can use the ``setuptools`` package to build a install script for your packag
           ],
       },
 
-      install_requires=['numpy'],
-      tests_require=['pytest'],
+      install_requires=md.install_requires,
+      extras_require=md.extras_require,
+      tests_require=md.tests_require,
+      dependency_links=md.dependency_links.
   )
 
 Use the ``entry_points`` argument to specify the location(s) of command line programs that should be created. Use the ``install_requires`` argument to list any dependencies. Use the ``tests_require`` argument to specify any additional packages needed to run the tests.
