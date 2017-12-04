@@ -6,8 +6,8 @@ numpy                                                    # numerical computing
 openpyxl
 optlang                                                  # numerical optimization
 # pgmpy                                                  # graphical models package
-# scikit-learn                                           # data science package
+# scikit_learn                                           # data science package
 scipy                                                    # scientific computing
 sqlalchemy                                               # relational databases
-git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang   # wc-modeling language
-git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils # wc-modeling utilities
+git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang   # wc modeling language
+git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils # wc modeling utilities

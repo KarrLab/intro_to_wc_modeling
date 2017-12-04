@@ -13,13 +13,13 @@ jobs:
             - cache-v8-{{ .Branch }}-
             - cache-v8-
 
-      - run: pip2 install -e .
-      - run: pip2 install -U -e git+https://github.com/KarrLab/karr_lab_build_utils.git#egg=karr_lab_build_utils
+      - run: pip2 install -U git+https://github.com/KarrLab/karr_lab_build_utils.git#egg=karr_lab_build_utils
       - run: karr_lab_build_utils2 install-requirements
-
-      - run: pip3 install -e .
-      - run: pip3 install -U -e git+https://github.com/KarrLab/karr_lab_build_utils.git#egg=karr_lab_build_utils
+      - run: pip2 install -U -e .[all]
+      
+      - run: pip3 install -U git+https://github.com/KarrLab/karr_lab_build_utils.git#egg=karr_lab_build_utils
       - run: karr_lab_build_utils3 install-requirements
+      - run: pip3 install -U -e .[all]
       
       - save_cache:
           key: cache-v8-{{ .Branch }}-{{ checksum "requirements.txt" }}

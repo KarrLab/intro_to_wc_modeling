@@ -1,42 +1,29 @@
-import pip
-pip.main(['install', 'git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils'])
-
-import os
 import setuptools
-import wc_utils.util.install
+try:
+    import pkg_utils
+except ImportError:
+    import pip
+    pip.main(['install', 'git+https://github.com/KarrLab/pkg_utils.git#egg=pkg_utils'])
+    import pkg_utils
+import os
 
-# get long description
-if os.path.isfile('README.rst'):
-    with open('README.rst', 'r') as file:
-        long_description = file.read()
-else:
-    long_description = ''
+name = 'intro_to_wc_modeling'
+dirname = os.path.dirname(__file__)
 
-# get version
-with open('intro_to_wc_modeling/VERSION', 'r') as file:
-    version = file.read().strip()
-
-# parse dependencies and links from requirements.txt files
-with open('requirements.txt', 'r') as file:
-    install_requires, dependency_links_install = wc_utils.util.install.parse_requirements(file.readlines())
-with open('tests/requirements.txt', 'r') as file:
-    tests_require, dependency_links_tests = wc_utils.util.install.parse_requirements(file.readlines())
-dependency_links = list(set(dependency_links_install + dependency_links_tests))
-
-# install non-PyPI dependencies
-wc_utils.util.install.install_dependencies(dependency_links)
-
+# get package metadata
+md = pkg_utils.get_package_metadata(dirname, name)
 
 # install package
 setuptools.setup(
-    name='intro_to_wc_modeling',
-    version=version,
+    name=name,
+    version=md.version,
 
-    description='Python tutorial',
-    long_description=long_description,
+    description='An introduction to whole-cell modeling',
+    long_description=md.long_description,
 
     # The project's main homepage.
-    url='https://github.com/KarrLab/intro_to_wc_modeling',
+    url='https://github.com/KarrLab/' + name,
+    download_url='https://github.com/KarrLab/' + name,
 
     author='Jonathan Karr',
     author_email='jonrkarr@gmail.com',
@@ -57,7 +44,7 @@ setuptools.setup(
     # packages not prepared yet
     packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
     package_data={
-        'intro_to_wc_modeling': [
+        name: [
             'VERSION',
             os.path.join('wc_modeling', 'wc_lang_tutorial', 'examples', 'test_wc_lang.xlsx'),
         ],
@@ -68,7 +55,8 @@ setuptools.setup(
         ],
     },
 
-    install_requires=install_requires,
-    tests_require=tests_require,
-    dependency_links=dependency_links,
+    install_requires=md.install_requires,
+    extras_require=md.extras_require,
+    tests_require=md.tests_require,
+    dependency_links=md.dependency_links,
 )

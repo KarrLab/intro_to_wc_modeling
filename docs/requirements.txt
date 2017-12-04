@@ -2,7 +2,7 @@ capturer
 cement
 cobra
 configparser
-robpol86-sphinxcontrib-googleanalytics
+robpol86_sphinxcontrib_googleanalytics
 matplotlib
 numpy
 openpyxl
@@ -10,10 +10,10 @@ optlang
 scipy
 six
 sphinx >= 1.6
-sphinx-rtd-theme
-sphinxcontrib-bibtex
-sphinxcontrib-spelling
+sphinx_rtd_theme
+sphinxcontrib_bibtex
+sphinxcontrib_spelling
 sqlalchemy
 sympy
-# git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang  # wc-modeling language
-git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils  # wc-modeling utilities
+# git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang  # wc modeling language
+git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils  # wc modeling utilities
