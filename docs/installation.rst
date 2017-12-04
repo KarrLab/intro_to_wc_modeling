@@ -92,6 +92,10 @@ Detailed instructions to install the tutorials and all of the requirements
         make install
         ldconfig
 
+        echo "" >> ~/.bashrc
+        echo "# libgit2" >> ~/.bashrc
+        echo "export LIBGIT2=/usr/local" >> ~/.bashrc
+
     #. Install Open Babel::
 
         wget https://github.com/openbabel/openbabel/archive/openbabel-2-4-1.tar.gz -O /tmp/openbabel-2.4.1.tar.gz
