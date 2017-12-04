@@ -13,15 +13,19 @@ class TestSimulationTutorial(unittest.TestCase):
 
     def test_boolean_exercise(self):
         import intro_to_wc_modeling.cell_modeling.simulation.boolean
+        intro_to_wc_modeling.cell_modeling.simulation.boolean.main()
 
     def test_ode_exercise(self):
         import intro_to_wc_modeling.cell_modeling.simulation.ode
+        intro_to_wc_modeling.cell_modeling.simulation.ode.main()
 
     def test_stochastic_exercise(self):
         import intro_to_wc_modeling.cell_modeling.simulation.stochastic
+        intro_to_wc_modeling.cell_modeling.simulation.stochastic.main()
 
     def test_dfba_exercise(self):
         import intro_to_wc_modeling.cell_modeling.simulation.dfba
+        intro_to_wc_modeling.cell_modeling.simulation.dfba.main()
 
     def test_mrna_and_proteins_using_several_methods(self):
         from intro_to_wc_modeling.cell_modeling.simulation import mrna_and_proteins_using_several_methods

@@ -79,43 +79,44 @@ def simulate(reaction_stochiometries, kinetic_laws, init_copy_number, time_max, 
 
     return (time_hist, copy_number_hist)
 
-# seed random number generator
-numpy.random.seed(0)
+def main():
+    # seed random number generator
+    numpy.random.seed(0)
 
-# run simulations
-time_max = 25.
-time_step = 1.
-n_simulations = 100
-copy_number_hist = numpy.full((int(time_max / time_step + 1), n_simulations), numpy.nan)
-for i_sim in range(n_simulations):
-    time_hist, copy_number_hist[:, i_sim] = simulate(reaction_stochiometries, kinetic_laws, init_copy_number, time_max, time_step)
+    # run simulations
+    time_max = 25.
+    time_step = 1.
+    n_simulations = 100
+    copy_number_hist = numpy.full((int(time_max / time_step + 1), n_simulations), numpy.nan)
+    for i_sim in range(n_simulations):
+        time_hist, copy_number_hist[:, i_sim] = simulate(reaction_stochiometries, kinetic_laws, init_copy_number, time_max, time_step)
 
-# plot results
-for i_sim in range(n_simulations):
-    color = (
-        float(i_sim) / (float(n_simulations) - 1.) / 2,
-        float(i_sim) / (float(n_simulations) - 1.) / 2,
-        float(i_sim) / (float(n_simulations) - 1.) / 2,
-    )
-    matplotlib.pyplot.plot(time_hist, copy_number_hist[:, i_sim], linestyle='-', color=color, linewidth=0.5)
+    # plot results
+    for i_sim in range(n_simulations):
+        color = (
+            float(i_sim) / (float(n_simulations) - 1.) / 2,
+            float(i_sim) / (float(n_simulations) - 1.) / 2,
+            float(i_sim) / (float(n_simulations) - 1.) / 2,
+        )
+        matplotlib.pyplot.plot(time_hist, copy_number_hist[:, i_sim], linestyle='-', color=color, linewidth=0.5)
 
-matplotlib.pyplot.fill_between(time_hist, 
-    numpy.mean(copy_number_hist, 1) - numpy.std(copy_number_hist, 1), 
-    numpy.mean(copy_number_hist, 1) + numpy.std(copy_number_hist, 1), 
-    facecolor=(1, 0, 0, 0.5))
-matplotlib.pyplot.plot(time_hist, numpy.mean(copy_number_hist, 1), linestyle='-', color='r', linewidth=3)
+    matplotlib.pyplot.fill_between(time_hist, 
+        numpy.mean(copy_number_hist, 1) - numpy.std(copy_number_hist, 1), 
+        numpy.mean(copy_number_hist, 1) + numpy.std(copy_number_hist, 1), 
+        facecolor=(1, 0, 0, 0.5))
+    matplotlib.pyplot.plot(time_hist, numpy.mean(copy_number_hist, 1), linestyle='-', color='r', linewidth=3)
 
-matplotlib.pyplot.xlim(0, time_max)
-matplotlib.pyplot.xlabel('Time (s)')
-matplotlib.pyplot.ylabel('Copy number')
-matplotlib.pyplot.gca().spines['top'].set_visible(False)
-matplotlib.pyplot.gca().spines['right'].set_visible(False)
+    matplotlib.pyplot.xlim(0, time_max)
+    matplotlib.pyplot.xlabel('Time (s)')
+    matplotlib.pyplot.ylabel('Copy number')
+    matplotlib.pyplot.gca().spines['top'].set_visible(False)
+    matplotlib.pyplot.gca().spines['right'].set_visible(False)
 
-# display figure
-# matplotlib.pyplot.show()
+    # display figure
+    # matplotlib.pyplot.show()
 
-# save figure
-filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs',
-                        'cell_modeling', 'simulation', 'stochastic-results.png')
-matplotlib.pyplot.savefig(filename, transparent=True, bbox_inches='tight')
-matplotlib.pyplot.close()
+    # save figure
+    filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs',
+                            'cell_modeling', 'simulation', 'stochastic-results.png')
+    matplotlib.pyplot.savefig(filename, transparent=True, bbox_inches='tight')
+    matplotlib.pyplot.close()

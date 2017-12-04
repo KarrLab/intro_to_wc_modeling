@@ -72,31 +72,32 @@ def d_conc_d_t(concs, time):
         d_cyclin_protease_dt
         ])
 
-# initial conditions
-init_concs = numpy.array([0.01, 0.01, 0.01])
+def main():
+    # initial conditions
+    init_concs = numpy.array([0.01, 0.01, 0.01])
 
-# integrate model
-time_max = 100
-time_step = 0.1
-time_hist = numpy.linspace(0., time_max, time_max / time_step + 1)
-conc_hist = scipy.integrate.odeint(d_conc_d_t, init_concs, time_hist)
+    # integrate model
+    time_max = 100
+    time_step = 0.1
+    time_hist = numpy.linspace(0., time_max, time_max / time_step + 1)
+    conc_hist = scipy.integrate.odeint(d_conc_d_t, init_concs, time_hist)
 
-# plot results
-line_cyclin, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 0], 'b-', label='Cyclin')
-line_cdc2, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 1], 'r-', label='Cdc2')
-line_cyclin_protease, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 2], 'g-', label='Protease')
-matplotlib.pyplot.legend([line_cyclin, line_cdc2, line_cyclin_protease], ['Cyclin', 'Cdc2', 'Protease'])
-matplotlib.pyplot.xlim(0, time_max)
-matplotlib.pyplot.xlabel('Time (min)')
-matplotlib.pyplot.ylabel('Cyclin concentration and fraction of\nactive Cdc2 and cyclin protease')
-matplotlib.pyplot.gca().spines['top'].set_visible(False)
-matplotlib.pyplot.gca().spines['right'].set_visible(False)
+    # plot results
+    line_cyclin, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 0], 'b-', label='Cyclin')
+    line_cdc2, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 1], 'r-', label='Cdc2')
+    line_cyclin_protease, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 2], 'g-', label='Protease')
+    matplotlib.pyplot.legend([line_cyclin, line_cdc2, line_cyclin_protease], ['Cyclin', 'Cdc2', 'Protease'])
+    matplotlib.pyplot.xlim(0, time_max)
+    matplotlib.pyplot.xlabel('Time (min)')
+    matplotlib.pyplot.ylabel('Cyclin concentration and fraction of\nactive Cdc2 and cyclin protease')
+    matplotlib.pyplot.gca().spines['top'].set_visible(False)
+    matplotlib.pyplot.gca().spines['right'].set_visible(False)
 
-# display figure
-# matplotlib.pyplot.show()
+    # display figure
+    # matplotlib.pyplot.show()
 
-# save figure
-filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs',
-                        'cell_modeling', 'simulation', 'ode-results.png')
-matplotlib.pyplot.savefig(filename, transparent=True, bbox_inches='tight')
-matplotlib.pyplot.close()
+    # save figure
+    filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs',
+                            'cell_modeling', 'simulation', 'ode-results.png')
+    matplotlib.pyplot.savefig(filename, transparent=True, bbox_inches='tight')
+    matplotlib.pyplot.close()

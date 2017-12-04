@@ -134,61 +134,62 @@ def random_async_update_scheme(regulatory_functions, step, current_state):
     # return state
     return current_state
 
-# seed random number generator
-numpy.random.seed(0)
+def main():
+    # seed random number generator
+    numpy.random.seed(0)
 
-# simulate
-n_steps = 10
-sync_time_hist, sync_hist = simulate(regulatory_functions, initial_state, 20, sync_update_scheme)
-det_async_time_hist, det_async_hist = simulate(regulatory_functions, initial_state, 20 * 3, deterministic_async_update_scheme)
-rand_sync_time_hist, rand_sync_hist = simulate(regulatory_functions, initial_state, 20 * 3, random_async_update_scheme)
+    # simulate
+    n_steps = 10
+    sync_time_hist, sync_hist = simulate(regulatory_functions, initial_state, 20, sync_update_scheme)
+    det_async_time_hist, det_async_hist = simulate(regulatory_functions, initial_state, 20 * 3, deterministic_async_update_scheme)
+    rand_sync_time_hist, rand_sync_hist = simulate(regulatory_functions, initial_state, 20 * 3, random_async_update_scheme)
 
-det_async_time_hist = det_async_time_hist / 3
-rand_sync_time_hist = rand_sync_time_hist / 3
+    det_async_time_hist = det_async_time_hist / 3
+    rand_sync_time_hist = rand_sync_time_hist / 3
 
-# plot
-axis = matplotlib.pyplot.subplot(3, 1, 1)
-line_a, = matplotlib.pyplot.plot(sync_time_hist, sync_hist['A'], 'r-', label='A')
-line_b, = matplotlib.pyplot.plot(sync_time_hist, sync_hist['B'], 'g-', label='B')
-line_c, = matplotlib.pyplot.plot(sync_time_hist, sync_hist['C'], 'b-', label='C')
-matplotlib.pyplot.legend([line_a, line_b, line_c], ['A', 'B', 'C'])
-matplotlib.pyplot.xlim(0, n_steps)
-matplotlib.pyplot.ylim(-0.1, 1.1)
-matplotlib.pyplot.yticks([0, 1])
-matplotlib.pyplot.xlabel('Step')
-matplotlib.pyplot.ylabel('Value')
-axis.spines['top'].set_visible(False)
-axis.spines['right'].set_visible(False)
+    # plot
+    axis = matplotlib.pyplot.subplot(3, 1, 1)
+    line_a, = matplotlib.pyplot.plot(sync_time_hist, sync_hist['A'], 'r-', label='A')
+    line_b, = matplotlib.pyplot.plot(sync_time_hist, sync_hist['B'], 'g-', label='B')
+    line_c, = matplotlib.pyplot.plot(sync_time_hist, sync_hist['C'], 'b-', label='C')
+    matplotlib.pyplot.legend([line_a, line_b, line_c], ['A', 'B', 'C'])
+    matplotlib.pyplot.xlim(0, n_steps)
+    matplotlib.pyplot.ylim(-0.1, 1.1)
+    matplotlib.pyplot.yticks([0, 1])
+    matplotlib.pyplot.xlabel('Step')
+    matplotlib.pyplot.ylabel('Value')
+    axis.spines['top'].set_visible(False)
+    axis.spines['right'].set_visible(False)
 
-axis = matplotlib.pyplot.subplot(3, 1, 2)
-line_a, = matplotlib.pyplot.plot(det_async_time_hist, det_async_hist['A'], 'r-', label='A')
-line_b, = matplotlib.pyplot.plot(det_async_time_hist, det_async_hist['B'], 'g-', label='B')
-line_c, = matplotlib.pyplot.plot(det_async_time_hist, det_async_hist['C'], 'b-', label='C')
-matplotlib.pyplot.xlim(0, n_steps)
-matplotlib.pyplot.ylim(-0.1, 1.1)
-matplotlib.pyplot.yticks([0, 1])
-matplotlib.pyplot.xlabel('Step')
-matplotlib.pyplot.ylabel('Value')
-axis.spines['top'].set_visible(False)
-axis.spines['right'].set_visible(False)
+    axis = matplotlib.pyplot.subplot(3, 1, 2)
+    line_a, = matplotlib.pyplot.plot(det_async_time_hist, det_async_hist['A'], 'r-', label='A')
+    line_b, = matplotlib.pyplot.plot(det_async_time_hist, det_async_hist['B'], 'g-', label='B')
+    line_c, = matplotlib.pyplot.plot(det_async_time_hist, det_async_hist['C'], 'b-', label='C')
+    matplotlib.pyplot.xlim(0, n_steps)
+    matplotlib.pyplot.ylim(-0.1, 1.1)
+    matplotlib.pyplot.yticks([0, 1])
+    matplotlib.pyplot.xlabel('Step')
+    matplotlib.pyplot.ylabel('Value')
+    axis.spines['top'].set_visible(False)
+    axis.spines['right'].set_visible(False)
 
-axis = matplotlib.pyplot.subplot(3, 1, 3)
-line_a, = matplotlib.pyplot.plot(rand_sync_time_hist, rand_sync_hist['A'], 'r-', label='A')
-line_b, = matplotlib.pyplot.plot(rand_sync_time_hist, rand_sync_hist['B'], 'g-', label='B')
-line_c, = matplotlib.pyplot.plot(rand_sync_time_hist, rand_sync_hist['C'], 'b-', label='C')
-matplotlib.pyplot.xlim(0, n_steps)
-matplotlib.pyplot.ylim(-0.1, 1.1)
-matplotlib.pyplot.yticks([0, 1])
-matplotlib.pyplot.xlabel('Step')
-matplotlib.pyplot.ylabel('Value')
-axis.spines['top'].set_visible(False)
-axis.spines['right'].set_visible(False)
+    axis = matplotlib.pyplot.subplot(3, 1, 3)
+    line_a, = matplotlib.pyplot.plot(rand_sync_time_hist, rand_sync_hist['A'], 'r-', label='A')
+    line_b, = matplotlib.pyplot.plot(rand_sync_time_hist, rand_sync_hist['B'], 'g-', label='B')
+    line_c, = matplotlib.pyplot.plot(rand_sync_time_hist, rand_sync_hist['C'], 'b-', label='C')
+    matplotlib.pyplot.xlim(0, n_steps)
+    matplotlib.pyplot.ylim(-0.1, 1.1)
+    matplotlib.pyplot.yticks([0, 1])
+    matplotlib.pyplot.xlabel('Step')
+    matplotlib.pyplot.ylabel('Value')
+    axis.spines['top'].set_visible(False)
+    axis.spines['right'].set_visible(False)
 
-# display figure
-# matplotlib.pyplot.show()
+    # display figure
+    # matplotlib.pyplot.show()
 
-# save figure
-filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs',
-                        'cell_modeling', 'simulation', 'boolean-results.png')
-matplotlib.pyplot.savefig(filename, transparent=True, bbox_inches='tight')
-matplotlib.pyplot.close()
+    # save figure
+    filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs',
+                            'cell_modeling', 'simulation', 'boolean-results.png')
+    matplotlib.pyplot.savefig(filename, transparent=True, bbox_inches='tight')
+    matplotlib.pyplot.close()
