@@ -233,9 +233,9 @@ Follow the steps below to distribute your code via PyPI.
         pypi
 
     [pypi]
-    repository=https://upload.pypi.org/legacy/
-    username:<username>
-    password:<password>
+    repository: https://upload.pypi.org/legacy/
+    username: <username>
+    password: <password>
 
 #. Convert your ``README.md`` file to ``.rst`` format::
 
