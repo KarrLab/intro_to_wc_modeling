@@ -2,7 +2,7 @@
 [![Documentation](https://readthedocs.org/projects/intro_to_wc_modeling/badge/?version=latest)](http://intro_to_wc_modeling.readthedocs.org)
 [![Test results](https://circleci.com/gh/KarrLab/intro_to_wc_modeling.svg?style=shield)](https://circleci.com/gh/KarrLab/intro_to_wc_modeling)
 [![Test coverage](https://coveralls.io/repos/github/KarrLab/intro_to_wc_modeling/badge.svg)](https://coveralls.io/github/KarrLab/intro_to_wc_modeling)
-[![Code analysis](https://codeclimate.com/github/KarrLab/intro_to_wc_modeling/badges/gpa.svg)](https://codeclimate.com/github/KarrLab/intro_to_wc_modeling)
+[![Code analysis](https://api.codeclimate.com/v1/badges/b2a33e172ec162ea4b6b/maintainability)](https://codeclimate.com/github/KarrLab/intro_to_wc_modeling)
 [![License](https://img.shields.io/github/license/KarrLab/intro_to_wc_modeling.svg)](LICENSE)
 ![Analytics](https://ga-beacon.appspot.com/UA-86759801-1/intro_to_wc_modeling/README.md?pixel)
 
