@@ -265,7 +265,7 @@ Detailed instructions to install the tutorials and all of the requirements
 
         #. Use your host id to create a license at `https://app.xpress.fico.com <https://app.xpress.fico.com>`_
         #. Save the license to `/tmp/xpauth.xpr`
-        #. Install XPRESS::
+        #. Install XPRESS. Note, the standard library directory needs to be added to the library path to prevent the OS from using the versions of libcrypto and libssl provided by XPRESS.::
 
             cd /tmp/xp8.4.0_linux_x86_64_setup
             ./install.sh
@@ -274,7 +274,7 @@ Detailed instructions to install the tutorials and all of the requirements
             echo "# XPRESS" >> ~/.bashrc
             echo "export XPRESSDIR=/opt/xpressmp" >> ~/.bashrc
             echo "export PATH=\"\${PATH}:\${XPRESSDIR}/bin\"" >> ~/.bashrc
-            echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:\${XPRESSDIR}/lib\"" >> ~/.bashrc
+            echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:/lib/x86_64-linux-gnu:\${XPRESSDIR}/lib\"" >> ~/.bashrc
             echo "export CLASSPATH=\"\${CLASSPATH}:\${XPRESSDIR}/lib/xprs.jar:\${XPRESSDIR}/lib/xprb.jar:\${XPRESSDIR}/lib/xprm.jar\"" >> ~/.bashrc
             echo "export XPRESS=\"\${XPRESSDIR}/bin\"" >> ~/.bashrc
 
