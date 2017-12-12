@@ -197,29 +197,40 @@ class OdeSimulation(object):
         """ Calculate the steady state
 
         Returns:
-            :obj:`tuple`:
-                * :obj:`float`: steady-state mRNA number (molecules)
-                * :obj:`float`: steady-state protein number (molecules)
-                * :obj:`str`: stability of the steady state
+            :obj:`float`: steady-state mRNA number (molecules)
+            :obj:`float`: steady-state protein number (molecules)
+            :obj:`str`: stability of the steady state
         """
         m = self.k_m / self.gamma_m
         n = self.k_n / self.gamma_n * self.k_m / self.gamma_m
 
-        w, _ = linalg.eig(self.jacobian(self.x(m, n)))
-        if numpy.all(numpy.imag(w) == 0):
-            if numpy.all(w < 0):
-                stability = 'stable sink'
-            elif numpy.all(w > 0):
-                stability = 'unstable source'
-            else:
-                stability = 'unstable saddle'
-        else:
-            if numpy.all(numpy.real(w) < 0):
-                stability = 'stable spiral sinl'
-            else:
-                stability = 'unstable spiral source'
+        jacobian = self.jacobian(self.x(m, n))
+        stability = self.get_steady_stability(jacobian)
 
         return (m, n, stability)
+
+    def get_steady_stability(self, jacobian):
+        """ Get the stability of a steady state
+
+        Args:
+            jacobian (:obj:`numpy.ndarray`): jacobian of the model
+
+        Returns:
+            :obj:`str`: stability of the steady state
+        """
+        w, _ = linalg.eig(jacobian)
+        if numpy.all(numpy.imag(w) == 0):
+            if numpy.all(w < 0):
+                return 'stable sink'
+            elif numpy.all(w > 0):
+                return 'unstable source'
+            else:
+                return 'unstable saddle'
+        else:
+            if numpy.all(numpy.real(w) < 0):
+                return 'stable spiral sink'
+            else:
+                return 'unstable spiral source'
 
     def simulate(self, t_0=0., t_end=100., t_step=1.):
         """ Run the simulation
@@ -403,7 +414,7 @@ class CmeSimulation(object):
             full_matrix (:obj:`numpy.array`): matrix with size (m_max + 1, n_max + 1) that represents
                 mRNA = {0 .. m_max} and protein = {0 .. n_max}
 
-        Returns:            
+        Returns:
             :obj:`numpy.array`: matrix with size (m_max - m_min + 1, n_max - n_min + 1) that represents
                 mRNA = {m_min .. m_max} and protein = {n_min .. n_max}
         """
@@ -416,7 +427,7 @@ class CmeSimulation(object):
             partial_matrix (:obj:`numpy.array`): matrix with size (m_max - m_min + 1, n_max - n_min + 1) that represents
                 mRNA = {m_min .. m_max} and protein = {n_min .. n_max}
 
-        Returns:            
+        Returns:
             :obj:`numpy.array`: matrix with size (m_max + 1, n_max + 1) that represents
                 mRNA = {0 .. m_max} and protein = {0 .. n_max}
         """
@@ -431,7 +442,7 @@ class CmeSimulation(object):
             full_matrix (:obj:`numpy.array`): matrix with size (m_max + 1, n_max + 1) that represents
                 mRNA = {0 .. m_max} and protein = {0 .. n_max}
 
-        Returns:            
+        Returns:
             :obj:`numpy.array`: vector of size ((m_max - m_min + 1) * (n_max - n_min + 1), 1) that represents
                 mRNA = {m_min .. m_max} and protein = {n_min .. n_max}
         """
@@ -445,7 +456,7 @@ class CmeSimulation(object):
             partial_vector (:obj:`numpy.array`): vector of size ((m_max - m_min + 1) * (n_max - n_min + 1), 1) that represents
                 mRNA = {m_min .. m_max} and protein = {n_min .. n_max}
 
-        Returns:            
+        Returns:
             :obj:`numpy.array`: matrix with size (m_max + 1, n_max + 1) that represents
                 mRNA = {0 .. m_max} and protein = {0 .. n_max}
         """
@@ -982,7 +993,7 @@ def trajectory_exercise():
     ##########################################################
     # simulate
     n_trajectories = 50
-    t, m, n = sim.simulate_ensemble(n_trajectories, t_end=2., t_step=0.2)    
+    t, m, n = sim.simulate_ensemble(n_trajectories, t_end=2., t_step=0.2)
 
     # plot
     fig = sim.plot_trajectories(t, m, n)

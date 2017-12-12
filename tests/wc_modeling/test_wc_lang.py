@@ -7,10 +7,19 @@
 '''
 
 from intro_to_wc_modeling.wc_modeling.wc_lang_tutorial import core
+import shutil
+import tempfile
 import unittest
 
 
 class TestWC_Lang(unittest.TestCase):
 
+    def setUp(self):
+        self.dirname = tempfile.mkdtemp()
+        shutil.rmtree(self.dirname)
+
+    def tearDown(self):
+        shutil.rmtree(self.dirname)
+
     def test(self):
-        core.main()
+        core.main(examples_dir=self.dirname)

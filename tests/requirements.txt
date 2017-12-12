@@ -1,1 +1,2 @@
 capturer # capture stdout
+mock # mock classes and functions

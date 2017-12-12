@@ -22,11 +22,11 @@ Prepare your package for distribution
 Annotate the version number of your package in ``VERSION`` and ``__init__.py``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Save the following to the ``VERSION`` file of your package, e.g. ``/path/to/intro_to_wc_modeling/intro_to_wc_modeling/VERSION``::
-  
+
   0.0.1
 
 Save the following to the ``__init__.py`` file of your package, e.g. ``/path/to/package/intro_to_wc_modeling/__init__.py``::
-  
+
   import pkg_resources
 
   with open(pkg_resources.resource_filename('intro_to_wc_modeling', 'VERSION'), 'r') as file:
@@ -46,7 +46,7 @@ Save a brief description of the package to ``/path/to/package/README.md``. GitHu
 Create a file ``requirements.txt`` which lists the required dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The following example illustrates how to use ``/path/to/package/requirements.txt`` to specify requirements including how to specify package sources, how to specify version dependencies, and how to specify required options.::
-  
+
   numpy
   scipy<=1.2
   matplotlib==2.3[option]
@@ -56,7 +56,7 @@ Packages that should be installed from PyPI should be listed by their names. Pac
 
 Version dependencies can be specified with '<', '>', '<=', '>=', and '='.
 
-Required options can be specified by post-pending option names to each dependency. 
+Required options can be specified by post-pending option names to each dependency.
 
 Similarly, ``docs/requirements.txt`` and ``tests/requirements.txt`` can be used to specify packages required for testing and documentation.
 
@@ -70,7 +70,7 @@ Optional dependencies can be listed in ``/path/to/package/requirements.optional.
   dependency_2
   ...
 
-These optional dependencies can be installed by post-pending the option name(s) during pip and setup.py commands, e.g.:: 
+These optional dependencies can be installed by post-pending the option name(s) during pip and setup.py commands, e.g.::
 
   pip install package_name[option_name]
 
@@ -110,11 +110,11 @@ Create a setup configuration file by following this example and saving it to ``/
   universal = 1
 
   [coverage:run]
-  source = 
+  source =
       intro_to_wc_modeling
 
   [sphinx-apidocs]
-  packages = 
+  packages =
       intro_to_wc_modeling
 
 
@@ -139,7 +139,7 @@ For example, save the following to ``/path/to/package/MANIFEST.in``::
 Create a setup script
 ^^^^^^^^^^^^^^^^^^^^^
 You can use the ``setuptools`` package to build a install script for your package. Simply edit this template and save it to ``/path/to/intro_to_wc_modeling/setup.py``::
-  
+
   import setuptools
   try:
       import setuptools_utils
@@ -227,7 +227,7 @@ Follow the steps below to distribute your code via PyPI.
 
 #. Create an account at `https://pypi.python.org <https://pypi.python.org>`_
 #. Save your login information to ``~/.pypirc``::
-    
+
     [distutils]
     index-servers =
         pypi
@@ -239,7 +239,7 @@ Follow the steps below to distribute your code via PyPI.
 
 #. Convert your ``README.md`` file to ``.rst`` format::
 
-    pandoc --from=markdown --to=rst --output=README.rst README.md 
+    pandoc --from=markdown --to=rst --output=README.rst README.md
 
 #. Compile your package for source code and binary distribution::
 
@@ -272,7 +272,7 @@ After you have configured Sphinx, committed your code to GitHub, and made your r
 #. Click the "Import a repository" button
 #. Select the repository that you wish to distribute
 #. Create the project
-#. Use the "Settings" and "Advanced Settings" panels to edit the settings for the project. 
+#. Use the "Settings" and "Advanced Settings" panels to edit the settings for the project.
 
     * Set the homepage and tags
     * Set the requirements file to ``docs/requirements.txt``
@@ -280,7 +280,7 @@ After you have configured Sphinx, committed your code to GitHub, and made your r
     * Set the Python interpreter to ``CPython 3.x``
 
 #. Optionally, use YAML files to configure the conda environment used to build the documentation within Read the Docs. This is helpful for documenting packages that depend on OS packages. The default Read the Docs conda environment cannot install OS packages, but some of these dependencies can be obtained from conda.:
-  
+
     * Add the following to ``/path/to/package/.readthedocs.yml``::
 
         python:

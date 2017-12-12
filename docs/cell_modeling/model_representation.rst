@@ -1,6 +1,6 @@
 Model representation
 ====================
-There are multiple ways to represent a model. 
+There are multiple ways to represent a model.
 
 
 Custom numerical simulation code
@@ -49,7 +49,7 @@ Ruled-based modeling languages
 ------------------------------
 Alternatively, models can be described using rule patterns which describe families of related species and reactions. This enables large models with large state spaces to be concisely represented. This approach also emphasizes the biology/chemistry/physics which is pertinent to each rule. Furthermore, models that are described with rules can be efficiently simulated using network-free simulation which is an agent-based simulation technique which takes advantage of the typical low occupancy of models with large state spaces. The most popular rule-based modeling languages include `BioNetGen <http://bionetgen.org>`_ and `Kappa <http://dev.executableknowledge.org/>`_. The most popular network-free simulators including `NFSim <http://michaelsneddon.net/nfsim/>`_ and `KaSim <http://dev.executableknowledge.org/>`_.
 
-However, all of the existing rule-based languages have a few critical limitations. First, they provide little support for semantic annotations. Second, they only support one specific type of combinatorial complexity, namely the combinatorial complexity that arises from having multiple binding sites per protein. In particular, the existing languages cannot easily described reactions that involve DNA, RNA, or protein sequences such as protein-DNA binding reactions. 
+However, all of the existing rule-based languages have a few critical limitations. First, they provide little support for semantic annotations. Second, they only support one specific type of combinatorial complexity, namely the combinatorial complexity that arises from having multiple binding sites per protein. In particular, the existing languages cannot easily described reactions that involve DNA, RNA, or protein sequences such as protein-DNA binding reactions.
 
 Exercise
 ^^^^^^^^^

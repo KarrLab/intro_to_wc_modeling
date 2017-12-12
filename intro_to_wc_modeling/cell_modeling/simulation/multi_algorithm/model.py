@@ -1,4 +1,4 @@
-''' 
+'''
 Reads models specified in Excel into a Python object
 
 @author Jonathan Karr, karr@mssm.edu
@@ -20,7 +20,7 @@ import re
 import warnings
 
 
-class Model:
+class Model(object):
     # Represents a model (submodels, compartments, species, reactions, parameters, references)
 
     submodels = []
@@ -152,58 +152,6 @@ class Model:
             for compartment in self.compartments:
                 self.speciesCounts[species.index, compartment.index] = speciesCountsDict['%s[%s]' % (species.id, compartment.id)]
 
-    def getSpeciesConcentrations(self):
-        # get species concentrations
-
-        return self.speciesCounts / self.getSpeciesVolumes() / N_AVOGADRO
-
-    def getSpeciesConcentrationsDict(self):
-        # get species concentrations
-
-        concs = self.getSpeciesConcentrations()
-        speciesConcsDict = {}
-        for species in self.species:
-            for compartment in self.compartments:
-                speciesConcsDict['%s[%s]' % (species.id, compartment.id)] = concs[species.index, compartment.index]
-        return speciesConcsDict
-
-    def getSpeciesVolumes(self):
-        # get container volumes for each species
-        cellComp = self.getComponentById('c', self.compartments)
-        extracellularComp = self.getComponentById('e', self.compartments)
-
-        volumes = np.zeros((len(self.species), len(self.compartments)))
-        volumes[:, cellComp.index] = self.volume
-        volumes[:, extracellularComp.index] = self.extracellularVolume
-        return volumes
-
-    def getSpeciesVolumesDict(self):
-        # get species counts as dictionary
-        volumes = self.getSpeciesVolumes()
-        volumesDict = {}
-        for species in self.species:
-            for compartment in self.compartments:
-                volumesDict['%s[%s]' % (species.id, compartment.id)] = volumes[species.index, compartment.index]
-        return volumesDict
-
-    def getTotalRnaCount(self):
-        # get total RNA number
-        cellComp = self.getComponentById('c', self.compartments)
-        tot = 0
-        for species in self.species:
-            if species.type == 'RNA':
-                tot += self.speciesCounts[species.index, cellComp.index]
-        return tot
-
-    def getTotalProteinCount(self):
-        # get total protein copy number
-        cellComp = self.getComponentById('c', self.compartments)
-        tot = 0
-        for species in self.species:
-            if species.type == 'Protein':
-                tot += self.speciesCounts[species.index, cellComp.index]
-        return tot
-
     def getComponentById(self, id, components=None):
         if not components:
             components = chain(self.submodels, self.compartments, self.species, self.reactions, self.parameters, self.references)
@@ -213,7 +161,7 @@ class Model:
                 return component
 
 
-class Submodel:
+class Submodel(object):
     # Represents a model (submodels, compartments, species, reactions, parameters, references)
 
     index = None
@@ -289,10 +237,7 @@ class Submodel:
             speciesCounts[part.id] += part.coefficient
         return speciesCounts
 
-    def getComponentById(self, id, components=None):
-        if not components:
-            components = chain(self.species, self.reactions, self.parameters)
-
+    def getComponentById(self, id, components):
         for component in components:
             if component.id == id:
                 return component
@@ -345,9 +290,9 @@ class FbaSubmodel(Submodel):
             cobraModel.add_reactions([cbRxn])
 
             cbMets = {}
-            for part in rxn.participants:                
+            for part in rxn.participants:
                 cbMets[part.id] = part.coefficient
-                if rxn.id == 'MetabolismProduction' and part.id == 'H2O[c]' and self.solver == 'glpk': # to compensate for GLPK bug
+                if rxn.id == 'MetabolismProduction' and part.id == 'H2O[c]' and self.solver == 'glpk':  # to compensate for GLPK bug
                     del cbMets[part.id]
             cbRxn.add_metabolites(cbMets)
 
@@ -473,48 +418,8 @@ class SsaSubmodel(Submodel):
     def setupSimulation(self):
         Submodel.setupSimulation(self)
 
-    @staticmethod
-    def stochasticSimulationAlgorithm(speciesCounts, speciesVolumes, reactions, volume, timeMax):
-        if len(reactions) >= 1 and not isinstance(reactions[0], list):
-            reactions = [reactions]
 
-        nSubmodels = len(reactions)
-
-        time = 0
-        while time < timeMax:
-            # calculate concentrations
-            speciesConcentrations = {}
-            for id, cnt in speciesCounts.items():
-                speciesConcentrations[id] = speciesCounts[id] / speciesVolumes[id] / N_AVOGADRO
-
-            # calculate propensities
-            totalPropensities = np.zeros(nSubmodels)
-            reactionPropensities = []
-            for iSubmodel in range(nSubmodels):
-                p = np.maximum(0, Submodel.calcReactionRates(reactions[iSubmodel], speciesConcentrations) * volume * N_AVOGADRO)
-                totalPropensities[iSubmodel] = np.sum(p)
-                reactionPropensities.append(p)
-
-            # Select time to next reaction from exponential distribution
-            dt = random.exponential(1/np.sum(totalPropensities))
-            if time + dt > timeMax:
-                if random.rand() > (timeMax - time) / dt:
-                    break
-                else:
-                    dt = timeMax - time
-
-            # Select next reaction
-            iSubmodel = random.choice(nSubmodels, p=totalPropensities / np.sum(totalPropensities))
-            iRxn = random.choice(len(reactionPropensities[iSubmodel]), p=reactionPropensities[iSubmodel] / totalPropensities[iSubmodel])
-
-            # update time and execute reaction
-            time += dt
-            speciesCounts = Submodel.executeReaction(speciesCounts, reactions[iSubmodel][iRxn])
-
-        return speciesCounts
-
-
-class Compartment:
+class Compartment(object):
     # Represents a compartment
 
     index = None
@@ -530,7 +435,7 @@ class Compartment:
         self.comments = comments
 
 
-class Species:
+class Species(object):
     # Represents a species
 
     index = None
@@ -565,7 +470,7 @@ class Species:
         return False
 
 
-class Reaction:
+class Reaction(object):
     # Represents a reaction
 
     index = None
@@ -602,50 +507,8 @@ class Reaction:
         self.crossRefs = crossRefs
         self.comments = comments
 
-    def getStoichiometryString(self):
-        # convert rate law to python
 
-        globalComp = self.participants[0].compartment
-        for part in self.participants:
-            if part.compartment != globalComp:
-                globalComp = None
-                break
-
-        lhs = []
-        rhs = []
-        for part in self.participants:
-            if part.coefficient < 0:
-                partStr = ''
-                if part.coefficient != -1:
-                    if math.ceil(part.coefficient) == part.coefficient:
-                        partStr += '(%d) ' % -part.coefficient
-                    else:
-                        partStr += '(%e) ' % -part.coefficient
-                partStr += part.species.id
-                if globalComp is None:
-                    partStr += '[%s]' % part.compartment.id
-                lhs.append(partStr)
-            else:
-                partStr = ''
-                if part.coefficient != 1:
-                    if math.ceil(part.coefficient) == part.coefficient:
-                        partStr += '(%d) ' % part.coefficient
-                    else:
-                        partStr += '(%e) ' % part.coefficient
-                partStr += part.species.id
-                if globalComp is None:
-                    partStr += '[%s]' % part.compartment.id
-                rhs.append(partStr)
-
-        stoichStr = ''
-        if globalComp is not None:
-            stoichStr += '[%s]: ' % globalComp.id
-        stoichStr += '%s %s==> %s' % (' + '.join(lhs), '<' if self.reversible else '', ' + '.join(rhs))
-
-        return stoichStr
-
-
-class Parameter:
+class Parameter(object):
     # Represents a model parameter
 
     index = None
@@ -665,7 +528,7 @@ class Parameter:
         self.comments = comments
 
 
-class Reference:
+class Reference(object):
     # Represents a reference
 
     index = None
@@ -682,7 +545,7 @@ class Reference:
         self.comments = comments
 
 
-class Concentration:
+class Concentration(object):
     # Represents a concentration in a compartment
 
     compartment = ''
@@ -693,7 +556,7 @@ class Concentration:
         self.value = value
 
 
-class SpeciesCompartment:
+class SpeciesCompartment(object):
     # Represents a participant in a submodel
 
     index = None
@@ -713,7 +576,7 @@ class SpeciesCompartment:
         self.name = '%s (%s)' % (self.species.name, self.compartment.name)
 
 
-class ExchangedSpecies:
+class ExchangedSpecies(object):
     # Represents an external
 
     id = ''
@@ -724,7 +587,7 @@ class ExchangedSpecies:
         self.reactionIndex = reactionIndex
 
 
-class ReactionParticipant:
+class ReactionParticipant(object):
     # Represents a participant in a reaction
 
     species = ''
@@ -743,12 +606,8 @@ class ReactionParticipant:
         self.id = '%s[%s]' % (self.species.id, self.compartment.id)
         self.name = '%s (%s)' % (self.species.name, self.compartment.name)
 
-    def __str__(self):
-        return "ReactionParticipant: species: {}; compartment: {}; coefficient: {}; id: {}; name: {}".format(
-            self.species, self.compartment, self.coefficient, self.id, self.name)
 
-
-class RateLaw:
+class RateLaw(object):
     # Represents a rate law
 
     native = ''
@@ -777,7 +636,7 @@ class RateLaw:
                 self.transcoded = self.transcoded.replace(id, "speciesConcentrations['%s']" % id)
 
 
-class CrossReference:
+class CrossReference(object):
     # Represents a cross reference to an external database
 
     source = ''
@@ -809,8 +668,6 @@ def getModelFromExcel(filename):
             subModel = FbaSubmodel(id=id, name=name)
         elif algorithm == 'SSA':
             subModel = SsaSubmodel(id=id, name=name)
-        else:
-            raise Exception('Undefined algorithm "%s" for submodel "%s"' % (algorithm, id))
         model.submodels.append(subModel)
 
     # compartments
@@ -921,45 +778,33 @@ def getModelFromExcel(filename):
     model.setComponentIndices()
 
     '''deserialize references'''
-    undefinedComponents = []
-
     # species concentration
     for species in model.species:
         for conc in species.concentrations:
             id = conc.compartment
             obj = model.getComponentById(id, model.compartments)
-            if id and obj is None:
-                undefinedComponents.append(id)
             conc.compartment = obj
 
     # reaction submodel, participant species, participant compartments, enzymes
     for reaction in model.reactions:
         id = reaction.submodel
         obj = model.getComponentById(id, model.submodels)
-        if id and obj is None:
-            undefinedComponents.append(id)
         reaction.submodel = obj
 
         for part in reaction.participants:
 
             id = part.species
             obj = model.getComponentById(id, model.species)
-            if id and obj is None:
-                undefinedComponents.append(id)
             part.species = obj
 
             id = part.compartment
             obj = model.getComponentById(id, model.compartments)
-            if id and obj is None:
-                undefinedComponents.append(id)
             part.compartment = obj
 
             part.calcIdName()
 
         id = reaction.enzyme
         obj = model.getComponentById(id, model.species)
-        if id and obj is None:
-            undefinedComponents.append(id)
         reaction.enzyme = obj
 
     # parameter submodels
@@ -967,14 +812,7 @@ def getModelFromExcel(filename):
         id = param.submodel
         if id:
             obj = model.getComponentById(id, model.submodels)
-            if obj is None:
-                undefinedComponents.append(id)
             param.submodel = obj
-
-    if len(undefinedComponents) > 0:
-        undefinedComponents = list(set(undefinedComponents))
-        undefinedComponents.sort()
-        raise Exception('Undefined components:\n- %s' % ('\n- '.join(undefinedComponents)))
 
     ''' Assemble back references'''
     for subModel in model.submodels:
@@ -1027,7 +865,7 @@ def parseStoichiometry(rxnStr):
     # Split stoichiometry in to global compartment, left-hand side, right-hand side, reversibility indictor
     rxnMatch = re.match('(?P<compartment>\[([a-z])\]: )?(?P<lhs>((\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])? \+ )*(\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])?) (?P<direction>[<]?)==> (?P<rhs>((\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])? \+ )*(\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])?)', rxnStr, flags=re.I)
     if rxnMatch is None:
-        raise Exception('Invalid stoichiometry: %s' % rxnStr)
+        raise ValueError('Invalid stoichiometry: %s' % rxnStr)
 
     # Determine reversiblity
     rxnDict = rxnMatch.groupdict()

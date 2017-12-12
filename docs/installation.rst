@@ -109,7 +109,7 @@ Detailed instructions to install the tutorials and all of the requirements
         ldconfig
 
     #. Install the CPLEX optimization package and the CPLEX Python binding
-        
+
         #. Register for an academic account and download CPLEX from `https://ibm.onthehub.com <https://ibm.onthehub.com>`_
 
         #. Install CPLEX::
@@ -141,7 +141,7 @@ Detailed instructions to install the tutorials and all of the requirements
         echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:/opt/coin-or/cbc/lib:/opt/coin-or/coinutils/lib\"" >> ~/.bashrc
         ~/.bashrc
         ldconfig
-        
+
         # CoinUtils
         cd /tmp
         wget --no-check-certificate https://www.coin-or.org/download/source/CoinUtils/CoinUtils-2.10.14.tgz
@@ -165,7 +165,7 @@ Detailed instructions to install the tutorials and all of the requirements
         make
         make install
 
-        # CyLP 
+        # CyLP
         pip install numpy scipy
         pip install git+https://github.com/jjhelmus/CyLP.git@py3#egg=cylp
 
@@ -244,7 +244,7 @@ Detailed instructions to install the tutorials and all of the requirements
                 cp -r include/ /opt/coin-or/qpoases
 
             #. Install the Python binding::
-                
+
                 cd interfaces/python
                 pip install cython numpy
                 python setup.py install
@@ -252,7 +252,7 @@ Detailed instructions to install the tutorials and all of the requirements
     #. Optionally, install the XPRESS optimization package and the XPRESS Python binding
 
         #. Download and unpack XPRESS::
-        
+
             cd /tmp
             wget --no-check-certificate https://clientarea.xpress.fico.com/downloads/8.4.0/xp8.4.0_linux_x86_64_setup.tar
             mkdir xp8.4.0_linux_x86_64_setup

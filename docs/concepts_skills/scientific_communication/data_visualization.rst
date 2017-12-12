@@ -2,16 +2,16 @@ Visualizing data
 ================
 
 * Leverage the human visual system's abilities to process visual information
-* Use easily understandable data encodings 
+* Use easily understandable data encodings
 
     * Utilize position and length
     * Use a small number of easily discriminable colors
-    * Avoid 3D and animation 
+    * Avoid 3D and animation
 
 * Display data in its context
 
     * Use appropriate scales
-    * Compare 
+    * Compare
     * Lay data out on familiar maps such as geographical and pathway maps
 
 * Use small multiples to visualize additional dimensions

@@ -26,7 +26,7 @@ Query the shape of an array
 .. code-block:: Python
 
     arr = numpy.array([...])
-    arr.shape()    
+    arr.shape()
 
 Reshaping
 ---------
@@ -47,7 +47,7 @@ Selection and slicing
 Transposition
 -------------
 .. code-block:: Python
-    
+
     arr = numpy.array([...])
     arr_trans = arr.transpose()
 

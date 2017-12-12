@@ -76,7 +76,7 @@ Below are general guidelines for formatting manuscripts for submission to journa
 * Font
 
     * 12pt
-    * Serif, Times New Roman (Word) or Computer Modern (LaTeX)    
+    * Serif, Times New Roman (Word) or Computer Modern (LaTeX)
 
 * Line spacing: doubling
 * Line numbers: display in left margin
@@ -84,13 +84,13 @@ Below are general guidelines for formatting manuscripts for submission to journa
 * Filetype: .docx, .tex, or .pdf
 * Figures:
 
-    * Size: Below are the sizes for *Cell*. Consult your journal's guidelines. 
+    * Size: Below are the sizes for *Cell*. Consult your journal's guidelines.
 
         * Full width: 174 mm
         * 1.5 width: 114 mm
         * Half width: 85 mm
 
-    * Font: 
+    * Font:
 
         * Subfigure labels: 8pt, bold
         * Other text: 5-7pt
@@ -113,14 +113,14 @@ How to write a response to reviewer critiques
 
     * Intersperse your responses with the reviewers' concerns.
     * Thank the reviewers for their suggestions.
-    * Discuss how you've improved the manuscript based on their suggestions or why you believe their suggestions should not be incorporated into the manuscript.    
+    * Discuss how you've improved the manuscript based on their suggestions or why you believe their suggestions should not be incorporated into the manuscript.
 
 * Format
 
     * Paper size: 8.5 x 11 in
     * Margin: 1 in
     * Font: 12pt, Serif
-    * Color the reviewers' concerns blue so they can easily be differentiated from your responses.    
+    * Color the reviewers' concerns blue so they can easily be differentiated from your responses.
     * Filetype: .docx or .pdf
 
 Below are several examples of responses to reviewer critiques.

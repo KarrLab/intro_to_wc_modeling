@@ -1,6 +1,6 @@
 Model calibration
 =================
-Once you have designed the structure of your model, the next step of the modeling process is to calibrate the model to identify/estimate the values of its parameters. Formally, models can be calibrated by identifying the set of parameter values which minimizes the difference between experimental observations and the model's predictions. 
+Once you have designed the structure of your model, the next step of the modeling process is to calibrate the model to identify/estimate the values of its parameters. Formally, models can be calibrated by identifying the set of parameter values which minimizes the difference between experimental observations and the model's predictions.
 
 Numerous methods have been developed to optimize arbitrary mathematical functions. This includes simple methods such as gradient descent for identifying the optimum of convex functions and scatter search methods for identifying local optima of non-convex problems. Nevertheless, model calibration remains a challenging problem because this often requires optimizing flat high-dimensional non-convex functions, especially to calibrate computationally-expensive, large models.
 
@@ -19,7 +19,7 @@ Key concepts
 
 * Model reduction
 * Numerical optimization
-    
+
     * Gradient descent
     * Scatter search
 

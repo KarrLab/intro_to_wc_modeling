@@ -52,6 +52,7 @@ class Simulation(object):  # all classes should inherit from `object`
         if time_max < 0 or numpy.ceil(time_max) != time_max:
             raise ValueError('`time_max` must be a non-negative integer')
 
+
         # simulate
         time = 0
         value = value_init
@@ -114,7 +115,8 @@ class Trajectory(object):
             time_max (:obj:`int`): simulation length in s
         """
         if time_max < 0 or numpy.ceil(time_max) != time_max:
-            raise ValueError('`time_max` must be a non-negative integer')
+            raise ValueError('`time_max` must be a non-negative integer'
+)
 
         self.times = numpy.arange(0., float(time_max) + 1., 1.)
         self.values = numpy.full(time_max + 1, numpy.nan)

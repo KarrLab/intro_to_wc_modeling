@@ -41,7 +41,7 @@ Follow these instructions to use CircleCI to continuously test a GitHub reposito
     * Which GitHub repository to checkout.
     * How to install any additional packages needed to execute the tests.
     * Instructions on how to run the tests and store the results.
-    
+
     See ``.circleci/config.yml`` for an example and see the `CircleCI documentation <https://circleci.com/docs/2.0/>`_ for more information about configuring CircleCI builds.
 
 In order to upload our test and coverage results to Code Climate, Coveralls, and our lab server, we must set three environment variables in the CircleCI settings for each repository. The values of these variables should be the tokens needed to authenticate with Code Climate, Coveralls, and our lab server. These tokens can be obtained from the corresponding Code Climate and Coveralls projects for each repository.
@@ -54,7 +54,7 @@ Optimizing the runtime of CircleCI builds by loading rather than compiling depen
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 There are two main mechanisms to decrease the runtime of CircleCI builds by loading rather than compiling dependent packages:
 
-* Use CircleCI's cache to avoid repeatedly compiling the dependent packages. 
+* Use CircleCI's cache to avoid repeatedly compiling the dependent packages.
 
     This can configured in ``.circleci/config.yml`` as illustrated below::
 
@@ -105,7 +105,7 @@ Debugging CircleCI builds
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 There are four ways to debug CircleCI builds.
 
-* You can iteratively edit and push your ``.circleci/config.yml`` file. However, this is slow because it is not interactive. 
+* You can iteratively edit and push your ``.circleci/config.yml`` file. However, this is slow because it is not interactive.
 * From the CircleCI website, you can rebuild a build with SSH access using the "Rebuild" button at the top-right of the page for the build. After the new build starts, CircleCI will provide you the IP address to SSH into the machine which is running your build. However, this is limited to 2 h, the CircleCI virtual machines are somewhat slow because they are running on top of shared hardware, and any changes you make are not saved to the build image.
 * You can use the CircleCI local executor (see below) to emulate CircleCI locally. This is a powerful way to debug CircleCI builds. However, this takes more effort to setup because it requires Docker.
 * You can interactively run your code on the Docker build image. This is also a powerful way to debug CircleCI builds. However, this takes more effort to setup because it requires Docker.
@@ -117,7 +117,7 @@ The CircleCI local executor and interactively running your code on the build ima
 
 #. Install Docker (see :numref:`installation`)
 #. Install the CircleCI command line tool::
-  
+
     sudo curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci
     sudo chmod +x /usr/local/bin/circleci
 

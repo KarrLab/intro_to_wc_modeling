@@ -1,6 +1,6 @@
 Model annotation
 =========================
-In addition to describing models in an understandable format, it is also important to annotate models so that other modelers can understand their biological meaning and provenance. 
+In addition to describing models in an understandable format, it is also important to annotate models so that other modelers can understand their biological meaning and provenance.
 
 Consider the following model of protein expression
 
@@ -19,11 +19,11 @@ The most common way to communicate the biological meaning of a species or reacti
 
 However, this approach to annotating models via references to external databases a few limitations
 
-* Annotations are limited by the limited content of the databases. For example, ChEBI only contains a fraction of all possible small molecules. 
+* Annotations are limited by the limited content of the databases. For example, ChEBI only contains a fraction of all possible small molecules.
 * Many databases have insufficient resolution to represent variants of species. For example, UniProt does not have separate entries for each splice variants of a gene and even if it did, UniProt could never represent all possible splice variants. Similar, ChEBI does not include every proton isomer of every molecule.
 * This approach focuses on species and reaction instances and does not support species or reaction rules.
 
-Instead, we recommend annotating the meanings of species and reactions based on their absolute physical structure. 
+Instead, we recommend annotating the meanings of species and reactions based on their absolute physical structure.
 
 * Small molecules: InChI-encoded structures
 * DNA, RNA, proteins: Sequences of references to InChI-encoded structures of nucleic and amino acids

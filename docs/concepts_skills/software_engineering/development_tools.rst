@@ -30,7 +30,7 @@ Below are several recommended programs for developing Python code:
     * `instrumental <http://instrumental.readthedocs.io>`_
 
 * Profilers
-    
+
     * `cProfile <https://docs.python.org/2/library/profile.html#module-cProfile>`_
     * `line_profiler <https://github.com/rkern/line_profiler>`_
     * `memory_profiler <https://github.com/fabianp/memory_profiler>`_
@@ -65,14 +65,14 @@ Execute the following command to install Python 2 and 3::
 Pip package manager
 ^^^^^^^^^^^^^^^^^^^
 Execute the following command to install the pip package manager::
-    
+
     apt-get install python-pip python3-pip
 
 
 ipython interactive shell
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 Execute the following command to install the ipython interactive shell::
-    
+
     apt-get install ipython ipython3
 
 
@@ -91,7 +91,7 @@ We also recommend editing the following settings:
     [
         { "keys": ["ctrl+shift+r"], "command": "unbound"}
     ]
-            
+
 * Preferences >> Package control >> Install package >> AutoPEP8
 * Preferences >> Package settings >> AutoPep8 >> Settings-User::
 

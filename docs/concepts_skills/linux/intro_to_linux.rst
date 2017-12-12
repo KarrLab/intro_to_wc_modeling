@@ -29,7 +29,7 @@ Linux's package manager makes it very easy to install, upgrade, and uninstall pa
 Mint uses `Synaptic <https://help.ubuntu.com/community/SynapticHowto>`_ to manage packages. To search for a package, first open the package manager by running ``synaptic &`` from the command line. In the window that opens, you can search and browse for packages by name and/or category. For example, to install the emacs text editor, search for "emacs", click the check box next to the emacs package, select "Mark for installation", accept the installation of emacs' dependencies, and finally click the "Apply" button to install emacs. To upgrade or uninstall emacs, search for "emacs", click the check box next to the emacs package, select "Mark for reinstall" or "Mark for uninstall", and finally click the "Apply" button.
 
 Packages can also be installed, upgraded, and uninstalled from the command line using the "apt" command. For example, the following commands can be used to install, upgrade, and remove emacs::
-    
+
     apt-get install emacs
     apt-get upgrade emacs
     apt-get remove emcas

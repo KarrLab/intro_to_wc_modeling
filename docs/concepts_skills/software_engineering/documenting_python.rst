@@ -2,7 +2,7 @@ Documenting Python code with Sphinx
 ===================================
 
 The goal of this tutorial is to teach you how to document Python code to help
-other programmers -- and yourself in the future -- understand your code. 
+other programmers -- and yourself in the future -- understand your code.
 We recommend that you document each attribute, argument, method and class, and also document
 each module and package.
 
@@ -18,7 +18,7 @@ Execute the following commands to install the packages required for this tutoria
         python-pip
     pip install \
         configparse \                            # configuration file parser
-        robpol86-sphinxcontrib-googleanalytics \ # sphinx support for Google analytics 
+        robpol86-sphinxcontrib-googleanalytics \ # sphinx support for Google analytics
         sphinx \                                 # documentation generator
         sphinx-rtd-theme                         # sphinx HTML theme
 
@@ -54,7 +54,7 @@ Using the `napoleon` style, you can document each class, method, and attribute. 
 Classes
 ^^^^^^^
 .. code-block:: Python
-    
+
     class Class():
         """ Description
 
@@ -86,8 +86,8 @@ Methods
 
 Top-level documentation
 ^^^^^^^^^^^^^^^^^^^^^^^
-We can also add top-level documentation to ``docs/index.rst`` using the reStructuredText markup language. See the 
-`reStructuredText primer <http://www.sphinx-doc.org/en/stable/rest.html#rst-primer>`_ for a brief tutorial 
+We can also add top-level documentation to ``docs/index.rst`` using the reStructuredText markup language. See the
+`reStructuredText primer <http://www.sphinx-doc.org/en/stable/rest.html#rst-primer>`_ for a brief tutorial
 about the reStructuredText markup language.
 
 
@@ -108,7 +108,7 @@ Compiling the documentation
 ---------------------------
 Run the following to compile the documentation::
 
-    sphinx-build docs docs/_build/html 
+    sphinx-build docs docs/_build/html
 
 Sphinx will print out any errors in the documentation. These must be fixed to properly generate the documentation.
 

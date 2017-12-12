@@ -110,7 +110,7 @@ The ``cascade`` argument to ``sqlalchemy.orm.relationship`` tells SQLAlchemy whe
                                               backref=sqlalchemy.orm.backref('reactions', cascade="all, delete-orphan", single_parent=True))
 
 
-Optimizing the schema 
+Optimizing the schema
 ^^^^^^^^^^^^^^^^^^^^^
 To speed up the querying of the database, we can instruct SQLlite to build index tables, or pre-sorted copies of the primary tables that can be used to quickly find rows using a binary search rather than having to iterate over every row in a table. This can be done by setting the ``index`` argument to each column constructor to ``True``::
 
@@ -165,7 +165,7 @@ To speed up the querying of the database, we can instruct SQLlite to build index
 Create the database
 ^^^^^^^^^^^^^^^^^^^
 Once we have defined the Python data model, we can use SQLAlchemy to generate the database::
-    
+
     DATABASE_FILENAME = 'test.sqlite'
     # :obj:`str`: path to store the database
 
@@ -176,7 +176,7 @@ Once we have defined the Python data model, we can use SQLAlchemy to generate th
     Base.metadata.create_all(engine)
 
 We can use the sqlite3 lite command lite utility to inspect the schema of the database that SQLAchemy generated.::
-    
+
     sqlite3 test.sqlite .schema
 
 

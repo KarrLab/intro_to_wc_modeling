@@ -70,3 +70,19 @@ class TestSimulation(unittest.TestCase):
             lines = stdout.rstrip().split('\n')
             for line in lines:
                 self.assertRegexpMatches(line, "^Time \d+: \d+ molecules$")
+
+    def test_invalid_inputs(self):
+        sim = core.Simulation()
+
+        with self.assertRaisesRegexp(ValueError, '`value_init` must be a non-negative integer'):
+            sim.run(value_init=-1, time_max=10)
+
+        with self.assertRaisesRegexp(ValueError, '`time_max` must be a non-negative integer'):
+            sim.run(value_init=4, time_max=-1)
+
+    def test_trajectory_exception(self):
+        with self.assertRaisesRegexp(ValueError, '`time_max` must be a non-negative integer'):
+            core.Trajectory(-1)
+
+        with self.assertRaisesRegexp(ValueError, '`time_max` must be a non-negative integer'):
+            core.Trajectory(1.5)

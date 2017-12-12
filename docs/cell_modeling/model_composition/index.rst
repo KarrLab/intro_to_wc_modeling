@@ -30,14 +30,14 @@ Below are the steps to merging models.
 #. Align the assumptions, granularity, and mathematical representation of the models
 
     #. Align the assumptions of all of the models. This is typically challenging to do because the assumptions underlying models are rarely explicitly stated.
-    #. Align the granularities of all common species and reactions    
+    #. Align the granularities of all common species and reactions
     #. Convert all models into explicit time-driven models. For example, convert Boolean models into stochastic models by assuming typical time and copy number scales.
-    
+
 #. Mathematically and/or computationally merge the models
 
     #. Merge all of the mathematically-like models analytically by computing the unions of their species and reactions. For example, ODE models can be merged by taking the union of the state variables and summing the differentials across the models.
     #. Computationally merge the groups of mathematically-dissimilar models by concurrently integrating the models (see the multi-algorithm simulation tutorial).
-    
+
 #. Calibrate the combined model. Potentially this could be done be reusing the data that was used to calibrate the individual models. However, this data is rarely published.
 #. Validate the combined model. This could also potentially be done using the same data that was used to validate the individual models. However, this data is rarely published.
 
@@ -75,12 +75,12 @@ In this exercise, you will learn how to merge models by working through the nuan
 
     * `Cronwright et al., 2002 <http://doi.org/10.1128/AEM.68.9.4448-4456.2002>`_
     * `Teusink et al., 2000 <10.1046/j.1432-1327.2000.01527.x>`_
-    
+
 #. Obtain the original models from `JWS online <http://jjj.biochem.sun.ac.za/>`_
 
     * `Cronwright model <http://jjj.biochem.sun.ac.za/models/cronwright/>`_
     * `Teusink model <http://jjj.biochem.sun.ac.za/models/teusink/>`_
-    
+
 #. Identify the common species and reactions among the models
 #. Merge the corresponding variables and equations
 #. Compare your merged model with `our solution <https://github.com/KarrLab/intro_to_wc_modeling/tree/master/intro_to_wc_modeling/cell_modeling/model_composition.py>`_
@@ -101,7 +101,7 @@ In this exercise. you will learn how to merge models by working through the nuan
     * `Terkildsen et al., 2008 <https://doi.org/10.1113/expphysiol.2007.041871>`_
     * `Niederer et al., 2007 <http://dx.doi.org/10.1529/biophysj.106.095463>`_
     * `Neal et al., 2015 <http://doi.org/10.1371/journal.pone.0145621>`_
-    
+
 #. Read the papers which describe the original models
 
     * `Pandit et al., 2001 <http://dx.doi.org/10.1016/S0006-3495(01)75943-7>`_
@@ -113,7 +113,7 @@ In this exercise. you will learn how to merge models by working through the nuan
     * `Pandit model <https://models.cellml.org/exposure/ea62c9c8a502afe364350d353ebf4dd5/pandit_clark_giles_demir_2001_endocardial_cell.cellml/view>`_
     * `Hinch model <https://models.cellml.org/exposure/8e1a590fb82a2cab5284502b430c4a4f/hinch_greenstein_tanskanen_xu_winslow_2004.cellml/view>`_
     * `Niederer model <https://models.cellml.org/exposure/97fb1de5199b1a74c89281db97aecc13/niederer_hunter_smith_2006.cellml/view>`_
-    
+
 #. Identify the common species and reactions among the models by annotating the model components against a single namespace
 #. Merge the corresponding variables and equations
 #. Simulate the merged model

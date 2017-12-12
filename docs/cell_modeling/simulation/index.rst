@@ -29,7 +29,7 @@ There are also several generalizations of Boolean and logical-valued models incl
 
 Ordinary differential equations (ODEs)
 --------------------------------------
-Ordinary differential equations (ODEs) is one of the most commonly used approaches for modeling dynamical systems. ODE models are based on microscopic analyses of how the concentration of each species in the cell changes over time in response to the concentrations of other species. Because ODE assume that cells are well-mixed and that they behave deterministically, ODE models are most appropriate for small systems that involve large concentrations and high fluxes. 
+Ordinary differential equations (ODEs) is one of the most commonly used approaches for modeling dynamical systems. ODE models are based on microscopic analyses of how the concentration of each species in the cell changes over time in response to the concentrations of other species. Because ODE assume that cells are well-mixed and that they behave deterministically, ODE models are most appropriate for small systems that involve large concentrations and high fluxes.
 
 ODE models can be simulated by numerically integrating the differential equations. The most basic ODE integration method is Euler's method. Euler's method is a time stepped algorithm in which the next state is computed by adding the current state and the multiplication of the current differentials with the timestep.
 
@@ -50,7 +50,7 @@ Because stochastic simulations are random, stochastic models should generally be
 
 Gillespie Algorithm / Stochastic Simulation Algorithm / Direct Method
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The simplest way to stochastically simulate a model is to iteratively 
+The simplest way to stochastically simulate a model is to iteratively
 
 #. Calculate the instantaneous rate of each reaction, :math:`p`, also known as the reaction `propensities`
 #. Sum these rates
@@ -62,7 +62,7 @@ The simplest way to stochastically simulate a model is to iteratively
 #. Sample the next reaction from a multinomial distribution with parameter :math:`p/\sum{p}` equal to the condition probability that each reaction fires given that a reaction fires.
 
 Below is pseudo-code for this algorithm which is also known as the Gillespie algorithm, the Stochastic Simulation Algorithm (SSA), and the direct method::
-    
+
     import numpy
 
     # represent the reaction and rate laws of the model
@@ -72,7 +72,7 @@ Below is pseudo-code for this algorithm which is also known as the Gillespie alg
     # initialize the time and cell state
     time = 0
     copy_numbers = numpy.array([ ... ])
-    
+
     while time < time_max:
         # calculate reaction properties/rates
         propensities = [kinetic_law(copy_numbers) for kinetic_law in kinetic_laws]
@@ -83,7 +83,7 @@ Below is pseudo-code for this algorithm which is also known as the Gillespie alg
 
         # select the next reaction to fire
         i_reaction = numpy.random.choice(len(propensities), p=propensities / total_propensity)
-        
+
         # reject the selected reaction if there are insufficient copies of the reactants for the reaction
 
         # update the time and cell state based on the selected reaction
@@ -93,7 +93,7 @@ Below is pseudo-code for this algorithm which is also known as the Gillespie alg
 Gillespie first reaction method
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Rather than sampling the time to the next reaction and then selecting the next reaction, alternatively we can stochastically simulate a model by (1) sampling the putative time to the next firing of each reaction and (b) firing the reaction with the minimum putative next reaction time. This algorithm is mathematically equivalent to the Gillespie algorithm. However, it is slower than the Gillespie algorithm because it draws more random number samples during each iteration.::
-    
+
     import numpy
 
     # represent the reaction and rate laws of the model
@@ -103,7 +103,7 @@ Rather than sampling the time to the next reaction and then selecting the next r
     # initialize the time and cell state
     time = 0
     copy_numbers = numpy.array([ ... ])
-    
+
     while time < time_max:
         # calculate reaction properties/rates
         propensities = [kinetic_law(copy_numbers) for kinetic_law in kinetic_laws]
@@ -113,7 +113,7 @@ Rather than sampling the time to the next reaction and then selecting the next r
 
         # select the next reaction to fire
         i_reaction = numpy.argmin(dt)
-        
+
         # reject the selected reaction if there are insufficient copies of the reactants for the reaction
 
         # update the time and cell state based on the selected reaction
@@ -132,7 +132,7 @@ Note, the Gibson-Bruck first reaction method is mathematically equivalent to the
 Below is pseudo code for the Gibson-Bruck next reaction method::
 
     import numpy
-    import pqdict 
+    import pqdict
 
     # represent the reaction and rate laws of the model
     reaction_stochiometries = numpy.array([ ... ])
@@ -150,11 +150,11 @@ Below is pseudo code for the Gibson-Bruck next reaction method::
 
     # calculate putative next reaction times for each reaction
     dt = pqdict.pqdict( ... numpy.random.exponential(1 / propensities) ... )
-    
+
     while time < time_max:
         # select the next reaction to fire
         i_reaction = numpy.argmin(dt)
-        
+
         # reject the selected reaction if there are insufficient copies of the reactants for the reaction
 
         # update the time and cell state based on the selected reaction
@@ -166,7 +166,7 @@ Below is pseudo code for the Gibson-Bruck next reaction method::
             for reaction in dependency_graph[:, species]:
                 old_propensity = propensities[reaction]
                 propensities[reaction] = kinetic_laws[reaction]
-                if reaction == i_reaction:                
+                if reaction == i_reaction:
                     dt[reaction] = numpy.random.exponential(1 / propensities[reaction])
                 else:
                     dt[reaction] = old_propensity / propensities[reaction] * (dt[reaction] - chosen_dt)
@@ -179,52 +179,52 @@ In addition to the Gillespie algorithm, the Gillespie first reaction method, and
     # represent the reaction and rate laws of the model
     reaction_stochiometries = numpy.array([ ... ])
     kinetic_laws = [...]
-    
+
     # select the desired time step
     dt = 1
-   
+
     # initialize the simulated state
     time = 0
     copy_numbers = numpy.array([...])
-    
+
     # iterate over time
     while time < time_max:
         # calculate the rate of each reaction
         propensities = [kinetic_law(copy_numbers) for kinetic_law in kinetic_laws]
-        
+
         # sample the number of firings of each reaction
         n_reactions = numpy.random.poisson(propensities * dt)
-        
+
         # adjust the time step or reject reactions for which there are insufficient reactants
-        
+
         # advance the time and copy numbers
         time += dt
         copy_numbers += reaction_stochiometries * n_reactions
-        
+
 The tau-leaping algorithm can be improved by adaptively optimizing time step based on its sensitivity to the propensities:
 
 .. math::
-   
+
     g_i &= -\min_j { S_{ij} } \\
     \mu_i &= \sum_j { S_{ij} R_j (x) } \\
     \sigma_i^2 &= \sum_j { S_{ij}^2 R_j (x) } \\
-    dt &= \min_i { \left\{ 
+    dt &= \min_i { \left\{
             \frac{
-                \max{ \left\{ 
-                    \epsilon x_i / g_i, 1 
-                \right\} }  
+                \max{ \left\{
+                    \epsilon x_i / g_i, 1
+                \right\} }
             }{
             |\mu_i (x)|
             }  ,
             \frac{
                 \max { \left\{
-                    \epsilon x_i / g_i, 1 
+                    \epsilon x_i / g_i, 1
                 \right\} }^2
             }{
             \sigma_i^2
-            }  
+            }
         \right\} } \\
-        
+
 where :math:`x_i` is the copy number of species :math:`i`, :math:`S_{ij}` is the stoichiometry of species :math:`i` in reaction :math:`j`, :math:`R_j (x)` is the rate law for reaction :math:`j`, and :math:`\epsilon \approx 0.03` is the desired tolerance. See `Cao, 2006 <http://doi.org/10.1063/1.2159468>`_ for more information.
 
 
@@ -325,7 +325,7 @@ The state of the ``numpy`` random number generator can be set using the ``seed``
 
 Simulation descriptions
 -----------------------
-To simulate a model, we must specify every aspect of the simulation including 
+To simulate a model, we must specify every aspect of the simulation including
 
 * The model that we want to simulate
 * Any modifications of the model that we wish to simulate (e.g. modified parameter values)
@@ -333,7 +333,7 @@ To simulate a model, we must specify every aspect of the simulation including
 * The desired simulation algorithm
 * The parameters of the simulation algorithm such as the initial seed and state of the random number generator
 
-The `Simulation Experiment Description Markup Language <http://sed-ml.org>`_ (SED-ML) is one of the most commonly used languages for describing simulations. SED-ML is primarily designed to describe simulations of XML-based models such as models encoded in CellML and SBML. However, SED-ML can be used to describe the simulation of any model. `Simulation Experiment Specification via a Scala Layer <http://sessl.org>`_ (SESSL) is competing language simulation description language. 
+The `Simulation Experiment Description Markup Language <http://sed-ml.org>`_ (SED-ML) is one of the most commonly used languages for describing simulations. SED-ML is primarily designed to describe simulations of XML-based models such as models encoded in CellML and SBML. However, SED-ML can be used to describe the simulation of any model. `Simulation Experiment Specification via a Scala Layer <http://sessl.org>`_ (SESSL) is competing language simulation description language.
 
 
 Software tools
@@ -341,10 +341,10 @@ Software tools
 Below is a list of some of the most commonly used simulation software programs for cell modeling:
 
 * Desktop programs:
-    
-    * `CellNOpt <http://www.cellnopt.org/>`_: Boolean simulator    
+
+    * `CellNOpt <http://www.cellnopt.org/>`_: Boolean simulator
     * `COPASI <http://copasi.org>`_: ODE and stochastic simulator
-    * `ECell <http://www.e-cell.org>`_: multi-algorithmic simulator    
+    * `ECell <http://www.e-cell.org>`_: multi-algorithmic simulator
     * `iBioSim <http://www.async.ece.utah.edu/ibiosim>`_
     * `NFSim <http://michaelsneddon.net/nfsim/>`_: stochastic network-free simulator
     * `VCell <http://vcell.org/>`_: ODE, stochastic, and spatial simulator
@@ -352,10 +352,10 @@ Below is a list of some of the most commonly used simulation software programs f
 * Web-based programs
 
     * `Cell Collective <https://cellcollective.org>`_: online Boolean simulator
-    * `JWS Online <http://jjj.biochem.sun.ac.za/>`_: online ODE and stochastic simulator    
+    * `JWS Online <http://jjj.biochem.sun.ac.za/>`_: online ODE and stochastic simulator
 
 * Python libraries
-    
+
     * `BooleanNet <https://github.com/ialbert/booleannet>`_: Boolean simulation
     * `COBRApy <https://opencobra.github.io/>`_: FBA simulation
     * `libRoadRunner <http://libroadrunner.org/>`_: ODE simulation
@@ -388,7 +388,7 @@ In this exercise we will simulate the gene Boolean network shown below using bot
 .. image:: boolean-model.png
 
 First, define a set of functions which represent the edges of the network::
-    
+
     regulatory_functions = {
         'A': lambda nodes: not nodes['C'],
         'B': lambda nodes: not nodes['A'],
@@ -470,7 +470,7 @@ Third, write a Boolean simulator and synchronous, asynchronous deterministic, an
         """
         # calculate next state
         ...
-        
+
         # return state
         return current_state
 
@@ -488,7 +488,7 @@ Third, write a Boolean simulator and synchronous, asynchronous deterministic, an
         """
         # calculate next state
         ...
-        
+
         # return state
         return current_state
 
@@ -527,7 +527,7 @@ First, open the `BioModels entry <http://www.ebi.ac.uk/biomodels-main/BIOMD00000
 Second, write a function to calculate the time derivative of the cyclin, cd2, and protease concentrations/activities by completing the code fragment below::
 
     def d_conc_d_t(concs, time):
-        """ Calculate differentials for Goldbeter 1991 cell cycle model 
+        """ Calculate differentials for Goldbeter 1991 cell cycle model
         (`BIOMD0000000003 <http://www.ebi.ac.uk/biomodels-main/BIOMD0000000003>`_)
 
         Args:
@@ -567,7 +567,7 @@ In this exercise we will simulate the stochastic synthesis and degradation of a 
     r_\text{deg} &= k_\text{deg} \text{mRNA}\\
     k_\text{syn} &= 2.5\,\text{s}^{-1}\\
     k_\text{deg} &= 0.5\,\text{s}^{-1}\,\text{molecule}^{-1}\\
-    \text{mRNA}(t=0) &= 10\,\text{molecules} \\ 
+    \text{mRNA}(t=0) &= 10\,\text{molecules} \\
 
 First, define data structures to represent the stoichiometries and rate laws of the reactions::
 
@@ -577,7 +577,7 @@ First, define data structures to represent the stoichiometries and rate laws of 
     k_deg = 0.5 # 1/s/molecule
     def kinetic_laws(copy_number):
         return numpy.array([
-            k_syn, 
+            k_syn,
             k_deg * copy_number,
             ])
 
@@ -633,7 +633,7 @@ Third, implement the Gillespie algorithm by completing the code skeleton below::
 
             # store copy number history
             #print(time)
-            if time < time_max:            
+            if time < time_max:
                 copy_number_hist[int(numpy.ceil(time / time_step)):] = copy_number
 
         return (time_hist, copy_number_hist)
@@ -700,7 +700,7 @@ Please follow `our solution <https://github.com/KarrLab/intro_to_wc_modeling/tre
 
     .. image:: mrna-and-protein-using-several-methods-trajectory-histogram.png
 
-#. Compare the simulations. 
+#. Compare the simulations.
 
     * What is the steady-state of each of the simulations? How long does it take to reach those steady states?
     * Which of the simulations captures protein bursts?
@@ -848,17 +848,17 @@ Please follow `our solution <https://github.com/KarrLab/intro_to_wc_modeling/tre
         .. image:: multi_algorithm_submodel_simulation/Growth.png
 
     * Predicted volume
-    
+
         .. image:: multi_algorithm_submodel_simulation/Volume.png
 
     * Predicted NTPs
-    
+
         .. image:: multi_algorithm_submodel_simulation/NTPs.png
 
     * Predicted amino acids
-    
+
         .. image:: multi_algorithm_submodel_simulation/Amino-acids.png
 
     * Predicted key proteins
-    
+
         .. image:: multi_algorithm_submodel_simulation/Proteins.png

@@ -7,7 +7,14 @@
 :License: MIT
 '''
 
-def main():
+import inspect
+import os
+import pkg_resources
+import wc_lang.core
+import wc_lang.io
+
+
+def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     # todo: synchronize with intro_to_wc_modeling/docs/wc_modeling/wc_lang_tutorial.rst
     ##########################################################################################################
     # THIS CODE IS DUPLICATED IN intro_to_wc_modeling/docs/wc_modeling/wc_lang_tutorial.rst
@@ -20,12 +27,6 @@ def main():
     #
     ##########################################################################################################
 
-    import inspect
-    import os
-    import pkg_resources
-    import wc_lang.core
-    import wc_lang.io
-
     ################################################
     # 2. Reading and writing models to/from files
     ################################################
@@ -35,9 +36,9 @@ def main():
     # instance, and string identifiers are used to indicate relationships among objects
 
     # This example illustrates how to read a model from an Excel file
-    MODEL_FILENAME = pkg_resources.resource_filename('intro_to_wc_modeling', os.path.join(
+    model_filename = pkg_resources.resource_filename('intro_to_wc_modeling', os.path.join(
         'wc_modeling', 'wc_lang_tutorial', 'examples', 'example_model.xlsx'))
-    model = wc_lang.io.Reader().run(MODEL_FILENAME)
+    model = wc_lang.io.Reader().run(model_filename)
 
     # ``wc_lang`` can also read and write models from specially formatted set of delimiter-separated files. `wc_lang`` uses filename glob patterns
     # to indicate sets of delimited files. The supported delimiters are *commas* for .csv files and *tabs* for .tsv files. These files use the same
@@ -45,14 +46,13 @@ def main():
     # but delimiter-separated files are more compatible  with code version control systems such as Git.
 
     # This example illustrates how to write a model to an set of .tsv files
-    EXAMPLES_DIR = os.path.join(os.path.dirname(__file__), 'examples')
-    if not os.path.isdir(EXAMPLES_DIR):
-        os.makedirs(EXAMPLES_DIR)
-    MODEL_FILENAME_PATTERN = os.path.join(EXAMPLES_DIR, 'example_model-*.tsv')
-    wc_lang.io.Writer().run(MODEL_FILENAME_PATTERN, model)
+    if not os.path.isdir(examples_dir):
+        os.makedirs(examples_dir)
+    model_filename_pattern = os.path.join(examples_dir, 'example_model-*.tsv')
+    wc_lang.io.Writer().run(model_filename_pattern, model)
 
     # This example illustrates how to read a model from a set of .tsv files
-    model_from_tsv = wc_lang.io.Reader().run(MODEL_FILENAME_PATTERN)
+    model_from_tsv = wc_lang.io.Reader().run(model_filename_pattern)
 
     # csv files can be used similarly.
 
@@ -120,7 +120,6 @@ def main():
     prog_model.id = 'programmatically_created_model'
     prog_model.name = 'Programmatically created model'
 
-
     #################################################
     # 5. Comparing and differencing models
     #################################################
@@ -132,7 +131,6 @@ def main():
     # The ``difference`` method produces a textual description of the differences between two models
     assert(model.difference(model_from_tsv) == '')
 
-
     #################################################
     # 6. Normalizing models into a reproducible order
     #################################################
@@ -141,7 +139,6 @@ def main():
     # To facilitate reproducible computations, ``wc_lang`` provides a ``normalize`` method which sorts models into
     # a reproducible order
     model.normalize()
-
 
     #################################################
     # 7. Complete API

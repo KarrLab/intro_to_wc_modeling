@@ -37,25 +37,25 @@ Appendix: Acronyms
 
     PDES
         parallel discrete event simulation
-    
+
     PGDB
         pathway genome database
-    
+
     ROSS
         Rensselaer's Optimistic Simulation System
 
     SBML
         Systems Biology Markup Language
-    
+
     SED-ML
         Simulation Experiment Description Markup Language
 
     SESSL
         Simulation Experiment Specification via a Scala Layer
-    
+
     SMILES
         simplified molecular-input line-entry system
-    
+
     SI
         International System of Units
 
@@ -64,9 +64,9 @@ Appendix: Acronyms
 
     SVG
         Scalable Vector Graphics
-    
+
     VCS
         version control system
-    
+
     WC
         whole-cell

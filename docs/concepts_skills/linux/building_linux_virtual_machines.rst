@@ -15,19 +15,19 @@ Instructions
 #. Download Mint Linux, Cinammon, 64-bit from `https://linuxmint.com/download.php <https://linuxmint.com/download.php>`_
 #. Run Virtual Box
 #. From the Virtual Box main menu, select "Machine" >> "New" and then follow the on screen instructions
-    
+
     #. Enter a name, e.g. "Mint Linux", select Type: "Linux", and select Version: "Ubuntu (64-bit)"
     #. Set the memory size to 4096 MB
     #. Select the option to create a virtual hard disk
-        
+
         #. Select the "VDI" format
-        #. Select "Dynamically allocated", 
+        #. Select "Dynamically allocated",
         #. Set the size to 100 GB
         #. Click "create"
 
-#. Highlight the new virtual machine in Virtual Box, right click on the machine, and select "Settings...". 
+#. Highlight the new virtual machine in Virtual Box, right click on the machine, and select "Settings...".
 #. In the window that opens
-    
+
     #. In "General" >> "Advanced", set "Shared clipboard" to "Bidirectional"
     #. In "System" >> "Processor", set the number of processor to 50% of the maximum and enable "Enable PAE/NX"
     #. In "Display" >> "Screen", enable "Enable 3D video acceleration"

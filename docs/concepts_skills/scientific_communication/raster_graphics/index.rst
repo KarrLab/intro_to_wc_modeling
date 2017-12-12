@@ -40,11 +40,11 @@ In this exercise, we will learn how to edit raster graphics by creating a head s
 #. Select the background by inverting the selection ("Select" >> "Invert")
 #. Delete the background ("Edit" >> "Clear")
 #. Change the color mode to gray scale ("Image" >> "Mode" >> Select "Grayscale")
-#. Crop the head and make the image square ("Tools" >> "Transform Tools" >> "Crop"). 
-    
+#. Crop the head and make the image square ("Tools" >> "Transform Tools" >> "Crop").
+
     #. Disable "Current layer only"
     #. Drag a rectangle over the photo
-    #. In the "Tool Options" pane, 
+    #. In the "Tool Options" pane,
 
         #. Set "Size" >> 10, 10
         #. Enable "Fixed" >> "Aspect ratio"

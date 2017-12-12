@@ -24,7 +24,7 @@ Slide design
 Below are several guidelines for designing effective slides
 
 * Each slide should focus on 1 message
-* Use simple diagrams    
+* Use simple diagrams
 * Use high-contrast colors so your slides are viewable even with dim projectors
 * Use sufficiently large font size so that text is readable from a distance
 * Avoid large amounts of text

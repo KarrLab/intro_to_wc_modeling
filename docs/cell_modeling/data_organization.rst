@@ -1,6 +1,6 @@
 Input data organization
 =======================
-Building large models requires a large amount of input data to inform the structure of the model and the value of each parameter. Consequently, it is helpful to organize this data into a readily understandable and computable database. 
+Building large models requires a large amount of input data to inform the structure of the model and the value of each parameter. Consequently, it is helpful to organize this data into a readily understandable and computable database.
 
 Unfortunately, there are few tools specifically designed to organize the input data needed for mechanistic models. However, Pathway/genome databases (PGDBs) or model organism databases (MOD) are conceptually similar and the existing PGDB tools provide much of the functionality needed to organize the input data for mechanistic models. In fact, the Pathway Tools PDB tool includes a module called MetaFlux which can be used to build flux balance analysis models of metabolism. In particular, PGDBs can track detailed molecular information at the genomic-scale for individual organisms. Some of the major limitations of the existing PGDBs are that they provide limited support for non-metabolic pathways and that they provide limited support for quantitative data.
 
@@ -8,7 +8,7 @@ Unfortunately, there are few tools specifically designed to organize the input d
 Schema
 ------
 The input data used to build models can be organized with the following schema
-   
+
 * Value
 * Uncertainty
 * Units

@@ -46,4 +46,4 @@ Formatting
 
 Software tools
 --------------
-Illustrator is one of the best tools for making scientific posters. Inkscape can also be used to make posters. PowerPoint can also be used to make posters, but PowerPoint does not provide users as much control over the appearance of graphics as Illustrator. 
+Illustrator is one of the best tools for making scientific posters. Inkscape can also be used to make posters. PowerPoint can also be used to make posters, but PowerPoint does not provide users as much control over the appearance of graphics as Illustrator.

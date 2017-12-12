@@ -22,7 +22,7 @@ k_syn = 2.5 # 1/s
 k_deg = 0.5 # 1/s/molecule
 def kinetic_laws(copy_number):
     return numpy.array([
-        k_syn, 
+        k_syn,
         k_deg * copy_number,
         ])
 
@@ -74,7 +74,7 @@ def simulate(reaction_stochiometries, kinetic_laws, init_copy_number, time_max, 
 
         # store copy number history
         #print(time)
-        if time < time_max:            
+        if time < time_max:
             copy_number_hist[int(numpy.ceil(time / time_step)):] = copy_number
 
     return (time_hist, copy_number_hist)
@@ -100,9 +100,9 @@ def main():
         )
         matplotlib.pyplot.plot(time_hist, copy_number_hist[:, i_sim], linestyle='-', color=color, linewidth=0.5)
 
-    matplotlib.pyplot.fill_between(time_hist, 
-        numpy.mean(copy_number_hist, 1) - numpy.std(copy_number_hist, 1), 
-        numpy.mean(copy_number_hist, 1) + numpy.std(copy_number_hist, 1), 
+    matplotlib.pyplot.fill_between(time_hist,
+        numpy.mean(copy_number_hist, 1) - numpy.std(copy_number_hist, 1),
+        numpy.mean(copy_number_hist, 1) + numpy.std(copy_number_hist, 1),
         facecolor=(1, 0, 0, 0.5))
     matplotlib.pyplot.plot(time_hist, numpy.mean(copy_number_hist, 1), linestyle='-', color='r', linewidth=3)
 

@@ -15,7 +15,7 @@ import scipy.integrate
 import os
 
 def d_conc_d_t(concs, time):
-    """ Calculate differentials for Goldbeter 1991 cell cycle model 
+    """ Calculate differentials for Goldbeter 1991 cell cycle model
     (`BIOMD0000000003 <http://www.ebi.ac.uk/biomodels-main/BIOMD0000000003>`_)
 
     Args:
@@ -67,7 +67,7 @@ def d_conc_d_t(concs, time):
         - r_deactivation_of_cyclin_protease
 
     return numpy.array([
-        d_cyclin_dt, 
+        d_cyclin_dt,
         d_cdc2_dt,
         d_cyclin_protease_dt
         ])

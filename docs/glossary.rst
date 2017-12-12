@@ -7,16 +7,16 @@ Appendix: Glossary
 
     combinatorial complexity
         The large number of species and interactions that can occur in biological systems due to the noisy interfaces between biomolecules. Examples of combinatorial complexity include the large number of possible phosphorylation states of each protein; the large number of possible subunit compositions of each protein complex; the large number of RNA transcripts that can result from multiple transcription start and stop sites, splicing, RNA editing, and RNA degradation. To capture the combinatorial complexity of cell biology, WC models should be represented using rules and simulating using network-free simulation.
-    
+
     continuous integration (CI)
         A method for finding errors quickly by executing unit tests each time a system is revised, typically each time a revised system is pushed to a version control system such as Git.
 
     curse of dimensionality
         The phenomenon that it is challenging to model high-dimensional systems due to sparsity of high-dimensional data and the combinatorial complexity of high-dimensional systems :cite:`keogh2011curse`.
-    
+
     data model
         A description of the types of entities and the attributes of each type of entity, including attributes which describe relationships among types of entities.
-        
+
         *See also:* :term:`schema`
 
     discrete event simulation (DES)
@@ -27,7 +27,7 @@ Appendix: Glossary
 
     Gillespie's algorithm
         An algorithm for exactly simulating biochemical networks.
-        
+
         *See also:* :term:`Stochastic Simulation Algorithm (SSA)`
 
     identifiability
@@ -37,7 +37,7 @@ Appendix: Glossary
 
     IUPAC International Chemical Identifier (InChI)
         A textual format for describing the structure of a chemical compound including its chemical formula, bond connectivity, protonation, charge, stereochemistry, and isotope composition.
-        
+
         *See also:* :term:`simplified molecular-input line-entry system (SMILES)`
 
     Minimum Information About a Simulation Experiment (MIASE)
@@ -58,7 +58,7 @@ Appendix: Glossary
 
     model reduction
         The process of reducing a model to reduced model.
-        
+
         *See also:* :term:`reduced model`
 
     network-free simulation
@@ -91,30 +91,30 @@ Appendix: Glossary
 
     reduced model
         A smaller, less complex, and/or computationally cheaper model that approximates the behavior of the original model. Reduced models can be created either by lumping species, reactions, and/or parameters to create a second smaller, mechanistic model or by fitting model predictions to a smaller data-driven model.
-        
+
         *See also:* :term:`model reduction`
 
     rule-based modeling
-        An abstraction for representing models in terms of species and reaction patterns which describe multiple individual species and reaction instances. Rule-based modeling is particularly effective for describing models with large numbers of species and reactions that emerge from the combinatorial interactions among species. Rule-based models can be simulated using conventional methods by statistically enumerating the reaction network or using network-free simulation which dynamically discovers the reaction network during simulation.    
+        An abstraction for representing models in terms of species and reaction patterns which describe multiple individual species and reaction instances. Rule-based modeling is particularly effective for describing models with large numbers of species and reactions that emerge from the combinatorial interactions among species. Rule-based models can be simulated using conventional methods by statistically enumerating the reaction network or using network-free simulation which dynamically discovers the reaction network during simulation.
 
     schema
        A description of the types of entities and the attributes of each type of entity, including attributes which describe relationships among types of entities.
-       
+
        *See also:* :term:`data model`
 
     simplified molecular-input line-entry system (SMILES)
         A textual format for describing the structure of a chemical compound. However, we recommend using InChI rather than SMILES because InChI is an open standard.
-        
+
         *See also:* :term:`IUPAC International Chemical Identifier (InChI)`
 
     Stochastic Simulation Algorithm (SSA)
         An algorithm for exactly simulating biochemical networks.
-        
+
         *See also:* :term:`Gillespie's algorithm`
 
     surrogate model
         A, typically computationally cheaper, model which approximates the behavior of another model.
-        
+
         *See also:* function approximation, metamodeling, model emulation, :term:`model reduction`, :term:`reduced model`, response surface modeling
 
     Systems Biology Markup Language (SBML)

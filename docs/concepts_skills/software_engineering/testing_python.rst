@@ -5,9 +5,9 @@ Testing Python code with unittest, pytest, and Coverage
 
 The goal of this tutorial to teach you how to effectively test and debug Python code.
 
-`Unit testing <https://en.wikibooks.org/wiki/Introduction_to_Software_Engineering/Testing/Unit_Tests>`_ is a powerful methodology for testing and debugging code and ensuring that code works as intended. You can unit test your code by writing numerous tests of your code, each of which executes the code and assert that the expected result is produced. 
+`Unit testing <https://en.wikibooks.org/wiki/Introduction_to_Software_Engineering/Testing/Unit_Tests>`_ is a powerful methodology for testing and debugging code and ensuring that code works as intended. You can unit test your code by writing numerous tests of your code, each of which executes the code and assert that the expected result is produced.
 
-To use unit testing effectively, it is best to begin by writing tests of individual pieces of your code, debugging each individual piece until they all work, and then proceeding to write larger tests of larger assemblies of code. 
+To use unit testing effectively, it is best to begin by writing tests of individual pieces of your code, debugging each individual piece until they all work, and then proceeding to write larger tests of larger assemblies of code.
 
 Collectively, your tests should cover all of the logic of your code. The following are the most popular metrics for evaluating the coverage of your tests. We recommend using statement coverage because this the simplest metric to evaluate and the most widely supported metric.
 
@@ -20,7 +20,7 @@ Collectively, your tests should cover all of the logic of your code. The followi
 Required packages
 ---------------------------
 Execute the following commands to install the packages required for this tutorial::
-    
+
     apt-get install \
         python \
         python-pip
@@ -116,7 +116,7 @@ The ``setUp`` and ``tearDown`` methods can be used to organize the code that sho
 
 Testing stochastic algorithms
 -----------------------------
-Stochastic codes should be validated by testing the statistical distribution of their output. Typically this is done with the 
+Stochastic codes should be validated by testing the statistical distribution of their output. Typically this is done with the
 following process
 
 #. Run the code many times and keep a list of the outputs
@@ -192,13 +192,13 @@ The following can be used to generated a more detailed HTML coverage report. The
 
     coverage html
 
-You can view the HTML report by opening ``file:///path/to/intro_to_wc_modeling/htmlcov/index.html`` 
-in your browser. Green indicates lines that were executed by the tests. Red indicates lines that 
+You can view the HTML report by opening ``file:///path/to/intro_to_wc_modeling/htmlcov/index.html``
+in your browser. Green indicates lines that were executed by the tests. Red indicates lines that
 were not executed. Large amounts of red lines means that more tests are needed. Ideally, code
 would be tested to 100% coverage.
 
 
-Additional tutorials 
+Additional tutorials
 --------------------
 There are numerous additional tutorials on unit testing Python
 

@@ -2,7 +2,7 @@
 
 How to build a Ubuntu Linux image with Docker
 =================================================
-Docker images are lightweight virtual machines that can be used to run custom environments on top of other machines. Thus, Docker images are a convenient way to distribute complicated software programs that have numerous dependencies and complicated configurations. We are using Docker images because CircleCI allows users to use Docker images to customize the environment used to execute each build. This makes it much easier to install programs into the environment used by CircleCI to run our builds. 
+Docker images are lightweight virtual machines that can be used to run custom environments on top of other machines. Thus, Docker images are a convenient way to distribute complicated software programs that have numerous dependencies and complicated configurations. We are using Docker images because CircleCI allows users to use Docker images to customize the environment used to execute each build. This makes it much easier to install programs into the environment used by CircleCI to run our builds.
 
 Docker images are built by compiling Dockerfiles which are explicit instructions on how to build the image. Importantly, this makes Docker images very transparent.
 
@@ -12,7 +12,7 @@ Docker images are built by compiling Dockerfiles which are explicit instructions
 Required packages
 ---------------------------
 Execute the following commands to install and configure the packages required for this tutorial::
-    
+
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo add-apt-repository \
        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
@@ -51,7 +51,7 @@ Docker uses Dockerfiles to configure images. These files contain several directi
 
 See the `Dockerfile reference <https://docs.docker.com/engine/reference/builder/>`_ and `Docker explained <https://www.digitalocean.com/community/tutorials/docker-explained-using-dockerfiles-to-automate-building-of-images>`_ for more information about Dockerfiles.
 
-    
+
 Building a image
 --------------------
 Once you have configured the image, you can use ``docker build`` to compile the image::

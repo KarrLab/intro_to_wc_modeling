@@ -19,9 +19,9 @@ Funding streams for your lab
 
 * Non-profit organizations
 * Your institution
-    
+
     * Many institutions have programs for small seed grants
-    * Often these are designed to encourage collaborations across departments and/or institutions    
+    * Often these are designed to encourage collaborations across departments and/or institutions
 
 * Institutional training grants for graduate students and postdoctoral scholars
 
@@ -61,7 +61,7 @@ Below is a list of some of the biggest funding opportunities specifically for ea
 * Non-profit foundations
 
     * Beckman Young Investigators Program
-    * Pew Scholars 
+    * Pew Scholars
     * Searle Scholars Program
     * Sloan Research Fellowships
 
@@ -99,7 +99,7 @@ Budgeting
 
 Submitting proposals
 --------------------
-Proposals must be submitted through your institutions Grants and Contracts Office using their online proposal submission system. These online systems are straightforward. They simply require you to upload each component of your proposal as a .docx or .pdf document and enter your budget using a set of webforms. Typically, proposals must be submitted internally 1-2 weeks in advance of the external deadline. 
+Proposals must be submitted through your institutions Grants and Contracts Office using their online proposal submission system. These online systems are straightforward. They simply require you to upload each component of your proposal as a .docx or .pdf document and enter your budget using a set of webforms. Typically, proposals must be submitted internally 1-2 weeks in advance of the external deadline.
 
 
 Advice for winning grants
@@ -125,7 +125,7 @@ Below is our advice for submitting revised proposals
 * Keep in mind that blaming the reviewers is not productive. You can't change the reviewers or program officers, but you can change your proposal and how you present it.
 * Keep in mind that reviewer concerns are often rooted in poor explanations rather than bad ideas. For this reason, reviewer concerns can often be addressed simply by clarifying the proposal.
 * Synthesize and rank the reviewers' concerns
-* Develop a revised plan that addresses all of the reviewers' concerns. 
+* Develop a revised plan that addresses all of the reviewers' concerns.
 * Discuss your plans with the program officers
 * Revise your proposal. This could require re-writing your entire proposal.
 

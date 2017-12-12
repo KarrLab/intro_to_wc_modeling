@@ -6,11 +6,20 @@
 :License: MIT
 """
 
+import shutil
+import tempfile
 import unittest
 
 
 class TestModelCompositionTutorial(unittest.TestCase):
 
+    def setUp(self):
+        self.out_dir = tempfile.mkdtemp()
+        shutil.rmtree(self.out_dir)
+
+    def tearDown(self):
+        shutil.rmtree(self.out_dir)
+
     def test(self):
         from intro_to_wc_modeling.cell_modeling import model_composition
-        model_composition.exercise_merge_mathematically_like_models()
+        model_composition.main(out_dir=self.out_dir)

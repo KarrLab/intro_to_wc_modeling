@@ -19,8 +19,6 @@ from matplotlib import pyplot
 import numpy
 import os
 
-OUT_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'docs', 'cell_modeling', 'model_composition')
-#:obj:`str`: directory to save graphs
 
 
 class GlycolysisModel(object):
@@ -723,17 +721,25 @@ class MergedModel(object):
         return (t, dhap, g3p)
 
 
-def exercise_merge_mathematically_like_models():
+def main(out_dir=None):
+    """ Simulate individual models and combined model, plot results, and save plots
+
+    Args:
+        out_dir (:obj:`str`, optional): path to directory to save results
+    """
+
+    out_dir = out_dir or os.path.join(os.path.dirname(__file__), '..', '..', 'docs', 'cell_modeling', 'model_composition')
+
     # make output directory if it doesn't already exist
-    if not os.path.isdir(OUT_DIR):
-        os.makedirs(OUT_DIR)
+    if not os.path.isdir(out_dir):
+        os.makedirs(out_dir)
 
     # simulate the glycolysis model
     glycolysis_model = GlycolysisModel()
     t, glycolysis_model_dhap = glycolysis_model.simulate()
     fig = glycolysis_model.plot_simulation_results(t, glycolysis_model_dhap)
     # pyplot.show(block=False)
-    filename = os.path.join(OUT_DIR, 'glycolysis-model.png')
+    filename = os.path.join(out_dir, 'glycolysis-model.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
 
@@ -742,7 +748,7 @@ def exercise_merge_mathematically_like_models():
     t, glycerol_model_dhap, glycerol_model_g3p = glycerol_model.simulate()
     fig = glycerol_model.plot_simulation_results(t, glycerol_model_dhap, glycerol_model_g3p)
     # pyplot.show(block=False)
-    filename = os.path.join(OUT_DIR, 'glycerol-model.png')
+    filename = os.path.join(out_dir, 'glycerol-model.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)
 
@@ -769,6 +775,6 @@ def exercise_merge_mathematically_like_models():
     axes[1].set_ylabel('G3P (mM)')
 
     # pyplot.show(block=False)
-    filename = os.path.join(OUT_DIR, 'merged-model.png')
+    filename = os.path.join(out_dir, 'merged-model.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
     matplotlib.pyplot.close(fig)

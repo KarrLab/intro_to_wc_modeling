@@ -18,7 +18,7 @@ Common data types and data sources
     * Concentrations: Mass-spectrometry; ECMDB, YMDB, HMDB
 
 * RNA
-    
+
     * Sequences: Sequencing; GenBank
     * Modifications: Sequencing, mass-spectrometry: Modomics
     * Concentrations: Microarray, RNA-seq; Array Express, GEO
@@ -36,7 +36,7 @@ Common data types and data sources
     * Half-lives: mass-spectrometry; individual papers
 
 * Interactions
-    
+
     * DNA-Protein: ChIP-seq; DBD, DBTBS
     * Protein-metabolite: DrugBank, STICH, SuperTarget, UniProt
     * Protein-Protein: BioGRID, DIP, IntAct, STRING
@@ -86,12 +86,12 @@ Exercise
 #. Download a model from BioModels
 #. Ignore the provided parameter values
 #. Use the databases and prediction tools listed above to estimate the values of all of the parameters of the model
-    
+
     * Determine was metadata is provided about the observed organism, genetic, environmental conditions, etc.
     * Try to identify data that were observed under similar conditions to the model
 
 #. Track the provenance of each value that you identify
-        
+
     * Observed value and uncertainty
     * Observed units
     * Observed species

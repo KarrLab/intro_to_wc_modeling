@@ -6,9 +6,9 @@ Simulates metabolism submodel
 '''
 
 # required libraries
-from intro_to_wc_modeling.cell_modeling.simulation.multi_algorithm import analysis  # code to analyze simulation results in exercises
-from intro_to_wc_modeling.cell_modeling.simulation.multi_algorithm.model import getModelFromExcel, Submodel, SsaSubmodel  # code for model in exercises
-from intro_to_wc_modeling.cell_modeling.simulation.multi_algorithm.util import N_AVOGADRO
+from intro_to_wc_modeling.cell_modeling.simulation.multi_algorithm import analysis
+from intro_to_wc_modeling.cell_modeling.simulation.multi_algorithm import model
+from intro_to_wc_modeling.cell_modeling.simulation.multi_algorithm import util
 from numpy import random
 import numpy as np
 import os
@@ -17,30 +17,30 @@ import os
 MODEL_FILENAME = os.path.join(os.path.dirname(__file__), 'Model-Simulation.xlsx')
 TIME_STEP = 10  # time step on simulation (s)
 TIME_STEP_RECORD = TIME_STEP  # Frequency at which to observe predicted cell state (s)
-OUTPUT_DIRECTORY = os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'docs',
-                                'cell_modeling', 'simulation', 'multi_algorithm_simulation')
+DEFAULT_OUTPUT_DIRECTORY = os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', 'docs',
+                                        'cell_modeling', 'simulation', 'multi_algorithm_simulation')
 RANDOM_SEED = 10000000
 
 
-def simulate(model):
+def simulate(mdl):
     # simulates model
 
     # Get FBA, SSA submodels
     ssaSubmodels = []
-    for submodel in model.submodels:
-        if isinstance(submodel, SsaSubmodel):
+    for submodel in mdl.submodels:
+        if isinstance(submodel, model.SsaSubmodel):
             ssaSubmodels.append(submodel)
 
-    metabolismSubmodel = model.getComponentById('Metabolism')
+    metabolismSubmodel = mdl.getComponentById('Metabolism')
 
     # get parameters
-    cellCycleLength = model.getComponentById('cellCycleLength').value
+    cellCycleLength = mdl.getComponentById('cellCycleLength').value
 
     # seed random number generator to generate reproducible results
     random.seed(RANDOM_SEED)
 
     # Initialize state
-    model.calcInitialConditions()
+    mdl.calcInitialConditions()
 
     time = 0  # (s)
 
@@ -51,13 +51,13 @@ def simulate(model):
     timeHist = np.linspace(0, timeMax, num=nTimeStepsRecord)
 
     volumeHist = np.full(nTimeStepsRecord, np.nan)
-    volumeHist[0] = model.volume
+    volumeHist[0] = mdl.volume
 
     growthHist = np.full(nTimeStepsRecord, np.nan)
     growthHist[0] = np.log(2) / cellCycleLength
 
-    speciesCountsHist = np.zeros((len(model.species), len(model.compartments), nTimeStepsRecord))
-    speciesCountsHist[:, :, 0] = model.speciesCounts
+    speciesCountsHist = np.zeros((len(mdl.species), len(mdl.compartments), nTimeStepsRecord))
+    speciesCountsHist[:, :, 0] = mdl.speciesCounts
 
     # Simulate dynamics
     print('Simulating for {} time steps from 0-{} s'.format(nTimeSteps, timeMax))
@@ -67,13 +67,13 @@ def simulate(model):
             print('\tStep = {}, t = {:.1f} s'.format(iTime, time))
 
         # simulate submodels
-        metabolismSubmodel.updateLocalCellState(model)
+        metabolismSubmodel.updateLocalCellState(mdl)
         metabolismSubmodel.calcReactionBounds(TIME_STEP)
         metabolismSubmodel.calcReactionFluxes(TIME_STEP)
         metabolismSubmodel.updateMetabolites(TIME_STEP)
-        metabolismSubmodel.updateGlobalCellState(model)
+        metabolismSubmodel.updateGlobalCellState(mdl)
 
-        speciesCountsDict = model.getSpeciesCountsDict()
+        speciesCountsDict = mdl.getSpeciesCountsDict()
         time2 = 0
         while time2 < TIME_STEP:
             time = 0
@@ -81,13 +81,13 @@ def simulate(model):
             # calculate concentrations
             speciesConcentrations = {}
             for id, cnt in speciesCountsDict.items():
-                speciesConcentrations[id] = speciesCountsDict[id] / model.volume / N_AVOGADRO
+                speciesConcentrations[id] = speciesCountsDict[id] / mdl.volume / util.N_AVOGADRO
 
             # calculate propensities
             totalPropensities = np.zeros(len(ssaSubmodels))
             reactionPropensities = []
             for iSubmodel, submodel in enumerate(ssaSubmodels):
-                p = np.maximum(0, Submodel.calcReactionRates(submodel.reactions, speciesConcentrations) * model.volume * N_AVOGADRO)
+                p = np.maximum(0, model.Submodel.calcReactionRates(submodel.reactions, speciesConcentrations) * mdl.volume * util.N_AVOGADRO)
                 totalPropensities[iSubmodel] = np.sum(p)
                 reactionPropensities.append(p)
 
@@ -110,110 +110,119 @@ def simulate(model):
             selectedSubmodel = ssaSubmodels[iSubmodel]
             speciesCountsDict = selectedSubmodel.executeReaction(speciesCountsDict, selectedSubmodel.reactions[iRxn])
 
-        model.setSpeciesCountsDict(speciesCountsDict)
+        mdl.setSpeciesCountsDict(speciesCountsDict)
 
         # update mass, volume
-        model.calcMass()
-        model.calcVolume()
+        mdl.calcMass()
+        mdl.calcVolume()
 
         # Record state
-        volumeHist[iTime] = model.volume
-        growthHist[iTime] = model.growth
-        speciesCountsHist[:, :, iTime] = model.speciesCounts
+        volumeHist[iTime] = mdl.volume
+        growthHist[iTime] = mdl.growth
+        speciesCountsHist[:, :, iTime] = mdl.speciesCounts
 
     return (timeHist, volumeHist, growthHist, speciesCountsHist)
 
 
-def analyzeResults(model, time, volume, growth, speciesCounts):
+def analyzeResults(mdl, time, volume, growth, speciesCounts, output_directory):
     # plot results
 
-    if not os.path.exists(OUTPUT_DIRECTORY):
-        os.makedirs(OUTPUT_DIRECTORY)
+    if not os.path.exists(output_directory):
+        os.makedirs(output_directory)
 
-    cellComp = model.getComponentById('c')
+    cellComp = mdl.getComponentById('c')
 
     totalRna = np.zeros(len(time))
     totalProt = np.zeros(len(time))
-    for species in model.species:
+    for species in mdl.species:
         if species.type == 'RNA':
             totalRna += speciesCounts[species.index, cellComp.index, :]
         elif species.type == 'Protein':
             totalProt += speciesCounts[species.index, cellComp.index, :]
 
     analysis.plot(
-        model=model,
+        model=mdl,
         time=time,
         yDatas={'Volume': volume},
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'Volume.png')
+        fileName=os.path.join(output_directory, 'Volume.png')
     )
 
     analysis.plot(
-        model=model,
+        model=mdl,
         time=time,
         yDatas={'Growth': growth},
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'Growth.png')
+        fileName=os.path.join(output_directory, 'Growth.png')
     )
 
     analysis.plot(
-        model=model,
+        model=mdl,
         time=time,
         yDatas={'RNA': totalRna},
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'Total-RNA.png')
+        fileName=os.path.join(output_directory, 'Total-RNA.png')
     )
 
     analysis.plot(
-        model=model,
+        model=mdl,
         time=time,
         yDatas={'Protein': totalProt},
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'Total-protein.png')
+        fileName=os.path.join(output_directory, 'Total-protein.png')
     )
 
     analysis.plot(
-        model=model,
+        model=mdl,
         time=time,
         volume=volume,
         speciesCounts=speciesCounts,
         units='molecules',
         selectedSpeciesCompartments=['ATP[c]', 'CTP[c]', 'GTP[c]', 'UTP[c]'],
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'NTPs.png')
+        fileName=os.path.join(output_directory, 'NTPs.png')
     )
 
     analysis.plot(
-        model=model,
+        model=mdl,
         time=time,
         volume=volume,
         speciesCounts=speciesCounts,
         selectedSpeciesCompartments=['AMP[c]', 'CMP[c]', 'GMP[c]', 'UMP[c]'],
         units='uM',
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'NMPs.png')
+        fileName=os.path.join(output_directory, 'NMPs.png')
     )
 
     analysis.plot(
-        model=model,
+        model=mdl,
         time=time,
         volume=volume,
         speciesCounts=speciesCounts,
         selectedSpeciesCompartments=['ALA[c]', 'ARG[c]', 'ASN[c]', 'ASP[c]'],
         units='uM',
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'Amino-acids.png')
+        fileName=os.path.join(output_directory, 'Amino-acids.png')
     )
 
     analysis.plot(
-        model=model,
+        model=mdl,
         time=time,
         speciesCounts=speciesCounts,
         units='molecules',
         selectedSpeciesCompartments=['RnaPolymerase-Protein[c]', 'Adk-Protein[c]', 'Apt-Protein[c]', 'Cmk-Protein[c]'],
-        fileName=os.path.join(OUTPUT_DIRECTORY, 'Proteins.png')
+        fileName=os.path.join(output_directory, 'Proteins.png')
     )
 
 
-def main():
-    model = getModelFromExcel(MODEL_FILENAME)
-    time, volume, growth, speciesCounts = simulate(model)
-    analyzeResults(model, time, volume, growth, speciesCounts)
+def main(output_directory=DEFAULT_OUTPUT_DIRECTORY):
+    """ Run simulation and plot results
 
-    # Check if simulation implemented correctly
-    volumeChange = (volume[-1] - volume[0]) / volume[0]
-    if volumeChange < 0.9 or volumeChange > 1.1:
-        raise Exception('Volume should approximately double over the simulation.')
+    Args:
+        output_directory (:obj:`str`, optional): directory to save plots        
+
+    Returns:
+        :obj:`model.Model`: model
+        :obj:`numpy.ndarray`: time
+        :obj:`numpy.ndarray`: predicted volume dynamics
+        :obj:`numpy.ndarray`: predicted growth rate dynamics
+        :obj:`numpy.ndarray`: predicted species counts dynamics
+    """
+    mdl = model.getModelFromExcel(MODEL_FILENAME)
+    time, volume, growth, speciesCounts = simulate(mdl)
+    analyzeResults(mdl, time, volume, growth, speciesCounts, output_directory)
+
+    return (mdl, time, volume, growth, speciesCounts)

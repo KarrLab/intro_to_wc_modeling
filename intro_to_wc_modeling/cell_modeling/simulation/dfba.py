@@ -17,7 +17,13 @@ import optlang
 import os
 
 
-def main():
+def main(init_concs=None):
+    """ Run dFBA simsulation, plot results, and save plots
+
+    Args:
+        init_concs (:obj:`dict`, optional): initial concentrations
+    """
+
     # create a model
     model = optlang.Model()
 
@@ -55,7 +61,8 @@ def main():
     observables = ['glc_e', 'aa_e', 'biomass']
 
     # set non-zero initial conditions
-    init_concs = dict(zip(observables, [200., 120., 1.]))
+    if not init_concs:
+        init_concs = dict(zip(observables, [200., 120., 1.]))
 
     # simulation end time
     time_max = 70
