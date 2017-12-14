@@ -1,13 +1,13 @@
-cement                                                   # framework for building command line programs
+cement                                                           # framework for building command line programs
 cobra >= 0.8.2
-ipython                                                  # interactive interpret
-matplotlib                                               # plotting
-numpy                                                    # numerical computing
+ipython                                                          # interactive interpret
+matplotlib                                                       # plotting
+numpy                                                            # numerical computing
 openpyxl
-optlang                                                  # numerical optimization
-# pgmpy                                                  # graphical models package
-# scikit_learn                                           # data science package
-scipy                                                    # scientific computing
-sqlalchemy                                               # relational databases
-git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang   # wc modeling language
-git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils # wc modeling utilities
+optlang                                                          # numerical optimization
+# pgmpy                                                          # graphical models package
+# scikit_learn                                                   # data science package
+scipy                                                            # scientific computing
+sqlalchemy                                                       # relational databases
+git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang-0.0.1     # wc modeling language
+git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils-0.0.1a5 # wc modeling utilities
