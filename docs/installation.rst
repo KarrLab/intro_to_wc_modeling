@@ -352,17 +352,13 @@ Detailed instructions to install the tutorials and all of the requirements
 
     #. Open Sublime and edit the following settings
 
+        * Tools >> Install Package Control
+        * Preferences >> Package control >> Install package >> AutoPEP8
         * Preferences >> Key Bindings::
 
             [
-                { "keys": ["ctrl+shift+r"], "command": "unbound"}
+                {"keys": ["ctrl+shift+r"], "command": "auto_pep8", "args": {"preview": false}}
             ]
-
-        * Tools >> Install Package Control
-        * Preferences >> Package control >> Install package >> AutoPEP8
-        * Preferences >> Package settings >> AutoPep8 >> Settings-User::
-
-            [{"keys": ["ctrl+shift+r"], "command": "auto_pep8", "args": {"preview": false}}]
 
     #. Open PyCharm and set the following settings to configure PyCharm
 
