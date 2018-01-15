@@ -1,4 +1,4 @@
-Recommended development Python tools
+Recommended Python development tools
 ====================================
 Below are several recommended programs for developing Python code:
 

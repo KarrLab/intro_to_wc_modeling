@@ -13,140 +13,179 @@ import pkg_resources
 import wc_lang.core
 import wc_lang.io
 
-
 def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
-    # todo: synchronize with intro_to_wc_modeling/docs/wc_modeling/wc_lang_tutorial.rst
-    ##########################################################################################################
-    # THIS CODE IS DUPLICATED IN intro_to_wc_modeling/docs/wc_modeling/wc_lang_tutorial.rst
-    # MANUALLY KEEP THEM SYNCHRONIZED, OR, use ``literalinclude`` to link them.
-    #
-    #   .. literalinclude:: example.py
-    #       :language: ruby
-    #       :lines: 1,3,5-10,20-
-    #       :dedent: 4
-    #
-    ##########################################################################################################
+
+    ################################################################
+    ## This code is used by literalinclude commands in wc_lang_tutorial.rst
+    ## It contains many separate examples, each prefixed by comment that delineates the
+    ## start of the example and is used by a start-after option in a literalinclude.
+    ## The line before each of these comments is:
+    ##      'Don't change the next comment - it's used by a literalinclude'
+    ## Changes to these comments should be synchronized with changes to wc_lang_tutorial.rst
+    ################################################################
+
+    # save the results of example commands so this function can be unit-tested
+    results = []
 
     ################################################
     # 2. Reading and writing models to/from files
     ################################################
 
-    # ``wc_lang`` can read and write models from specially formatted Excel workbooks in which each worksheet represents a Python class, each row
-    # represents a class instance, each column represents an instance attribute, each cell represents the value of an attribute of an
-    # instance, and string identifiers are used to indicate relationships among objects
-
+    model_filename = os.path.join(examples_dir, 'example_model.xlsx')
+    ## Don't change the next comment - it's used by a literalinclude
     # This example illustrates how to read a model from an Excel file
-    model_filename = pkg_resources.resource_filename('intro_to_wc_modeling', os.path.join(
-        'wc_modeling', 'wc_lang_tutorial', 'examples', 'example_model.xlsx'))
+    # 'model_filename' is the name of an Excel file storing a model
     model = wc_lang.io.Reader().run(model_filename)
 
-    # ``wc_lang`` can also read and write models from specially formatted set of delimiter-separated files. `wc_lang`` uses filename glob patterns
-    # to indicate sets of delimited files. The supported delimiters are *commas* for .csv files and *tabs* for .tsv files. These files use the same
-    # format as the Excel workbook format, except that each worksheet is saved as a separate file.Excel workbooks are easier to edit interactively,
-    # but delimiter-separated files are more compatible  with code version control systems such as Git.
+    results.append("read model: '{}'".format(model.name))
 
-    # This example illustrates how to write a model to an set of .tsv files
     if not os.path.isdir(examples_dir):
         os.makedirs(examples_dir)
+    ## Don't change the next comment - it's used by a literalinclude
+    # This example illustrates how to write a model to a set of .tsv files
+    # 'examples_dir' is a directory
     model_filename_pattern = os.path.join(examples_dir, 'example_model-*.tsv')
     wc_lang.io.Writer().run(model_filename_pattern, model)
 
+    rv = wc_lang.io.Writer().run(model_filename_pattern, model)
+    results.append("write a model to a set of .tsv files: '{}'".format(rv))
+
+    ## Don't change the next comment - it's used by a literalinclude
     # This example illustrates how to read a model from a set of .tsv files
     model_from_tsv = wc_lang.io.Reader().run(model_filename_pattern)
 
-    # csv files can be used similarly.
+    results.append("read a model from a set of .tsv files: '{}'".format(model_from_tsv.name))
 
     ################################################
     # 3. Accessing model properties
     ################################################
 
-    #``wc_lang`` models (instances of ``wc_lang.core.Model``) have several attributes
-    model.id
-    model.name
-    model.version
-    model.taxon
-    model.submodels
-    model.compartments
-    model.species_types
-    model.parameters
-    model.references
+    ## Don't change the next comment - it's used by a literalinclude
+    # ``wc_lang`` models have many attributes
+    model.id                # a unique identifier
+    model.name              # human readable name
+    model.version           # version number
+    model.taxon             # taxon of the organism being modeled
+    model.submodels         # a list of the model's submodels
+    model.compartments      # the model's compartments
+    model.species_types     # its species types
+    model.parameters        # its parameters
+    model.references        # publication sources for the model instance
+    model.cross_references  # database sources for the model instance
 
-    # ``wc_lang`` also provides several convenience methods to get all of the elements of a specific type
-    # that are part of a model. Each of these methods returns a list of the instances of requested type.
+    results.append("referenced model attributes")
+
+    ## Don't change the next comment - it's used by a literalinclude
+    # ``wc_lang`` also provides many convenience methods
     model.get_compartments()
     model.get_species_types()
     model.get_submodels()
     model.get_species()
     model.get_concentrations()
     model.get_reactions()
+    model.get_biomass_reactions()
     model.get_rate_laws()
     model.get_parameters()
     model.get_references()
 
-    # For example, ``get_submodels`` returns a list of all of the submodels. This can be used to obtain the ids and names of the submodels:
-    id_and_names = []
-    for submodel in model.get_submodels():
-        id_and_names.append('id: {}, name: {}'.format(submodel.id, submodel.name))
+    results.append("referenced model convenience methods")
 
-    # API documentation for ``wc_lang`` is available at `http://code.karrlab.org <http://code.karrlab.org/>`_.
+    ## Don't change the next comment - it's used by a literalinclude
+    # ``get_reactions()`` returns a list of all of the reactions in a model's submodels
+    reaction_identification = []
+    for reaction in model.get_reactions():
+        reaction_identification.append('submodel name: {}, reaction id: {}'.format(
+            reaction.submodel.name, reaction.id))
+
+    results.append("get_reactions entry 0: '{}'".format(reaction_identification[0]))
 
     #################################################
     # 4. Building models and editing model properties
     #################################################
 
-    # You can also use the classes and methods in ``wc_lang.core`` to programmatically build and edit models
-
+    ## Don't change the next comment - it's used by a literalinclude
     # The following illustrates how to build a simple model programmatically
+    # create a model with one submodel and one compartment
     prog_model = wc_lang.core.Model(id='programmatic_model', name='Programmatic model')
 
     submodel = wc_lang.core.Submodel(id='submodel_1', model=prog_model)
 
     cytosol = wc_lang.core.Compartment(id='c', name='Cytosol')
 
+    # create 5 species types
     atp = wc_lang.core.SpeciesType(id='atp', name='ATP', model=prog_model)
     adp = wc_lang.core.SpeciesType(id='adp', name='ADP', model=prog_model)
     pi = wc_lang.core.SpeciesType(id='pi', name='Pi', model=prog_model)
     h2o = wc_lang.core.SpeciesType(id='h2o', name='H2O', model=prog_model)
     h = wc_lang.core.SpeciesType(id='h', name='H+', model=prog_model)
 
+    # create an 'ATP hydrolysis' reaction with 2 reactants and 3 products
     atp_hydrolysis = wc_lang.core.Reaction(id='atp_hydrolysis', name='ATP hydrolysis')
-    atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=atp, compartment=cytosol), coefficient=-1)
-    atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=h2o, compartment=cytosol), coefficient=-1)
-    atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=adp, compartment=cytosol), coefficient=1)
-    atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=pi, compartment=cytosol), coefficient=1)
-    atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=h, compartment=cytosol), coefficient=1)
+    atp_hydrolysis.participants.create(
+        species=wc_lang.core.Species(species_type=atp, compartment=cytosol), coefficient=-1)
+    atp_hydrolysis.participants.create(
+        species=wc_lang.core.Species(species_type=h2o, compartment=cytosol), coefficient=-1)
+    atp_hydrolysis.participants.create(
+        species=wc_lang.core.Species(species_type=adp, compartment=cytosol), coefficient=1)
+    atp_hydrolysis.participants.create(
+        species=wc_lang.core.Species(species_type=pi, compartment=cytosol), coefficient=1)
+    atp_hydrolysis.participants.create(
+        species=wc_lang.core.Species(species_type=h, compartment=cytosol), coefficient=1)
+    # The previous illustrates how to build a simple model programmatically
+    ## Don't change the previous comment - it's used by a literalinclude
 
+    results.append("created model: '{}'".format(prog_model.name))
+
+    ## Don't change the next comment - it's used by a literalinclude
+    # The attribues that can be initialized when a ``wc_lang.BaseModel`` class is instantiated
+    wc_lang.core.Model.Meta.attributes.keys()
+    wc_lang.core.Submodel.Meta.attributes.keys()
+    wc_lang.core.SpeciesType.Meta.attributes.keys()
+    wc_lang.core.Compartment.Meta.attributes.keys()
+
+    ## Don't change the next comment - it's used by a literalinclude
     # The following illustrates how to edit a model programmatically
-    prog_model.id = 'programmatically_created_model'
-    prog_model.name = 'Programmatically created model'
+    atp_hydrolysis.comments = 'example comments'
+    atp_hydrolysis.reversible = False
 
     #################################################
-    # 5. Comparing and differencing models
+    # 5. Completing and validating models
     #################################################
 
-    # The ``is_equal`` method determines if two models are semantically equal (i.e. the two models recursively
-    # have the same attribute values, ignoring the order of the attributes which has no semantic meaning)
+    ## Don't change the next comment - it's used by a literalinclude
+    # This example illustrates how to validate ``prog_model``
+    prog_model.validate()
+
+    rv = prog_model.validate()
+    results.append("validate model: '{}'".format(rv))
+
+    # print(atp_hydrolysis.participants[0])
+    # TODO: make this work print(atp_hydrolysis.participants[0].reaction)
+
+    #################################################
+    # 6. Comparing and differencing models
+    #################################################
+
+    ## Don't change the next comment - it's used by a literalinclude
+    # compare the semantic equality of ``model`` and ``model_from_tsv``
     assert(model.is_equal(model_from_tsv) == True)
 
-    # The ``difference`` method produces a textual description of the differences between two models
+    ## Don't change the next comment - it's used by a literalinclude
+    # produces a textual description of the differences between two models
     assert(model.difference(model_from_tsv) == '')
 
     #################################################
-    # 6. Normalizing models into a reproducible order
+    # 7. Normalizing models into a reproducible order
     #################################################
 
-    # Although the attribute order has no semantic meaning, numerical results are sensitive to the attribute order
-    # To facilitate reproducible computations, ``wc_lang`` provides a ``normalize`` method which sorts models into
-    # a reproducible order
+    ## Don't change the next comment - it's used by a literalinclude
+    # The following code excerpt will normalize ``model`` into a reproducible order
     model.normalize()
 
-    #################################################
-    # 7. Complete API
-    #################################################
+    rv = model.normalize()
+    results.append("normalize model: '{}'".format(rv))
 
-    # The ``wc_lang`` API documentation is available at `http://code.karrlab.org <http://code.karrlab.org/>`_
-    inspect.getmembers(wc_lang.core.Model)
-    inspect.getmembers(wc_lang.core.Submodel)
-    inspect.getmembers(wc_lang.core.Compartment)
-    inspect.getmembers(wc_lang.core.SpeciesType)
-    inspect.getmembers(wc_lang.core.Reaction)
+    return results
+
+if __name__ == '__main__':
+    main()

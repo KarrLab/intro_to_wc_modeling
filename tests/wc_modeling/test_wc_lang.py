@@ -7,19 +7,22 @@
 '''
 
 from intro_to_wc_modeling.wc_modeling.wc_lang_tutorial import core
-import shutil
-import tempfile
 import unittest
 
 
 class TestWC_Lang(unittest.TestCase):
 
-    def setUp(self):
-        self.dirname = tempfile.mkdtemp()
-        shutil.rmtree(self.dirname)
-
-    def tearDown(self):
-        shutil.rmtree(self.dirname)
-
     def test(self):
-        core.main(examples_dir=self.dirname)
+        examples = []
+        examples.append("read model")
+        examples.append("write a model to a set of .tsv files")
+        examples.append("read a model from a set of .tsv files")
+        examples.append("referenced model attributes")
+        examples.append("referenced model convenience methods")
+        examples.append("get_reactions entry 0")
+        examples.append("created model")
+        examples.append("validate model")
+        examples.append("normalize model")
+        results = core.main()
+        for example, result in zip(examples, results):
+            self.assertIn(example, result)

@@ -1,24 +1,25 @@
 Using the wc_lang package to define whole-cell models
 =======================================================
 
-This tutorial teaches you how to use the ``wc_lang`` package to define whole-call models.
-``wc_lang`` provides a foundation for defining, accessing and manipulating biochemical models composed of species,
+This tutorial teaches you how to use the ``wc_lang`` package to access and create whole-cell models.
+``wc_lang`` provides a foundation for defining, writing, reading and manipulating biochemical models composed of species,
 reactions, compartments and other parts of a biochemical system.
 It can be used to define models of entire cells, or models of smaller biochemical systems.
 ``wc_lang`` contains methods to read and write models from two types of files --
-spreadsheet workbooks and sets of delimited files. It also includes methods that
+Excel spreadsheet workbooks and sets of delimited files. It also includes methods that
 analyze or transform models -- e.g., methods that validate, compare, and normalize them.
 
 ``wc_lang`` depends heavily on the ``obj_model`` package which defines a generic language for declaring
-interrelated typed data records in Python, transferring them from and to files, and validating their
-values.
+interrelated Python objects, converting them to and from data records,
+transferring the records to and from files, and validating their values.
+``obj_model`` is essentially an object-relational mapping (ORM) system that stores data in files
+instead of databases.
 However, users of ``wc_lang`` do not need to use ``obj_model`` directly.
-
 
 Semantics of a ``wc_lang`` biochemical Model
 ----------------------------------------------
 A ``wc_lang`` biochemical model represents a biochemical system as ``Species`` (we indicate
-classes in ``wc_lang`` by capitalized names in ``fixed-width`` text) which get transformed by reactions.
+classes in ``wc_lang`` by capitalized names in ``fixed-width`` text) that get transformed by reactions.
 
 A ``SpeciesType`` describes a biochemical molecule, including its ``name`` (following Python
 convention, attributes
@@ -26,7 +27,7 @@ of classes are lowercase names), ``structure``, ``molecular_weight``,
 ``charge`` and other properties.
 The concentration of a ``SpeciesType`` in a compartment is stored by a ``Species`` instance
 that references instances of ``SpeciesType``, ``Compartment``, and ``Concentration``, which provide
-the species' location and concentration.
+the ``Species``' location and concentration.
 A compartment may represent an organelle or a conceptual region of a model.
 Adjacency relationships among compartments are implied by reactions that transfer
 species among them, but physical relationships between compartments or their 3D positions
@@ -34,41 +35,40 @@ are not represented.
 
 The data in
 a ``wc_lang`` model is organized in a highly-interconnected graph of related Python objects, each of
-which is an ``obj_model.Model`` instance.
+which is an ``obj_model.core.Model`` instance.
 For example, a ``Species`` instance contains ``reaction_participants``,
 which references each ``Reaction`` in which the ``Species`` participates.
 The graph contains many convenience relationships like this, which make it easy to
-follow the relationships between ``obj_model.Model`` instances anywhere in a ``wc_lang`` model.
+follow the relationships between ``obj_model.core.Model`` instances anywhere in a ``wc_lang`` model.
 
 A ``wc_lang`` model also supports some metadata.
 Named ``Parameter`` entities store arbitrary values, such as input parameters.
 Published data sources used by a model should be recorded in ``Reference`` entities,
 or in a ``CrossReference`` objects that identify a biological or chemical database.
 
-You should think of a ``wc_lang`` model as the description of a model in its initial state because
-a ``wc_lang``
-description lacks any notion of time and contains much information not required for the simulation of a model,
-such as data sources.
+``wc_lang`` models are typically used to describe the initial state of a model -- a ``wc_lang``
+description lacks any notion of time.
+More generally, a comprehensive ``wc_lang`` model should provide a complete description of a model,
+including its data sources and comments about model components.
 
 
 ``wc_lang`` Classes Used to Define biochemical Models
 ------------------------------------------------------
 
-This subsection enumerates the ``obj_model.Model`` classes that store data in ``wc_lang`` models.
+This subsection enumerates the ``obj_model.core.Model`` classes that store data in ``wc_lang`` models.
 
-It is only necessary to import these types when they are being instantiated programmatically.
-Typically, their types are not imported, but their
-attributes are accessed when using a model that has been read from file(s).
+When using an existing model the attributes of these classes are frequently accessed, although
+their definitions are not typically imported.
+However, they must be imported when they are being instantiated programmatically.
 
 Many of these classes implement the methods ``deserialize()`` and ``serialize()``.
 ``deserialize()`` parses an object's string representation -- as would be stored in a text file or spreadsheet
-representation of a biochemical model -- into one or more ``obj_model.Model`` instances.
-Thus, the ``deserialize()`` methods are used when reading models from files.
+representation of a biochemical model -- into one or more ``obj_model.core.Model`` instances.
+``serialize()`` performs the reverse, converting a ``wc_lang`` class instance into a string representation.
+Thus, the ``deserialize()`` methods are used when reading models from files and ``serialize()`` 
+is used when writing a model to disk. 
 ``deserialize()`` returns an error when a string representation cannot be parsed into a
 Python object.
-``serialize()`` converts a ``wc_lang`` class instance into a string representation, and is used when
-writing a model to a file or files.
-``serialize()`` and ``deserialize()`` invert each other.
 
 Static Enumerations
 ~~~~~~~~~~~~~~~~~~~
@@ -95,7 +95,8 @@ Static attributes of these classes are used as attributes of ``wc_lang`` model c
 
 These classes are instantiated as components of a ``wc_lang`` model.
 When a model is stored on disk all the instances of each class are
-usually stored in a separate table, either a workbook's worksheet or delimiter-separated file.
+usually stored in a separate table, either an Excel workbook's worksheet or delimiter-separated file.
+In the former case, the model is stored in one workbook, while in the latter it is stored in a set of files.
 
 ``Taxon``
     The taxonomic rank of a model.
@@ -123,7 +124,7 @@ usually stored in a separate table, either a workbook's worksheet or delimiter-s
     ``SpeciesTypeType``.
 
 ``Species``
-    A particular ``SpeciesType`` contained in a particular ``Compartment``.
+    A particular ``SpeciesType`` contained in a particular ``Compartment`` at a particular concentration.
 
 ``Concentration``
     The molar concentration (M) of a species.
@@ -153,7 +154,7 @@ usually stored in a separate table, either a workbook's worksheet or delimiter-s
     their use isn't required.
 
 ``RateLawEquation``
-    ``expression`` contains a textual, mathematical expression of the rate law. A rate law can be
+    A rate law equation's ``expression`` contains a textual, mathematical expression of the rate law. A rate law can be
     used by more than one ``Reaction``.
     The expression will be transcoded into a valid Python expression, stored in the ``transcoded``
     attribute, and
@@ -164,11 +165,15 @@ usually stored in a separate table, either a workbook's worksheet or delimiter-s
     ``SpeciesType`` and ``Compartment`` names must be valid Python identifiers, and the entire
     expression must be a valid Python expression.
     A species composed of a ``SpeciesType`` named
-    ``species_x`` located in a ``Compartment`` named ``c`` is written ``species_x[c]``. Evaluating
-    the rate law converts species into their concentration
+    ``species_x`` located in a ``Compartment`` named ``c`` is written ``species_x[c]``.
+    When a rate law equation is evaluated during the simulation of a model the expression ``species_x[c]``
+    is interpreted as the current concentration of ``species_x`` in compartment ``c``. 
 
 ..
     # todo: expand this documentation of the syntax and semantics of RateLawEquation expressions.
+
+..
+    # todo: include biomass component and biomass reaction
 
 ``Parameter``
     A ``Parameter`` holds an arbitrary floating point ``value``. It is named, associated with a
@@ -177,7 +182,7 @@ usually stored in a separate table, either a workbook's worksheet or delimiter-s
 ``wc_lang`` Model Data Sources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-These classes record the sources of the model's data.
+These classes record the sources of a model's data.
 
 ``Reference``
     A ``Reference`` holds a reference to a publication that contains data used in the model.
@@ -189,20 +194,17 @@ These classes record the sources of the model's data.
 Using ``wc_lang``
 -----------------
 The following tutorial shows several ways to use ``wc_lang``, including
-reading a model defined in one or more files, defining a model programmatically,
+reading a model from disk, defining a model programmatically and writing it to disk,
 and using these models:
-
-..
-    # THIS CODE IS DUPLICATED IN intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
-    # KEEP THEM SYNCHRONIZED, OR, BETTER YET, REPLACE THEM WITH A SINGLE FILE AND CONVERSION PROGRAM(S).
-    # TODO: RESYNCH THEM.
 
 #. Install the required software for the tutorial:
 
     * Python
     * Pip
 
-#. Install the tutorial and the whole-cell packages that it uses::
+#. Install the tutorial and the whole-cell packages that it uses:
+
+.. code-block:: bash
 
     git clone https://github.com/KarrLab/intro_to_wc_modeling.git
     pip install --upgrade \
@@ -210,11 +212,15 @@ and using these models:
         git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang \
         git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils
 
-#. Change to the directory for this tutorial::
+#. Change to the directory for this tutorial:
+
+.. code-block:: bash
 
     cd intro_to_wc_modeling/intro_to_wc_modeling/wc_modeling/wc_lang_tutorial
 
-#. Open an interactive python interpreter::
+#. Open an interactive python interpreter:
+
+.. code-block:: bash
 
     ipython
 
@@ -225,7 +231,8 @@ and using these models:
 
 #. Read a model from an Excel file
 
-    ``wc_lang`` can read and write models from specially formatted Excel workbooks in which each worksheet represents a Python class, each row
+    ``wc_lang`` can read and write models from specially formatted Excel workbooks in which each worksheet represents
+    one of the model component classes above, each row
     represents a class instance, each column represents an instance attribute, each cell represents the value of an attribute of an
     instance, and string identifiers are used to indicate relationships among objects.
 
@@ -243,111 +250,131 @@ and using these models:
     * The citations which support each model decision
     * PubMed id, DOI, ISBN, or URL for each citation
 
-    This example illustrates how to read a model from an Excel file::
+    This example illustrates how to read a model from an Excel file:
 
-        MODEL_FILENAME = os.path.join('examples', 'example_model.xlsx')
-        model = wc_lang.io.Reader().run(MODEL_FILENAME)
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: This example illustrates how to read a model from an Excel file
+        :lines: 2
+        :dedent: 4
 
     (You may ignore a ``UserWarning`` generated by these commands.)
 
-    If a model file is invalid (for example, two species are defined with the same name), this operation
+    If a model file is invalid (for example, it defines two species types with the same id, or
+    a concentration that refers to a species type that is not defined), this operation
     will raise an exception which contains a list of all of the errors in the model definition.
 
-    ``wc_lang`` can also read and write a model from a specially formatted set of delimiter-separated files. `wc_lang`` uses filename glob patterns
-    to indicate sets of delimited files. The supported delimiters are *commas* for .csv files and *tabs* for .tsv files. These files use the same
+    ``wc_lang`` can also read and write a model from a specially formatted set of delimiter-separated files.
+    ``wc_lang`` uses filename glob patterns to indicate sets of delimited files. The supported delimiters
+    are *commas* for .csv files and *tabs* for .tsv files. These files use the same
     format as the Excel workbook format, except that each worksheet is saved as a separate file.
-    Excel workbooks are easier to edit interactively,
+    Excel workbooks are easier to read and edit interactively,
     but changes to delimiter-separated files can be tracked in code version control systems such as Git.
 
-    This example illustrates how to write a model to a set of .tsv files::
+    This example illustrates how to write a model to a set of .tsv files:
 
-        MODEL_FILENAME_PATTERN = os.path.join('examples', 'example_model-*.tsv')
-        wc_lang.io.Writer().run(MODEL_FILENAME_PATTERN, model)
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: This example illustrates how to write a model to a set of .tsv files
+        :lines: 1-3
+        :dedent: 4
 
-    This example illustrates how to read this set of .tsv files into a model::
+    Continuing the previous example, this command reads this set of .tsv files into a model:
 
-        model_from_tsv = wc_lang.io.Reader().run(MODEL_FILENAME_PATTERN)
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: This example illustrates how to read a model from a set of .tsv files
+        :lines: 1
+        :dedent: 4
 
     csv files can be used similarly.
 
 #. Access properties of the model
 
-    ``wc_lang`` models (instances of ``wc_lang.core.Model``) have multiple attributes:
+    A ``wc_lang`` model (an instance of ``wc_lang.core.Model``) has multiple attributes:
 
-    * ``id``
-    * ``name``
-    * ``version``
-    * ``taxon``
-    * ``submodels``
-    * ``compartments``
-    * ``species_types``
-    * ``parameters``
-    * ``references``
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: ``wc_lang`` models have many attributes
+        :lines: 1-10
+        :dedent: 4
+
+    These provide access to the parts of a ``wc_lang`` model that are directly referenced by a model instance.
 
     ``wc_lang`` also provides some convenience methods that get all of the elements of a specific type
     which are part of a model. Each of these methods returns a list of the instances of requested type.
 
-    * ``get_compartments()``
-    * ``get_species_types()``
-    * ``get_submodels()``
-    * ``get_species()``
-    * ``get_concentrations()``
-    * ``get_reactions()``
-    * ``get_rate_laws()``
-    * ``get_parameters()``
-    * ``get_references()``
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: ``wc_lang`` also provides many convenience methods
+        :lines: 1-10
+        :dedent: 4
 
-    For example, ``get_submodels()`` returns a list of all of a model's submodels. As illustrated below,
-    this can be used to print the ids and names of the submodels::
+    For example, ``get_reactions()`` returns a list of all of the reactions in a model's submodels.
+    As illustrated below,
+    this can be used to obtain the id of each reaction and the name of its submodel:
 
-        for submodel in model.get_submodels():
-            print('id: {}, name: {}'.format(submodel.id, submodel.name))
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: ``get_reactions()`` returns a list of all of the reactions in a model's submodels
+        :lines: 1-4
+        :dedent: 4
+
 
 #. Programmatically build a new model and edit its model properties
 
     You can also use the classes and methods in ``wc_lang.core`` to programmatically build and edit models.
-    While users typically will not create models programmatically, creating model components
+    While modelers typically will not create models programmatically, creating model components
     in this way gives you a feeling for how models are built.
 
-    The following illustrates how to build a simple model programmatically::
+    The following illustrates how to build a simple model programmatically:
 
-        prog_model = wc_lang.core.Model(id='programmatic_model', name='Programmatic model')
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: The following illustrates how to build a simple model programmatically
+        :end-before: The previous illustrates how to build a simple model programmatically
+        :dedent: 4
 
-        submodel = wc_lang.core.Submodel(id='submodel_1', model=prog_model)
+    Similar code can be used to create any part of a model. All ``wc_lang`` objects that are subclassed from
+    ``wc_lang.BaseModel`` (an alias for ``obj_model.core.Model``) can be instantiated in the normal fashion,
+    as shown for ``Model``, ``Submodel``, ``Compartment``, ``SpeciesType`` and ``Reaction`` above.
+    Each subclass of ``wc_lang.BaseModel`` contains a ``Meta`` attribute that is a class which
+    stores meta information about the subclass. 
+    The attributes that can be initialized when a ``wc_lang.BaseModel`` class is instantiated can be
+    obtained from the class' ``Meta`` attribute, which is a dictionary that maps from attribute name to attribute instance:
 
-        cytosol = wc_lang.core.Compartment(id='c', name='Cytosol')
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: The attribues that can be initialized when a ``wc_lang.BaseModel`` class is instantiated
+        :lines: 1-4
+        :dedent: 4
 
-        atp = wc_lang.core.SpeciesType(id='atp', name='ATP', model=prog_model)
-        adp = wc_lang.core.SpeciesType(id='adp', name='ADP', model=prog_model)
-        pi = wc_lang.core.SpeciesType(id='pi', name='Pi', model=prog_model)
-        h2o = wc_lang.core.SpeciesType(id='h2o', name='H2O', model=prog_model)
-        h = wc_lang.core.SpeciesType(id='h', name='H+', model=prog_model)
+    For example, ``Reaction`` has the following attributes in ``wc_lang.core.Reaction.Meta.attributes.keys()``::
 
-        atp_hydrolysis = wc_lang.core.Reaction(id='atp_hydrolysis', name='ATP hydrolysis')
-        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=atp,
-            compartment=cytosol), coefficient=-1)
-        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=h2o,
-            compartment=cytosol), coefficient=-1)
-        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=adp,
-            compartment=cytosol), coefficient=1)
-        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=pi,
-            compartment=cytosol), coefficient=1)
-        atp_hydrolysis.participants.create(species=wc_lang.core.Species(species_type=h,
-            compartment=cytosol), coefficient=1)
+        ['comments', 'id', 'max_flux', 'min_flux', 'name', 'participants', 'references',
+            'reversible', 'submodel']
 
-    The following illustrates how to edit a model programmatically::
+    These attributes can also be set programmatically:
 
-        prog_model.id = 'programmatically_created_model'
-        prog_model.name = 'Programmatically created model'
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: The following illustrates how to edit a model programmatically
+        :lines: 1-2
+        :dedent: 4
 
-#. Validating the programmatically generated model
+    In addition, the ``create`` method can be used to add elements to lists of related ``wc_lang.BaseModel``
+    objects, as illustrated by ``atp_hydrolysis.participants.create()`` above. This avoids creating
+    unnecessary identifiers.
 
-    The ``wc_lang.core.Model.validate`` method can be used to determine if a model is valid, and, if the model is invalid, return a list of all of the errors. The validate method performs the following checks:
+#. Validating a programmatically generated Model
+
+    The ``wc_lang.core.Model.validate`` method determines whether a model is valid. If
+    the model is invalid validate return a list of all of the model's errors. It performs the following checks:
 
     * Check that only one model and taxon are defined
     * Check that each submodel, compartment, species type, reaction, and reference is defined only once
     * Check that each the species type and compartment referenced in each concentration and reaction exist
-    * Check that numeric values are provided for each numerically-valued attribute
+    * Check that values of the correct types are provided for each attribute
 
         * ``wc_lang.core.Compartment.initial_volume``: float
         * ``wc_lang.core.Concentration.value``: float
@@ -368,26 +395,38 @@ and using these models:
         * ``wc_lang.core.Submodel.algorithm``
         * ``wc_lang.core.Taxon.rank``
 
-    The example illustrates how to validate ``prog_model``::
+    This example illustrates how to validate ``prog_model``:
 
-        prog_model.validate()
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: This example illustrates how to validate ``prog_model``
+        :lines: 1
+        :dedent: 4
 
-#. Compare and difference ``model`` and ``model_from_tsv``
+#. Compare and difference Models
 
     ``wc_lang`` provides methods that determine if two models are semantically equal and report any semantic
     differences between two models. The ``is_equal`` method determines if two models are semantically equal
     (the two models recursively have the same attribute values, ignoring the order of the attributes which has
-    no semantic meaning). The following code excerpt compares the semantic equality of
+    no semantic meaning). The following code compares the semantic equality of
     ``model`` and ``model_from_tsv``. Since ``model_from_tsv`` was generated by writing ``model``
-    to tsv files, ``is_equal`` should return ``True``::
+    to tsv files, ``is_equal`` should return ``True``:
 
-        model.is_equal(model_from_tsv)
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: compare the semantic equality of ``model`` and ``model_from_tsv``
+        :lines: 1
+        :dedent: 4
 
     The ``difference`` method produces a textual description of the differences between two models. The following
     code excerpt prints the differences between ``model`` and ``model_from_tsv``. Since they are
-    equal, the differences should be the empty string::
+    equal, the differences should be the empty string:
 
-        model.difference(model_from_tsv)
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: produces a textual description of the differences between two models
+        :lines: 1
+        :dedent: 4
 
 #. Normalize ``model`` into a reproducible order to facilitate reproducible numerical simulations
 
@@ -395,11 +434,20 @@ and using these models:
     models described in ``wc_lang`` can be sensitive to the attribute order. To facilitate reproducible simulation results,
     ``wc_lang`` provides a ``normalize`` to sort models into a reproducible order.
 
-    The following code excerpt will normalize ``model`` into a reproducible order::
+    The following code excerpt will normalize ``model`` into a reproducible order:
 
-        model.normalize()
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: The following code excerpt will normalize ``model`` into a reproducible order
+        :lines: 1
+        :dedent: 4
 
 #. Please see `http://code.karrlab.org <http://code.karrlab.org/>`_ for documentation of the entire ``wc_lang`` API.
+
+
+..
+    # todo: Furthermore, ``obj_model`` automatically creates reverse references for 
+    reference attributes 
 
 ..
     Complete and add this section:
