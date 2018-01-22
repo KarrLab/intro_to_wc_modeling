@@ -17,10 +17,10 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
 
     ################################################################
     ## This code is used by literalinclude commands in wc_lang_tutorial.rst
-    ## It contains many separate examples, each prefixed by comment that delineates the
+    ## It contains many separate examples, each prefixed by a comment that delineates the
     ## start of the example and is used by a start-after option in a literalinclude.
     ## The line before each of these comments is:
-    ##      'Don't change the next comment - it's used by a literalinclude'
+    ##      Don't change the next comment - it's used by a literalinclude
     ## Changes to these comments should be synchronized with changes to wc_lang_tutorial.rst
     ################################################################
 
@@ -28,7 +28,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     results = []
 
     ################################################
-    # 2. Reading and writing models to/from files
+    # Reading and writing models to/from files
     ################################################
 
     model_filename = os.path.join(examples_dir, 'example_model.xlsx')
@@ -57,21 +57,21 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     results.append("read a model from a set of .tsv files: '{}'".format(model_from_tsv.name))
 
     ################################################
-    # 3. Accessing model properties
+    # Accessing model properties
     ################################################
 
     ## Don't change the next comment - it's used by a literalinclude
     # ``wc_lang`` models have many attributes
-    model.id                # a unique identifier
-    model.name              # human readable name
-    model.version           # version number
-    model.taxon             # taxon of the organism being modeled
+    model.id                # the model's unique identifier
+    model.name              # its human readable name
+    model.version           # its version number
+    model.taxon             # the taxon of the organism being modeled
     model.submodels         # a list of the model's submodels
-    model.compartments      # the model's compartments
-    model.species_types     # its species types
-    model.parameters        # its parameters
-    model.references        # publication sources for the model instance
-    model.cross_references  # database sources for the model instance
+    model.compartments      # "  "   "  the model's compartments
+    model.species_types     # "  "   "  its species types
+    model.parameters        # "  "   "  its parameters
+    model.references        # "  "   "  publication sources for the model instance
+    model.cross_references  # "  "   "  database sources for the model instance
 
     results.append("referenced model attributes")
 
@@ -100,11 +100,11 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     results.append("get_reactions entry 0: '{}'".format(reaction_identification[0]))
 
     #################################################
-    # 4. Building models and editing model properties
+    # Building models and editing model properties
     #################################################
 
     ## Don't change the next comment - it's used by a literalinclude
-    # The following illustrates how to build a simple model programmatically
+    # The following illustrates how to program a trivial model
     # create a model with one submodel and one compartment
     prog_model = wc_lang.core.Model(id='programmatic_model', name='Programmatic model')
 
@@ -119,22 +119,37 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     h2o = wc_lang.core.SpeciesType(id='h2o', name='H2O', model=prog_model)
     h = wc_lang.core.SpeciesType(id='h', name='H+', model=prog_model)
 
-    # create an 'ATP hydrolysis' reaction with 2 reactants and 3 products
+    # create an 'ATP hydrolysis' reaction that uses these species types
     atp_hydrolysis = wc_lang.core.Reaction(id='atp_hydrolysis', name='ATP hydrolysis')
+
+    # add two reactants, which have negative stoichiometric coefficients
     atp_hydrolysis.participants.create(
         species=wc_lang.core.Species(species_type=atp, compartment=cytosol), coefficient=-1)
     atp_hydrolysis.participants.create(
         species=wc_lang.core.Species(species_type=h2o, compartment=cytosol), coefficient=-1)
+
+    # add three products, with positive stoichiometric coefficients
     atp_hydrolysis.participants.create(
         species=wc_lang.core.Species(species_type=adp, compartment=cytosol), coefficient=1)
     atp_hydrolysis.participants.create(
         species=wc_lang.core.Species(species_type=pi, compartment=cytosol), coefficient=1)
     atp_hydrolysis.participants.create(
         species=wc_lang.core.Species(species_type=h, compartment=cytosol), coefficient=1)
-    # The previous illustrates how to build a simple model programmatically
+    # The previous illustrates how to program a trivial model
     ## Don't change the previous comment - it's used by a literalinclude
 
     results.append("created model: '{}'".format(prog_model.name))
+
+    ## Don't change the next comment - it's used by a literalinclude
+    # so that this assertion holds
+    assert(atp in prog_model.get_species_types())
+
+    ## Don't change the next comment - it's used by a literalinclude
+    # these assertions hold
+    # 5 participants were added to the reaction
+    assert(len(atp_hydrolysis.participants) == 5)
+    first_reaction_participant = atp_hydrolysis.participants[0]
+    assert(first_reaction_participant.reactions[0] is atp_hydrolysis)
 
     ## Don't change the next comment - it's used by a literalinclude
     # The attribues that can be initialized when a ``wc_lang.BaseModel`` class is instantiated
@@ -149,7 +164,18 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     atp_hydrolysis.reversible = False
 
     #################################################
-    # 5. Completing and validating models
+    # Viewing Models and their attributes
+    #################################################
+
+    # pprint example
+    atp_hydrolysis.participants[0].pprint(max_depth=1)
+
+    #################################################
+    # Finding model components
+    #################################################
+
+    #################################################
+    # Completing and validating models
     #################################################
 
     ## Don't change the next comment - it's used by a literalinclude
@@ -159,11 +185,11 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     rv = prog_model.validate()
     results.append("validate model: '{}'".format(rv))
 
-    # print(atp_hydrolysis.participants[0])
-    # TODO: make this work print(atp_hydrolysis.participants[0].reaction)
+    # TODO: make this work: print(atp_hydrolysis.participants[0].reaction)
+    # TODO: make this work: print('len(atp_hydrolysis.participants)', len(atp_hydrolysis.participants))
 
     #################################################
-    # 6. Comparing and differencing models
+    # Comparing and differencing models
     #################################################
 
     ## Don't change the next comment - it's used by a literalinclude
@@ -175,7 +201,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     assert(model.difference(model_from_tsv) == '')
 
     #################################################
-    # 7. Normalizing models into a reproducible order
+    # Normalizing models into a reproducible order
     #################################################
 
     ## Don't change the next comment - it's used by a literalinclude

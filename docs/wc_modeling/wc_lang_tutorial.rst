@@ -204,39 +204,40 @@ and using these models:
 
 #. Install the tutorial and the whole-cell packages that it uses:
 
-.. code-block:: bash
+    .. code-block:: bash
 
-    git clone https://github.com/KarrLab/intro_to_wc_modeling.git
-    pip install --upgrade \
-        ipython \
-        git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang \
-        git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils
+        git clone https://github.com/KarrLab/intro_to_wc_modeling.git
+        pip install --upgrade \
+            ipython \
+            git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang \
+            git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils
 
 #. Change to the directory for this tutorial:
 
-.. code-block:: bash
+    .. code-block:: bash
 
-    cd intro_to_wc_modeling/intro_to_wc_modeling/wc_modeling/wc_lang_tutorial
+        cd intro_to_wc_modeling/intro_to_wc_modeling/wc_modeling/wc_lang_tutorial
 
 #. Open an interactive python interpreter:
 
-.. code-block:: bash
+    .. code-block:: bash
 
-    ipython
+        ipython
 
 #. Import the ``os`` and ``wc_lang.io`` modules::
 
     import os
     import wc_lang.io
 
-#. Read a model from an Excel file
+#. Read and write models in Excel and delimited files
 
     ``wc_lang`` can read and write models from specially formatted Excel workbooks in which each worksheet represents
     one of the model component classes above, each row
     represents a class instance, each column represents an instance attribute, each cell represents the value of an attribute of an
     instance, and string identifiers are used to indicate relationships among objects.
+    ``wc_lang`` can also read and write models from a specially formatted sets of delimiter-separated files.
 
-    In addition to defining a model, these Excel files should contain all of the annotation needed to understand the biological semantic meaning of
+    In addition to defining a model, files that define models should contain all of the annotation needed to understand the biological semantic meaning of
     the model. Ideally, this should include:
 
     * NCBI Taxonomy ID for the taxon
@@ -264,10 +265,11 @@ and using these models:
     a concentration that refers to a species type that is not defined), this operation
     will raise an exception which contains a list of all of the errors in the model definition.
 
-    ``wc_lang`` can also read and write a model from a specially formatted set of delimiter-separated files.
-    ``wc_lang`` uses filename glob patterns to indicate sets of delimited files. The supported delimiters
-    are *commas* for .csv files and *tabs* for .tsv files. These files use the same
-    format as the Excel workbook format, except that each worksheet is saved as a separate file.
+    To name a model stored in a set of delimiter-separated files,
+    ``wc_lang`` uses a filename `glob pattern <https://docs.python.org/3/library/glob.html>`_
+    that matches the files in the set. The supported delimiters
+    are *commas* in .csv files and *tabs* in .tsv files. These files use the same
+    format as the Excel workbook format, except that each worksheet is stored as a separate file.
     Excel workbooks are easier to read and edit interactively,
     but changes to delimiter-separated files can be tracked in code version control systems such as Git.
 
@@ -278,6 +280,24 @@ and using these models:
         :start-after: This example illustrates how to write a model to a set of .tsv files
         :lines: 1-3
         :dedent: 4
+
+    The glob pattern in ``model_filename_pattern`` matches these files::
+
+        example_model-Biomass components.tsv
+        example_model-Biomass reactions.tsv
+        example_model-Compartments.tsv
+        example_model-Concentrations.tsv
+        example_model-Cross references.tsv
+        example_model-Model.tsv
+        example_model-Parameters.tsv
+        example_model-Rate laws.tsv
+        example_model-Reactions.tsv
+        example_model-References.tsv
+        example_model-Species types.tsv
+        example_model-Submodels.tsv
+        example_model-Taxon.tsv
+
+    in ``examples_dir``, each of which contains a component of the model.
 
     Continuing the previous example, this command reads this set of .tsv files into a model:
 
@@ -325,21 +345,68 @@ and using these models:
 
     You can also use the classes and methods in ``wc_lang.core`` to programmatically build and edit models.
     While modelers typically will not create models programmatically, creating model components
-    in this way gives you a feeling for how models are built.
+    in this way gives you a feeling for how models are built and will .
 
-    The following illustrates how to build a simple model programmatically:
+    The following illustrates how to program a trivial model with 1 compartment, 5 species types and one reaction:
 
     .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
         :language: Python
-        :start-after: The following illustrates how to build a simple model programmatically
-        :end-before: The previous illustrates how to build a simple model programmatically
+        :start-after: The following illustrates how to program a trivial model
+        :end-before: The previous illustrates how to program a trivial model
         :dedent: 4
+
+    In this example ``wc_lang.core.SpeciesType(id='atp', name='ATP', model=prog_model)`` instantiates a
+    ``SpeciesType`` instance with two string attributes and a ``model`` attribute that references an
+    existing model. In addition, this
+    expression adds the new ``SpeciesType`` to the model's species types, thereby showing
+    how ``obj_model``'s underlying functionality automatically creates bi-directional references
+    that make it easy to build and navigate ``wc_lang`` models, and making this assertion hold:
+
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: so that this assertion holds
+        :lines: 1
+        :dedent: 4
+
+    The example above illustrates another way to create and connect model components. Consider the expression::
+
+        atp_hydrolysis.participants.create(
+            species=wc_lang.core.Species(species_type=atp, compartment=cytosol), coefficient=-1)
+
+    ``participants`` is a
+    `Reaction <https://207-73089754-gh.circle-artifacts.com/0/docs/source/wc_lang.html#wc_lang.core.Reaction>`_
+    instance attribute that stores a list of
+    `ReactionParticipant <https://207-73089754-gh.circle-artifacts.com/0/docs/source/wc_lang.html#wc_lang.core.ReactionParticipant>`_
+    objects. In this expression ``create`` takes keyword arguments for the parameters used to instantiate a
+    ``ReactionParticipant``, instantiates a ``ReactionParticipant``, and appends it to the list
+    in ``atp_hydrolysis.participants``. These assertions hold after the 5 participants are added to
+    the ATP hydrolysis reaction:
+
+    ..
+        # todo: need more permanent links to documentation elements
+
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: these assertions hold
+        :lines: 1-4
+        :dedent: 4
+
+    In general, the ``create`` method can be used to add model components to lists of related
+    ``wc_lang.BaseModel`` objects. ``create`` takes keyword arguments and uses them to
+    initialize the attributes of the component created.
+    Thus, if ``obj`` has an attribute ``attr`` that stores a list of
+    references to components of type ``X``, this expression will create an instance of ``X`` and
+    append it to the list::
+
+        obj.attr.create(**kwargs)
+
+    This simplifies model construction by avoiding creation of unnecessary identifiers for these components.
 
     Similar code can be used to create any part of a model. All ``wc_lang`` objects that are subclassed from
     ``wc_lang.BaseModel`` (an alias for ``obj_model.core.Model``) can be instantiated in the normal fashion,
     as shown for ``Model``, ``Submodel``, ``Compartment``, ``SpeciesType`` and ``Reaction`` above.
     Each subclass of ``wc_lang.BaseModel`` contains a ``Meta`` attribute that is a class which
-    stores meta information about the subclass. 
+    stores meta information about the subclass.
     The attributes that can be initialized when a ``wc_lang.BaseModel`` class is instantiated can be
     obtained from the class' ``Meta`` attribute, which is a dictionary that maps from attribute name to attribute instance:
 
@@ -362,9 +429,66 @@ and using these models:
         :lines: 1-2
         :dedent: 4
 
-    In addition, the ``create`` method can be used to add elements to lists of related ``wc_lang.BaseModel``
-    objects, as illustrated by ``atp_hydrolysis.participants.create()`` above. This avoids creating
-    unnecessary identifiers.
+#. Viewing Models and their attributes
+
+    All ``wc_lang.BaseModel`` instances can be viewed with ``pprint()``, which outputs an indented
+    representation that shows the attributes of a model, and indents and outputs connected models.
+    To constrain the size of its output
+    ``pprint()`` outputs the graph of interconnected models to a depth of ``max_depth``, which
+    defaults to 3.
+    Model nodes at depth ``max_depth+1`` are represented by ``<class name>: ...``, while deeper models
+    are not traversed. And models re-encountered by ``pprint()`` are elided by
+    ``<attribute name>: --``.
+    For example, after creating the reaction ``atp_hydrolysis`` above this expression
+
+    .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
+        :language: Python
+        :start-after: pprint example
+        :lines: 1
+        :dedent: 4
+
+    creates this output::
+
+        ReactionParticipant:
+           species:
+              Species:
+                 species_type:
+                    SpeciesType: ...
+                 compartment:
+                    Compartment: ...
+                 concentration: None
+                 rate_law_equations:
+                 reaction_participants:
+           coefficient: -1
+           reactions:
+              Reaction:
+                 id: atp_hydrolysis
+                 name: ATP hydrolysis
+                 submodel: None
+                 participants:
+                    ReactionParticipant: ...
+                    ReactionParticipant: ...
+                    ReactionParticipant: ...
+                    ReactionParticipant: ...
+                 reversible: False
+                 min_flux: nan
+                 max_flux: nan
+                 comments: example comments
+                 references:
+                 cross_references:
+                 objective_functions:
+                 rate_laws:
+
+    This shows that the first ``ReactionParticipant`` in ``atp_hydrolysis`` has the attributes
+    species, coefficient,
+    and reactions, that the coefficient is -1, and that reactions is a list with one element which is
+    the ``atp_hydrolysis`` reaction itself.
+
+    ..
+        # todo:
+        #. Finding model components
+
+            In addition to being accessed via direct references, model components can be found by a search API.
 
 #. Validating a programmatically generated Model
 
