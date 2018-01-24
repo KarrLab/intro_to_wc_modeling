@@ -6,10 +6,7 @@
 :License: MIT
 """
 
-import matplotlib
-# select a supported matplotlib backend if necessary
-# matplotlib.use('Agg')
-import matplotlib.pyplot
+from matplotlib import pyplot
 import numpy
 import scipy.integrate
 import os
@@ -83,21 +80,21 @@ def main():
     conc_hist = scipy.integrate.odeint(d_conc_d_t, init_concs, time_hist)
 
     # plot results
-    line_cyclin, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 0], 'b-', label='Cyclin')
-    line_cdc2, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 1], 'r-', label='Cdc2')
-    line_cyclin_protease, = matplotlib.pyplot.plot(time_hist, conc_hist[:, 2], 'g-', label='Protease')
-    matplotlib.pyplot.legend([line_cyclin, line_cdc2, line_cyclin_protease], ['Cyclin', 'Cdc2', 'Protease'])
-    matplotlib.pyplot.xlim(0, time_max)
-    matplotlib.pyplot.xlabel('Time (min)')
-    matplotlib.pyplot.ylabel('Cyclin concentration and fraction of\nactive Cdc2 and cyclin protease')
-    matplotlib.pyplot.gca().spines['top'].set_visible(False)
-    matplotlib.pyplot.gca().spines['right'].set_visible(False)
+    line_cyclin, = pyplot.plot(time_hist, conc_hist[:, 0], 'b-', label='Cyclin')
+    line_cdc2, = pyplot.plot(time_hist, conc_hist[:, 1], 'r-', label='Cdc2')
+    line_cyclin_protease, = pyplot.plot(time_hist, conc_hist[:, 2], 'g-', label='Protease')
+    pyplot.legend([line_cyclin, line_cdc2, line_cyclin_protease], ['Cyclin', 'Cdc2', 'Protease'])
+    pyplot.xlim(0, time_max)
+    pyplot.xlabel('Time (min)')
+    pyplot.ylabel('Cyclin concentration and fraction of\nactive Cdc2 and cyclin protease')
+    pyplot.gca().spines['top'].set_visible(False)
+    pyplot.gca().spines['right'].set_visible(False)
 
     # display figure
-    # matplotlib.pyplot.show()
+    # pyplot.show()
 
     # save figure
     filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs',
                             'cell_modeling', 'simulation', 'ode-results.png')
-    matplotlib.pyplot.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close()
+    pyplot.savefig(filename, transparent=True, bbox_inches='tight')
+    pyplot.close()

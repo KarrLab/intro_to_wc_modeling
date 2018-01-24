@@ -6,15 +6,9 @@
 :License: MIT
 """
 
-import matplotlib
+from matplotlib import pyplot
 import numpy
 import os
-
-# set backend
-matplotlib.use('Agg')  # for non-interactive usage, e.g. on servers
-# matplotlib.use('TkAgg') # for GUI display
-
-from matplotlib import pyplot
 
 
 def main():

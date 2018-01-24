@@ -5,12 +5,10 @@ Analysis utility functions
 @date 3/26/2016
 '''
 
-import matplotlib
-matplotlib.use('Agg')
-
 from intro_to_wc_modeling.cell_modeling.simulation.multi_algorithm.model import Model, Submodel
 from intro_to_wc_modeling.cell_modeling.simulation.multi_algorithm.util import N_AVOGADRO
-from matplotlib import pyplot, ticker
+from matplotlib import pyplot
+from matplotlib import ticker
 import numpy as np
 import re
 

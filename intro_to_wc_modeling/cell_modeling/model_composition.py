@@ -10,15 +10,11 @@
 :License: MIT
 """
 
-import matplotlib
-# matplotlib.use('TkAgg')
-matplotlib.use('Agg')
-
 from scipy.integrate import odeint
 from matplotlib import pyplot
+import matplotlib
 import numpy
 import os
-
 
 
 class GlycolysisModel(object):
@@ -741,7 +737,7 @@ def main(out_dir=None):
     # pyplot.show(block=False)
     filename = os.path.join(out_dir, 'glycolysis-model.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close(fig)
+    pyplot.close(fig)
 
     # simulate the glycerol model
     glycerol_model = GlycerolModel()
@@ -750,7 +746,7 @@ def main(out_dir=None):
     # pyplot.show(block=False)
     filename = os.path.join(out_dir, 'glycerol-model.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close(fig)
+    pyplot.close(fig)
 
     # simulate merged model
     merged_model = MergedModel()
@@ -777,4 +773,4 @@ def main(out_dir=None):
     # pyplot.show(block=False)
     filename = os.path.join(out_dir, 'merged-model.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close(fig)
+    pyplot.close(fig)

@@ -6,17 +6,15 @@
 :License: MIT
 """
 
-import matplotlib
-import numpy
-import os
-# matplotlib.use('TkAgg')
-matplotlib.use('Agg')
 from matplotlib import colors
 from matplotlib import pyplot
 from numpy import linalg
 from scipy import integrate
 from scipy import optimize
 from scipy import stats
+import matplotlib
+import numpy
+import os
 
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs', 'cell_modeling', 'simulation')
@@ -300,7 +298,7 @@ def deterministic_exercise():
     # fig.show()
     filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-deterministic-vector-field.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close(fig)
+    pyplot.close(fig)
 
     ##########################################################
     # Calculate the Jacobian
@@ -321,7 +319,7 @@ def deterministic_exercise():
     # fig.show()
     filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-deterministic-simulation.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close(fig)
+    pyplot.close(fig)
 
 
 class CmeSimulation(object):
@@ -634,7 +632,7 @@ def probability_distribution_exercise():
     # fig.show()
     filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-probability-distribution-simulation.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close(fig)
+    pyplot.close(fig)
 
     ##########################################################
     # Calculate the steady state
@@ -651,7 +649,7 @@ def probability_distribution_exercise():
     # fig.show()
     filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-probability-distribution-steady-state.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close(fig)
+    pyplot.close(fig)
 
 
 class SsaSimulation(object):
@@ -986,7 +984,7 @@ def trajectory_exercise():
     # fig.show()
     filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-trajectory-simulation.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close(fig)
+    pyplot.close(fig)
 
     ##########################################################
     # Simulate several trajectories
@@ -1000,7 +998,7 @@ def trajectory_exercise():
     # fig.show()
     filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-trajectory-simulations.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close(fig)
+    pyplot.close(fig)
 
     ##########################################################
     # Plot the average of multiple trajectories
@@ -1009,10 +1007,10 @@ def trajectory_exercise():
     # fig.show()
     filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-trajectory-average.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close(fig)
+    pyplot.close(fig)
 
     fig = sim.plot_mrna_protein_distribution(m, n)
     # fig.show()
     filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-trajectory-histogram.png')
     fig.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close(fig)
+    pyplot.close(fig)

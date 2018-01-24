@@ -6,9 +6,7 @@
 :License: MIT
 """
 
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot
+from matplotlib import pyplot
 import numpy
 import os
 
@@ -98,25 +96,25 @@ def main():
             float(i_sim) / (float(n_simulations) - 1.) / 2,
             float(i_sim) / (float(n_simulations) - 1.) / 2,
         )
-        matplotlib.pyplot.plot(time_hist, copy_number_hist[:, i_sim], linestyle='-', color=color, linewidth=0.5)
+        pyplot.plot(time_hist, copy_number_hist[:, i_sim], linestyle='-', color=color, linewidth=0.5)
 
-    matplotlib.pyplot.fill_between(time_hist,
+    pyplot.fill_between(time_hist,
         numpy.mean(copy_number_hist, 1) - numpy.std(copy_number_hist, 1),
         numpy.mean(copy_number_hist, 1) + numpy.std(copy_number_hist, 1),
         facecolor=(1, 0, 0, 0.5))
-    matplotlib.pyplot.plot(time_hist, numpy.mean(copy_number_hist, 1), linestyle='-', color='r', linewidth=3)
+    pyplot.plot(time_hist, numpy.mean(copy_number_hist, 1), linestyle='-', color='r', linewidth=3)
 
-    matplotlib.pyplot.xlim(0, time_max)
-    matplotlib.pyplot.xlabel('Time (s)')
-    matplotlib.pyplot.ylabel('Copy number')
-    matplotlib.pyplot.gca().spines['top'].set_visible(False)
-    matplotlib.pyplot.gca().spines['right'].set_visible(False)
+    pyplot.xlim(0, time_max)
+    pyplot.xlabel('Time (s)')
+    pyplot.ylabel('Copy number')
+    pyplot.gca().spines['top'].set_visible(False)
+    pyplot.gca().spines['right'].set_visible(False)
 
     # display figure
-    # matplotlib.pyplot.show()
+    # pyplot.show()
 
     # save figure
     filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs',
                             'cell_modeling', 'simulation', 'stochastic-results.png')
-    matplotlib.pyplot.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close()
+    pyplot.savefig(filename, transparent=True, bbox_inches='tight')
+    pyplot.close()

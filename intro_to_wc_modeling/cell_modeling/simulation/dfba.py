@@ -7,11 +7,7 @@
 :License: MIT
 """
 
-import matplotlib
-# select a supported matplotlib backend if necessary
-matplotlib.use('Agg')  # for non-interactive usage, e.g. on servers
-# matplotlib.use('TkAgg') # for GUI display
-import matplotlib.pyplot
+from matplotlib import pyplot
 import numpy
 import optlang
 import os
@@ -116,19 +112,19 @@ def main(init_concs=None):
     plot_labels = ['Glucose', 'Amino acid', 'Biomass']
     lines = []
     for observable, plot_label in zip(observables, plot_labels):
-        lines.append(matplotlib.pyplot.plot(time_hist, conc_hist[observable], '-', label=plot_label)[0])
-    matplotlib.pyplot.legend(lines, plot_labels)
-    matplotlib.pyplot.xlim(0, time_max)
-    matplotlib.pyplot.xlabel('Time (s)')
-    matplotlib.pyplot.ylabel('Concentration')
-    matplotlib.pyplot.gca().spines['top'].set_visible(False)
-    matplotlib.pyplot.gca().spines['right'].set_visible(False)
+        lines.append(pyplot.plot(time_hist, conc_hist[observable], '-', label=plot_label)[0])
+    pyplot.legend(lines, plot_labels)
+    pyplot.xlim(0, time_max)
+    pyplot.xlabel('Time (s)')
+    pyplot.ylabel('Concentration')
+    pyplot.gca().spines['top'].set_visible(False)
+    pyplot.gca().spines['right'].set_visible(False)
 
     # display figure
-    # matplotlib.pyplot.show()
+    # pyplot.show()
 
     # save figure
     filename = os.path.join(os.path.dirname(__file__), '..', '..', '..', 'docs',
                             'cell_modeling', 'simulation', 'dfba-results.png')
-    matplotlib.pyplot.savefig(filename, transparent=True, bbox_inches='tight')
-    matplotlib.pyplot.close()
+    pyplot.savefig(filename, transparent=True, bbox_inches='tight')
+    pyplot.close()

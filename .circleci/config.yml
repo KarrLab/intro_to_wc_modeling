@@ -3,15 +3,15 @@ jobs:
   build:
     working_directory: /root/project
     docker:
-      - image: karrlab/build:0.0.18
+      - image: karrlab/build:0.0.21
     steps:
       - checkout
       
       - restore_cache:
           keys:
-            - cache-v8-{{ .Branch }}-{{ checksum "requirements.txt" }}
-            - cache-v8-{{ .Branch }}-
-            - cache-v8-
+            - cache-v9-{{ .Branch }}-{{ checksum "requirements.txt" }}
+            - cache-v9-{{ .Branch }}-
+            - cache-v9-
 
       - run: pip2 install -U --process-dependency-links git+https://github.com/KarrLab/pkg_utils.git#egg=pkg_utils
       - run: pip2 install -U --process-dependency-links git+https://github.com/KarrLab/karr_lab_build_utils.git#egg=karr_lab_build_utils
@@ -20,7 +20,7 @@ jobs:
       - run: pip3 install -U --process-dependency-links git+https://github.com/KarrLab/karr_lab_build_utils.git#egg=karr_lab_build_utils
       
       - save_cache:
-          key: cache-v8-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          key: cache-v9-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - /usr/local/lib/python2.7/site-packages
             - /usr/local/lib/python3.6/site-packages
