@@ -636,8 +636,8 @@ class RateLaw(object):
                 self.transcoded = self.transcoded.replace(id, "speciesConcentrations['%s']" % id)
 
 
-class CrossReference(object):
-    # Represents a cross reference to an external database
+class DatabaseReference(object):
+    # Represents a database reference to an external database
 
     source = ''
     id = ''
@@ -708,7 +708,7 @@ def getModelFromExcel(filename):
                 Concentration(compartment='e', value=float(ws.cell(row=iRow, column=9).value or 0)),
             ],
             crossRefs=[
-                CrossReference(
+                DatabaseReference(
                     source=ws.cell(row=iRow, column=10).value,
                     id=ws.cell(row=iRow, column=11).value,
                 ),
@@ -739,7 +739,7 @@ def getModelFromExcel(filename):
             vmax=ws.cell(row=iRow, column=7).value,
             km=ws.cell(row=iRow, column=8).value,
             crossRefs=[
-                CrossReference(
+                DatabaseReference(
                     source=ws.cell(row=iRow, column=9).value,
                     id=ws.cell(row=iRow, column=10).value,
                 ),
@@ -766,7 +766,7 @@ def getModelFromExcel(filename):
             id=str(ws.cell(row=iRow, column=1).value),
             name=ws.cell(row=iRow, column=2).value,
             crossRefs=[
-                CrossReference(
+                DatabaseReference(
                     source=ws.cell(row=iRow, column=3).value,
                     id=ws.cell(row=iRow, column=4).value,
                 ),

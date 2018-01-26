@@ -44,7 +44,7 @@ follow the relationships between ``obj_model.core.Model`` instances anywhere in 
 A ``wc_lang`` model also supports some metadata.
 Named ``Parameter`` entities store arbitrary values, such as input parameters.
 Published data sources used by a model should be recorded in ``Reference`` entities,
-or in a ``CrossReference`` objects that identify a biological or chemical database.
+or in a ``DatabaseReference`` objects that identify a biological or chemical database.
 
 ``wc_lang`` models are typically used to describe the initial state of a model -- a ``wc_lang``
 description lacks any notion of time.
@@ -187,7 +187,7 @@ These classes record the sources of a model's data.
 ``Reference``
     A ``Reference`` holds a reference to a publication that contains data used in the model.
 
-``CrossReference``
+``DatabaseReference``
     A ``Reference`` describes a biological or chemical database that provided data for the model.
 
 
@@ -287,7 +287,7 @@ and using these models:
         example_model-Biomass reactions.tsv
         example_model-Compartments.tsv
         example_model-Concentrations.tsv
-        example_model-Cross references.tsv
+        example_model-database references.tsv
         example_model-Model.tsv
         example_model-Parameters.tsv
         example_model-Rate laws.tsv
@@ -475,7 +475,7 @@ and using these models:
                  max_flux: nan
                  comments: example comments
                  references:
-                 cross_references:
+                 database_references:
                  objective_functions:
                  rate_laws:
 

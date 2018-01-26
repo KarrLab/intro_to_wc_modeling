@@ -71,7 +71,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     model.species_types     # "  "   "  its species types
     model.parameters        # "  "   "  its parameters
     model.references        # "  "   "  publication sources for the model instance
-    model.cross_references  # "  "   "  database sources for the model instance
+    model.database_references  # "  "   "  database sources for the model instance
 
     results.append("referenced model attributes")
 
