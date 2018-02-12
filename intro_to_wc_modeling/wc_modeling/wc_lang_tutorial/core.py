@@ -45,10 +45,9 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     # This example illustrates how to write a model to a set of .tsv files
     # 'examples_dir' is a directory
     model_filename_pattern = os.path.join(examples_dir, 'example_model-*.tsv')
-    wc_lang.io.Writer().run(model_filename_pattern, model)
+    wc_lang.io.Writer().run(model, model_filename_pattern)
 
-    rv = wc_lang.io.Writer().run(model_filename_pattern, model)
-    results.append("write a model to a set of .tsv files: '{}'".format(rv))
+    results.append("write a model to a set of .tsv files: '{}'".format(model_filename_pattern))
 
     ## Don't change the next comment - it's used by a literalinclude
     # This example illustrates how to read a model from a set of .tsv files
