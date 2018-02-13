@@ -15,5 +15,5 @@ sphinxcontrib_bibtex
 sphinxcontrib_spelling
 sqlalchemy
 sympy
-# git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang-0.0.1  # wc modeling language
+git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang-0.0.1  # wc modeling language
 git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils-0.0.1a5  # wc modeling utilities
