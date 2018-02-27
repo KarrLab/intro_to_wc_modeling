@@ -114,21 +114,17 @@ Detailed instructions to install the tutorials and all of the requirements
 
         #. Install CPLEX::
 
-            chmod ugo+x cplex_studio12.7.1.linux-x86-64.bin
-            ./cplex_studio12.7.1.linux-x86-64.bin
+            chmod ugo+x cplex_studio128.linux-x86-64.bin
+            ./cplex_studio128.linux-x86-64.bin
 
         #. Install the Python binding::
 
             # Python 2.7
-            cd /opt/ibm/ILOG/CPLEX_Studio1271/cplex/python/2.7/x86-64_linux/
+            cd /opt/ibm/ILOG/CPLEX_Studio128/cplex/python/2.7/x86-64_linux/
             pip2.7 install .
 
-            # Python 3.6 -- Note, as of 11/2017 CPLEX doesn't natively support Python 3.6,
-            # but CPLEX can be used on Python 3.6 by editing three files as shown below
-            cp -r /opt/ibm/ILOG/CPLEX_Studio1271/cplex/python/3.5 /opt/ibm/ILOG/CPLEX_Studio1271/cplex/python/3.6
-            cd /opt/ibm/ILOG/CPLEX_Studio1271/cplex/python/3.6/x86-64_linux/
-            sed -i 's/version_info < (3, 6, 0)/version_info < (3, 7, 0)/g' setup.py
-            sed -i 's/version_info < (3, 6, 0)/version_info < (3, 7, 0)/g' cplex/_internal/_pycplex_platform.py
+            # Python 3.6
+            cd /opt/ibm/ILOG/CPLEX_Studio128/cplex/python/3.6/x86-64_linux/
             pip3.6 install .
 
     #. Optionally, install the COIN-OR Cbc optimization package and the CyLP Python binding::
@@ -176,23 +172,23 @@ Detailed instructions to install the tutorials and all of the requirements
         #. Install Gurobi::
 
             apt-get install
-            wget http://packages.gurobi.com/7.5/gurobi7.5.1_linux64.tar.gz
-            tar xvfz gurobi7.5.1_linux64.tar.gz
-            mv gurobi751 /opt/
+            wget http://packages.gurobi.com/7.5/gurobi7.5.2_linux64.tar.gz
+            tar xvfz gurobi7.5.2_linux64.tar.gz
+            mv gurobi752 /opt/
 
             echo "" >> ~/.bashrc
             echo "# Gurobi" >> ~/.bashrc
-            echo "export GUROBI_HOME=/opt/gurobi751/linux64" >> ~/.bashrc
+            echo "export GUROBI_HOME=/opt/gurobi752/linux64" >> ~/.bashrc
             echo "export PATH=\"\${PATH}:\${GUROBI_HOME}/bin\"" >> ~/.bashrc
             echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:\${GUROBI_HOME}/lib\"" >> ~/.bashrc
 
         #. Use your license to activate Gurobi::
 
-            /opt/gurobi751/linux64/bin/grbgetkey "<license>"
+            /opt/gurobi752/linux64/bin/grbgetkey "<license>"
 
         #. Install the Python binding::
 
-            cd /opt/gurobi751/linux64
+            cd /opt/gurobi752/linux64
             python setup.py install
 
     #. Optionally, install the MOSEK optimization package and the Mosek Python binding
@@ -203,7 +199,7 @@ Detailed instructions to install the tutorials and all of the requirements
         #. Install Mosek::
 
             cd /tmp
-            wget --no-check-certificate https://d2i6rjz61faulo.cloudfront.net/stable/8.1.0.33/mosektoolslinux64x86.tar.bz2
+            wget --no-check-certificate https://d2i6rjz61faulo.cloudfront.net/stable/8.1.0.37/mosektoolslinux64x86.tar.bz2
             tar -xvvf mosektoolslinux64x86.tar.bz2
             mv /tmp/mosek /opt/
 
@@ -254,20 +250,20 @@ Detailed instructions to install the tutorials and all of the requirements
         #. Download and unpack XPRESS::
 
             cd /tmp
-            wget --no-check-certificate https://clientarea.xpress.fico.com/downloads/8.4.0/xp8.4.0_linux_x86_64_setup.tar
-            mkdir xp8.4.0_linux_x86_64_setup
-            tar -xvvf xp8.4.0_linux_x86_64_setup.tar -C xp8.4.0_linux_x86_64_setup
+            wget --no-check-certificate https://clientarea.xpress.fico.com/downloads/8.4.4/xp8.4.4_linux_x86_64_setup.tar
+            mkdir xp8.4.4_linux_x86_64_setup
+            tar -xvvf xp8.4.4_linux_x86_64_setup.tar -C xp8.4.4_linux_x86_64_setup
 
         #. Get your host id::
 
-            cd /tmp/xp8.4.0_linux_x86_64_setup
+            cd /tmp/xp8.4.4_linux_x86_64_setup
             utils/xphostid | grep -m 1 "<id>" | cut -d ">" -f 2 | cut -d "<" -f 1
 
         #. Use your host id to create a license at `https://app.xpress.fico.com <https://app.xpress.fico.com>`_
         #. Save the license to `/tmp/xpauth.xpr`
         #. Install XPRESS. Note, the standard library directory needs to be added to the library path to prevent the OS from using the versions of libcrypto and libssl provided by XPRESS.::
 
-            cd /tmp/xp8.4.0_linux_x86_64_setup
+            cd /tmp/xp8.4.4_linux_x86_64_setup
             ./install.sh
 
             echo "" >> ~/.bashrc
@@ -288,7 +284,7 @@ Detailed instructions to install the tutorials and all of the requirements
                 # Python 3.6
                 echo "/opt/xpressmp/lib" | tee /usr/local/lib/python3.6/site-packages/xpress.pth
 
-            * Save the following package meta data to `/usr/local/lib/python2.7/site-packages/xpress-8.4.0.egg-info` for Python 2.7 and/or `/usr/local/lib/python3.6/site-packages/xpress-8.4.0.egg-info` for Python 3.6::
+            * Save the following package meta data to `/usr/local/lib/python2.7/site-packages/xpress-8.4.4.egg-info` for Python 2.7 and/or `/usr/local/lib/python3.6/site-packages/xpress-8.4.4.egg-info` for Python 3.6::
 
                 Metadata-Version: 1.0
                 Name: xpress
