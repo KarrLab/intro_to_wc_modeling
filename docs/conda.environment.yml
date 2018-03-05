@@ -1,0 +1,21 @@
+name: docs
+channels:
+  - conda-forge
+  - SBMLTeam
+  - sys-bio
+  - openbabel
+  - defaults
+dependencies:
+  - libsedml
+  - openbabel
+  - pip
+  - pygit2
+  - python>=3.6.4
+  - python-libsbml
+  - sphinx
+  - pip:
+    - configparser
+    - sphinx_rtd_theme
+    - robpol86_sphinxcontrib_googleanalytics
+    - sphinxcontrib_bibtex
+    - sphinxcontrib_spelling
