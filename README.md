@@ -1,5 +1,5 @@
 [//]: # ( [![PyPI package](https://img.shields.io/pypi/v/intro_to_wc_modeling.svg)](https://pypi.python.org/pypi/intro_to_wc_modeling) )
-[![Documentation](https://readthedocs.org/projects/intro_to_wc_modeling/badge/?version=latest)](http://intro_to_wc_modeling.readthedocs.org)
+[![Documentation](https://img.shields.io/badge/docs-latest-green.svg)](http://docs.karrlab.org/intro_to_wc_modeling)
 [![Test results](https://circleci.com/gh/KarrLab/intro_to_wc_modeling.svg?style=shield)](https://circleci.com/gh/KarrLab/intro_to_wc_modeling)
 [![Test coverage](https://coveralls.io/repos/github/KarrLab/intro_to_wc_modeling/badge.svg)](https://coveralls.io/github/KarrLab/intro_to_wc_modeling)
 [![Code analysis](https://api.codeclimate.com/v1/badges/b2a33e172ec162ea4b6b/maintainability)](https://codeclimate.com/github/KarrLab/intro_to_wc_modeling)
@@ -10,10 +10,10 @@
 
 This repository provides an introduction to whole-cell (WC) modeling, including a variety of written explanations and interactive tutorials. The goal of this resource is to prepare you to be a productive WC modeler. 
 
-This repository provides the source markup for the text and the source code for the tutorials. Please visit [http://intro-to-wc_modeling.readthedocs.io](http://intro-to-wc_modeling.readthedocs.io) to read the text which guides you through the tutorials.
+This repository provides the source markup for the text and the source code for the tutorials. Please visit [http://docs.karrlab.org/intro_to_wc_modeling](http://docs.karrlab.org/intro_to_wc_modeling) to read the text which guides you through the tutorials.
 
 ## Installation
-Please see [http://intro-to-wc_modeling.readthedocs.io](http://intro-to-wc_modeling.readthedocs.io).
+Please see [http://docs.karrlab.org/intro_to_wc_modeling](http://docs.karrlab.org/intro_to_wc_modeling).
 
 ## License
 This repository is released under the [MIT license](LICENSE).

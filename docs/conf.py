@@ -164,7 +164,7 @@ html_theme_options = {
     'collapse_navigation': False,
     'display_version': True,
     'navigation_depth': 4,
-    'canonical_url': 'http://intro-to-wc-modeling.readthedocs.io/en/latest/',
+    'canonical_url': 'http://docs.karrlab.org/intro_to_wc_modeling',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.

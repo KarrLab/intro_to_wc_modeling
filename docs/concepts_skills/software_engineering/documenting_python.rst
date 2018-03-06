@@ -96,7 +96,7 @@ README
 In addition to this documentation, we also recommend providing a brief README file with each repository and we recommend embedded status badges at the top of this file. These badges can be embedded as shown in the example below::
 
     <!-- [![PyPI package](https://img.shields.io/pypi/v/intro_to_wc_modeling.svg)](https://pypi.python.org/pypi/intro_to_wc_modeling) -->
-    [![Documentation](https://readthedocs.org/projects/karrlab_intro_to_wc_modeling/badge/?version=latest)](http://karrlab_intro_to_wc_modeling.readthedocs.org)
+    [![Documentation](https://img.shields.io/badge/docs-latest-green.svg)](http://docs.karrlab.org/karrlab_intro_to_wc_modeling)
     [![Test results](https://circleci.com/gh/KarrLab/intro_to_wc_modeling.svg?style=shield)](https://circleci.com/gh/KarrLab/intro_to_wc_modeling)
     [![Test coverage](https://coveralls.io/repos/github/KarrLab/intro_to_wc_modeling/badge.svg)](https://coveralls.io/github/KarrLab/intro_to_wc_modeling)
     [![Code analysis](https://codeclimate.com/github/KarrLab/intro_to_wc_modeling/badges/gpa.svg)](https://codeclimate.com/github/KarrLab/intro_to_wc_modeling)
