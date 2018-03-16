@@ -2,7 +2,7 @@
 
 How to build a Ubuntu Linux image with Docker
 =================================================
-Docker images are lightweight virtual machines that can be used to run custom environments on top of other machines. Thus, Docker images are a convenient way to distribute complicated software programs that have numerous dependencies and complicated configurations. We are using Docker images because CircleCI allows users to use Docker images to customize the environment used to execute each build. This makes it much easier to install programs into the environment used by CircleCI to run our builds.
+Docker images are configurable, free-standing computing environments that can be used to create and run custom software on top of an operating system. Unlike virtual machines (VM), images do not contain an operating system. Docker images are a convenient way to distribute complicated software programs that have numerous dependencies and complicated configurations. We are using Docker images because CircleCI allows users to use Docker images to customize the environment used to execute each build. This makes it much easier to install programs into the environment used by CircleCI to run our builds.
 
 Docker images are built by compiling Dockerfiles which are explicit instructions on how to build the image. Importantly, this makes Docker images very transparent.
 
@@ -106,4 +106,6 @@ You can use the ``run`` command to run images::
 
 If no command is provided, then Docker will run the final command in the image's configuration.
 
-Any modifications made to the machine such as installed packages or saved files will not be discarded when the image terminates. When the image is booted up again, the image will start its execution from exactly the same state as all previous executions of the image. This design forces you to use Doxyfiles to explicitly describe image configurations.
+Running a Docker image instantiates a running environment called a container.
+
+Any modifications made to the machine such as installed packages or saved files will not be discarded when the image terminates. When the image is booted up again, the image will start its execution from exactly the same state as the most  recent execution of the image. This design forces you to use Docker files to explicitly describe image configurations.

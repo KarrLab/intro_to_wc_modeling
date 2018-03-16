@@ -490,6 +490,8 @@ and using these models:
 
             In addition to being accessed via direct references, model components can be found by a search API.
 
+        #. Reusing components in multiple create() operations, like reusing Species() in many reactions
+
 #. Validating a programmatically generated Model
 
     The ``wc_lang.core.Model.validate`` method determines whether a model is valid. If
