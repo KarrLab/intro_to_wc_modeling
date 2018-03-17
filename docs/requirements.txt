@@ -1,25 +1,8 @@
-# nested requirements whose sources must be explictly stated for Read the Docs
-git+https://github.com/KarrLab/log.git#egg=log-2016.10.12 # >= 2016.10.12
-git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils-0.0.1a5  # wc modeling utilities
-git+https://github.com/KarrLab/obj_model.git#egg=obj_model-0.0.5
-git+https://github.com/KarrLab/wc_kb.git#egg=wc_kb-0.0.1
-
-capturer
-cement
-cobra
-configparser
+mock
+pip_check_reqs
 robpol86_sphinxcontrib_googleanalytics
-matplotlib
-numpy
-openpyxl
-optlang
-scipy
 six
 sphinx >= 1.7
 sphinx_rtd_theme
 sphinxcontrib_bibtex
 sphinxcontrib_spelling
-sqlalchemy
-sympy
-git+https://github.com/KarrLab/wc_lang.git#egg=wc_lang-0.0.1  # wc modeling language
-git+https://github.com/KarrLab/wc_utils.git#egg=wc_utils-0.0.1a5  # wc modeling utilities
