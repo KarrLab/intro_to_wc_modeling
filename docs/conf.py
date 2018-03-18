@@ -349,6 +349,7 @@ def run_apidoc(app):
 import importlib
 import mock
 import pip_check_reqs.common
+import six
 
 # find packages
 parent_dir = os.path.join(os.path.dirname(__file__), '..')
@@ -367,13 +368,18 @@ import_mods = pip_check_reqs.common.find_imported_modules(options)
 class ModuleMock(mock.MagicMock):
     @classmethod
     def __getattr__(cls, name):
-        return MagicMock()
+        return ModuleMock()
 for import_mod in import_mods.keys():
-    try:
-        importlib.import_module(import_mod)
-    except ImportError:
-        sys.modules.update((import_mod, ModuleMock()))
+    if six.PY2:
+        import imp
+        installed = imp.find_module(import_mod.partition('.')[0]) is not None
+    else:
+        import importlib
+        installed = importlib.util.find_spec(import_mod) is not None
 
+    if not installed:
+        sys.modules.update((import_mod, ModuleMock()))
+        
 
 # -- trigger API doc generation with docs compilation  --------------------
 def setup(app):
