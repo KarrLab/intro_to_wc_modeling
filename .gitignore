@@ -34,3 +34,6 @@ intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/examples/*.tsv
 .idea/
 
 gurobi.log
+
+# temporary LibreOffice files
+.~lock*
