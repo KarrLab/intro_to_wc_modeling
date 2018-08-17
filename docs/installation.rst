@@ -191,7 +191,40 @@ Detailed instructions to install the tutorials and all of the requirements
             cd /opt/gurobi752/linux64
             python setup.py install
 
-    #. Optionally, install the MOSEK optimization package and the Mosek Python binding
+    #. Optionally, install the MINOS optimization package and the MINOS Python binding:
+
+        #. Request an academic license from `Michael Saunders <mailto:saunders@stanford.edu>`_
+        #. Use the following commands to compile MINOS::
+            
+            apt-get install csh gfortran
+            cd /path/to/parent of quadLP.zip
+            unzip quadLP.zip
+            
+            cd quadLP/minos56
+            sed -i 's/FC        = gfortran/FC        = gfortran -fPIC/g' Makefile.defs
+            make clean
+            make
+            cd /tmp/quadLP/minos56/test
+            make minos
+            ./run minos t1diet
+            
+            ../../../quadLP/qminos56
+            sed -i 's/FC        = gfortran/FC        = gfortran -fPIC/g' Makefile.defs
+            make clean
+            make
+            cd /tmp/quadLP/qminos56/test
+            make minos
+            ./run minos t1diet
+
+        #. Use the following commands to install the MINOS Python binding::
+    
+            git clone https://github.com/SBRG/solvemepy.git
+            cd solvemepy
+            cp /path/to/quadLP/minos56/lib/libminos.a ./
+            cp /path/to/quadLP/qminos56/lib/libquadminos.a ./
+            pip install .
+
+    #. Optionally, install the MOSEK optimization package and the Mosek Python binding:
 
         #. Request an academic license at `https://license.mosek.com/academic <https://license.mosek.com/academic>`_
         #. Recieve a license by email
@@ -244,6 +277,30 @@ Detailed instructions to install the tutorials and all of the requirements
                 cd interfaces/python
                 pip install cython numpy
                 python setup.py install
+
+    #. Optionally, install the SoPlex optimization package and the SoPlex Python binding:
+
+        #. Download SoPlex 3.1.1 from `http://soplex.zib.de/#download <http://soplex.zib.de/#download>`_
+        #. Use the following commands to install SoPlex::
+
+            cd /path/to/parent of soplex-3.1.1.tgz
+            tar -xvvf soplex-3.1.1.tgz
+            cd soplex-3.1.1
+            mkdir build
+            cd build
+            cmake ..
+            make
+            make test
+            make install
+
+        #. Use the following commands to install the SoPlex Python binding::
+
+            apt-get install libgmp-dev
+            pip install cython
+            git clone https://github.com/SBRG/soplex_cython.git
+            cd soplex_cython
+            cp /path/to/soplex-3.1.1.tgz .
+            pip install .
 
     #. Optionally, install the XPRESS optimization package and the XPRESS Python binding
 
