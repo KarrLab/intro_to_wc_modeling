@@ -1,5 +1,5 @@
 capturer                                                         # Capture stdout and stderr
-cement                                                           # framework for building command line programs
+cement >= 3.0.0.                                                 # framework for building command line programs
 cobra >= 0.8.2                                                   # Constraint-based modeling
 ipython                                                          # interactive interpret
 matplotlib                                                       # plotting

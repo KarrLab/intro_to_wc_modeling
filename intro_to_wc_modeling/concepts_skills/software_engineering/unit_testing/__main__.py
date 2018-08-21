@@ -6,11 +6,10 @@
 :License: MIT
 """
 
-from cement.core import foundation
-from cement.core import controller
+import cement
 
 
-class BaseController(controller.CementBaseController):
+class BaseController(cement.Controller):
 
     class Meta:
         label = 'base'
@@ -22,12 +21,12 @@ class BaseController(controller.CementBaseController):
 
         ]
 
-    @controller.expose(hide=True)
-    def default(self):
+    @cement.ex(hide=True)
+    def _default(self):
         print('Arg = `{}`'.format(self.app.pargs.arg))
 
 
-class App(foundation.CementApp):
+class App(cement.App):
 
     class Meta:
         label = "intro_to_wc_modeling"
