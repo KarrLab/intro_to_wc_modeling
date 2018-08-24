@@ -366,11 +366,11 @@ Detailed instructions to install the tutorials and all of the requirements
         sudo apt-get update
         sudo apt-get install sublime-text-installer
 
-    #. Install the `PyCharm IDE <https://www.jetbrains.com/pycharm/download/download-thanks.html>`_::
+    #. Install the `PyCharm IDE <https://www.jetbrains.com/pycharm/download>`_::
 
-        sudo mv ~/Downloads/pycharm-community-2017.2.3.tar.gz /opt/
-        sudo tar -xzf pycharm-community-2017.2.3.tar.gz
-        cd pycharm-community-2017.2.3/bin
+        sudo mv ~/Downloads/pycharm-community-2018.2.2.tar.gz /opt/
+        sudo tar -xzf pycharm-community-2018.2.2.tar.gz
+        cd pycharm-community-2018.2.2/bin
         ./pycharm.sh &
 
     #. Install the CircleCI command line tool::

@@ -62,7 +62,7 @@ Once you have configured the image, you can use ``docker build`` to compile the 
       /path/to/context
 
     docker build \
-      --tag karrlab/build:latest \
+      --tag karrlab/wc_env_dependencies:latest \
       Dockerfile \
       .
 

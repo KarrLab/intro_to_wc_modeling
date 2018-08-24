@@ -136,7 +136,7 @@ The CircleCI local executor and interactively running your code on the build ima
 
 #. Use Docker to interactively run the Docker build image::
 
-    docker run -it karrlab/build:latest bash
+    docker run -it karrlab/wc_env_dependencies:latest bash
 
 See `https://github.com/KarrLab/karr_lab_docker_images/blob/master/build/test_packages.py <https://github.com/KarrLab/karr_lab_docker_images/blob/master/build/test_packages.py>`_ for a detailed example of how to run builds locally using the CircleCI CLI and Docker.
 
