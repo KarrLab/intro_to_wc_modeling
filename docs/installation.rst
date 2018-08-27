@@ -422,3 +422,12 @@ Detailed instructions to install the tutorials and all of the requirements
     #. Configure Docker::
 
         sudo usermod -aG docker $USER
+
+    #. Optional, setup IDEs such as PyCharm to run code using a Docker image, such as, an image created with *wc_env_manager*.
+
+        * `Jupyter Notebook <https://jupyter-docker-stacks.readthedocs.io/>`_
+        * `PyCharm Professional Edition <https://www.jetbrains.com/help/pycharm/docker.html>`_
+        * Other IDEs:
+            
+            #. Install the IDE in a Docker image
+            #. Use X11 forwarding to render graphical output from a Docker container to your host. See `Using GUI's with Docker <https://jupyter-docker-stacks.readthedocs.io>`_ for more information.
