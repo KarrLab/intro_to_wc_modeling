@@ -11,4 +11,5 @@ Foundational concepts and skills for computational biology
     typing.rst
     software_engineering/index.rst
     linux/index.rst
+    quilt.rst
     scientific_communication/index.rst
