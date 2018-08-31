@@ -146,9 +146,9 @@ def main():
     #########################################
     #########################################
     # Use the ``print`` and ``format`` methods to write `Hello {your name}!` to standard out
-    import capturer
-    with capturer.CaptureOutput() as captured:
+    import abduct
+    with abduct.captured(abduct.out(tee=True)) as stdout:
         print('Hello {}'.format('reader'))
-        stdout = captured.get_text()
+        out_text = stdout.getvalue()
 
     # assert stdout == 'Hello reader' # this causes an error in Read the Docs
