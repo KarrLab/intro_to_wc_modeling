@@ -41,7 +41,7 @@ class TestSimulationTutorial(unittest.TestCase):
             'aa_e': 120.,
             'biomass': 1e8,
         }
-        with self.assertRaisesRegexp(Exception, 'below 0'):
+        with self.assertRaisesRegex(Exception, 'below 0'):
             intro_to_wc_modeling.cell_modeling.simulation.dfba.main(init_concs=init_concs)
 
     def test_mrna_and_proteins_using_several_methods(self):
@@ -113,7 +113,7 @@ class TestMultiAlgorithm(unittest.TestCase):
 
     def test_analysis(self):
         # get y data
-        with self.assertRaisesRegexp(Exception, 'Invalid model type'):
+        with self.assertRaisesRegex(Exception, 'Invalid model type'):
             analysis.get_y_data(None, None, 'a[b]')
 
         # unit scaling
@@ -121,7 +121,7 @@ class TestMultiAlgorithm(unittest.TestCase):
         scale_mm = analysis.get_scale('mM', 'e', 1., 1.)
         self.assertAlmostEqual(scale_mm, scale_um * 1e3, places=7)
 
-        with self.assertRaisesRegexp(Exception, 'Invalid units'):
+        with self.assertRaisesRegex(Exception, 'Invalid units'):
             analysis.get_scale('', 'c', 1., 1.)
 
     def test_containsCarbon(self):
@@ -129,5 +129,5 @@ class TestMultiAlgorithm(unittest.TestCase):
         self.assertFalse(model.Species(empiricalFormula='H').containsCarbon())
 
     def test_parseStoichiometry_exception(self):
-        with self.assertRaisesRegexp(ValueError, 'Invalid stoichiometry:'):
+        with self.assertRaisesRegex(ValueError, 'Invalid stoichiometry:'):
             model.parseStoichiometry('[]: ')

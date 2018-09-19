@@ -28,4 +28,4 @@ class TestMain(unittest.TestCase):
         with mock.patch('sys.argv', ['unit_testing', '--help']):
             with self.assertRaises(SystemExit) as context:
                 __main__.main()
-                self.assertRegexpMatches(context.Exception, 'usage: intro_to_wc_modeling')
+                self.assertRegex(context.Exception, 'usage: intro_to_wc_modeling')
