@@ -84,7 +84,7 @@ def get_y_data(model, speciesCounts, speciesCompartmentId):
         yData
     """
 
-    match = re.match('^(?P<speciesId>[a-z0-9\-_]+)\[(?P<compartmentId>[a-z0-9\-_]+)\]$', speciesCompartmentId, re.I).groupdict()
+    match = re.match(r'^(?P<speciesId>[a-z0-9\-_]+)\[(?P<compartmentId>[a-z0-9\-_]+)\]$', speciesCompartmentId, re.I).groupdict()
     speciesId = match['speciesId']
     compartmentId = match['compartmentId']
 

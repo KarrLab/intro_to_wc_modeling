@@ -863,7 +863,7 @@ def parseStoichiometry(rxnStr):
     # Parse a string representing the stoichiometry of a reaction into a Python object
 
     # Split stoichiometry in to global compartment, left-hand side, right-hand side, reversibility indictor
-    rxnMatch = re.match('(?P<compartment>\[([a-z])\]: )?(?P<lhs>((\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])? \+ )*(\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])?) (?P<direction>[<]?)==> (?P<rhs>((\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])? \+ )*(\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])?)', rxnStr, flags=re.I)
+    rxnMatch = re.match(r'(?P<compartment>\[([a-z])\]: )?(?P<lhs>((\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])? \+ )*(\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])?) (?P<direction>[<]?)==> (?P<rhs>((\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])? \+ )*(\(\d*\.?\d*([e][-+]?[0-9]+)?\) )?[a-z0-9\-_]+(\[[a-z]\])?)', rxnStr, flags=re.I)
     if rxnMatch is None:
         raise ValueError('Invalid stoichiometry: %s' % rxnStr)
 
@@ -875,7 +875,7 @@ def parseStoichiometry(rxnStr):
     if rxnDict['compartment'] is None:
         globalComp = None
     else:
-        globalComp = re.match('\[(?P<compartment>[a-z])\]', rxnDict['compartment'], flags=re.I).groupdict()['compartment']
+        globalComp = re.match(r'\[(?P<compartment>[a-z])\]', rxnDict['compartment'], flags=re.I).groupdict()['compartment']
 
     # initialize array of reaction participants
     participants = []
@@ -883,7 +883,7 @@ def parseStoichiometry(rxnStr):
     # Parse left-hand side
     for rxnPartStr in rxnDict['lhs'].split(' + '):
         rxnPartDict = re.match(
-            '(\((?P<coefficient>\d*\.?\d*([e][-+]?[0-9]+)?)\) )?(?P<species>[a-z0-9\-_]+)(\[(?P<compartment>[a-z])\])?', rxnPartStr, flags=re.I).groupdict()
+            r'(\((?P<coefficient>\d*\.?\d*([e][-+]?[0-9]+)?)\) )?(?P<species>[a-z0-9\-_]+)(\[(?P<compartment>[a-z])\])?', rxnPartStr, flags=re.I).groupdict()
 
         species = rxnPartDict['species']
         compartment = rxnPartDict['compartment'] or globalComp
@@ -898,7 +898,7 @@ def parseStoichiometry(rxnStr):
     # Parse right-hand side
     for rxnPartStr in rxnDict['rhs'].split(' + '):
         rxnPartDict = re.match(
-            '(\((?P<coefficient>\d*\.?\d*([e][-+]?[0-9]+)?)\) )?(?P<species>[a-z0-9\-_]+)(\[(?P<compartment>[a-z])\])?', rxnPartStr, flags=re.I).groupdict()
+            r'(\((?P<coefficient>\d*\.?\d*([e][-+]?[0-9]+)?)\) )?(?P<species>[a-z0-9\-_]+)(\[(?P<compartment>[a-z])\])?', rxnPartStr, flags=re.I).groupdict()
 
         species = rxnPartDict['species']
         compartment = rxnPartDict['compartment'] or globalComp
