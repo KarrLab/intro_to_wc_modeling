@@ -46,7 +46,7 @@ def simulate(reaction_stochiometries, kinetic_laws, init_copy_number, time_max, 
     """
 
     # data structure to store predicted copy numbers
-    time_hist = numpy.linspace(0., time_max, time_max / time_step + 1)
+    time_hist = numpy.linspace(0., time_max, int(time_max / time_step + 1))
     copy_number_hist = numpy.full(int(time_max / time_step + 1), numpy.nan)
     copy_number_hist[0] = init_copy_number
 

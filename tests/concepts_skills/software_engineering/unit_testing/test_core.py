@@ -69,7 +69,7 @@ class TestSimulation(unittest.TestCase):
             stdout = captured.get_text()
             lines = stdout.rstrip().split('\n')
             for line in lines:
-                self.assertRegex(line, "^Time \d+: \d+ molecules$")
+                self.assertRegex(line, r'^Time \d+: \d+ molecules$')
 
     def test_invalid_inputs(self):
         sim = core.Simulation()

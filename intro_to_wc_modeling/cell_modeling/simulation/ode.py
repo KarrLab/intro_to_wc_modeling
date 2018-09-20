@@ -76,7 +76,7 @@ def main():
     # integrate model
     time_max = 100
     time_step = 0.1
-    time_hist = numpy.linspace(0., time_max, time_max / time_step + 1)
+    time_hist = numpy.linspace(0., time_max, int(time_max / time_step + 1))
     conc_hist = scipy.integrate.odeint(d_conc_d_t, init_concs, time_hist)
 
     # plot results

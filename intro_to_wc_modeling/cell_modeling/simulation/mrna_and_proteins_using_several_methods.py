@@ -25,10 +25,10 @@ class OdeSimulation(object):
     """ Represents an ODE simulation of mRNA and protein synthesis and degradation
 
     Attributes:
-        k_m (:obj:`float`): mRNA synthesis rate constant (molecules h\ :sup:`-1`\ )
-        k_n (:obj:`float`): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`\ )
-        gamma_m (:obj:`float`): mRNA degradation rate constant (h\ :sup:`-1`\ )
-        gamma_n (:obj:`float`): protein degradation rate constant (h\ :sup:`-1`\ )
+        k_m (:obj:`float`): mRNA synthesis rate constant (molecules h\ :sup:`-1`)
+        k_n (:obj:`float`): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`)
+        gamma_m (:obj:`float`): mRNA degradation rate constant (h\ :sup:`-1`)
+        gamma_n (:obj:`float`): protein degradation rate constant (h\ :sup:`-1`)
         m_0 (:obj:`float`): initial mRNA number (molecules)
         n_0 (:obj:`float`): initial protein number (molecules)
     """
@@ -36,10 +36,10 @@ class OdeSimulation(object):
     def __init__(self, k_m=5, k_n=20, gamma_m=numpy.log(2) * 60 / 3, gamma_n=numpy.log(2) / 10, m_0=1, n_0=98):
         """
         Args:
-            k_m (:obj:`float`, optional): mRNA synthesis rate constant (molecules h\ :sup:`-1`\ )
-            k_n (:obj:`float`, optional): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`\ )
-            gamma_m (:obj:`float`, optional): mRNA degradation rate constant (h\ :sup:`-1`\ )
-            gamma_n (:obj:`float`, optional): protein degradation rate constant (h\ :sup:`-1`\ )
+            k_m (:obj:`float`, optional): mRNA synthesis rate constant (molecules h\ :sup:`-1`)
+            k_n (:obj:`float`, optional): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`)
+            gamma_m (:obj:`float`, optional): mRNA degradation rate constant (h\ :sup:`-1`)
+            gamma_n (:obj:`float`, optional): protein degradation rate constant (h\ :sup:`-1`)
             m_0 (:obj:`float`, optional): initial mRNA number (molecules)
             n_0 (:obj:`float`, optional): initial protein number (molecules)
         """
@@ -59,7 +59,7 @@ class OdeSimulation(object):
             n (:obj:`float`): protein number (molecules)
 
         Returns:
-            :obj:`float`: mRNA synthesis rate (molecules h\ :sup:`-1`\ )
+            :obj:`float`: mRNA synthesis rate (molecules h\ :sup:`-1`)
         """
         return self.k_m
 
@@ -71,7 +71,7 @@ class OdeSimulation(object):
             n (:obj:`float`): protein number (molecules)
 
         Returns:
-            :obj:`float`: protein synthesis rate (molecules h\ :sup:`-1`\ )
+            :obj:`float`: protein synthesis rate (molecules h\ :sup:`-1`)
         """
         return m * self.k_n
 
@@ -83,7 +83,7 @@ class OdeSimulation(object):
             n (:obj:`float`): protein number (molecules)
 
         Returns:
-            :obj:`float`: mRNA degradation rate (molecules h\ :sup:`-1`\ )
+            :obj:`float`: mRNA degradation rate (molecules h\ :sup:`-1`)
         """
         return m * self.gamma_m
 
@@ -95,7 +95,7 @@ class OdeSimulation(object):
             n (:obj:`float`): protein number (molecules)
 
         Returns:
-            :obj:`float`: protein degradation rate (molecules h\ :sup:`-1`\ )
+            :obj:`float`: protein degradation rate (molecules h\ :sup:`-1`)
         """
         return n * self.gamma_n
 
@@ -108,7 +108,7 @@ class OdeSimulation(object):
             n (:obj:`float`): protein number (molecules)
 
         Returns:
-            :obj:`float`: rate of change of mRNA (molecules h\ :sup:`-1`\ )
+            :obj:`float`: rate of change of mRNA (molecules h\ :sup:`-1`)
         """
         return self.r_m_syn(m, n) - self.r_m_deg(m, n)
 
@@ -120,7 +120,7 @@ class OdeSimulation(object):
             n (:obj:`float`): protein number (molecules)
 
         Returns:
-            :obj:`float`: rate of change of proteins (molecules h\ :sup:`-1`\ )
+            :obj:`float`: rate of change of proteins (molecules h\ :sup:`-1`)
         """
         return self.r_n_syn(m, n) - self.r_n_deg(m, n)
 
@@ -132,7 +132,7 @@ class OdeSimulation(object):
             x (:obj:`numpy.array`): numbers of particles (tuple of mRNA and proteins numbers) (molecules)
 
         Returns:
-            :obj:`float`: rate of change of the system (tuple of the rates of change of mRNA and proteins) (molecules h\ :sup:`-1`\ )
+            :obj:`float`: rate of change of the system (tuple of the rates of change of mRNA and proteins) (molecules h\ :sup:`-1`)
         """
         m = x[0]
         n = x[1]
@@ -162,7 +162,7 @@ class OdeSimulation(object):
             x (:obj:`numpy.array`): numbers of particles (tuple of mRNA and proteins numbers) (molecules)
 
         Returns:
-            :obj:`numpy.array`: Jacobian (h\ :sup:`-1`\ )
+            :obj:`numpy.array`: Jacobian (h\ :sup:`-1`)
         """
         return numpy.array([[-self.gamma_m, 0], [self.k_n, -self.gamma_n]])
 
@@ -187,7 +187,7 @@ class OdeSimulation(object):
         axes.set_ylim(n[(0, -1), 0])
         axes.set_xlabel('mRNA')
         axes.set_ylabel('Protein')
-        axes.grid('on')
+        axes.grid(True)
 
         return fig
 
@@ -326,10 +326,10 @@ class CmeSimulation(object):
     """ Represents a CME simulation of mRNA and protein synthesis and degradation
 
     Attributes:
-        k_m (:obj:`float`): mRNA synthesis rate constant (molecules h\ :sup:`-1`\ )
-        k_n (:obj:`float`): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`\ )
-        gamma_m (:obj:`float`): mRNA degradation rate constant (h\ :sup:`-1`\ )
-        gamma_n (:obj:`float`): protein degradation rate constant (h\ :sup:`-1`\ )
+        k_m (:obj:`float`): mRNA synthesis rate constant (molecules h\ :sup:`-1`)
+        k_n (:obj:`float`): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`)
+        gamma_m (:obj:`float`): mRNA degradation rate constant (h\ :sup:`-1`)
+        gamma_n (:obj:`float`): protein degradation rate constant (h\ :sup:`-1`)
         m_min (:obj:`int`): minimum mRNA copy number to simulate
         m_max (:obj:`int`): maximum protein copy number to simulate
         n_min (:obj:`int`): minimum mRNA copy number to simulate
@@ -343,10 +343,10 @@ class CmeSimulation(object):
                  p_0=None):
         """
         Args:
-            k_m (:obj:`float`, optional): mRNA synthesis rate constant (molecules h\ :sup:`-1`\ )
-            k_n (:obj:`float`, optional): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`\ )
-            gamma_m (:obj:`float`, optional): mRNA degradation rate constant (h\ :sup:`-1`\ )
-            gamma_n (:obj:`float`, optional): protein degradation rate constant (h\ :sup:`-1`\ )
+            k_m (:obj:`float`, optional): mRNA synthesis rate constant (molecules h\ :sup:`-1`)
+            k_n (:obj:`float`, optional): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`)
+            gamma_m (:obj:`float`, optional): mRNA degradation rate constant (h\ :sup:`-1`)
+            gamma_n (:obj:`float`, optional): protein degradation rate constant (h\ :sup:`-1`)
             m_min (:obj:`int`, optional): minimum mRNA copy number to simulate
             m_max (:obj:`int`, optional): maximum protein copy number to simulate
             n_min (:obj:`int`, optional): minimum mRNA copy number to simulate
@@ -656,10 +656,10 @@ class SsaSimulation(object):
     """ Represents an SSA simulation of mRNA and protein synthesis and degradation
 
     Attributes:
-        k_m (:obj:`float`): mRNA synthesis rate constant (molecules h\ :sup:`-1`\ )
-        k_n (:obj:`float`): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`\ )
-        gamma_m (:obj:`float`): mRNA degradation rate constant (h\ :sup:`-1`\ )
-        gamma_n (:obj:`float`): protein degradation rate constant (h\ :sup:`-1`\ )
+        k_m (:obj:`float`): mRNA synthesis rate constant (molecules h\ :sup:`-1`)
+        k_n (:obj:`float`): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`)
+        gamma_m (:obj:`float`): mRNA degradation rate constant (h\ :sup:`-1`)
+        gamma_n (:obj:`float`): protein degradation rate constant (h\ :sup:`-1`)
         m_0 (:obj:`float`): initial mRNA number (molecules)
         n_0 (:obj:`float`): initial protein number (molecules)
     """
@@ -667,10 +667,10 @@ class SsaSimulation(object):
     def __init__(self, k_m=5, k_n=20, gamma_m=numpy.log(2) * 60 / 3, gamma_n=numpy.log(2) / 10, m_0=1, n_0=98):
         """
         Args:
-            k_m (:obj:`float`, optional): mRNA synthesis rate constant (molecules h\ :sup:`-1`\ )
-            k_n (:obj:`float`, optional): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`\ )
-            gamma_m (:obj:`float`, optional): mRNA degradation rate constant (h\ :sup:`-1`\ )
-            gamma_n (:obj:`float`, optional): protein degradation rate constant (h\ :sup:`-1`\ )
+            k_m (:obj:`float`, optional): mRNA synthesis rate constant (molecules h\ :sup:`-1`)
+            k_n (:obj:`float`, optional): protein synthesis rate constant (\ :sup:`-1`\  h\ :sup:`-1`)
+            gamma_m (:obj:`float`, optional): mRNA degradation rate constant (h\ :sup:`-1`)
+            gamma_n (:obj:`float`, optional): protein degradation rate constant (h\ :sup:`-1`)
             m_0 (:obj:`float`, optional): initial mRNA number (molecules)
             n_0 (:obj:`float`, optional): initial protein number (molecules)
         """
@@ -690,7 +690,7 @@ class SsaSimulation(object):
             n (:obj:`float`): protein number (molecules)
 
         Returns:
-            :obj:`float`: mRNA synthesis rate (molecules h\ :sup:`-1`\ )
+            :obj:`float`: mRNA synthesis rate (molecules h\ :sup:`-1`)
         """
         return self.k_m
 
@@ -702,7 +702,7 @@ class SsaSimulation(object):
             n (:obj:`float`): protein number (molecules)
 
         Returns:
-            :obj:`float`: protein synthesis rate (molecules h\ :sup:`-1`\ )
+            :obj:`float`: protein synthesis rate (molecules h\ :sup:`-1`)
         """
         return m * self.k_n
 
@@ -714,7 +714,7 @@ class SsaSimulation(object):
             n (:obj:`float`): protein number (molecules)
 
         Returns:
-            :obj:`float`: mRNA degradation rate (molecules h\ :sup:`-1`\ )
+            :obj:`float`: mRNA degradation rate (molecules h\ :sup:`-1`)
         """
         return m * self.gamma_m
 
@@ -726,7 +726,7 @@ class SsaSimulation(object):
             n (:obj:`float`): protein number (molecules)
 
         Returns:
-            :obj:`float`: protein degradation rate (molecules h\ :sup:`-1`\ )
+            :obj:`float`: protein degradation rate (molecules h\ :sup:`-1`)
         """
         return n * self.gamma_n
 

@@ -403,7 +403,7 @@ class GlycolysisModel(object):
             x (:obj:`numpy.array`): species concentrations (mM)
 
         Returns:
-            :obj:`numpy.array`: time derivative of the species concentrations (mM min\ :sub:`-1`\ )
+            :obj:`numpy.array`: time derivative of the species concentrations (mM min\ :sup:`-1`)
         """
         return numpy.array([
             self.dACE_dt(x),
@@ -480,9 +480,9 @@ class GlycerolModel(object):
         NAD (:obj:`float`): NAD concentration (mM)
         NADH (:obj:`float`): NADH concentration (mM)
         Phi (:obj:`float`): Pi concentration (mM)
-
-        V2 (:obj:`float`): forward rate constant (mM min\ :sub:`-1`\ )
-        Vf1 (:obj:`float`): reverse rate constant (mM min\ :sub:`-1`\ )
+ 
+        V2 (:obj:`float`): forward rate constant (mM min\ :sup:`-1`)
+        Vf1 (:obj:`float`): reverse rate constant (mM min\ :sup:`-1`)
 
         K1adp (:obj:`float`): ADP forward affinity constant (mM)
         K1atp (:obj:`float`): ATP forward affinity constant (mM)
@@ -535,7 +535,7 @@ class GlycerolModel(object):
             x (:obj:`numpy.array`): species concentrations (mM)
 
         Returns:
-            :obj:`float`: rate of Glycerol 3-phosphate dehydrogenase (mM min\ :sub:`-1`\ )
+            :obj:`float`: rate of Glycerol 3-phosphate dehydrogenase (mM min\ :sup:`-1`)
         """
         return (self.Vf1 * (self.DHAP * self.NADH - (self.NAD * x[0]) / self.Keq1)) / \
             (self.K1dhap * (1 + self.ADP/self.K1adp + self.ATP / self.K1atp + self.F16BP / self.K1f16bp)
@@ -549,7 +549,7 @@ class GlycerolModel(object):
             x (:obj:`numpy.array`): species concentrations (mM)
 
         Returns:
-            :obj:`float`: rate of Glycerol 3-phosphatase (mM min\ :sub:`-1`\ )
+            :obj:`float`: rate of Glycerol 3-phosphatase (mM min\ :sup:`-1`)
         """
         return self.V2 * x[0] / (self.K2g3p * (1 + self.Phi / self.K2phi) * (1 + x[0] / self.K2g3p))
 
@@ -560,7 +560,7 @@ class GlycerolModel(object):
             x (:obj:`numpy.array`): species concentrations (mM)
 
         Returns:
-            :obj:`float`: time derivative of the G3P concentration (mM min\ :sub:`-1`\ )
+            :obj:`float`: time derivative of the G3P concentration (mM min\ :sup:`-1`)
         """
         return self.v_1(x) - self.v_2(x)
 
@@ -571,7 +571,7 @@ class GlycerolModel(object):
             x (:obj:`numpy.array`): species concentrations (mM)
 
         Returns:
-            :obj:`numpy.array`: time derivative of the species concentrations (mM min\ :sub:`-1`\ )
+            :obj:`numpy.array`: time derivative of the species concentrations (mM min\ :sup:`-1`)
         """
 
         return numpy.array([self.dg3p_dt(x)])
@@ -681,7 +681,7 @@ class MergedModel(object):
             x (:obj:`numpy.array`): species concentrations (mM)
 
         Returns:
-            :obj:`numpy.array`: time derivative of the species concentrations (mM min\ :sub:`-1`\ )
+            :obj:`numpy.array`: time derivative of the species concentrations (mM min\ :sup:`-1`)
         """
         dx_dt = numpy.concatenate((
             self.glycolysis_model.dx_dt(x[0:-1]),
