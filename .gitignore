@@ -16,6 +16,7 @@ htmlcov/
 # compiled documentation
 docs/_build
 docs/source/
+docs/.doctrees/
 
 # generated sqlite files
 *.sqlite
