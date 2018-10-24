@@ -360,6 +360,43 @@ Detailed instructions to install the tutorials and all of the requirements
         Note: If you want to install XPRESS onto a cluster, virtual machine, or docker image, you should first install a XPRESS license server on a static host
         and then install XPRESS using a floating license. See the XPRESS documentation for more information.
 
+    #. Install the `SUNDIALS <https://computation.llnl.gov/projects/sundials/sundials-software>`_ ODE solver and the `scikits.odes <https://scikits-odes.readthedocs.io>`_ Python interface:
+
+        #. Install the Fortran and BLAS::
+        
+            apt-get install \
+                build-essential \
+                cmake \
+                gfortran \
+                libopenblas-base \
+                libopenblas-dev \
+                wget
+        
+        #. Download, compile, and install SUNDIALS 2.7.0::
+
+            cd /tmp
+            wget https://computation.llnl.gov/projects/sundials/download/sundials-2.7.0.tar.gz
+            tar xzf sundials-2.7.0.tar.gz
+            cd sundials-2.7.0
+            mkdir build
+            cd build
+            cmake \
+                -DEXAMPLES_ENABLE=OFF \
+                -DLAPACK_ENABLE=ON \
+                ..
+            make
+            make install
+
+        #. Install scikits.odes::
+
+            pip install scikits.odes
+
+        #. Remove SUNDIALS source files::
+
+            cd /tmp
+            rm sundials-2.7.0.tar.gz
+            rm -r sundials-2.7.0
+
     #. Install the Sublime text editor::
 
         sudo add-apt-repository ppa:webupd8team/sublime-text-3
