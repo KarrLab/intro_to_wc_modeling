@@ -13,19 +13,27 @@ Requirements
 
 Below is a list of all of the packages needed for the tutorials. Note, each tutorial only requires a subset of these packages. Please see the tutorials for information about the packages required for each tutorial.
 
-* CPLEX
-* Docker
-* Gimp
-* Git
-* Illustrator
-* Inkscape
-* libgit2
-* Meld
-* Open Babel
-* Pandoc
-* Pip
-* Python
+* `CPLEX <https://www.ibm.com/analytics/cplex-optimizer>`_
+* `Docker <https://www.docker.com/>`_
+* `Gimp <https://www.gimp.org/>`_
+* `Git <https://git-scm.com/>`_
+* `Illustrator <https://www.adobe.com/Illustrator‎>`_
+* `Inkscape <https://inkscape.org/>`_
+* `Meld <http://meldmerge.org/>`_
+* `Open Babel <http://openbabel.org/wiki/Main_Page>`_
+* `Pandoc <https://pandoc.org/>`_
+* `Pip <https://pip.pypa.io/en/latest/>`_
+* `Python <https://www.python.org/>`_
+* `SUNDIALS <https://computation.llnl.gov/projects/sundials/sundials-software>`_, `scikits.odes <https://scikits-odes.readthedocs.io>`_
 
+In addition, the following packages are optional
+
+* `Cbc <https://projects.coin-or.org/Cbc>`_, `CyLP <http://mpy.github.io/CyLPdoc/>`_
+* `Gurobi <https://www.gurobi.com>`_
+* `MINOS <https://web.stanford.edu/group/SOL/minos.htm>`_, `solveME <https://github.com/SBRG/solvemepy>`_
+* `MOSEK <https://www.mosek.com/>`_
+* `SoPlex <http://soplex.zib.de>`_, `soplex_cython <https://github.com/SBRG/soplex_cython>`_
+* `XPRESS <https://www.fico.com/en/products/fico-xpress-optimization>`_
 
 ==========================================================================
 How to install these tutorials
@@ -81,20 +89,6 @@ Detailed instructions to install the tutorials and all of the requirements
         curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
         sudo apt-get install git-lfs
         git lfs install
-
-    #. Install `libgit2`::
-
-        wget https://github.com/libgit2/libgit2/archive/v0.26.0.tar.gz -O /tmp/libgit2-0.26.0.tar.gz
-        tar -xvvf /tmp/libgit2-0.26.0.tar.gz
-        cd /tmp/libgit2-0.26.0
-        cmake .
-        make
-        make install
-        ldconfig
-
-        echo "" >> ~/.bashrc
-        echo "# libgit2" >> ~/.bashrc
-        echo "export LIBGIT2=/usr/local" >> ~/.bashrc
 
     #. Install Open Babel::
 
@@ -251,32 +245,32 @@ Detailed instructions to install the tutorials and all of the requirements
             cd /opt/mosek/8/tools/platform/linux64x86/python/3/
             python3.6 setup.py install
 
-    .. commented out because we haven't figured out how to get qpOASES to work with newer versions of Python
+        .. commented out because we haven't figured out how to get qpOASES to work with newer versions of Python
 
-        #. Optionally, install the COIN-OR qpOASES optimization package::
+            #. Optionally, install the COIN-OR qpOASES optimization package::
 
-            #. Install qpOASES::
+                #. Install qpOASES::
 
-                echo "" >> ~/.bashrc
-                echo "# COIN-OR: qpOASES" >> ~/.bashrc
-                echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:/opt/coin-or/qpoases/lib\"" >> ~/.bashrc
-                ~/.bashrc
-                ldconfig
+                    echo "" >> ~/.bashrc
+                    echo "# COIN-OR: qpOASES" >> ~/.bashrc
+                    echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:/opt/coin-or/qpoases/lib\"" >> ~/.bashrc
+                    ~/.bashrc
+                    ldconfig
 
-                cd /tmp
-                wget --no-check-certificate https://www.coin-or.org/download/source/qpOASES/qpOASES-3.2.1.tgz
-                tar -xvvf qpOASES-3.2.1.tgz
-                cd qpOASES-3.2.1
-                make
-                mkdir -p /opt/coin-or/qpoases/lib
-                cp bin/libqpOASES.* /opt/coin-or/qpoases/lib
-                cp -r include/ /opt/coin-or/qpoases
+                    cd /tmp
+                    wget --no-check-certificate https://www.coin-or.org/download/source/qpOASES/qpOASES-3.2.1.tgz
+                    tar -xvvf qpOASES-3.2.1.tgz
+                    cd qpOASES-3.2.1
+                    make
+                    mkdir -p /opt/coin-or/qpoases/lib
+                    cp bin/libqpOASES.* /opt/coin-or/qpoases/lib
+                    cp -r include/ /opt/coin-or/qpoases
 
-            #. Install the Python binding::
+                #. Install the Python binding::
 
-                cd interfaces/python
-                pip install cython numpy
-                python setup.py install
+                    cd interfaces/python
+                    pip install cython numpy
+                    python setup.py install
 
     #. Optionally, install the SoPlex optimization package and the SoPlex Python binding:
 
