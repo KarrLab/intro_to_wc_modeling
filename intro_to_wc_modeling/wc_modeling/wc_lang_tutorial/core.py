@@ -123,17 +123,17 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
 
     # add two reactants, which have negative stoichiometric coefficients
     atp_hydrolysis.participants.create(
-        species=wc_lang.core.Species(species_type=atp, compartment=cytosol), coefficient=-1)
+        species=wc_lang.core.Species(id='atp[c]', species_type=atp, compartment=cytosol), coefficient=-1)
     atp_hydrolysis.participants.create(
-        species=wc_lang.core.Species(species_type=h2o, compartment=cytosol), coefficient=-1)
+        species=wc_lang.core.Species(id='h2o[c]', species_type=h2o, compartment=cytosol), coefficient=-1)
 
     # add three products, with positive stoichiometric coefficients
     atp_hydrolysis.participants.create(
-        species=wc_lang.core.Species(species_type=adp, compartment=cytosol), coefficient=1)
+        species=wc_lang.core.Species(id='adp[c]', species_type=adp, compartment=cytosol), coefficient=1)
     atp_hydrolysis.participants.create(
-        species=wc_lang.core.Species(species_type=pi, compartment=cytosol), coefficient=1)
+        species=wc_lang.core.Species(id='pi[c]', species_type=pi, compartment=cytosol), coefficient=1)
     atp_hydrolysis.participants.create(
-        species=wc_lang.core.Species(species_type=h, compartment=cytosol), coefficient=1)
+        species=wc_lang.core.Species(id='h[c]', species_type=h, compartment=cytosol), coefficient=1)
     # The previous illustrates how to program a trivial model
     ## Don't change the previous comment - it's used by a literalinclude
 
