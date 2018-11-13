@@ -10,7 +10,7 @@
 import inspect
 import os
 import pkg_resources
-import wc_lang.core
+import wc_lang
 import wc_lang.io
 
 def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
@@ -105,35 +105,35 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     ## Don't change the next comment - it's used by a literalinclude
     # The following illustrates how to program a trivial model
     # create a model with one submodel and one compartment
-    prog_model = wc_lang.core.Model(id='programmatic_model', name='Programmatic model')
+    prog_model = wc_lang.Model(id='programmatic_model', name='Programmatic model')
 
-    submodel = wc_lang.core.Submodel(id='submodel_1', model=prog_model)
+    submodel = wc_lang.Submodel(id='submodel_1', model=prog_model)
 
-    cytosol = wc_lang.core.Compartment(id='c', name='Cytosol')
+    cytosol = wc_lang.Compartment(id='c', name='Cytosol')
 
     # create 5 species types
-    atp = wc_lang.core.SpeciesType(id='atp', name='ATP', model=prog_model)
-    adp = wc_lang.core.SpeciesType(id='adp', name='ADP', model=prog_model)
-    pi = wc_lang.core.SpeciesType(id='pi', name='Pi', model=prog_model)
-    h2o = wc_lang.core.SpeciesType(id='h2o', name='H2O', model=prog_model)
-    h = wc_lang.core.SpeciesType(id='h', name='H+', model=prog_model)
+    atp = wc_lang.SpeciesType(id='atp', name='ATP', model=prog_model)
+    adp = wc_lang.SpeciesType(id='adp', name='ADP', model=prog_model)
+    pi = wc_lang.SpeciesType(id='pi', name='Pi', model=prog_model)
+    h2o = wc_lang.SpeciesType(id='h2o', name='H2O', model=prog_model)
+    h = wc_lang.SpeciesType(id='h', name='H+', model=prog_model)
 
     # create an 'ATP hydrolysis' reaction that uses these species types
-    atp_hydrolysis = wc_lang.core.Reaction(id='atp_hydrolysis', name='ATP hydrolysis')
+    atp_hydrolysis = wc_lang.Reaction(id='atp_hydrolysis', name='ATP hydrolysis')
 
     # add two reactants, which have negative stoichiometric coefficients
     atp_hydrolysis.participants.create(
-        species=wc_lang.core.Species(id='atp[c]', species_type=atp, compartment=cytosol), coefficient=-1)
+        species=wc_lang.Species(id='atp[c]', species_type=atp, compartment=cytosol), coefficient=-1)
     atp_hydrolysis.participants.create(
-        species=wc_lang.core.Species(id='h2o[c]', species_type=h2o, compartment=cytosol), coefficient=-1)
+        species=wc_lang.Species(id='h2o[c]', species_type=h2o, compartment=cytosol), coefficient=-1)
 
     # add three products, with positive stoichiometric coefficients
     atp_hydrolysis.participants.create(
-        species=wc_lang.core.Species(id='adp[c]', species_type=adp, compartment=cytosol), coefficient=1)
+        species=wc_lang.Species(id='adp[c]', species_type=adp, compartment=cytosol), coefficient=1)
     atp_hydrolysis.participants.create(
-        species=wc_lang.core.Species(id='pi[c]', species_type=pi, compartment=cytosol), coefficient=1)
+        species=wc_lang.Species(id='pi[c]', species_type=pi, compartment=cytosol), coefficient=1)
     atp_hydrolysis.participants.create(
-        species=wc_lang.core.Species(id='h[c]', species_type=h, compartment=cytosol), coefficient=1)
+        species=wc_lang.Species(id='h[c]', species_type=h, compartment=cytosol), coefficient=1)
     # The previous illustrates how to program a trivial model
     ## Don't change the previous comment - it's used by a literalinclude
 
@@ -152,10 +152,10 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
 
     ## Don't change the next comment - it's used by a literalinclude
     # The attribues that can be initialized when a ``wc_lang.BaseModel`` class is instantiated
-    wc_lang.core.Model.Meta.attributes.keys()
-    wc_lang.core.Submodel.Meta.attributes.keys()
-    wc_lang.core.SpeciesType.Meta.attributes.keys()
-    wc_lang.core.Compartment.Meta.attributes.keys()
+    wc_lang.Model.Meta.attributes.keys()
+    wc_lang.Submodel.Meta.attributes.keys()
+    wc_lang.SpeciesType.Meta.attributes.keys()
+    wc_lang.Compartment.Meta.attributes.keys()
 
     ## Don't change the next comment - it's used by a literalinclude
     # The following illustrates how to edit a model programmatically
