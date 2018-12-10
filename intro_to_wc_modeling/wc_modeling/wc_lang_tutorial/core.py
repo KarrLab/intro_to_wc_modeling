@@ -13,15 +13,16 @@ import pkg_resources
 import wc_lang
 import wc_lang.io
 
+
 def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
 
     ################################################################
-    ## This code is used by literalinclude commands in wc_lang_tutorial.rst
-    ## It contains many separate examples, each prefixed by a comment that delineates the
-    ## start of the example and is used by a start-after option in a literalinclude.
-    ## The line before each of these comments is:
-    ##      Don't change the next comment - it's used by a literalinclude
-    ## Changes to these comments should be synchronized with changes to wc_lang_tutorial.rst
+    # This code is used by literalinclude commands in wc_lang_tutorial.rst
+    # It contains many separate examples, each prefixed by a comment that delineates the
+    # start of the example and is used by a start-after option in a literalinclude.
+    # The line before each of these comments is:
+    # Don't change the next comment - it's used by a literalinclude
+    # Changes to these comments should be synchronized with changes to wc_lang_tutorial.rst
     ################################################################
 
     # save the results of example commands so this function can be unit-tested
@@ -32,7 +33,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     ################################################
 
     model_filename = os.path.join(examples_dir, 'example_model.xlsx')
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # This example illustrates how to read a model from an Excel file
     # 'model_filename' is the name of an Excel file storing a model
     model = wc_lang.io.Reader().run(model_filename)
@@ -41,7 +42,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
 
     if not os.path.isdir(examples_dir):
         os.makedirs(examples_dir)
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # This example illustrates how to write a model to a set of .tsv files
     # 'examples_dir' is a directory
     model_filename_pattern = os.path.join(examples_dir, 'example_model-*.tsv')
@@ -49,7 +50,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
 
     results.append("write a model to a set of .tsv files: '{}'".format(model_filename_pattern))
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # This example illustrates how to read a model from a set of .tsv files
     model_from_tsv = wc_lang.io.Reader().run(model_filename_pattern)
 
@@ -59,7 +60,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     # Accessing model properties
     ################################################
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # ``wc_lang`` models have many attributes
     model.id                # the model's unique identifier
     model.name              # its human readable name
@@ -70,26 +71,26 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     model.species_types     # "  "   "  its species types
     model.parameters        # "  "   "  its parameters
     model.references        # "  "   "  publication sources for the model instance
-    model.database_references  # "  "   "  database sources for the model instance
+    model.db_refs           # "  "   "  database sources for the model instance
 
     results.append("referenced model attributes")
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # ``wc_lang`` also provides many convenience methods
     model.get_compartments()
     model.get_species_types()
     model.get_submodels()
     model.get_species()
-    model.get_concentrations()
+    model.get_distribution_init_concentrations()
     model.get_reactions()
-    model.get_biomass_reactions()
+    model.get_dfba_net_reactions()
     model.get_rate_laws()
     model.get_parameters()
     model.get_references()
 
     results.append("referenced model convenience methods")
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # ``get_reactions()`` returns a list of all of the reactions in a model's submodels
     reaction_identification = []
     for reaction in model.get_reactions():
@@ -102,7 +103,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     # Building models and editing model properties
     #################################################
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # The following illustrates how to program a trivial model
     # create a model with one submodel and one compartment
     prog_model = wc_lang.Model(id='programmatic_model', name='Programmatic model')
@@ -135,29 +136,29 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     atp_hydrolysis.participants.create(
         species=wc_lang.Species(id='h[c]', species_type=h, compartment=cytosol), coefficient=1)
     # The previous illustrates how to program a trivial model
-    ## Don't change the previous comment - it's used by a literalinclude
+    # Don't change the previous comment - it's used by a literalinclude
 
     results.append("created model: '{}'".format(prog_model.name))
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # so that this assertion holds
     assert(atp in prog_model.get_species_types())
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # these assertions hold
     # 5 participants were added to the reaction
     assert(len(atp_hydrolysis.participants) == 5)
     first_reaction_participant = atp_hydrolysis.participants[0]
     assert(first_reaction_participant.reactions[0] is atp_hydrolysis)
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # The attribues that can be initialized when a ``wc_lang.BaseModel`` class is instantiated
     wc_lang.Model.Meta.attributes.keys()
     wc_lang.Submodel.Meta.attributes.keys()
     wc_lang.SpeciesType.Meta.attributes.keys()
     wc_lang.Compartment.Meta.attributes.keys()
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # The following illustrates how to edit a model programmatically
     atp_hydrolysis.comments = 'example comments'
     atp_hydrolysis.reversible = False
@@ -177,7 +178,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     # Completing and validating models
     #################################################
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # This example illustrates how to validate ``prog_model``
     prog_model.validate()
 
@@ -191,11 +192,11 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     # Comparing and differencing models
     #################################################
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # compare the semantic equality of ``model`` and ``model_from_tsv``
     assert(model.is_equal(model_from_tsv) == True)
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # produces a textual description of the differences between two models
     assert(model.difference(model_from_tsv) == '')
 
@@ -203,7 +204,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     # Normalizing models into a reproducible order
     #################################################
 
-    ## Don't change the next comment - it's used by a literalinclude
+    # Don't change the next comment - it's used by a literalinclude
     # The following code excerpt will normalize ``model`` into a reproducible order
     model.normalize()
 
@@ -211,6 +212,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     results.append("normalize model: '{}'".format(rv))
 
     return results
+
 
 if __name__ == '__main__':
     main()
