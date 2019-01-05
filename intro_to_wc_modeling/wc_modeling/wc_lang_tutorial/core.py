@@ -83,7 +83,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     model.get_species()
     model.get_distribution_init_concentrations()
     model.get_reactions()
-    model.get_dfba_net_reactions()
+    model.get_dfba_obj_reactions()
     model.get_rate_laws()
     model.get_parameters()
     model.get_references()
