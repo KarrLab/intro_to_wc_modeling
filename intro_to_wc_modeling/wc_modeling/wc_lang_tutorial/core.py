@@ -36,7 +36,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     # Don't change the next comment - it's used by a literalinclude
     # This example illustrates how to read a model from an Excel file
     # 'model_filename' is the name of an Excel file storing a model
-    model = wc_lang.io.Reader().run(model_filename)
+    model = wc_lang.io.Reader().run(model_filename)[wc_lang.Model][0]
 
     results.append("read model: '{}'".format(model.name))
 
@@ -46,13 +46,13 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     # This example illustrates how to write a model to a set of .tsv files
     # 'examples_dir' is a directory
     model_filename_pattern = os.path.join(examples_dir, 'example_model-*.tsv')
-    wc_lang.io.Writer().run(model, model_filename_pattern, set_repo_metadata_from_path=False)
+    wc_lang.io.Writer().run(model_filename_pattern, model, set_repo_metadata_from_path=False)
 
     results.append("write a model to a set of .tsv files: '{}'".format(model_filename_pattern))
 
     # Don't change the next comment - it's used by a literalinclude
     # This example illustrates how to read a model from a set of .tsv files
-    model_from_tsv = wc_lang.io.Reader().run(model_filename_pattern)
+    model_from_tsv = wc_lang.io.Reader().run(model_filename_pattern)[wc_lang.Model][0]
 
     results.append("read a model from a set of .tsv files: '{}'".format(model_from_tsv.name))
 
