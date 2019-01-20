@@ -181,7 +181,7 @@ Fourth, use the following command to log in the container.::
   docker-compose up -d
   docker-compose exec wc_env bash
 
-Fifth, use the integrated WC modeling command line program, `*wc* <https://github.com/KarrLab/wc>`_, to run WC models and WC modeling tools. For example, the following command illustrates how to get help for the *wc* program. See the `*wc* documentation <https://docs.karrlab.org/wc>`_ for more information.::
+Fifth, use the integrated WC modeling command line program, `*wc* <https://github.com/KarrLab/wc_cli>`_, to run WC models and WC modeling tools. For example, the following command illustrates how to get help for the *wc* program. See the `*wc* documentation <https://docs.karrlab.org/wc_cli>`_ for more information.::
 
   container >> wc --help
 
