@@ -192,7 +192,7 @@ You can use the ``setuptools`` package to build a install script for your packag
       },
       entry_points={
           'console_scripts': [
-              'intro_to_wc_modeling = intro_to_wc_modeling.__main__:main',
+              'intro-to-wc-modeling = intro_to_wc_modeling.__main__:main',
           ],
       },
 

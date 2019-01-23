@@ -51,7 +51,7 @@ setuptools.setup(
     },
     entry_points={
         'console_scripts': [
-            'intro_to_wc_modeling = intro_to_wc_modeling.__main__:main',
+            'intro-to-wc-modeling = intro_to_wc_modeling.__main__:main',
         ],
     },
 

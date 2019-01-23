@@ -121,7 +121,7 @@ Building the *wc_env* and *wc_env_dependencies* Docker images
 
 Use the following command to build the *wc_env* and *wc_env_dependencies* images::
 
-    wc_env_manager build
+    wc-env-manager build
 
 
 Pushing the *wc_env* and *wc_env_dependencies* Docker images to DockerHub
@@ -129,7 +129,7 @@ Pushing the *wc_env* and *wc_env_dependencies* Docker images to DockerHub
 
 Use the following command to push the *wc_env* and *wc_env_dependencies* images to GitHub::
 
-    wc_env_manager push
+    wc-env-manager push
 
 Using *wc_env_manager* to create and run Docker containers for WC modeling
 --------------------------------------------------------------------------
@@ -146,12 +146,12 @@ Pulling existing Docker images
 
 First, use the following command to pull existing WC modeling Docker images. This will pull both the base image with third part dependencies, *wc_env_dependencies*, and the image with WC models and modeling tools, *wc_env*.::
 
-  wc_env_manager pull
+  wc-env-manager pull
 
 The following commands can also be used to pull the individual images.::
 
-  wc_env_manager base-image pull
-  wc_env_manager image pull
+  wc-env-manager base-image pull
+  wc-env-manager image pull
 
 
 Building containers for WC modeling
@@ -167,7 +167,7 @@ Second, set the configuration for the containers created by *wc_env_manager* by 
 
 Third, use the following command to use *wc_env* to construct a Docker container.::
 
-  wc_env_manager container build
+  wc-env-manager container build
 
 This will print out the id of the created container.
 
