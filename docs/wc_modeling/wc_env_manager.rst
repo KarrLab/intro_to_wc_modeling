@@ -181,9 +181,9 @@ Fourth, use the following command to log in the container.::
   docker-compose up -d
   docker-compose exec wc_env bash
 
-Fifth, use the integrated WC modeling command line program, `*wc* <https://github.com/KarrLab/wc_cli>`_, to run WC models and WC modeling tools. For example, the following command illustrates how to get help for the *wc* program. See the `*wc* documentation <https://docs.karrlab.org/wc_cli>`_ for more information.::
+Fifth, use the integrated WC modeling command line program, `*wc_cli* <https://github.com/KarrLab/wc_cli>`_, to run WC models and WC modeling tools. For example, the following command illustrates how to get help for the *wc_cli* program. See the `*wc_cli* documentation <https://docs.karrlab.org/wc_cli>`_ for more information.::
 
-  container >> wc --help
+  container >> wc-cli --help
 
 
 Using WC modeling computing environments with an external IDE such as PyCharm
