@@ -13,6 +13,7 @@ Requirements
 
 Below is a list of all of the packages needed for the tutorials. Note, each tutorial only requires a subset of these packages. Please see the tutorials for information about the packages required for each tutorial.
 
+* `ChemAxon Marvin <https://chemaxon.com/products/marvin>`_
 * `CPLEX <https://www.ibm.com/analytics/cplex-optimizer>`_
 * `Docker <https://www.docker.com/>`_
 * `Gimp <https://www.gimp.org/>`_
@@ -101,6 +102,18 @@ Detailed instructions to install the tutorials and all of the requirements
         make
         make install
         ldconfig
+
+    #. Install ChemAxon Marvin
+
+        #. Download the installer from `https://chemaxon.com/products/marvin/download <https://chemaxon.com/products/marvin/download>`_
+        #. Install ChemAxon Marvin::
+
+            export version_marvin=19.3
+            dpkg -i marvin_linux_${version_marvin}.deb
+
+        #. Obtain a license at `https://docs.chemaxon.com/display/docs/About+ChemAxon+Licensing <https://docs.chemaxon.com/display/docs/About+ChemAxon+Licensing>`_. Free 2-year licenses are available for academic research.
+        #. Download your license from `https://accounts.chemaxon.com/my/licenses <https://accounts.chemaxon.com/my/licenses>`_
+        #. Save your your license to ``~/.chemaxon/license.cxl``
 
     #. Install the CPLEX optimization package and the CPLEX Python binding
 
