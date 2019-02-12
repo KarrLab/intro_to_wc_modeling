@@ -105,11 +105,23 @@ Detailed instructions to install the tutorials and all of the requirements
 
     #. Install ChemAxon Marvin
 
+        #. Install Java::
+
+            apt-get install default-jre default-jdk
+
         #. Download the installer from `https://chemaxon.com/products/marvin/download <https://chemaxon.com/products/marvin/download>`_
         #. Install ChemAxon Marvin::
 
             export version_marvin=19.3
             dpkg -i marvin_linux_${version_marvin}.deb
+
+        #. Set ``JAVA_HOME`` to the path to your Java virtual machine (JVM)::
+
+            export JAVA_HOME=/usr/lib/jvm/default-java
+
+        #. Add Marvin to the Java class path::
+
+            export CLASSPATH=$CLASSPATH:/opt/chemaxon/marvinsuite/lib/MarvinBeans.jar
 
         #. Obtain a license at `https://docs.chemaxon.com/display/docs/About+ChemAxon+Licensing <https://docs.chemaxon.com/display/docs/About+ChemAxon+Licensing>`_. Free 2-year licenses are available for academic research.
         #. Download your license from `https://accounts.chemaxon.com/my/licenses <https://accounts.chemaxon.com/my/licenses>`_
