@@ -41,8 +41,11 @@ How to install these tutorials
 ==========================================================================
 Run the following command to install the latest version from GitHub::
 
-    git clone git@github.com:KarrLab/intro_to_wc_modeling.git
-    pip install -e intro_to_wc_modeling
+    pip install https://github.com/KarrLab/log.git#egg=log
+    pip install https://github.com/KarrLab/wc_utils.git#egg=wc_utils
+    pip install https://github.com/KarrLab/obj_model.git#egg=obj_model
+    pip install https://github.com/KarrLab/wc_lang.git#egg=wc_lang
+    pip install https://github.com/KarrLab/intro_to_wc_modeling.git#egg=intro_to_wc_modeling
 
 
 ==========================================================================
@@ -138,10 +141,6 @@ Detailed instructions to install the tutorials and all of the requirements
 
         #. Install the Python binding::
 
-            # Python 2.7
-            cd /opt/ibm/ILOG/CPLEX_Studio128/cplex/python/2.7/x86-64_linux/
-            pip2.7 install .
-
             # Python 3.6
             cd /opt/ibm/ILOG/CPLEX_Studio128/cplex/python/3.6/x86-64_linux/
             pip3.6 install .
@@ -191,23 +190,23 @@ Detailed instructions to install the tutorials and all of the requirements
         #. Install Gurobi::
 
             apt-get install
-            wget http://packages.gurobi.com/7.5/gurobi7.5.2_linux64.tar.gz
-            tar xvfz gurobi7.5.2_linux64.tar.gz
-            mv gurobi752 /opt/
+            wget http://packages.gurobi.com/8.1/gurobi8.1.0_linux64.tar.gz
+            tar xvfz gurobi8.1.0_linux64.tar.gz
+            mv gurobi810 /opt/
 
             echo "" >> ~/.bashrc
             echo "# Gurobi" >> ~/.bashrc
-            echo "export GUROBI_HOME=/opt/gurobi752/linux64" >> ~/.bashrc
+            echo "export GUROBI_HOME=/opt/gurobi810/linux64" >> ~/.bashrc
             echo "export PATH=\"\${PATH}:\${GUROBI_HOME}/bin\"" >> ~/.bashrc
             echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:\${GUROBI_HOME}/lib\"" >> ~/.bashrc
 
         #. Use your license to activate Gurobi::
 
-            /opt/gurobi752/linux64/bin/grbgetkey "<license>"
+            /opt/gurobi810/linux64/bin/grbgetkey "<license>"
 
         #. Install the Python binding::
 
-            cd /opt/gurobi752/linux64
+            cd /opt/gurobi810/linux64
             python setup.py install
 
     #. Optionally, install the MINOS optimization package and the MINOS Python binding:
@@ -251,7 +250,7 @@ Detailed instructions to install the tutorials and all of the requirements
         #. Install Mosek::
 
             cd /tmp
-            wget --no-check-certificate https://d2i6rjz61faulo.cloudfront.net/stable/8.1.0.37/mosektoolslinux64x86.tar.bz2
+            wget --no-check-certificate https://d2i6rjz61faulo.cloudfront.net/stable/8.1.0.78/mosektoolslinux64x86.tar.bz2
             tar -xvvf mosektoolslinux64x86.tar.bz2
             mv /tmp/mosek /opt/
 
@@ -261,10 +260,6 @@ Detailed instructions to install the tutorials and all of the requirements
             echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:/opt/mosek/8/tools/platform/linux64x86/bin\"" >> ~/.bashrc
 
         #. Install the Python binding::
-
-            # Python 2.7
-            cd /opt/mosek/8/tools/platform/linux64x86/python/2/
-            python2.7 setup.py install
 
             # Python 3.6
             cd /opt/mosek/8/tools/platform/linux64x86/python/3/
@@ -326,20 +321,20 @@ Detailed instructions to install the tutorials and all of the requirements
         #. Download and unpack XPRESS::
 
             cd /tmp
-            wget --no-check-certificate https://clientarea.xpress.fico.com/downloads/8.4.4/xp8.4.4_linux_x86_64_setup.tar
-            mkdir xp8.4.4_linux_x86_64_setup
-            tar -xvvf xp8.4.4_linux_x86_64_setup.tar -C xp8.4.4_linux_x86_64_setup
+            wget --no-check-certificate https://clientarea.xpress.fico.com/downloads/8.5.6/xp8.5.6_linux_x86_64_setup.tar
+            mkdir xp8.5.6_linux_x86_64_setup
+            tar -xvvf xp8.5.6_linux_x86_64_setup.tar -C xp8.5.6_linux_x86_64_setup
 
         #. Get your host id::
 
-            cd /tmp/xp8.4.4_linux_x86_64_setup
+            cd /tmp/xp8.5.6_linux_x86_64_setup
             utils/xphostid | grep -m 1 "<id>" | cut -d ">" -f 2 | cut -d "<" -f 1
 
         #. Use your host id to create a license at `https://app.xpress.fico.com <https://app.xpress.fico.com>`_
         #. Save the license to `/tmp/xpauth.xpr`
         #. Install XPRESS. Note, the standard library directory needs to be added to the library path to prevent the OS from using the versions of libcrypto and libssl provided by XPRESS.::
 
-            cd /tmp/xp8.4.4_linux_x86_64_setup
+            cd /tmp/xp8.5.6_linux_x86_64_setup
             ./install.sh
 
             echo "" >> ~/.bashrc
@@ -354,13 +349,10 @@ Detailed instructions to install the tutorials and all of the requirements
 
             * Add XPRESS to your Python path::
 
-                # Python 2.7
-                echo "/opt/xpressmp/lib" | tee /usr/local/lib/python2.7/site-packages/xpress.pth
-
                 # Python 3.6
                 echo "/opt/xpressmp/lib" | tee /usr/local/lib/python3.6/site-packages/xpress.pth
 
-            * Save the following package meta data to `/usr/local/lib/python2.7/site-packages/xpress-8.4.4.egg-info` for Python 2.7 and/or `/usr/local/lib/python3.6/site-packages/xpress-8.4.4.egg-info` for Python 3.6::
+            * Save the following package meta data to `/usr/local/lib/python3.6/site-packages/xpress-8.5.6.egg-info` for Python 3.6::
 
                 Metadata-Version: 1.0
                 Name: xpress
@@ -391,17 +383,18 @@ Detailed instructions to install the tutorials and all of the requirements
                 libopenblas-dev \
                 wget
         
-        #. Download, compile, and install SUNDIALS 2.7.0::
+        #. Download, compile, and install SUNDIALS 3.2.1::
 
             cd /tmp
-            wget https://computation.llnl.gov/projects/sundials/download/sundials-2.7.0.tar.gz
-            tar xzf sundials-2.7.0.tar.gz
-            cd sundials-2.7.0
+            wget https://computation.llnl.gov/projects/sundials/download/sundials-3.2.1.tar.gz
+            tar xzf sundials-3.2.1.tar.gz
+            cd sundials-3.2.1
             mkdir build
             cd build
             cmake \
                 -DEXAMPLES_ENABLE=OFF \
                 -DLAPACK_ENABLE=ON \
+                -DSUNDIALS_INDEX_TYPE=int32_t \
                 ..
             make
             make install
@@ -413,8 +406,8 @@ Detailed instructions to install the tutorials and all of the requirements
         #. Remove SUNDIALS source files::
 
             cd /tmp
-            rm sundials-2.7.0.tar.gz
-            rm -r sundials-2.7.0
+            rm sundials-3.2.1.tar.gz
+            rm -r sundials-3.2.1
 
     #. Install the Sublime text editor::
 
@@ -424,9 +417,9 @@ Detailed instructions to install the tutorials and all of the requirements
 
     #. Install the `PyCharm IDE <https://www.jetbrains.com/pycharm/download>`_::
 
-        sudo mv ~/Downloads/pycharm-community-2018.2.2.tar.gz /opt/
-        sudo tar -xzf pycharm-community-2018.2.2.tar.gz
-        cd pycharm-community-2018.2.2/bin
+        sudo mv ~/Downloads/pycharm-community-2018.3.5.tar.gz /opt/
+        sudo tar -xzf pycharm-community-2018.3.5.tar.gz
+        cd pycharm-community-2018.3.5/bin
         ./pycharm.sh &
 
     #. Install the CircleCI command line tool::

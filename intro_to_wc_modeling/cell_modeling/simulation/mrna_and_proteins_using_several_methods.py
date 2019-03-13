@@ -467,9 +467,9 @@ class CmeSimulation(object):
             p_part_vec (:obj:`numpy.array`): vector of probability of each (mRNA, protein) state (dimensionless)
 
         Returns:
-            adf
+            :obj:`numpy.array`: vector of size ((m_max - m_min + 1) * (n_max - n_min + 1), 1) that represents
+                mRNA = {m_min .. m_max} and protein = {n_min .. n_max}
         """
-
         p_part_mat = self.partial_vector_to_partial_matrix(p_part_vec)
 
         dp_dt_part_mat = numpy.zeros(p_part_mat.shape)
@@ -507,11 +507,12 @@ class CmeSimulation(object):
                 * :obj:`numpy.array`: predicted probability of each (mRNA, protein) state at each time point (dimensionless)
         """
         assert ((t_end - t_0) / t_step % 1 == 0)
-        t = numpy.linspace(t_0, t_end, int((t_end - t_0) / t_step) + 1)
-        p_part_vec = integrate.odeint(lambda p, t: self.dp_dt(p), self.full_matrix_to_partial_vector(self.p_0), t)
-        p = numpy.zeros((t.size, self.p_0.shape[0], self.p_0.shape[1]))
-        p[:, self.m_min:, self.n_min:] = p_part_vec.reshape((t.size, self.m_max - self.m_min + 1, self.n_max - self.n_min + 1))
-        return (t, p)
+        t_eval = numpy.linspace(t_0, t_end, int((t_end - t_0) / t_step) + 1)
+        result = integrate.solve_ivp(lambda t, p: self.dp_dt(p), (t_0, t_end),
+                                     self.full_matrix_to_partial_vector(self.p_0), t_eval=t_eval)
+        p = numpy.zeros((t_eval.size, self.p_0.shape[0], self.p_0.shape[1]))
+        p[:, self.m_min:, self.n_min:] = result.y.reshape((t_eval.size, self.m_max - self.m_min + 1, self.n_max - self.n_min + 1))
+        return (t_eval, p)
 
     def plot_simulation_results(self, t, p):
         """ Plot simulation results
@@ -627,7 +628,7 @@ def probability_distribution_exercise():
     ##########################################################
     # Simulate the temporal dynamics
     ##########################################################
-    t, p = sim.simulate(t_end=2, t_step=0.01)
+    t, p = sim.simulate(t_end=2., t_step=0.01)
     fig = sim.plot_simulation_results(t, p)
     # fig.show()
     filename = os.path.join(OUT_DIR, 'mrna-and-protein-using-several-methods-probability-distribution-simulation.png')
