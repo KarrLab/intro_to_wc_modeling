@@ -189,7 +189,6 @@ Detailed instructions to install the tutorials and all of the requirements
 
         #. Install Gurobi::
 
-            apt-get install
             wget http://packages.gurobi.com/8.1/gurobi8.1.0_linux64.tar.gz
             tar xvfz gurobi8.1.0_linux64.tar.gz
             mv gurobi810 /opt/
