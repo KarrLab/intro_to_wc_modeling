@@ -28,12 +28,13 @@ File naming and organization
 Our convention is to place all top-level documentation within a separate ``docs`` directory within each repository and to embed all API documentation in the source code.::
 
     /path/to/repo/
-        docs/                  # directory for all of the documentation files
-            index.rst          # main documentation file
-            conf.py            # Sphinx configuration
-            requirements.txt   # packages required to compile the documentation
-        setup.cfg              # contains a setting which specifies the packages for which
-                               # API documentation should be generated
+        docs/                    # directory for all of the documentation files
+            index.rst            # main documentation file
+            conf.py              # Sphinx configuration
+            requirements.txt     # packages required to compile the documentation
+            requirements.rtd.txt # packages required to compile the documentation; used by Read the Docs
+        setup.cfg                # contains a setting which specifies the packages for which
+                                 # API documentation should be generated
 
 
 Generating a Sphinx configuration file

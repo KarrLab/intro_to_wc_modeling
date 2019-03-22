@@ -18,10 +18,10 @@ We recommend using the following principles to organize Python projects:
                 secret/                 # git-ignored fixtures that contain usernames, passwords, and tokens
             requirements.txt            # list of packages required to run the tests; used by CircleCI
         docs/                           # directory for documentation
-            conda.environment.yml       # conda environment to compile documentation
             conf.py                     # documentation configuration
             index.rst                   # main documentation file
-            requirements.txt            # list of packages required to compile the documentation; used by Read the Docs
+            requirements.txt            # list of packages required to compile the documentation
+            requirements.rtd.txt        # list of packages required to compile the documentation; used by Read the Docs
             _build/html/                # directory where compiled documentation is saved
             _static                     # optional for static files such as .css and .js files needed for the documentation
         examples/                       # (optional) directory for examples of how to use the code
@@ -34,6 +34,7 @@ We recommend using the following principles to organize Python projects:
         setup.py                        # installation script
         .circleci/                      # directory for CircleCI configuration
             config.yml                  # CircleCI configuration
+            requirements.txt            # list of locations of requirements not in PyPI
             downstream_dependencies.yml # List of downstream dependencies in YAML format
         .gitignore                      # list of file paths and extensions that Git should ignore
         .readthedocs.yml                # Read the Docs configuration

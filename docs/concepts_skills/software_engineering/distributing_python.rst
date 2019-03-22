@@ -60,6 +60,8 @@ Required options can be specified by post-pending option names to each dependenc
 
 Similarly, ``docs/requirements.txt`` and ``tests/requirements.txt`` can be used to specify packages required for testing and documentation.
 
+In addition, ``.circleci/requirements.txt``  and ``docs/requirements.rtd.txt`` can be used to specify the locations of packages that are not in PyPI for CircleCI and Read the Docs.
+
 Create a file ``requirements.optional.txt`` which lists the dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -275,7 +277,7 @@ After you have configured Sphinx, committed your code to GitHub, and made your r
 #. Use the "Settings" and "Advanced Settings" panels to edit the settings for the project.
 
     * Set the homepage and tags
-    * Set the requirements file to ``docs/requirements.txt``
+    * Set the requirements file to ``docs/requirements.rtd.txt``
     * Set the Python configuration file to ``docs/conf.py``
     * Set the Python interpreter to ``CPython 3.x``
 
@@ -286,7 +288,7 @@ After you have configured Sphinx, committed your code to GitHub, and made your r
         python:
            version: 3
            setup_py_install: true
-        requirements_file: docs/requirements.txt
+        requirements_file: docs/requirements.rtd.txt
         conda:
             file: docs/conda.environment.yml
 
