@@ -236,7 +236,7 @@ class OdeSimulation(object):
         Args:
             t_0 (:obj:`float`, optional): initial time (h)
             t_end (:obj:`float`, optional): end time (h)
-            t_step (:obj:`float`, optional): frequency at which to record predicted mRNA and proteins
+            t_step (:obj:`float`, optional): period at which to record predicted mRNA and proteins (h)
 
         Return:
             :obj:`tuple`:

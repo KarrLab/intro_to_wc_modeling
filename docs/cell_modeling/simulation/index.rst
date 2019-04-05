@@ -659,7 +659,7 @@ In this exercise, you will compare deterministic, probalistic, and stochastic si
 * Zeroth order mRNA synthesis: :math:`k_m`
 * First order protein synthesis: :math:`m k_n`
 * First order RNA degradation: :math:`m \gamma_m`
-* First order protein degradation: :math:`n \gamma n`
+* First order protein degradation: :math:`n \gamma_n`
 * :math:`k_m = 5` h\ :sup:`-1`
 * :math:`k_n = 20` molecule\ :sup:`-1` h\ :sup:`-1`
 * :math:`\gamma_m = \frac{\ln{2}}{3}` min\ :sup:`-1`
