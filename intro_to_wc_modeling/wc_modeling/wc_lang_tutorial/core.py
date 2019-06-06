@@ -7,9 +7,7 @@
 :License: MIT
 '''
 
-import inspect
 import os
-import pkg_resources
 import wc_lang
 import wc_lang.io
 
