@@ -44,9 +44,13 @@ class TestSimulationTutorial(unittest.TestCase):
         with self.assertRaisesRegex(Exception, 'below 0'):
             intro_to_wc_modeling.cell_modeling.simulation.dfba.main(init_concs=init_concs)
 
-    def test_mrna_and_proteins_using_several_methods(self):
+    def test_mrna_and_proteins_using_several_methods_deterministic_exercise(self):
         mrna_and_proteins_using_several_methods.deterministic_exercise()
+
+    def test_mrna_and_proteins_using_several_methods_probability_distribution_exercise(self):
         mrna_and_proteins_using_several_methods.probability_distribution_exercise()
+
+    def test_mrna_and_proteins_using_several_methods_trajectory_exercise(self):
         mrna_and_proteins_using_several_methods.trajectory_exercise()
 
     def test_get_steady_state(self):

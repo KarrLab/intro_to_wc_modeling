@@ -507,11 +507,18 @@ class CmeSimulation(object):
                 * :obj:`numpy.array`: predicted probability of each (mRNA, protein) state at each time point (dimensionless)
         """
         assert ((t_end - t_0) / t_step % 1 == 0)
-        t = numpy.linspace(t_0, t_end, int((t_end - t_0) / t_step) + 1)
-        p_part_vec = integrate.odeint(lambda p, t: self.dp_dt(p), self.full_matrix_to_partial_vector(self.p_0), t)
-        p = numpy.zeros((t.size, self.p_0.shape[0], self.p_0.shape[1]))
-        p[:, self.m_min:, self.n_min:] = p_part_vec.reshape((t.size, self.m_max - self.m_min + 1, self.n_max - self.n_min + 1))
-        return (t, p)
+
+        t_eval = numpy.linspace(t_0, t_end, int((t_end - t_0) / t_step) + 1)
+
+        result = integrate.solve_ivp(lambda t, p: self.dp_dt(p), (t_0, t_end),
+                                    self.full_matrix_to_partial_vector(self.p_0), t_eval=t_eval,
+                                    method='RK45', vectorized=True) # use RK45 to avoid segmentation fault caused by clash between jnius and LSODA
+        assert result.success
+        p = numpy.zeros((t_eval.size, self.p_0.shape[0], self.p_0.shape[1]))
+        p[:, self.m_min:, self.n_min:] = numpy.transpose(
+            result.y.reshape((self.m_max - self.m_min + 1, self.n_max - self.n_min + 1, t_eval.size)),
+            (2, 0, 1))
+        return (t_eval, p)
 
     def plot_simulation_results(self, t, p):
         """ Plot simulation results
