@@ -44,7 +44,7 @@ def main(examples_dir=os.path.join(os.path.dirname(__file__), 'examples')):
     # This example illustrates how to write a model to a set of .tsv files
     # 'examples_dir' is a directory
     model_filename_pattern = os.path.join(examples_dir, 'example_model-*.tsv')
-    wc_lang.io.Writer().run(model_filename_pattern, model, set_repo_metadata_from_path=False)
+    wc_lang.io.Writer().run(model_filename_pattern, model, data_repo_metadata=False)
 
     results.append("write a model to a set of .tsv files: '{}'".format(model_filename_pattern))
 
