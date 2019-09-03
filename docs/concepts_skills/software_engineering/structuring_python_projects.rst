@@ -8,7 +8,7 @@ We recommend using the following principles to organize Python projects:
 
     .. code-block :: text
 
-        repository_name/                # source code directory
+        repository_name/                # source code directory +
             __init__.py                 # each source code directory must contain an ``__init__.py`` file
             __main__.py                 # optional, for command line programs
             VERSION                     # text file with version number
@@ -34,11 +34,12 @@ We recommend using the following principles to organize Python projects:
         setup.py                        # installation script
         .circleci/                      # directory for CircleCI configuration
             config.yml                  # CircleCI configuration
-            requirements.txt            # list of locations of requirements not in PyPI; for details see `Karr Lab build utilities <https://docs.karrlab.org/karr_lab_build_utils/master/0.0.13/tutorial_developers.html>`_
+            requirements.txt            # list of locations of requirements not in PyPI ++
             downstream_dependencies.yml # List of downstream dependencies in YAML format
         .gitignore                      # list of file paths and extensions that Git should ignore
         .readthedocs.yml                # Read the Docs configuration
 
-    *Note: the name of the source code directory should be the same as that of the repository*
+    + *The name of the source code directory should be the same as that of the repository.*
+    ++ *For details about ``.circleci/requirements.txt`` see `Karr Lab build utilities <https://docs.karrlab.org/karr_lab_build_utils/master/tutorial_developers.html>`_*
 
 * Separate code which is useful on its own, distinct from the project, into their own packages and repositories
