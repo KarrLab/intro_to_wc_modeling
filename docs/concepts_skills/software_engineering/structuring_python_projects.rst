@@ -34,7 +34,7 @@ We recommend using the following principles to organize Python projects:
         setup.py                        # installation script
         .circleci/                      # directory for CircleCI configuration
             config.yml                  # CircleCI configuration
-            requirements.txt            # list of locations of requirements not in PyPI; for details see `Karr Lab build utilities <https://docs.karrlab.org/karr_lab_build_utils/master/0.0.13/tutorial_developers.html>_`
+            requirements.txt            # list of locations of requirements not in PyPI; for details see `Karr Lab build utilities <https://docs.karrlab.org/karr_lab_build_utils/master/0.0.13/tutorial_developers.html>`_
             downstream_dependencies.yml # List of downstream dependencies in YAML format
         .gitignore                      # list of file paths and extensions that Git should ignore
         .readthedocs.yml                # Read the Docs configuration
