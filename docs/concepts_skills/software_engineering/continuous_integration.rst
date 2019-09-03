@@ -37,6 +37,8 @@ Follow these instructions to use CircleCI to continuously test a GitHub reposito
 #. Click the `Follow Project` button for any repository you want to compile and test on CircleCI
 #. Add a CircleCI configuration file, ``/path/to/repo/.circleci/config.yml``, to the repository to instruct CircleCI what to execute within each build. This includes the following instructions
 
+See :ref:`Using the CircleCI cloud-based continuous integration system` please.
+
     * Which container/virtual machine should be used to run the build. We are using a custom container so that little additional software needs to be installed to test our code. See :ref:`How to build a Ubuntu Linux image with Docker` for more information about how to create and use custom Linux containers.
     * Which GitHub repository to checkout.
     * How to install any additional packages needed to execute the tests.
@@ -85,11 +87,12 @@ Occasionally, you may need to change the dependencies of a repository. The follo
 
 #. Update the ``pip`` ``requirements.txt`` files which describe the dependencies of the package, its tests, and its documentation.
 
-    * ``./requirements.txt`` describes the dependencies of the package
+    * ``./requirements.txt`` should list the immediate dependencies (imported packages) and constraints on the versions required by the package. It should not contain URLs,  specify the source from which a package should be obtained, or the specific version that should be installed.
     * ``./requirements.optional.txt`` describes optional dependencies of the package
     * ``./tests/requirements.txt`` describes the dependencies of the package's tests
     * ``./docs/requirements.txt`` describes the dependencies of the package's documentation, and
-    * ``.circleci/requirements.txt`` and ``./docs/requirements.rtd.txt`` tell CircleCI and Read the Docs where to obtain dependencies that are not located in PyPI
+    * ``.circleci/requirements.txt`` tells CircleCI where to obtain dependencies that are not located in PyPI. 
+    * ``./docs/requirements.rtd.txt`` tells Read the Docs where to obtain dependencies that are not located in PyPI
 
 #. Commit the changes to the ``requirements.txt`` files to your code repository.
 
