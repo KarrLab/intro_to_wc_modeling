@@ -9,7 +9,7 @@ We recommend using the following principles to organize Python projects:
     .. code-block :: text
 
         repository_name/                # source code directory (1)
-            __init__.py                 # each source code directory must contain an `__init__.py` file
+            __init__.py                 # each source code directory must contain an '__init__.py' file
             __main__.py                 # optional, for command line programs
             VERSION                     # text file with version number
             data/                       # directory for data files needed by the code
@@ -40,6 +40,7 @@ We recommend using the following principles to organize Python projects:
         .readthedocs.yml                # Read the Docs configuration
 
     \(1\) *The name of the source code directory should be the same as that of the repository.*
+    
     \(2\) *For details about `requirements.txt` files see :ref:`Changing package dependencies for a CircleCI build` *
 
 * Separate code that is useful on its own, distinct from the project, into independent packages and repositories.
