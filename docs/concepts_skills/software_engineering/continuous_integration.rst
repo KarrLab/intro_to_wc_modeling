@@ -37,7 +37,7 @@ Follow these instructions to use CircleCI to continuously test a GitHub reposito
 #. Click the `Follow Project` button for any repository you want to compile and test on CircleCI
 #. Add a CircleCI configuration file, ``/path/to/repo/.circleci/config.yml``, to the repository to instruct CircleCI what to execute within each build. This includes the following instructions
 
-    * Which container/virtual machine should be used to run the build. We are using a custom container so that little additional software needs to be installed to test our code. See :numref:`building_linux_containers` for more information about how to create and use custom Linux containers.
+    * Which container/virtual machine should be used to run the build. We are using a custom container so that little additional software needs to be installed to test our code. See :ref:`How to build a Ubuntu Linux image with Docker` for more information about how to create and use custom Linux containers.
     * Which GitHub repository to checkout.
     * How to install any additional packages needed to execute the tests.
     * Instructions on how to run the tests and store the results.
