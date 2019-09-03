@@ -1,7 +1,5 @@
-.. _building_linux_containers:
-
 How to build a Ubuntu Linux image with Docker
-=================================================
+=============================================
 Docker images are configurable, free-standing computing environments that can be used to create and run custom software on top of an operating system. Unlike virtual machines (VM), images do not contain an operating system. Docker images are a convenient way to distribute complicated software programs that have numerous dependencies and complicated configurations. We are using Docker images because CircleCI allows users to use Docker images to customize the environment used to execute each build. This makes it much easier to install programs into the environment used by CircleCI to run our builds.
 
 Docker images are built by compiling Dockerfiles which are explicit instructions on how to build the image. Importantly, this makes Docker images very transparent.
