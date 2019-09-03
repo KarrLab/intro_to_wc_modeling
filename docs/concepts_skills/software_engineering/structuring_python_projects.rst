@@ -39,8 +39,8 @@ We recommend using the following principles to organize Python projects:
         .gitignore                      # list of file paths and extensions that Git should ignore
         .readthedocs.yml                # Read the Docs configuration
 
-    \(1\) *The name of the source code directory should be the same as that of the repository.*
-    
-    \(2\) *For details about `requirements.txt` files see :ref:`Changing package dependencies for a CircleCI build` *
+    \(1\) The name of the source code directory should be the same as that of the repository.
 
-* Separate code that is useful on its own, distinct from the project, into independent packages and repositories.
+    \(2\) For details about `requirements.txt` files see :ref:`Changing package dependencies for a CircleCI build`.
+
+* Separate code that is useful on its own--distinct from the project, into independent packages and repositories.
