@@ -83,15 +83,15 @@ The Karr Lab uses both of these mechanisms.
 
 Changing package dependencies for a CircleCI build
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Occasionally, you may need to change the dependencies of a repository. The following recipe can be used to update the dependencies of a repository:
+Occasionally, you may need to change the dependencies of a repository. The following steps can be used to update the dependencies of a repository:
 
-#. Update the ``pip`` ``requirements.txt`` files which identify packages that the repository uses. To automate this process, use the commands in `karr_lab_build_utils <https://docs.karrlab.org/karr_lab_build_utils/latest/tutorial_developers.html#managing-dependencies-of-packages>`_ that can obtain a package's dependencies, and identify dependencies that may be missing or unnecessary.
+#. Update the ``pip`` ``requirements.txt`` files which identify packages that the repository uses. To automate this process, use the commands in `karr_lab_build_utils <https://docs.karrlab.org/karr_lab_build_utils/latest/tutorial_developers.html#managing-dependencies-of-packages>`_ that can obtain a package's dependencies and identify dependencies that may be missing or unnecessary.
 
-    * ``./requirements.txt`` describe the dependencies of the package. It lists the package's immediate dependencies, i.e., the packages that are imported,  and may constraint which versions are suitable for the package. It should not contain URLs,  specify the source from which a package should be obtained, or the specific version of a dependency to install.
-    * ``./requirements.optional.txt`` describes optional dependencies of the package.
+    * ``./requirements.txt`` describes the dependencies of the package. It lists the package's immediate dependencies, i.e., the other packages that are imported, and may constraint which versions are suitable for the package. It should not contain URLs, specify the source which should provide a package, or specify the specific version of a dependency to install. The systems administrator who configures the package's environment, not the programmer, should be responsible for these details.
+    * ``./requirements.optional.txt`` describes the package's optional dependencies.
     * ``./tests/requirements.txt`` lists the dependencies of the package's tests.
     * ``./docs/requirements.txt`` describes the dependencies of the software that compiles the package's documentation.
-    * ``.circleci/requirements.txt`` tells CircleCI where to obtain dependencies that are not located in PyPI. Dependencies can be identified by GitHub URLs with the format ``git+https://github.com/--account_name--/--package_name--.git#egg=--package_name--``. All dependencies--including transitive dependencies--must be listed. They must be listed in dependency order, so that if package `y` depends on package `x` then `x` precedes `y`, in the order of a `topological sort <https://en.wikipedia.org/wiki/Topological_sorting>`_ of the dependencies.
+    * ``.circleci/requirements.txt`` tells CircleCI where to obtain dependencies that are not located in PyPI. Dependencies can be identified by GitHub URLs with the format ``git+https://github.com/--account_name--/--package_name--.git#egg=--package_name--``. All dependencies--including transitive dependencies--must be listed. The list must be arranged in dependency order, so that if package `y` depends on package `x` then `x` precedes `y`, as in a `topological sort <https://en.wikipedia.org/wiki/Topological_sorting>`_ of the dependencies.
     * ``./docs/requirements.rtd.txt`` tells Read the Docs where to obtain dependencies that are not located in PyPI.
 
 #. Commit the changes to the ``requirements.txt`` files to your code repository.
