@@ -83,11 +83,11 @@ The Karr Lab uses both of these mechanisms.
 
 Changing package dependencies for a CircleCI build
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Occasionally, you may need to change the dependencies of a repository. The following recipe can be used to update the PyPI dependencies of a repository:
+Occasionally, you may need to change the dependencies of a repository. The following recipe can be used to update the dependencies of a repository:
 
-#. Update the ``pip`` ``requirements.txt`` files which are used by the repository.
+#. Update the ``pip`` ``requirements.txt`` files which identify packages that the repository uses. To automate this process, use the commands in `karr_lab_build_utils <https://docs.karrlab.org/karr_lab_build_utils/latest/tutorial_developers.html#managing-dependencies-of-packages>`_ that can obtain a package's dependencies, and identify dependencies that may be missing or unnecessary.
 
-    * ``./requirements.txt`` describe the dependencies of the package. It lists the package's immediate dependencies, i.e., the packages it imports,  and constraints on their versions required by the package. It should not contain URLs,  specify the source from which a package should be obtained, or the specific version that should be installed. The ``find-missing-requirements`` command provided by `karr_lab_build_utils <https://docs.karrlab.org/karr_lab_build_utils/latest/tutorial_developers.html#finding-missing-requirements-for-a-package>`_ can obtain a packages dependencies.
+    * ``./requirements.txt`` describe the dependencies of the package. It lists the package's immediate dependencies, i.e., the packages that are imported,  and may constraint which versions are suitable for the package. It should not contain URLs,  specify the source from which a package should be obtained, or the specific version of a dependency to install.
     * ``./requirements.optional.txt`` describes optional dependencies of the package.
     * ``./tests/requirements.txt`` lists the dependencies of the package's tests.
     * ``./docs/requirements.txt`` describes the dependencies of the software that compiles the package's documentation.

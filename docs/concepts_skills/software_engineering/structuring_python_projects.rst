@@ -41,7 +41,7 @@ We recommend using the following principles to organize Python projects:
 
     \(1\) The name of the source code directory should be the same as that of the repository.
 
-    \(2\) For details about `requirements.txt` files see :ref:`Changing package dependencies for a CircleCI build`.
+    \(2\) For details about `requirements.txt` files see the section about :ref:`Changing package dependencies for a CircleCI build`.
 
     \(3\) These dependencies can be determined automatically by `karr_lab_build_utils <https://docs.karrlab.org/karr_lab_build_utils/latest/tutorial_developers.html#managing-dependencies-of-packages>`_.
 
