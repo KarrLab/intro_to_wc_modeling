@@ -91,7 +91,7 @@ Occasionally, you may need to change the dependencies of a repository. The follo
     * ``./requirements.optional.txt`` describes the package's optional dependencies.
     * ``./tests/requirements.txt`` lists the dependencies of the package's tests.
     * ``./docs/requirements.txt`` describes the dependencies of the software that compiles the package's documentation.
-    * ``.circleci/requirements.txt`` tells CircleCI where to obtain dependencies that are not located in PyPI. Dependencies can be identified by GitHub URLs with the format ``git+https://github.com/--account_name--/--package_name--.git#egg=--package_name--``. All dependencies--including transitive dependencies--must be listed. The list must be arranged in dependency order, so that if package `y` depends on package `x` then `x` precedes `y`, as in a `topological sort <https://en.wikipedia.org/wiki/Topological_sorting>`_ of the dependencies.
+    * ``.circleci/requirements.txt`` tells CircleCI where to obtain dependencies that are not located in PyPI. Dependencies can be identified by GitHub URLs with the format ``git+https://github.com/--account_name--/--package_name--.git#egg=--package_name--``. All dependencies--including transitive dependencies--must be listed. The list must be arranged in dependency order, so that if package `y` depends on package `x` then `x` precedes `y`, as in a `topological sort <https://en.wikipedia.org/wiki/Topological_sorting>`_ of the dependencies. This file works around limitations in pip and PyPI.
     * ``./docs/requirements.rtd.txt`` tells Read the Docs where to obtain dependencies that are not located in PyPI.
 
 #. Commit the changes to the ``requirements.txt`` files to your code repository.
