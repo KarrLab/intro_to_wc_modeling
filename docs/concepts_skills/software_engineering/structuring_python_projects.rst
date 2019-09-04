@@ -43,4 +43,4 @@ We recommend using the following principles to organize Python projects:
 
     \(2\) For details about `requirements.txt` files see :ref:`Changing package dependencies for a CircleCI build`.
 
-* Separate code that is useful on its own--distinct from the project, into independent packages and repositories.
+* Separate code that is useful on its own---distinct from the project, into independent packages and repositories.

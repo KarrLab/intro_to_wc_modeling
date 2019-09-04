@@ -85,14 +85,13 @@ Changing package dependencies for a CircleCI build
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Occasionally, you may need to change the dependencies of a repository. The following recipe can be used to update the PyPI dependencies of a repository:
 
-#. Update the ``pip`` ``requirements.txt`` files which describe the dependencies of the package, its tests, and its documentation.
+#. Update the ``pip`` ``requirements.txt`` files which used by the repository.
 
-    * ``./requirements.txt`` should list the immediate dependencies (imported packages) and constraints on the versions required by the package. It should not contain URLs,  specify the source from which a package should be obtained, or the specific version that should be installed.
-    * ``./requirements.optional.txt`` describes optional dependencies of the package. The ``find-missing-requirements`` command provided by the can obtain a packages dependencies.
-   `karr_lab_build_utils <https://docs.karrlab.org/karr_lab_build_utils/master/tutorial_developers.html#finding-missing-requirements-for-a-package>`_
-    * ``./tests/requirements.txt`` describes the dependencies of the package's tests.
-    * ``./docs/requirements.txt`` describes the dependencies of the package's documentation.
-    * ``.circleci/requirements.txt`` tells CircleCI where to obtain dependencies that are not located in `PyPI`. Dependencies can be identified by GitHub URLs in the format ``git+https://github.com/--account_name--/--package_name--.git#egg=--package_name--``. All dependencies--including transitive dependencies--must be listed. They must be listed in dependency order, so that if package `Y` depends on package `X` then `X` precedes `Y` (i.e., in the order of a `topological sort <https://en.wikipedia.org/wiki/Topological_sorting>`_ of the dependencies).
+    * ``./requirements.txt`` describe the dependencies of the package. It lists the package's immediate dependencies, i.e., the packages it imports,  and constraints on their versions required by the package. It should not contain URLs,  specify the source from which a package should be obtained, or the specific version that should be installed. The ``find-missing-requirements`` command provided by `karr_lab_build_utils <https://docs.karrlab.org/karr_lab_build_utils/master/tutorial_developers.html#finding-missing-requirements-for-a-package>`_ can obtain a packages dependencies.
+    * ``./requirements.optional.txt`` describes optional dependencies of the package.
+    * ``./tests/requirements.txt`` lists the dependencies of the package's tests.
+    * ``./docs/requirements.txt`` describes the dependencies of the software that compiles the package's documentation.
+    * ``.circleci/requirements.txt`` tells CircleCI where to obtain dependencies that are not located in PyPI. Dependencies can be identified by GitHub URLs with the format ``git+https://github.com/--account_name--/--package_name--.git#egg=--package_name--``. All dependencies--including transitive dependencies--must be listed. They must be listed in dependency order, so that if package `Y` depends on package `X` then `X` precedes `Y` (i.e., in the order of a `topological sort <https://en.wikipedia.org/wiki/Topological_sorting>`_ of the dependencies).
     * ``./docs/requirements.rtd.txt`` tells Read the Docs where to obtain dependencies that are not located in `PyPI`.
 
 #. Commit the changes to the ``requirements.txt`` files to your code repository.
