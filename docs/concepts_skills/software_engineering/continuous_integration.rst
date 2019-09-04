@@ -83,7 +83,7 @@ The Karr Lab uses both of these mechanisms.
 
 Changing package dependencies for a CircleCI build
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Occasionally, you may need to change the dependencies of a repository. The following steps can be used to update the dependencies of a repository:
+Occasionally, you may need to change the dependencies of a repository. The following steps can perform this task:
 
 #. Update the ``pip`` ``requirements.txt`` files which identify packages that the repository uses. To automate this process, use the commands in `karr_lab_build_utils <https://docs.karrlab.org/karr_lab_build_utils/latest/tutorial_developers.html#managing-dependencies-of-packages>`_ that can obtain a package's dependencies and identify dependencies that may be missing or unnecessary.
 
