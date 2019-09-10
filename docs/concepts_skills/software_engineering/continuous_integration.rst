@@ -37,7 +37,9 @@ Follow these instructions to use CircleCI to continuously test a GitHub reposito
 #. Click the `Follow Project` button for any repository you want to compile and test on CircleCI
 #. Add a CircleCI configuration file, ``/path/to/repo/.circleci/config.yml``, to the repository to instruct CircleCI what to execute within each build. This includes the following instructions
 
-    * Which container/virtual machine should be used to run the build. We are using a custom container so that little additional software needs to be installed to test our code. See :numref:`building_linux_containers` for more information about how to create and use custom Linux containers.
+See :ref:`Using the CircleCI cloud-based continuous integration system` please.
+
+    * Which container/virtual machine should be used to run the build. We are using a custom container so that little additional software needs to be installed to test our code. See :ref:`How to build a Ubuntu Linux image with Docker` for more information about how to create and use custom Linux containers.
     * Which GitHub repository to checkout.
     * How to install any additional packages needed to execute the tests.
     * Instructions on how to run the tests and store the results.
@@ -75,15 +77,23 @@ There are two main mechanisms to decrease the runtime of CircleCI builds by load
 
     The Dockerfile for the Docker image that the Karr Lab uses with CircleCI is located at `https://github.com/KarrLab/karr_lab_docker_images/tree/master/build <https://github.com/KarrLab/karr_lab_docker_images/tree/master/build>`_.
 
-    See the :numref:`building_linux_containers` for more information.
+    See :ref:`How to build a Ubuntu Linux image with Docker` for more information.
 
 The Karr Lab uses both of these mechanisms.
 
 Changing package dependencies for a CircleCI build
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Occasionally, you may need to change the dependencies of a repository. The following recipe can be used to update the PyPI dependencies of a repository:
+Occasionally, you may need to change the dependencies of a repository. The following steps can perform this task:
 
-#. Update the ``pip`` ``requirements.txt`` files which describe the dependencies of the package, its tests, and its documentation. This includes ``./requirements.txt`` which describes the dependencies of the package, ``./requirements.optional.txt`` which describes optional dependencies of the package, ``./tests/requirements.txt`` which describes the dependencies of the package's tests, ``./docs/requirements.txt`` which describes the dependencies of the package's documentation, and ``.circleci/requirements.txt`` and ``./docs/requirements.rtd.txt`` which tell CircleCI and Read the Docs where to obtain dependencies that are not located in PyPI.
+#. Update the ``pip`` ``requirements.txt`` files which identify packages that the repository uses. To automate this process, use the commands in `karr_lab_build_utils <https://docs.karrlab.org/karr_lab_build_utils/latest/tutorial_developers.html#managing-dependencies-of-packages>`_ that can obtain a package's dependencies and identify dependencies that may be missing or unnecessary.
+
+    * ``./requirements.txt`` describes the dependencies of the package. It lists the package's immediate dependencies, i.e., the other packages that are imported, and may constraint which versions are suitable for the package. It should not contain URLs, specify the source which should provide a package, or specify the specific version of a dependency to install. The systems administrator who configures the package's environment, not the programmer, should be responsible for these details.
+    * ``./requirements.optional.txt`` describes the package's optional dependencies.
+    * ``./tests/requirements.txt`` lists the dependencies of the package's tests.
+    * ``./docs/requirements.txt`` describes the dependencies of the software that compiles the package's documentation.
+    * ``.circleci/requirements.txt`` tells CircleCI where to obtain dependencies that are not located in PyPI. Dependencies can be identified by GitHub URLs with the format ``git+https://github.com/--account_name--/--package_name--.git#egg=--package_name--``. All dependencies--including transitive dependencies--must be listed. The list must be arranged in dependency order, so that if package `y` depends on package `x` then `x` precedes `y`, as in a `topological sort <https://en.wikipedia.org/wiki/Topological_sorting>`_ of the dependencies. This file works around limitations in pip and PyPI.
+    * ``./docs/requirements.rtd.txt`` tells Read the Docs where to obtain dependencies that are not located in PyPI.
+
 #. Commit the changes to the ``requirements.txt`` files to your code repository.
 
 If there are errors in the compilation and/or installation of the new dependencies, you can try rebuilding the build without its cache. As described above, we recommend using CircleCI's cache to avoid repeatedly recompiling dependent packages. The cache avoids recompiling dependent packages by storing them after the first time they are built, and loading them on subsequent builds. You can force CircleCI to create a new cache by incrementing the cache version number ``vXXX`` specified in ``.circleci/config.yml`` and pushing the updated configuration file to your code repository::

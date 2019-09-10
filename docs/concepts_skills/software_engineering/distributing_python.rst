@@ -262,7 +262,7 @@ There are also several online tutorials with more information about how to uploa
 
 Distributing containers with Docker Hub
 ---------------------------------------
-Docker Hub can be used to distribute virtual machines simply by changing the public/private setting of a repository. See :numref:`building_linux_containers` for more information about using Docker and Docker Hub.
+Docker Hub can be used to distribute virtual machines simply by changing the public/private setting of a repository. See :ref:`How to build a Ubuntu Linux image with Docker` for more information about using Docker and Docker Hub.
 
 
 Distributing documentation with Read The Docs
