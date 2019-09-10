@@ -16,7 +16,7 @@ def d_conc_d_t(concs, time):
     (`BIOMD0000000003 <http://www.ebi.ac.uk/biomodels-main/BIOMD0000000003>`_)
 
     Args:
-        time (obj:`float`): time
+        time (:obj:`float`): time
         concs (:obj:`numpy.ndarray`): array of current concentrations
 
     Returns:
