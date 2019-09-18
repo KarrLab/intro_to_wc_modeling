@@ -50,7 +50,7 @@ The following example illustrates how to use ``/path/to/package/requirements.txt
   numpy
   scipy<=1.2
   matplotlib==2.3[option]
-  git+https://github.com/KarrLab/obj_model.git#egg=obj_model
+  git+https://github.com/KarrLab/obj_tables.git#egg=obj_tables
 
 Packages that should be installed from PyPI should be listed by their names. Packages that should be installed from GitHub should be listed by their GitHub URL.
 

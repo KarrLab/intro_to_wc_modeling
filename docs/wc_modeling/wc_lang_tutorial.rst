@@ -9,12 +9,12 @@ It can be used to define models of entire cells, or models of smaller biochemica
 Excel spreadsheet workbooks and sets of delimited files. It also includes methods that
 analyze or transform models -- e.g., methods that validate, compare, and normalize them.
 
-``wc_lang`` depends heavily on the ``obj_model`` package which defines a generic language for declaring
+``wc_lang`` depends heavily on the ``obj_tables`` package which defines a generic language for declaring
 interrelated Python objects, converting them to and from data records,
 transferring the records to and from files, and validating their values.
-``obj_model`` is essentially an object-relational mapping (ORM) system that stores data in files
+``obj_tables`` is essentially an object-relational mapping (ORM) system that stores data in files
 instead of databases.
-However, users of ``wc_lang`` do not need to use ``obj_model`` directly.
+However, users of ``wc_lang`` do not need to use ``obj_tables`` directly.
 
 Semantics of a ``wc_lang`` biochemical Model
 ----------------------------------------------
@@ -35,11 +35,11 @@ are not represented.
 
 The data in
 a ``wc_lang`` model is organized in a highly-interconnected graph of related Python objects, each of
-which is an ``obj_model.core.Model`` instance.
+which is an ``obj_tables.core.Model`` instance.
 For example, a ``Species`` instance contains ``reaction_participants``,
 which references each ``Reaction`` in which the ``Species`` participates.
 The graph contains many convenience relationships like this, which make it easy to
-follow the relationships between ``obj_model.core.Model`` instances anywhere in a ``wc_lang`` model.
+follow the relationships between ``obj_tables.core.Model`` instances anywhere in a ``wc_lang`` model.
 
 A ``wc_lang`` model also supports some metadata.
 Named ``Parameter`` entities store arbitrary values, such as input parameters.
@@ -55,7 +55,7 @@ including its data sources and comments about model components.
 ``wc_lang`` Classes Used to Define biochemical Models
 ------------------------------------------------------
 
-This subsection enumerates the ``obj_model.core.Model`` classes that store data in ``wc_lang`` models.
+This subsection enumerates the ``obj_tables.core.Model`` classes that store data in ``wc_lang`` models.
 
 When using an existing model the attributes of these classes are frequently accessed, although
 their definitions are not typically imported.
@@ -63,7 +63,7 @@ However, they must be imported when they are being instantiated programmatically
 
 Many of these classes implement the methods ``deserialize()`` and ``serialize()``.
 ``deserialize()`` parses an object's string representation -- as would be stored in a text file or spreadsheet
-representation of a biochemical model -- into one or more ``obj_model.core.Model`` instances.
+representation of a biochemical model -- into one or more ``obj_tables.core.Model`` instances.
 ``serialize()`` performs the reverse, converting a ``wc_lang`` class instance into a string representation.
 Thus, the ``deserialize()`` methods are used when reading models from files and ``serialize()`` 
 is used when writing a model to disk. 
@@ -359,7 +359,7 @@ and using these models:
     ``SpeciesType`` instance with two string attributes and a ``model`` attribute that references an
     existing model. In addition, this
     expression adds the new ``SpeciesType`` to the model's species types, thereby showing
-    how ``obj_model``'s underlying functionality automatically creates bi-directional references
+    how ``obj_tables``'s underlying functionality automatically creates bi-directional references
     that make it easy to build and navigate ``wc_lang`` models, and making this assertion hold:
 
     .. literalinclude:: ../../intro_to_wc_modeling/wc_modeling/wc_lang_tutorial/core.py
@@ -403,7 +403,7 @@ and using these models:
     This simplifies model construction by avoiding creation of unnecessary identifiers for these components.
 
     Similar code can be used to create any part of a model. All ``wc_lang`` objects that are subclassed from
-    ``wc_lang.BaseModel`` (an alias for ``obj_model.core.Model``) can be instantiated in the normal fashion,
+    ``wc_lang.BaseModel`` (an alias for ``obj_tables.core.Model``) can be instantiated in the normal fashion,
     as shown for ``Model``, ``Submodel``, ``Compartment``, ``SpeciesType`` and ``Reaction`` above.
     Each subclass of ``wc_lang.BaseModel`` contains a ``Meta`` attribute that is a class which
     stores meta information about the subclass.
@@ -572,7 +572,7 @@ and using these models:
 
 
 ..
-    # todo: Furthermore, ``obj_model`` automatically creates reverse references for 
+    # todo: Furthermore, ``obj_tables`` automatically creates reverse references for 
     reference attributes 
 
 ..
