@@ -53,96 +53,154 @@ Detailed instructions to install the tutorials and all of the requirements
 #. Follow the instructions in :ref:`How to build a Ubuntu Linux image with Docker` to build a Linux virtual machine
 #. Install several packages
 
-    #. Enable the Docker Aptitude repository::
+    #. Install SSH::
 
+        sudo apt-get install ssh
+
+    #. Install Git::
+
+        sudo apt-get install \
+            git \
+            libgnome-keyring-dev \
+            meld
+
+    #. Configure your Git user name and email::
+
+        git config --global user.name "John Doe"
+        git config --global user.email "johndoe@example.com"
+
+    #. Configure Git to store your GitHub password::
+
+        cd /usr/share/doc/git/contrib/credential/gnome-keyring
+        sudo make
+        git config --global credential.helper /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
+
+    #. Add the following to `~/.gitconfig` to configure Git to use meld to visualize differences::
+
+        [diff]
+            tool = meld
+        [difftool]
+            prompt = false
+
+    #. Install Docker::
+
+        # Docker
+        sudo apt-get install curl
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
         sudo add-apt-repository \
            "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-           xenial \
+           $(lsb_release -cs) \
            stable"
         sudo apt-get update
+        sudo apt-get install docker-ce docker-ce-cli containerd.io
+        sudo usermod -aG docker $USER
 
-    #. Install several packages from the Mint repository::
+        # Docker Compose
+        sudo curl -L "https://github.com/docker/compose/releases/download/1.25.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+
+    #. Install Python 3.7.5
+
+        export python_version=3.7.5
 
         sudo apt-get install \
-            apt-transport-https \
+            build-essential \
             ca-certificates \
-            curl \
-            docker-ce \
-            gimp \
-            git \
+            libbz2-dev \
+            libexpat1 \
+            libexpat1-dev \
+            libffi-dev \
+            libffi6 \
+            libreadline-dev \
+            libsqlite3-dev \
+            libssl-dev \
+            tar \
+            tk-dev \
+            wget \
+            zlib1g-dev \
+            liblzma-dev \
+            libtinfo-dev \
+            mime-support
+    
+        cd /tmp
+        wget https://www.python.org/ftp/python/${python_version}/Python-${python_version}.tgz -O /tmp/Python-${python_version}.tgz
+        tar xzf /tmp/Python-${python_version}.tgz
+        cd /tmp/Python-${python_version}
+        ./configure \
+            --prefix=/usr/local \
+            --enable-optimizations \
+            --enable-shared \
+            --enable-unicode=ucs4 \
+            --with-system-expat \
+            --with-system-ffi
+        make
+        sudo make install
+        sudo ldconfig
+        sudo pip3.7 install \
             ipython \
-            ipython3 \
-            inkscape \
-            libgnome-keyring-dev \
-            libpython-dev \
-            libpython3-dev \
-            meld \
-            mysql-server \
-            python \
-            python3 \
-            python-pip \
-            python3-pip \
-            software-properties-common \
-            texlive \
-            zip
+            pytest \
+            coverage
 
-    #. Install support for large file in Git repositories::
+    #. Install Open Babel 2.4.1::
 
-        curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-        sudo apt-get install git-lfs
-        git lfs install
+        export obabel_version_dash=2-4-1
+        export obabel_version_dot=2.4.1
 
-    #. Install Open Babel::
+        sudo apt-get install \
+            build-essential \
+            cmake \
+            libcairo2-dev \
+            libeigen3-dev \
+            libxml2-dev \
+            tar \
+            wget \
+            zlib1g-dev
 
-        wget https://github.com/openbabel/openbabel/archive/openbabel-2-4-1.tar.gz -O /tmp/openbabel-2.4.1.tar.gz
-        tar -xvvf /tmp/openbabel-2.4.1.tar.gz
-        cd openbabel-openbabel-2-4-1
+        cd /tmp
+        wget https://github.com/openbabel/openbabel/archive/openbabel-${obabel_version_dash}.tar.gz -O /tmp/openbabel-${obabel_version_dot}.tar.gz
+        tar -xvvf /tmp/openbabel-${obabel_version_dot}.tar.gz
+        cd /tmp/openbabel-openbabel-${obabel_version_dash}
         mkdir build
         cd build
         cmake ..
         make
-        make install
-        ldconfig
+        sudo make install
+        sudo ldconfig
+
+        sudo pip3.7 install openbabel
 
     #. Install ChemAxon Marvin
 
         #. Install Java::
 
-            apt-get install default-jre default-jdk
+            sudo apt-get install openjdk-11-jdk openjdk-11-jre
 
         #. Download the installer from `https://chemaxon.com/products/marvin/download <https://chemaxon.com/products/marvin/download>`_
         #. Install ChemAxon Marvin::
 
-            export version_marvin=19.3
-            dpkg -i marvin_linux_${version_marvin}.deb
+            export version_marvin=19.25
+            sudo dpkg -i ~/Downloads/marvin_linux_${version_marvin}.deb
 
-        #. Set ``JAVA_HOME`` to the path to your Java virtual machine (JVM)::
+        # Add Marvin to the Java class path::
 
-            export JAVA_HOME=/usr/lib/jvm/default-java
-
-        #. Add Marvin to the Java class path::
-
-            export CLASSPATH=$CLASSPATH:/opt/chemaxon/marvinsuite/lib/MarvinBeans.jar
+            echo "CLASSPATH=\$CLASSPATH:/opt/chemaxon/marvinsuite/lib/MarvinBeans.jar" >> ~/.bash2rc
 
         #. Obtain a license at `https://docs.chemaxon.com/display/docs/About+ChemAxon+Licensing <https://docs.chemaxon.com/display/docs/About+ChemAxon+Licensing>`_. Free 2-year licenses are available for academic research.
         #. Download your license from `https://accounts.chemaxon.com/my/licenses <https://accounts.chemaxon.com/my/licenses>`_
         #. Save your your license to ``~/.chemaxon/license.cxl``
 
-    #. Install the CPLEX optimization package and the CPLEX Python binding
+    #. Install CPLEX 12.10 and the CPLEX Python binding
 
-        #. Register for an academic account and download CPLEX from `https://ibm.onthehub.com <https://ibm.onthehub.com>`_
+        #. Register for an academic account and download CPLEX from `https://www.ibm.com/academic <https://www.ibm.com/academic>`_
 
         #. Install CPLEX::
 
-            chmod ugo+x cplex_studio128.linux-x86-64.bin
-            ./cplex_studio128.linux-x86-64.bin
+            chmod ugo+x ~/Downloads/cplex_studio1210.linux-x86-64.bin
+            sudo ~/Downloads/cplex_studio1210.linux-x86-64.bin
 
-        #. Install the Python binding::
+        #. Install the binding for Python 3.7::
 
-            # Python 3.6
-            cd /opt/ibm/ILOG/CPLEX_Studio128/cplex/python/3.6/x86-64_linux/
-            pip3.6 install .
+            sudo python3.7 /opt/ibm/ILOG/CPLEX_Studio1210/python/setup.py install
 
     #. Optionally, install the COIN-OR Cbc optimization package and the CyLP Python binding::
 
@@ -154,6 +212,9 @@ Detailed instructions to install the tutorials and all of the requirements
         echo "export LD_LIBRARY_PATH=\"\${LD_LIBRARY_PATH}:/opt/coin-or/cbc/lib:/opt/coin-or/coinutils/lib\"" >> ~/.bashrc
         ~/.bashrc
         ldconfig
+
+        # install utilities
+        sudo apt-get install wget
 
         # CoinUtils
         cd /tmp
@@ -188,6 +249,7 @@ Detailed instructions to install the tutorials and all of the requirements
 
         #. Install Gurobi::
 
+            sudo apt-get install wget
             wget http://packages.gurobi.com/8.1/gurobi8.1.0_linux64.tar.gz
             tar xvfz gurobi8.1.0_linux64.tar.gz
             mv gurobi810 /opt/
@@ -212,7 +274,7 @@ Detailed instructions to install the tutorials and all of the requirements
         #. Request an academic license from `Michael Saunders <mailto:saunders@stanford.edu>`_
         #. Use the following commands to compile MINOS::
             
-            apt-get install csh gfortran
+            apt-get install csh gfortran zip
             cd /path/to/parent of quadLP.zip
             unzip quadLP.zip
             
@@ -247,6 +309,7 @@ Detailed instructions to install the tutorials and all of the requirements
         #. Save the license to `${HOME}/mosek/mosek.lic`
         #. Install Mosek::
 
+            sudo apt-get install wget
             cd /tmp
             wget --no-check-certificate https://d2i6rjz61faulo.cloudfront.net/stable/8.1.0.78/mosektoolslinux64x86.tar.bz2
             tar -xvvf mosektoolslinux64x86.tar.bz2
@@ -373,7 +436,7 @@ Detailed instructions to install the tutorials and all of the requirements
 
         #. Install the Fortran and BLAS::
         
-            apt-get install \
+            sudo apt-get install \
                 build-essential \
                 cmake \
                 gfortran \
@@ -383,10 +446,11 @@ Detailed instructions to install the tutorials and all of the requirements
         
         #. Download, compile, and install SUNDIALS 3.2.1::
 
+            export sundials_version=3.2.1
             cd /tmp
-            wget https://computation.llnl.gov/projects/sundials/download/sundials-3.2.1.tar.gz
-            tar xzf sundials-3.2.1.tar.gz
-            cd sundials-3.2.1
+            wget https://computation.llnl.gov/projects/sundials/download/sundials-${sundials_version}.tar.gz
+            tar xzf sundials-${sundials_version}.tar.gz
+            cd sundials-${sundials_version}
             mkdir build
             cd build
             cmake \
@@ -395,30 +459,34 @@ Detailed instructions to install the tutorials and all of the requirements
                 -DSUNDIALS_INDEX_TYPE=int32_t \
                 ..
             make
-            make install
+            sudo make install
 
         #. Install scikits.odes::
 
-            pip install scikits.odes
+            sudo pip install scikits.odes
 
         #. Remove SUNDIALS source files::
 
             cd /tmp
-            rm sundials-3.2.1.tar.gz
-            rm -r sundials-3.2.1
+            rm sundials-${sundials_version}.tar.gz
+            rm -r sundials-${sundials_version}
 
     #. Install the Sublime text editor::
 
-        sudo add-apt-repository ppa:webupd8team/sublime-text-3
+        wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+        echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
         sudo apt-get update
-        sudo apt-get install sublime-text-installer
+        sudo apt-get install sublime-text
 
     #. Install the `PyCharm IDE <https://www.jetbrains.com/pycharm/download>`_::
 
-        sudo mv ~/Downloads/pycharm-community-2018.3.5.tar.gz /opt/
-        sudo tar -xzf pycharm-community-2018.3.5.tar.gz
-        cd pycharm-community-2018.3.5/bin
-        ./pycharm.sh &
+        sudo mv ~/Downloads/pycharm-community-2019.3.tar.gz /opt/
+        cd /opt/
+        sudo tar -xzf pycharm-community-2019.3.tar.gz
+        sudo rm -r pycharm-community-2019.3.tar.gz
+
+        # Run PyCharm
+        # pycharm-community-2019.3/bin/pycharm.sh &
 
     #. Install the CircleCI command line tool::
 
@@ -429,26 +497,6 @@ Detailed instructions to install the tutorials and all of the requirements
 
 
 #. Configure the packages
-
-    #. Configure your Git user name and email::
-
-        git config --global user.name "John Doe"
-        git config --global user.email "johndoe@example.com"
-
-    #. Configure Git to store your GitHub password::
-
-        cd /usr/share/doc/git/contrib/credential/gnome-keyring
-        sudo make
-        git config --global credential.helper /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
-
-    #. Add the following to `~/.gitconfig` to configure Git to use meld to visualize differences::
-
-        [diff]
-            tool = meld
-        [difftool]
-            prompt = false
-        [difftool "meld"]
-            cmd = meld "$LOCAL" "$REMOTE"
 
     #. Open Sublime and edit the following settings
 
@@ -466,15 +514,6 @@ Detailed instructions to install the tutorials and all of the requirements
         * Run >> Edit configurations >> Defaults >> Python tests >> py.test: add additional arguments "--capture=no"
         * Run >> Edit configurations >> Defaults >> Python tests >> Nosetests: add additional arguments "--nocapture"
 
-    #. Configure Docker::
-
-        sudo usermod -aG docker $USER
-
-    #. Install Docker Compose::
-
-        sudo curl -L "https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-        sudo chmod +x /usr/local/bin/docker-compose
-
     #. Optional, setup IDEs such as PyCharm to run code using a Docker image, such as, an image created with *wc_env_manager*.
 
         * `Jupyter Notebook <https://jupyter-docker-stacks.readthedocs.io/>`_
@@ -483,3 +522,11 @@ Detailed instructions to install the tutorials and all of the requirements
             
             #. Install the IDE in a Docker image
             #. Use X11 forwarding to render graphical output from a Docker container to your host. See `Using GUI's with Docker <https://jupyter-docker-stacks.readthedocs.io>`_ for more information.
+
+    #. Install additional software for tutorials::
+
+        sudo apt-get install \
+            gimp \
+            inkscape \
+            mysql-server \
+            texlive
