@@ -183,7 +183,8 @@ Detailed instructions to install the tutorials and all of the requirements
 
         # Add Marvin to the Java class path::
 
-            echo "CLASSPATH=\$CLASSPATH:/opt/chemaxon/marvinsuite/lib/MarvinBeans.jar" >> ~/.bash2rc
+            echo "export JAVA_HOME=/usr/lib/jvm/default-java" >> ~/.bash2rc
+            echo "export CLASSPATH=\$CLASSPATH:/opt/chemaxon/marvinsuite/lib/MarvinBeans.jar" >> ~/.bash2rc
 
         #. Obtain a license at `https://docs.chemaxon.com/display/docs/About+ChemAxon+Licensing <https://docs.chemaxon.com/display/docs/About+ChemAxon+Licensing>`_. Free 2-year licenses are available for academic research.
         #. Download your license from `https://accounts.chemaxon.com/my/licenses <https://accounts.chemaxon.com/my/licenses>`_
