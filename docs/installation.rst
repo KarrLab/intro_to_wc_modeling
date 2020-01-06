@@ -464,7 +464,7 @@ Detailed instructions to install the tutorials and all of the requirements
 
         #. Install scikits.odes::
 
-            sudo pip install scikits.odes
+            sudo pip install "scikits.odes < 2.5"
 
         #. Remove SUNDIALS source files::
 
