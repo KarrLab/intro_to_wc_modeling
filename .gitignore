@@ -38,3 +38,6 @@ gurobi.log
 
 # temporary LibreOffice files
 .~lock*
+
+# temporary WPS files
+.~*.xlsx
