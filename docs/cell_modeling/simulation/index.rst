@@ -121,15 +121,15 @@ Rather than sampling the time to the next reaction and then selecting the next r
         copy_numbers += reaction_stochiometries[:, i_reaction]
 
 
-Gibson-Bruck next reaction method
+Gibson-Bruck Next Reaction Method
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-`The Gibson-Bruck first reaction method <http://doi.org/10.1021/jp993732q>`_ is a computational optimization of the Gillespie first reaction method which uses (a) a dependency graph to only recalculate rate laws and resample putative next reaction times when necessary, namely when the participants in the rate law are updated and (b) an `indexed priority queue` to minimize the computational cost of identifying the reaction with the lowest putative next reaction time and updating the data structure which stores these putative next reaction times.
+`The Gibson-Bruck Next Reaction Method <http://doi.org/10.1021/jp993732q>`_ is a computational optimization of the Gillespie first reaction method which uses (a) a dependency graph to only recalculate rate laws and resample putative next reaction times when necessary, namely when the participants in the rate law are updated and (b) an `indexed priority queue` to minimize the computational cost of identifying the reaction with the lowest putative next reaction time and updating the data structure which stores these putative next reaction times.
 
 An indexed priority queue is a data structure that provides efficient identification (:math:`O(1)`) of the minimum value of the list and efficient updating of the list (:math:`O(\log{n})`. Indexed priority queues are implemented by the Python ``pqdict`` package. See the `pqdict documentation <http://pqdict.readthedocs.io/en/latest/intro.html#what-is-an-indexed-priority-queue>`_ for more information about indexed priority queues.
 
-Note, the Gibson-Bruck first reaction method is mathematically equivalent to the Gillespie direct and Gillespie first reaction methods.
+Note, the Gibson-Bruck Next Reaction Method is mathematically equivalent to the Gillespie direct and Gillespie first reaction methods.
 
-Below is pseudo code for the Gibson-Bruck next reaction method::
+Below is pseudo code for the Gibson-Bruck Next Reaction Method::
 
     import numpy
     import pqdict
