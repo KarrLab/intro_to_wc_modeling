@@ -1,9 +1,6 @@
 # description
 include README.rst
 
-# version
-include intro_to_wc_modeling/VERSION
-
 # license
 include LICENSE
 

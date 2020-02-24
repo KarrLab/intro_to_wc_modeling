@@ -19,18 +19,17 @@ Execute the following commands to install the packages required for this tutoria
 Prepare your package for distribution
 -------------------------------------
 
-Annotate the version number of your package in ``VERSION`` and ``__init__.py``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Save the following to the ``VERSION`` file of your package, e.g. ``/path/to/intro_to_wc_modeling/intro_to_wc_modeling/VERSION``::
+Annotate the version number of your package in ``_version.py`` and ``__init__.py``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Save the following to the ``_version.py`` file of your package, e.g. ``/path/to/intro_to_wc_modeling/intro_to_wc_modeling/_version.py``::
 
-  0.0.1
+  __version__ = '0.0.1'y
 
 Save the following to the ``__init__.py`` file of your package, e.g. ``/path/to/package/intro_to_wc_modeling/__init__.py``::
 
   import pkg_resources
 
-  with open(pkg_resources.resource_filename('intro_to_wc_modeling', 'VERSION'), 'r') as file:
-      __version__ = file.read().strip()
+  from ._version.py import __version__
   # :obj:`str`: version
 
 
@@ -127,9 +126,6 @@ For example, save the following to ``/path/to/package/MANIFEST.in``::
   # documentation
   include README.rst
 
-  # version
-  include package/VERSION
-
   # license
   include LICENSE
 
@@ -144,18 +140,20 @@ You can use the ``setuptools`` package to build a install script for your packag
 
   import setuptools
   try:
-      import setuptools_utils
+      import pkg_utils
   except ImportError:
-      import pip
-      pip.main(['install', 'git+https://github.com/KarrLab/setuptools_utils.git#egg=setuptools_utils'])
-      import setuptools_utils
+      import subprocess
+      import sys
+      subprocess.check_call(
+        [sys.executable, "-m", "pip", "install", "pkg_utils"])
+      import pkg_utils
   import os
 
   name = 'intro_to_wc_modeling'
   dirname = os.path.dirname(__file__)
 
   # get package metadata
-  md = setuptools_utils.get_package_metadata(dirname, name)
+  md = pkg_utils.get_package_metadata(dirname, name)
 
   # install package
   setup(
@@ -187,11 +185,6 @@ You can use the ``setuptools`` package to build a install script for your packag
 
       # packages not prepared yet
       packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
-      package_data={
-          name: [
-              'VERSION',
-          ],
-      },
       entry_points={
           'console_scripts': [
               'intro-to-wc-modeling = intro_to_wc_modeling.__main__:main',

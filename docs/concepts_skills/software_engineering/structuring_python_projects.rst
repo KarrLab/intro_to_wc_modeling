@@ -11,7 +11,7 @@ We recommend using the following principles to organize Python projects:
         repository_name/                # source code directory (1)
             __init__.py                 # each source code directory must contain an __init__.py file
             __main__.py                 # optional, for command line programs
-            VERSION                     # text file with version number
+            _version.py                 # file with version number
             data/                       # directory for data files needed by the code
         tests/                          # directory for test code
             fixtures/                   # fixtures for tests
