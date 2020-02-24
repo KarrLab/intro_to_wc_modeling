@@ -50,7 +50,6 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=['tests', 'tests.*']),
     package_data={
         name: [
-            'VERSION',
             os.path.join('wc_modeling', 'wc_lang_tutorial', 'examples', 'test_wc_lang.xlsx'),
         ],
     },
