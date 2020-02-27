@@ -82,7 +82,16 @@ author = 'Jonathan Karr and Arthur Goldberg'
 # built documents.
 #
 # The short X.Y version.
-from intro_to_wc_modeling._version import __version__ as version
+import re
+filename = os.path.join(os.path.dirname(__file__), "..", "intro_to_wc_modeling", "_version.py")
+if os.path.isfile(filename):
+    verstrline = open(filename, "rt").read()
+    VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
+    mo = re.search(VSRE, verstrline, re.M)
+    if mo:
+        version = mo.group(1)
+    else:
+        version = None
 # The full version, including alpha/beta/rc tags.
 release = version
 
