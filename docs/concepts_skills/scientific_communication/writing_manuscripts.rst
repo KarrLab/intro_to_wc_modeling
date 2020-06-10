@@ -42,21 +42,21 @@ How to write an abstract
 ------------------------
 Abstracts should follow this hour-glass structure
 
-#. Introduce the broader problem which you have tried to solve and why is significant
-#. Describe what specific problem you have tried to solve
-#. Describe why the problem had not yet been solved
+#. Introduce the broader problem that you have tried to solve and explain why it is significant
+#. Describe the specific problem you have tried to solve
+#. Explain why the problem has not been solved previously
 #. Describe how you innovatively solved the problem
 #. Describe the results of your work
 #. Describe the broader significance of your results
 
 Abstracts are generally limited to 200-250 words.
 
-See `Nature's annotated abstract <http://www.nature.com/nature/authors/gta/Letter_bold_para.doc>`_ for more information about how to write an abstract for a manuscript.
+See `Nature's annotated abstract <https://www.nature.com/documents/nature-summary-paragraph.pdf>`_ for more information about how to write an abstract for a manuscript.
 
 
-How to to format a manuscript for submission
+How to format a manuscript for submission
 --------------------------------------------
-Below are general guidelines for formatting manuscripts for submission to journals. Before submitting to a journal, also reviewing the journal's submission guidelines.
+Below are general guidelines for formatting manuscripts for submission to journals. Before submitting to a journal, also review the journal's submission guidelines.
 
 * Layout
 
