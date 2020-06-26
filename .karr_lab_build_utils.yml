@@ -2,3 +2,7 @@ downstream_dependencies: []
 email_notifications:
   - jonrkarr@gmail.com
   - arthur.p.goldberg@mssm.edu
+static_analyses:
+  ignore_unused_requirements: []
+  ignore_missing_requirements:
+    - configobj
